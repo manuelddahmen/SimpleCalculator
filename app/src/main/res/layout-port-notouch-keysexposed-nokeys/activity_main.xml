@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintWindows"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="visible">
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="135dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="152dp"
+        android:text="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="136dp"
+        android:layout_height="68dp"
+        android:text="2"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="152dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="136dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="152dp"
+        android:text="3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="135dp"
+        android:layout_height="68dp"
+        android:text="4"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="220dp" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="136dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="220dp"
+        android:text="5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="136dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="220dp"
+        android:text="6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="135dp"
+        android:layout_height="69dp"
+        android:text="7"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="281dp" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="136dp"
+        android:layout_height="69dp"
+        android:text="8"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="281dp" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="136dp"
+        android:layout_height="69dp"
+        android:text="9"
+        tools:layout_editor_absoluteX="272dp"
+        tools:layout_editor_absoluteY="281dp" />
+
+    <Button
+        android:id="@+id/dotButton"
+        android:layout_width="135dp"
+        android:layout_height="68dp"
+        android:text="."
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="348dp" />
+
+    <Button
+        android:id="@+id/button0"
+        android:layout_width="136dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="348dp"
+        android:text="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/equalButton"
+        android:layout_width="136dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="348dp"
+        android:text="="
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="135dp"
+        android:layout_height="68dp"
+        android:text="+"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="416dp" />
+
+    <Button
+        android:id="@+id/multButton"
+        android:layout_width="136dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="416dp"
+        android:text="*"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button15"
+        android:layout_width="136dp"
+        android:layout_height="68dp"
+        android:text="sqrt"
+        tools:layout_editor_absoluteX="272dp"
+        tools:layout_editor_absoluteY="416dp" />
+
+    <Button
+        android:id="@+id/substractButton"
+        android:layout_width="135dp"
+        android:layout_height="69dp"
+        android:text="-"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="477dp" />
+
+    <Button
+        android:id="@+id/divideButton"
+        android:layout_width="136dp"
+        android:layout_height="69dp"
+        android:text="/"
+        tools:layout_editor_absoluteX="135dp"
+        tools:layout_editor_absoluteY="477dp" />
+
+    <Button
+        android:id="@+id/button18"
+        android:layout_width="136dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="476dp"
+        android:text="pow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="409dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
