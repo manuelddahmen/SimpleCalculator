@@ -1,6 +1,8 @@
+package one.empty3.apps.simplecalculator
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +12,13 @@ class MainActivity : AppCompatActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_main)
+            var buttonActive = findViewById<Button>(R.id.button0)
+            buttonActive.setOnClickListener(View.OnClickListener {
+                val findViewById = findViewById<EditText>(R.id.editTextTextPersonName)
+                findViewById.text = findViewById.text.append("0")
+            })
         }
+    /*
     var editText: EditText = EditText(null)
     var button0: Button = Button(null)
     var button1: Button = Button(null)
@@ -29,10 +37,12 @@ class MainActivity : AppCompatActivity() {
     var substractButton: Button = Button(null)
     var multiplyButton: Button = Button(null)
     var divideButton: Button = Button(null)
-
+*/
     fun SimpleCalculator() {
 
     }
+
+
     fun main() {
         val simpleCalculator = SimpleCalculator()
     }
