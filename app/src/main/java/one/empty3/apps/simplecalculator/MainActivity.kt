@@ -12,38 +12,17 @@ class MainActivity : AppCompatActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_main)
-            var buttonActive = findViewById<Button>(R.id.button0)
-            buttonActive.setOnClickListener(View.OnClickListener {
-                val findViewById = findViewById<EditText>(R.id.editTextTextPersonName)
-                findViewById.text = findViewById.text.append("0")
-            })
+            var buttonsNumbers = arrayListOf<Int>(R.id.button0, R.id.button1, R.id.button2, R.id.button3,
+                    R.id.button4, R.id.button5, R.id.button6, R.id.button7,
+                R.id.button8, R.id.button9)
+            val i:Int = 0;
+
+            for (i:Int in buttonsNumbers) {
+                var buttonActive = findViewById<Button>(buttonsNumbers[i])
+                buttonActive.setOnClickListener({
+                    val findViewById = findViewById<EditText>(R.id.editTextTextPersonName)
+                    findViewById.setText(findViewById.getText().append(""+i))
+                })
+            }
         }
-    /*
-    var editText: EditText = EditText(null)
-    var button0: Button = Button(null)
-    var button1: Button = Button(null)
-    var button2: Button = Button(null)
-    var button3: Button = Button(null)
-    var button4: Button = Button(null)
-    var button5: Button = Button(null)
-    var button6: Button = Button(null)
-    var button7: Button = Button(null)
-    var button8: Button = Button(null)
-    var button9: Button = Button(null)
-    var dotButton: Button = Button(null)
-    var equalButton: Button = Button(null)
-    var clearButtn: Button = Button(null)
-    var addButton: Button = Button(null)
-    var substractButton: Button = Button(null)
-    var multiplyButton: Button = Button(null)
-    var divideButton: Button = Button(null)
-*/
-    fun SimpleCalculator() {
-
-    }
-
-
-    fun main() {
-        val simpleCalculator = SimpleCalculator()
-    }
 }
