@@ -17,12 +17,15 @@ class MainActivity : AppCompatActivity() {
                 R.id.button8, R.id.button9)
             val i:Int = 0;
 
+            var j: Int = 0
+            val editText : EditText = findViewById(R.id.editTextCalculus)
+
             for (i:Int in buttonsNumbers) {
                 var buttonActive = findViewById<Button>(i)
                 buttonActive.setOnClickListener({
-                    val findViewById = findViewById<EditText>(R.id.editTextTextPersonName)
-                    findViewById.setText(findViewById.getText().append(""+i))
+                    editText.setText(editText.getText().append(""+j))
                 })
+                j = j+1
             }
         }
 }
