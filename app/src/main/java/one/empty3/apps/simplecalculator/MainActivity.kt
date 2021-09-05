@@ -1,12 +1,8 @@
 package one.empty3.apps.simplecalculator
-import android.app.Activity
-import android.app.Application
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import one.empty3.apps.simplecalculator.R
 
 class MainActivity : AppCompatActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,14 +11,18 @@ class MainActivity : AppCompatActivity() {
             var buttonsNumbers = arrayListOf<Int>(R.id.button0, R.id.button1, R.id.button2, R.id.button3,
                     R.id.button4, R.id.button5, R.id.button6, R.id.button7,
                 R.id.button8, R.id.button9)
-            val i:Int = 0;
+            var j:Int=0
+
+            val editText = findViewById<EditText>(R.id.editTextCalculus)
 
             for (i:Int in buttonsNumbers) {
-                var buttonActive = findViewById<Button>(buttonsNumbers[i])
+                val buttonActive = findViewById<Button>(i)
                 buttonActive.setOnClickListener({
-                    val findViewById = findViewById<EditText>(R.id.editTextTextPersonName)
-                    findViewById.setText(findViewById.getText().append(""+i))
+                    editText.text = editText.text.append(""+j)
+                    println("Number on button : "+j)
                 })
+                j=j+1
             }
+            setVisible(true)
         }
 }
