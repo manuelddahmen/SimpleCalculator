@@ -13,12 +13,12 @@ class MainActivity : AppCompatActivity() {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_main)
             var buttonsNumbers = arrayListOf<Int>(R.id.button0, R.id.button1, R.id.button2, R.id.button3,
-                    R.id.button4, R.id.button5, R.id.button6, R.id.button7,
+                R.id.button4, R.id.button5, R.id.button6, R.id.button7,
                 R.id.button8, R.id.button9)
             val i:Int = 0;
 
             for (i:Int in buttonsNumbers) {
-                var buttonActive = findViewById<Button>(buttonsNumbers[i])
+                var buttonActive = findViewById<Button>(i)
                 buttonActive.setOnClickListener({
                     val findViewById = findViewById<EditText>(R.id.editTextTextPersonName)
                     findViewById.setText(findViewById.getText().append(""+i))
