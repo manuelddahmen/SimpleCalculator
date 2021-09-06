@@ -12,20 +12,17 @@ class MainActivity : AppCompatActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_main)
-            var buttonsNumbers = arrayListOf<Int>(R.id.button0, R.id.button1, R.id.button2, R.id.button3,
-                R.id.button4, R.id.button5, R.id.button6, R.id.button7,
-                R.id.button8, R.id.button9)
-            val i:Int = 0;
-
-            var j: Int = 0
-            val editText : EditText = findViewById(R.id.editTextCalculus)
-
-            for (i:Int in buttonsNumbers) {
-                var buttonActive = findViewById<Button>(i)
-                buttonActive.setOnClickListener({
-                    editText.setText(editText.getText().append(""+j))
-                })
-                j = j+1
+            val buttonsNumbers = arrayListOf<Int>(R.id.button0, R.id.button1, R.id.button2, R.id.button3,
+                R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.dotButton,
+                R.id.divideButton, R.id.multButton, R.id.addButton, R.id.substractButton, R.id.expButton, R.id.sqrtButton
+            )
+            val editText = findViewById<EditText>(R.id.editTextCalculus)
+            var j:Int = 0
+            for(j in buttonsNumbers) {
+                findViewById<Button>(j)!!.setOnClickListener{
+                    editText.setText(editText.getText().append(findViewById<Button>(j)!!.getText()))
+                    println(j)
+                }
             }
         }
 }
