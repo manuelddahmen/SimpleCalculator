@@ -8,6 +8,8 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import one.empty3.apps.simplecalculator.R
 import one.empty3.apps.tree.altree.*;
+import java.lang.Exception
+
 class MainActivity : AppCompatActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -19,14 +21,21 @@ class MainActivity : AppCompatActivity() {
             val editText = findViewById<EditText>(R.id.editTextCalculus)
             var j:Int = 0
             for(j in buttonsNumbers) {
-                findViewById<Button>(j)!!.setOnClickListener{
+                findViewById<Button>(j)!!.setOnClickListener {
                     editText.setText(editText.getText().append(findViewById<Button>(j)!!.getText()))
                     println(j)
-                     val tree: AlgebricTree = AlgebricTree(editText.text.toString());
-                    tree.construct()
-                    val d : Double = tree.eval()
-                    val labelAnswer : String = d.toString()
-                    findViewById<EditText>(R.id.answerText).setText(labelAnswer)
+                    val tree: AlgebricTree = AlgebricTree(editText.text.toString());
+
+                    try {
+                        tree.construct()
+                        val d: Double = tree.eval()
+                        val labelAnswer: String = d.toString()
+                        findViewById<EditText>(R.id.answerText).setText(labelAnswer)
+
+                    } catch (ex: Exception) {
+                        ex.printStackTrace()
+                    }
+
                 }
             }
         }
