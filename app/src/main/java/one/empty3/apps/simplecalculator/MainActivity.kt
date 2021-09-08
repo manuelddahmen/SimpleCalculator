@@ -18,8 +18,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.dotButton,
                 R.id.divideButton, R.id.multButton, R.id.addButton, R.id.substractButton, R.id.expButton, R.id.sqrtButton
             )
+
+            val textAnswer : EditText = findViewById<EditText>(R.id.answerText)
             val editText = findViewById<EditText>(R.id.editTextCalculus)
+
             var j:Int = 0
+
             for(j in buttonsNumbers) {
                 findViewById<Button>(j)!!.setOnClickListener {
                     editText.setText(editText.getText().append(findViewById<Button>(j)!!.getText()))
@@ -30,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                         tree.construct()
                         val d: Double = tree.eval()
                         val labelAnswer: String = d.toString()
-                        findViewById<EditText>(R.id.answerText).setText(labelAnswer)
+                        textAnswer.setText(labelAnswer)
 
                     } catch (ex: Exception) {
                         ex.printStackTrace()
