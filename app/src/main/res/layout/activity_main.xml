@@ -7,6 +7,14 @@
     android:layout_height="wrap_content"
     android:visibility="visible">
 
+    <TextView
+        android:id="@+id/answerText"
+        android:layout_width="229dp"
+        android:layout_height="172dp"
+        app:layout_constraintEnd_toEndOf="@id/expButton"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="571dp" />
+
     <Button
         android:id="@+id/button1"
         android:layout_width="135dp"

@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import one.empty3.apps.simplecalculator.R
-
+import one.empty3.apps.tree.altree.*;
 class MainActivity : AppCompatActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -22,6 +22,11 @@ class MainActivity : AppCompatActivity() {
                 findViewById<Button>(j)!!.setOnClickListener{
                     editText.setText(editText.getText().append(findViewById<Button>(j)!!.getText()))
                     println(j)
+                     val tree: AlgebricTree = AlgebricTree(editText.text.toString());
+                    tree.construct()
+                    val d : Double = tree.eval()
+                    val labelAnswer : String = d.toString()
+                    findViewById<EditText>(R.id.answerText).setText(labelAnswer)
                 }
             }
         }
