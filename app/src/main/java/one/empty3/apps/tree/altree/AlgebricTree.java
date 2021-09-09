@@ -350,7 +350,8 @@ subformula.substring(0, i)+" of " +subformula
 
                 String subsubstring = values.substring(oldFactorPos, newFactorPos);
 
-
+                if(newFactorPos>=values.length())
+                    throw new AlgebraicFormulaSyntaxException("Second factor missing");
                 if (subsubstring.length() > 0) {
                     t2 = new TreeNode(t, new Object[]{subsubstring}, new TermTreeNodeType(oldFactorSign));
                     t.getChildren().add(t2);

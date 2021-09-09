@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import one.empty3.apps.simplecalculator.R
 import one.empty3.apps.tree.altree.*;
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.divideButton, R.id.multButton, R.id.addButton, R.id.substractButton, R.id.expButton, R.id.sqrtButton
             )
 
-            val textAnswer : EditText = findViewById<EditText>(R.id.answerText)
+            val textAnswer : TextView = findViewById<EditText>(R.id.answerText)
             val editText = findViewById<EditText>(R.id.editTextCalculus)
 
             var j:Int = 0
@@ -36,8 +37,8 @@ class MainActivity : AppCompatActivity() {
                         val labelAnswer: String = d.toString()
                         textAnswer.setText(labelAnswer)
 
-                    } catch (ex: Exception) {
-                        ex.printStackTrace()
+                    } catch (ex: AlgebraicFormulaSyntaxException) {
+
                     }
 
                 }
