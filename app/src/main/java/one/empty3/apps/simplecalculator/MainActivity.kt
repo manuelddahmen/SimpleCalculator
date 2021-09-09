@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                     } catch (ex: AlgebraicFormulaSyntaxException) {
 
                     }
+                    println(tree.toString())
 
                 }
             }

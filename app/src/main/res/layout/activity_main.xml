@@ -5,7 +5,6 @@
     android:id="@+id/constraintWindows"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_toStartOf="parent"
     android:visibility="visible">
 
     <TextView
@@ -206,7 +205,6 @@
         android:layout_width="350dp"
         android:layout_height="57dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="0"
         android:background="#673AB7"
         android:ems="10"
         android:inputType="textPersonName"

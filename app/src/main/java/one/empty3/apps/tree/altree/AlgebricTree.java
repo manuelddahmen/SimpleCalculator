@@ -34,7 +34,6 @@
 package one.empty3.apps.tree.altree;
 
 import one.empty3.apps.tree.altree.functions.MathFunctionTreeNodeType;
-import one.empty3.apps.tree.altree.functions.MathFunctionTreeNodeType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +49,6 @@ public class AlgebricTree extends Tree {
     Map<String, Double> parametersValues = new HashMap<>();
     private Tree t;
     private TreeNode root;
-    //private List<Objet> classes;
     public AlgebricTree(String formula) throws AlgebraicFormulaSyntaxException {
         this.formula = formula;
     }
@@ -61,12 +59,13 @@ public class AlgebricTree extends Tree {
     }
     public void setParameter(String s, Double d) {
         this.parametersValues.put(s, d);
-} 
+    }
     public AlgebricTree construct() throws AlgebraicFormulaSyntaxException {
         root = new TreeNode(formula);
         add(root, formula);
         return this;
     }
+
     public boolean add(TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
 
         if (src == null || subformula == null || subformula.length() == 0)
@@ -79,11 +78,11 @@ public class AlgebricTree extends Tree {
                         addPower(src, subformula) ||
                         addSingleSign(src, subformula) ||
                         addDouble(src, subformula) ||
-                           addFunction(src, subformula) ||
-                       addVariable(src, subformula) ||
-                      addBracedExpression(src, subformula)
+                        addFunction(src, subformula) ||
+                        addVariable(src, subformula) ||
+                        addBracedExpression(src, subformula)
 
-                ) {
+        ) {
             /*Iterator<TreeNode> it = src.getChildren().iterator();
             while (it.hasNext()) {
                 TreeNode children = it.next();
@@ -108,25 +107,25 @@ public class AlgebricTree extends Tree {
         return true;
     }
 
-    private boolean addVariable(TreeNode src, String subformula) 
-   throws AlgebraicFormulaSyntaxException{
+    private boolean addVariable(TreeNode src, String subformula)
+            throws AlgebraicFormulaSyntaxException{
         if (Character.isLetter(subformula.charAt(0))) {
             int i = 1;
             while (i < subformula.length() && Character.isLetterOrDigit(subformula.charAt(i))) {
                 i++;
             }
-            
-                VariableTreeNodeType variableTreeNodeType = new VariableTreeNodeType();
-                variableTreeNodeType.setValues(new Object[]{subformula.substring(0, i), parametersValues});
-                src.getChildren().add(new TreeNodeVariable(src, new Object[]{subformula.substring(0, i), parametersValues}, variableTreeNodeType));
 
-if (subformula.length()>i)
-   throw new AlgebraicFormulaSyntaxException("var tree node test failed. error in formula+ \n"+
-subformula.substring(0, i)+" of " +subformula
-);
+            VariableTreeNodeType variableTreeNodeType = new VariableTreeNodeType();
+            variableTreeNodeType.setValues(new Object[]{subformula.substring(0, i), parametersValues});
+            src.getChildren().add(new TreeNodeVariable(src, new Object[]{subformula.substring(0, i), parametersValues}, variableTreeNodeType));
 
-              
-   
+            if (subformula.length()>i)
+                throw new AlgebraicFormulaSyntaxException("var tree node test failed. error in formula+ \n"+
+                        subformula.substring(0, i)+" of " +subformula
+                );
+
+
+
 
         }
         return src.getChildren().size() > 0;
@@ -340,7 +339,10 @@ subformula.substring(0, i)+" of " +subformula
                 }
 */               // else throw new AlgebraicFormulaSyntaxException("Ni + ni -");
 
-            }
+            }/*
+            if(i>0&&i==values.length()-1&&(values.charAt(i-1)=='+'||values.charAt(i-1)=='-')) {
+                return false;
+            }*/
 
 
             if (isNewFactor) {
@@ -350,15 +352,15 @@ subformula.substring(0, i)+" of " +subformula
 
                 String subsubstring = values.substring(oldFactorPos, newFactorPos);
 
-                if(newFactorPos>=values.length())
-                    throw new AlgebraicFormulaSyntaxException("Second factor missing");
+
                 if (subsubstring.length() > 0) {
                     t2 = new TreeNode(t, new Object[]{subsubstring}, new TermTreeNodeType(oldFactorSign));
                     t.getChildren().add(t2);
-                    if (!add(t2, subsubstring)) {
+                    if (newFactorPos<i &&!add(t2, subsubstring)) {
                         return false;
                     }
-                }
+                } else
+                    return false;
 
 
                 isNewFactor = false;
@@ -407,8 +409,8 @@ subformula.substring(0, i)+" of " +subformula
 
 
                 MathFunctionTreeNodeType mathFunctionTreeNodeType = new MathFunctionTreeNodeType(
-fParamString, parametersValues
-);
+                        fParamString, parametersValues
+                );
 
                 TreeNode t2 = new TreeNode(t, new Object[]{fName}, mathFunctionTreeNodeType);
                 add(t2, fParamString);
@@ -430,10 +432,10 @@ fParamString, parametersValues
      * examples
      * a = new Point(0.0, y/this.getResY());
      * b.x >= p.plus(p2.mult(3.0).add(p3)).getY();
-     
+
      * ajouter {; , .}
      */
-    
+
     public boolean addMethodCall(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
         int i = 1;
         boolean isNewFactor = false;
@@ -463,7 +465,9 @@ fParamString, parametersValues
                 String fParamString = values.substring(newFactorPos, i);
 
 
-                MathFunctionTreeNodeType mathFunctionTreeNodeType = new MathFunctionTreeNodeType(fParamString, parametersValues);
+                MathFunctionTreeNodeType mathFunctionTreeNodeType = new MathFunctionTreeNodeType(
+                        fParamString, parametersValues
+                );
 
                 TreeNode t2 = new TreeNode(t, new Object[]{fName}, mathFunctionTreeNodeType);
                 add(t2, fParamString);

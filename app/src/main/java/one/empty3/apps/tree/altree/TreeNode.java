@@ -116,8 +116,6 @@ public class TreeNode {
             return dot;
 
 
-        } else if (cType instanceof MathFunctionTreeNodeType) {
-            return ((MathFunctionTreeNodeType) cType).compute(((FunctionTreeNodeType) cType).getFName(), this.getChildren().get(0));
         } else if (cType instanceof TermTreeNodeType) {
             if (getChildren().size() == 1) {
                 return getChildren().get(0).eval();
@@ -126,12 +124,14 @@ public class TreeNode {
             for (int i = 0; i < getChildren().size(); i++) {
                 TreeNode treeNode = getChildren().get(i);
                 double op1 = treeNode.type.getSign1();
-                sum += op1 * (Double) treeNode.eval();
+                sum += op1 + (Double) treeNode.eval();
             }
 
 
             return sum;
-        } else if (cType instanceof FactorTreeNodeType) {
+        } else if (cType instanceof MathFunctionTreeNodeType) {
+            return ((MathFunctionTreeNodeType) cType).compute(((FunctionTreeNodeType) cType).getFName(), this.getChildren().get(0));
+        } /*else if (cType instanceof FactorTreeNodeType) {
             if (getChildren().size() == 1) {
                 return getChildren().get(0).eval();
             }
@@ -145,7 +145,7 @@ public class TreeNode {
 
 
             return sum;
-        } else
+        }*/ else
         if (cType instanceof SignTreeNodeType) {
             double s1 = ((SignTreeNodeType) cType).getSign();
             return s1 * (Double) getChildren().get(0).eval();
