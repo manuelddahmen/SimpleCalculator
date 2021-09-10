@@ -191,6 +191,8 @@ public class AlgebricTree extends Tree {
                 } else throw new AlgebraicFormulaSyntaxException("Ni + ni -");
             */
             }
+            if(values.charAt(values.length()-1)=='^'||values.charAt( values.length()-1)=='^')
+                return false;
 
 
             if (isNewFactor) {
@@ -265,6 +267,8 @@ public class AlgebricTree extends Tree {
                 } else throw new AlgebraicFormulaSyntaxException("Ni + ni -");
             */
             }
+            if(values.charAt(values.length()-1)=='*'||values.charAt(values.length()-1)=='/')
+                return false;
 
 
             if (isNewFactor) {
@@ -343,7 +347,8 @@ public class AlgebricTree extends Tree {
             if(i>0&&i==values.length()-1&&(values.charAt(i-1)=='+'||values.charAt(i-1)=='-')) {
                 return false;
             }*/
-
+            if(values.charAt(values.length()-1)=='+'||values.charAt(values.length()-1)=='-')
+                return false;
 
             if (isNewFactor) {
                 countTerms++;
@@ -356,7 +361,7 @@ public class AlgebricTree extends Tree {
                 if (subsubstring.length() > 0) {
                     t2 = new TreeNode(t, new Object[]{subsubstring}, new TermTreeNodeType(oldFactorSign));
                     t.getChildren().add(t2);
-                    if (newFactorPos<i &&!add(t2, subsubstring)) {
+                    if (!add(t2, subsubstring)) {
                         return false;
                     }
                 } else

@@ -79,15 +79,17 @@ public class TreeNode {
 
 
     public Double eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
-        TreeNodeType cType = (getChildren().size() == 0) ? type : getChildren().get(0).type;
-        /*if (type instanceof IdentTreeNodeType) {
-            return getChildren().get(0).eval();
+        /*if(this instanceof TreeNode) {
+            return Double.parseDouble(((TreeNode) this).expressionString);
         }*/
+
+        TreeNodeType cType = (getChildren().size() == 0) ? type : getChildren().get(0).type;
+
+        if (type instanceof IdentTreeNodeType) {
+            return getChildren().get(0).eval();
+        }else
         if (cType instanceof EquationTreeNodeType) {
             return (Double) getChildren().get(0).eval() - (Double) getChildren().get(1).eval() - 0;
-        }
-        if (cType instanceof IdentTreeNodeType) {
-            return getChildren().get(0).eval();
         }else
         if (cType instanceof DoubleTreeNodeType) {
             return cType.eval();
@@ -111,20 +113,20 @@ public class TreeNode {
                     dot *= op1 * (Double) treeNode.eval();
                 else
 
-                    dot /= (Double) treeNode.eval();
+                    dot /= op1 * (Double) treeNode.eval();
             }
             return dot;
 
 
         } else if (cType instanceof TermTreeNodeType) {
             if (getChildren().size() == 1) {
-                return getChildren().get(0).eval();
+                return ((Double) getChildren().get(0).eval()) * getChildren().get(0).type.getSign1();
             }
-            double sum = 0;
+            double sum = 0.0;
             for (int i = 0; i < getChildren().size(); i++) {
                 TreeNode treeNode = getChildren().get(i);
                 double op1 = treeNode.type.getSign1();
-                sum += op1 + (Double) treeNode.eval();
+                sum += op1 * (Double) treeNode.eval();
             }
 
 

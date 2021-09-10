@@ -37,7 +37,7 @@ package one.empty3.apps.tree.altree;
  */
 public abstract class TreeNodeType {
     protected Object[] values;
-    protected double sign1; // 1=*
+    protected double sign1 = 1.0;
     private TreeNodeType d;
     private TreeNodeType tnt;
     public TreeNodeType() {
