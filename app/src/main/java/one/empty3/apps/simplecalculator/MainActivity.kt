@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity() {
 
                     } catch (ex: AlgebraicFormulaSyntaxException) {
 
+                    } catch (ex:kotlin.IndexOutOfBoundsException) {
+                        ex.printStackTrace()
+                    } catch (ex:kotlin.NullPointerException) {
+                        ex.printStackTrace()
                     }
                     println(tree.toString())
 

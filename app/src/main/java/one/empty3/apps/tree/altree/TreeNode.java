@@ -32,6 +32,8 @@
 
 package one.empty3.apps.tree.altree;
 
+import androidx.annotation.NonNull;
+
 import one.empty3.apps.tree.altree.functions.MathFunctionTreeNodeType;
 import one.empty3.apps.tree.altree.functions.MathFunctionTreeNodeType;
 
@@ -50,7 +52,7 @@ public class TreeNode {
 
     public TreeNode(String expStr) {
         this.parent = null;
-        if("".equals(expStr.trim()))
+        if ("".equals(expStr.trim()))
             expressionString = "0.0";
         this.expressionString = expStr;
     }
@@ -85,17 +87,13 @@ public class TreeNode {
 
         TreeNodeType cType = (getChildren().size() == 0) ? type : getChildren().get(0).type;
 
-        if (type instanceof IdentTreeNodeType) {
+        if (cType instanceof IdentTreeNodeType) {
             return getChildren().get(0).eval();
-        }else
-        if (cType instanceof EquationTreeNodeType) {
+        } else if (cType instanceof EquationTreeNodeType) {
             return (Double) getChildren().get(0).eval() - (Double) getChildren().get(1).eval() - 0;
-        }else
-        if (cType instanceof DoubleTreeNodeType) {
+        } else if (cType instanceof DoubleTreeNodeType) {
             return cType.eval();
-        }  else
-        if(cType instanceof VariableTreeNodeType)
-        {
+        } else if (cType instanceof VariableTreeNodeType) {
             return cType.eval();//cType.eval();
         } else if (cType instanceof ExponentTreeNodeType) {
             return Math.pow((Double) getChildren().get(0).eval(), (Double) getChildren().get(1).eval());
@@ -110,10 +108,10 @@ public class TreeNode {
                 if (op1 == 1)
 
 
-                    dot *= op1 * (Double) treeNode.eval();
+                    dot *= ((Double) treeNode.eval());
                 else
 
-                    dot /= op1 * (Double) treeNode.eval();
+                    dot /= ((Double) (Double) treeNode.eval());///treeNode.type.getSign1()) *
             }
             return dot;
 
@@ -133,24 +131,12 @@ public class TreeNode {
             return sum;
         } else if (cType instanceof MathFunctionTreeNodeType) {
             return ((MathFunctionTreeNodeType) cType).compute(((FunctionTreeNodeType) cType).getFName(), this.getChildren().get(0));
-        } /*else if (cType instanceof FactorTreeNodeType) {
-            if (getChildren().size() == 1) {
-                return getChildren().get(0).eval();
-            }
-
-            double sum = getChildren().get(0).eval();
-            for (int i = 1; i < getChildren().size(); i++) {
-                TreeNode treeNode = getChildren().get(i);
-                double op1 = treeNode.type.getSign1();
-                sum = Math.pow(sum, op1 * treeNode.eval());
-            }
-
-
-            return sum;
-        }*/ else
-        if (cType instanceof SignTreeNodeType) {
+        } else if (cType instanceof SignTreeNodeType) {
             double s1 = ((SignTreeNodeType) cType).getSign();
-            return s1 * (Double) getChildren().get(0).eval();
+            if (getChildren().size() > 0)
+                return s1 * (Double) getChildren().get(0).eval();
+            else
+                return s1;
         }
 
         return type.eval();
@@ -182,12 +168,13 @@ public class TreeNode {
     }
 
 
+    @NonNull
     public String toString() {
         String s = "TreeNode " + this.getClass().getSimpleName() +
                 "\nExpression string: " + expressionString +
                 (type == null ? "\nType null" :
                         "\nType: " + type.getClass() + "\n " + type.toString()) +
-                "\nChildren: \n";
+                "\nChildren: "+getChildren().size()+"\n";
         int i = 0;
         for (TreeNode t :
                 getChildren()) {
