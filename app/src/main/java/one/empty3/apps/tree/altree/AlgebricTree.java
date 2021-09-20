@@ -80,8 +80,8 @@ public class AlgebricTree extends Tree {
                         addSingleSign(src, subformula) ||
                         addDouble(src, subformula) ||
                         addFunction(src, subformula) ||
-                        addVariable(src, subformula) ||
-                        addBracedExpression(src, subformula)
+                        addBracedExpression(src, subformula)||
+                        addVariable(src, subformula)
 
         ) {
             /*Iterator<TreeNode> it = src.getChildren().iterator();
@@ -464,9 +464,10 @@ public class AlgebricTree extends Tree {
                             fParamString, parametersValues
                     );
 
-                    TreeNode t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues, fName},
+                    TreeNode t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues, fParamString},
                             mathFunctionTreeNodeType);
-                    add(t2, fParamString);
+                    if(!add(t2, fParamString))
+                        return false;
 
                     t.getChildren().add(t2);
 
@@ -528,6 +529,8 @@ public class AlgebricTree extends Tree {
                 TreeNode t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues},
                         mathFunctionTreeNodeType);
                 t.getChildren().add(t2);
+                if(!add(t2, fParamString))
+                    return false;
 
             }
 
@@ -560,6 +563,8 @@ public class AlgebricTree extends Tree {
                     );
                     TreeNode t2 = new TreeTreeNode(t, new Object[]{subsubstring, parametersValues, ""}, mathFunctionTreeNodeType);
                     t.getChildren().add(t2);
+                    if(!add(t2, subsubstring))
+                        return false;
                 }
 
 

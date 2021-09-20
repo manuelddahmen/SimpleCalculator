@@ -10,28 +10,29 @@ public class TreeTreeNode extends TreeNode {
 
     public TreeTreeNode(TreeNode t, Object[] objects, TreeNodeType type) {
         super(t, objects, type);
-        tree = new AlgebricTree((String)objects[0], (Map<String, Double>)objects[1]);
+        tree = new AlgebricTree((String)objects[2], (Map<String, Double>)objects[1]);
         try {
             tree.construct();
-            if(objects.length>=3 && objects[2] instanceof String) {
-                String call =(String) objects[2];
+            if(objects[2] instanceof String) {
+                String call =(String) objects[0];
                 if(call.length()>1)
-                    method = Math.class.getMethod(call, Double.class);
+                    method = Math.class.getMethod(call, double.class);
             }
-        } catch (AlgebraicFormulaSyntaxException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
+        } catch (AlgebraicFormulaSyntaxException | NoSuchMethodException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public Double eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
-        Double r = 0.0;
+        double r = 0.0;
         r = tree.eval();
+        System.out.printf("r" + r);
+        System.out.printf("method name"+method.getName());
+
         if(method!=null) {
             try {
-                r = (Double) method.invoke(r);
+                r = (Double) method.invoke(Math.class, r);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
