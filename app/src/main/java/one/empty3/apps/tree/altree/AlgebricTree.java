@@ -45,7 +45,6 @@ public class AlgebricTree extends Tree {
 
     private String formula = "0.0";
     Map<String, Double> parametersValues = new HashMap<>();
-    private Tree t;
     private TreeNode root;
 
     public AlgebricTree(String formula) throws AlgebraicFormulaSyntaxException {
@@ -193,7 +192,10 @@ public class AlgebricTree extends Tree {
             if (values.charAt(values.length() - 1) == '^' || values.charAt(values.length() - 1) == '^')
                 return false;
 
-
+            if (i == values.length() - 1 && (count == 0||(count==1&&values.charAt(i)==')')) && firstTermFound) {
+                isNewFactor = true;
+                newFactorPos = i + 1;
+            }
             if (isNewFactor && count == 0) {
                 String subsubstring = values.substring(oldFactorPos, newFactorPos);
 
@@ -252,17 +254,9 @@ public class AlgebricTree extends Tree {
                 firstTermFound = true;
                 newFactorSign = -1;
             }
-            if (i == values.length() - 1 && count == 0 && firstTermFound) {
+            if (i == values.length() - 1 && (count == 0||(count==1&&values.charAt(i)==')')) && firstTermFound) {
                 isNewFactor = true;
                 newFactorPos = i + 1;
-                /*if (values.charAt(oldFactorPos - 1) == '/') {
-                    newFactorSign = -1;
-                    newFactor = '/';//??
-                } else if (values.charAt(oldFactorPos - 1) == '*') {
-                    newFactorSign = 1;
-                    newFactor = '*';//??
-                } else throw new AlgebraicFormulaSyntaxException("Ni + ni -");
-            */
             }
             if (values.charAt(i) == '(') {
                 count++;
@@ -278,7 +272,7 @@ public class AlgebricTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    if (subsubstring.charAt(0) == '(' && subsubstring.charAt(subsubstring.length() - 1) == ')') {
+/*                    if (subsubstring.charAt(0) == '(' && subsubstring.charAt(subsubstring.length() - 1) == ')') {
                         t2 = new TreeNode(t, new Object[]{subsubstring}, new FactorTreeNodeType(oldFactorSign));
                         t.getChildren().add(t2);
                         if (!add(t2, subsubstring.substring(1, subsubstring.length() - 1))) {
@@ -294,7 +288,7 @@ public class AlgebricTree extends Tree {
                             if (!add(t3, subsubstring.substring(1, subsubstring.length() - 1)))
                                 return false;
                         }
-                    } else {
+                    } else*/ {
                         t2 = new TreeNode(t, new Object[]{subsubstring}, new FactorTreeNodeType(oldFactorSign));
                         t.getChildren().add(t2);
                         if (!add(t2, subsubstring)) {
@@ -351,7 +345,7 @@ public class AlgebricTree extends Tree {
             } else if (values.charAt(i) == ')') {
                 count--;
             }
-            if (i == values.length() - 1 && count == 0 && firstTermFound) {
+            if (i == values.length() - 1 && (count == 0||(count==1&&values.charAt(i)==')')) && firstTermFound) {
                 isNewFactor = true;
                 newFactorPos = i + 1;
 /*                if (values.charAt(oldFactorPos - 1) == '-') {
@@ -384,7 +378,7 @@ public class AlgebricTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    if (subsubstring.charAt(0) == '(' && subsubstring.charAt(subsubstring.length() - 1) == ')') {
+                    /*if (subsubstring.charAt(0) == '(' && subsubstring.charAt(subsubstring.length() - 1) == ')') {
                         t2 = new TreeNode(t, new Object[]{subsubstring}, new TermTreeNodeType(oldFactorSign));
                         t.getChildren().add(t2);
                         if (!add(t2, subsubstring)) {
@@ -400,7 +394,7 @@ public class AlgebricTree extends Tree {
                             if (!add(t3, subsubstring.substring(1, subsubstring.length() - 1)))
                                 return false;
                         }
-                    } else {
+                    } else*/ {
                         t2 = new TreeNode(t, new Object[]{subsubstring}, new TermTreeNodeType(oldFactorSign));
                         t.getChildren().add(t2);
                         if (!add(t2, subsubstring)) {
@@ -437,44 +431,46 @@ public class AlgebricTree extends Tree {
             int argumentEnd = 0;
             int functionNameStart = 0;
             int countLetters = 0;
-
+            boolean isName = true;
             while (i < values.length()) {
-                if (Character.isLetter(values.charAt(0)) && Character.isLetterOrDigit(values.charAt(i)) && count == 0) {
+                if (isName&&Character.isLetter(values.charAt(0)) && Character.isLetterOrDigit(values.charAt(i)) && count == 0) {
                     countLetters++;
+                    isName = true;
                 } else if (values.charAt(i) == '(' && i > 0) {
+                    isName = false;
                     if (count == 0) {
                         argumentStart = i + 1;
                     }
                     count++;
-                } else if (values.charAt(i) == ')' && i > 1 && count == 1) {
+                } else if (values.charAt(i) == ')' && i > 1) {
                     count--;
                     argumentEnd = i;
                 } else if (i < 2)
                     return false;
 
 
-                if (count == 0 && values.charAt(i) == ')') {
-
-
-                    String fName = values.substring(functionNameStart, argumentStart - 1);
-                    String fParamString = values.substring(argumentStart, argumentEnd);
-
-
-                    TreeTreeNodeType mathFunctionTreeNodeType = new TreeTreeNodeType(
-                            fParamString, parametersValues
-                    );
-
-                    TreeNode t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues, fParamString},
-                            mathFunctionTreeNodeType);
-                    if(!add(t2, fParamString))
-                        return false;
-
-                    t.getChildren().add(t2);
-
-                }
 
 
                 i++;
+
+            }
+            if (count == 0 && values.charAt(i-1) == ')') {
+
+
+                String fName = values.substring(functionNameStart, argumentStart - 1);
+                String fParamString = values.substring(argumentStart, argumentEnd);
+
+
+                TreeTreeNodeType mathFunctionTreeNodeType = new TreeTreeNodeType(
+                        fParamString, parametersValues
+                );
+
+                TreeNode t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues, fParamString},
+                        mathFunctionTreeNodeType);
+                if(!add(t2, fParamString))
+                    return false;
+
+                t.getChildren().add(t2);
 
             }
         } catch (Exception ex) {
@@ -576,12 +572,6 @@ public class AlgebricTree extends Tree {
 
         return t.getChildren().size() > 0;
     }
-
-    private void grammar() {
-        t = new Tree();
-
-    }
-
 
     public Double eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
         //System.out.println(parametersValues.size());
