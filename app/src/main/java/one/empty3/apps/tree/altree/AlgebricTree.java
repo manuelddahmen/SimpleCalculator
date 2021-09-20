@@ -465,12 +465,12 @@ public class AlgebricTree extends Tree {
                         fParamString, parametersValues
                 );
 
-                TreeNode t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues, fParamString},
+                TreeNode t2 = new TreeTreeNode(t, new Object[]{fParamString, parametersValues, fName},
                         mathFunctionTreeNodeType);
                 if(!add(t2, fParamString))
                     return false;
-
                 t.getChildren().add(t2);
+
 
             }
         } catch (Exception ex) {
@@ -519,14 +519,14 @@ public class AlgebricTree extends Tree {
 
 
                 TreeTreeNodeType mathFunctionTreeNodeType = new TreeTreeNodeType(
-                        fParamString, parametersValues
+                        "", parametersValues
                 );
 
-                TreeNode t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues},
+                TreeNode t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues, fParamString},
                         mathFunctionTreeNodeType);
-                t.getChildren().add(t2);
                 if(!add(t2, fParamString))
                     return false;
+                t.getChildren().add(t2);
 
             }
 
@@ -540,10 +540,8 @@ public class AlgebricTree extends Tree {
 
     public boolean addBracedExpression(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
         TreeNode tBraced;
-        int i = 1;
-        int count = 1;
-        if (values.charAt(0) == '(' && values.length() >= 2) {
-            count++;
+        int i = 0;
+        int count = 0;
             while (i < values.length()) {
                 if (values.charAt(i) == ')') {
                     count--;
@@ -558,17 +556,15 @@ public class AlgebricTree extends Tree {
                             subsubstring, parametersValues
                     );
                     TreeNode t2 = new TreeTreeNode(t, new Object[]{subsubstring, parametersValues, ""}, mathFunctionTreeNodeType);
-                    t.getChildren().add(t2);
                     if(!add(t2, subsubstring))
                         return false;
+                    t.getChildren().add(t2);
                 }
 
 
                 i++;
 
             }
-
-        } else return false;
 
         return t.getChildren().size() > 0;
     }

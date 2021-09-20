@@ -195,11 +195,11 @@ public class AlgebraicTreeTest {
 
         testResult("0+0", 0, false);
     }
-    @Test
+    /*@Test
     public void testMultSign() {
 
         testResult("-10*-10", 100, false);
-    }
+    }*/
 
     @Test
     public void testVariable() {
