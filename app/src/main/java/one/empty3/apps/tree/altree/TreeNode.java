@@ -33,10 +33,6 @@
 package one.empty3.apps.tree.altree;
 
 import androidx.annotation.NonNull;
-
-import one.empty3.apps.tree.altree.functions.MathFunctionTreeNodeType;
-import one.empty3.apps.tree.altree.functions.MathFunctionTreeNodeType;
-
 import java.util.ArrayList;
 
 /*__
@@ -88,6 +84,8 @@ public class TreeNode {
         TreeNodeType cType = (getChildren().size() == 0) ? type : getChildren().get(0).type;
 
         if (cType instanceof IdentTreeNodeType) {
+            System.out.println("cType Ident=" +getChildren().size());
+            System.out.println("cType Ident=" +getChildren().get(0).eval());
             return getChildren().get(0).eval();
         } else if (cType instanceof EquationTreeNodeType) {
             return (Double) getChildren().get(0).eval() - (Double) getChildren().get(1).eval() - 0;
@@ -104,14 +102,18 @@ public class TreeNode {
             double dot = 1;
             for (int i = 0; i < getChildren().size(); i++) {
                 TreeNode treeNode = getChildren().get(i);
-                double op1 = treeNode.type.getSign1();
-                if (op1 == 1)
+                double op1;
+
+                if(treeNode.type instanceof FactorTreeNodeType) {
+                    op1 = ((FactorTreeNodeType) treeNode.type).getSignFactor();
+                    if (op1 == 1)
 
 
-                    dot *= ((Double) treeNode.eval());
-                else
+                        dot *= ((Double) treeNode.eval());
+                    else
 
-                    dot /= ((Double) (Double) treeNode.eval());///treeNode.type.getSign1()) *
+                        dot /= ((Double) (Double) treeNode.eval());///treeNode.type.getSign1()) *
+                }
             }
             return dot;
 
@@ -129,8 +131,8 @@ public class TreeNode {
 
 
             return sum;
-        } else if (cType instanceof MathFunctionTreeNodeType) {
-            return ((MathFunctionTreeNodeType) cType).compute(((FunctionTreeNodeType) cType).getFName(), this.getChildren().get(0));
+        } else if (cType instanceof TreeTreeNodeType) {
+            return ((TreeTreeNode)getChildren().get(0)).eval();
         } else if (cType instanceof SignTreeNodeType) {
             double s1 = ((SignTreeNodeType) cType).getSign();
             if (getChildren().size() > 0)

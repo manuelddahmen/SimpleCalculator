@@ -36,10 +36,11 @@ package one.empty3.apps.tree.altree;
  * Created by manuel on 16-12-16.
  */
 public class FactorTreeNodeType extends TreeNodeType {
-    private double sign1 = 1; // 1=*
+    protected double signFactor = 1; // 1=*
 
-    public FactorTreeNodeType(double sign1) {
-        super(sign1);
+    public FactorTreeNodeType(double signFactor) {
+        super(1);
+        this.signFactor = signFactor;
     }
 
 
@@ -47,6 +48,14 @@ public class FactorTreeNodeType extends TreeNodeType {
         return null;
     }
 
+    public double getSignFactor() {
+        return signFactor;
+    }
+
+    @Override
+    public double getSign1() {
+        return super.getSign1();
+    }
 
     public String toString() {
         return super.toString() + "\nSign:" + sign1;

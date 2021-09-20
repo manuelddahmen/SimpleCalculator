@@ -186,6 +186,11 @@ public class AlgebraicTreeTest {
     }
 
     @Test
+    public void testSimpleAddSubMulDiv() {
+
+        testResult("4*2/5+8*9/10-4-4*5/9-2*3+1.2", 4*2/5.+8*9/10.-4-4*5/9.-2*3+1.2, false);
+    }
+    @Test
     public void testZeroPlusZero() {
 
         testResult("0+0", 0, false);
@@ -193,7 +198,7 @@ public class AlgebraicTreeTest {
     @Test
     public void testMultSign() {
 
-        testResult("-10*-10", -100, false);
+        testResult("-10*-10", 100, false);
     }
 
     @Test
@@ -242,8 +247,6 @@ public class AlgebraicTreeTest {
         double u = 10;
         HashMap<String, Double> vars = new HashMap<>();
         vars.put("u", u);
-
-
         testResultVariable("10*cos(10*u)", 10 * Math.cos(10 * u), vars, true);
     }
 
@@ -252,8 +255,6 @@ public class AlgebraicTreeTest {
         double u = 10;
         HashMap<String, Double> vars = new HashMap<>();
         vars.put("u", u);
-
-
         testResultVariable("cos(10*u)+u", Math.cos(10 * u) + u, vars, true);
     }
 
@@ -279,7 +280,7 @@ public class AlgebraicTreeTest {
 
     @Test
     public void testSimpleParentheses() {
-        assertTrue(testResult("(2+3)*(4+5)", (2 + 3) * (4 + 5), false));
+        assertTrue(testResult("(2+3)*(4+5)", (2 + 3) * (4 + 5), true));
     }
 
     @Test
