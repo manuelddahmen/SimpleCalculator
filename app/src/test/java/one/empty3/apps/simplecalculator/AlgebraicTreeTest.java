@@ -224,7 +224,6 @@ public class AlgebraicTreeTest {
 
         HashMap<String, Double> vars = new HashMap<>();
         vars.put("coordArr", 4.0);
-        vars.put("coordArr", 4.0);
         vars.put("y", 13.0);
         vars.put("z", 13.0);
         vars.put("R", 20.0);
@@ -235,6 +234,23 @@ public class AlgebraicTreeTest {
     @Test
     public void testSimpleEquationBracedMultDiv() {
         testResult("1*2*3/4*5*4", 1.0 * 2.0 * 3.0 / 4.0 * 5.0 * 4.0, false);
+    }
+    @Test
+    public void testComplexFunMultiple1() {
+        testResult("sin(1)*sin(2)*sin(2)",//2*exp(3/4)+0.5-5*4*cos(2)",
+                Math.sin(1) * Math.sin(2) * Math.sin(2), false);
+    }
+    @Test
+    public void testComplexFunFunMultiple2() {
+        testResult("sin(1)*sin(2*cos(0.2)*sin(2))+2*exp(3/4)+0.5-5*4*cos(2)",
+                Math.sin(1)*Math.sin(2*Math.cos(0.2)*Math.sin(2))+
+                        +2*Math.exp(3./4)+0.5-5*4*Math.cos(2), false);
+
+    }
+    @Test
+    public void testComplexFunFunMultiple3() {
+        testResult("sin(1)*sin(2*2)+2*exp(3/4)+0.5-5*4*cos(2)",
+                Math.sin(1)*Math.sin(2*2)+2*Math.exp(3/4.)+0.5-5*4*Math.cos(2), false);
     }
 
     @Test
@@ -283,6 +299,10 @@ public class AlgebraicTreeTest {
         assertTrue(testResult("(2+3)*(4+5)", (2 + 3) * (4 + 5), true));
     }
 
+    @Test
+    public void testSimpleParentheses3() {
+        assertTrue(testResult("(2+3)*(4+5)*(6+7)", (2 + 3) * (4 + 5)*(6+7), true));
+    }
     @Test
     public void testSimple2() {
         assertTrue(testResult("1.5", 1.5, false));
