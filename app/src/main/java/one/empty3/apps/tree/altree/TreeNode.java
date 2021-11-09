@@ -138,7 +138,7 @@ public class TreeNode {
             if (getChildren().size() > 0)
                 return s1 * (Double) getChildren().get(0).eval();
             else
-                return s1;
+                throw new AlgebraicFormulaSyntaxException("Wrong tree: sign, with no value after");
         }
 
         return type.eval();

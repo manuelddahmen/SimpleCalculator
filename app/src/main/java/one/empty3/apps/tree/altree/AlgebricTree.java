@@ -74,7 +74,9 @@ public class AlgebricTree extends Tree {
         int i = 0;
         boolean added = false;
         int length = 9;
+        boolean exception = false;
         while(i<length && !added) {
+            try {
             switch(i) {
                 case 0:
                     added = addFormulaSeparator(src, subformula);
@@ -83,13 +85,13 @@ public class AlgebricTree extends Tree {
                     added = addTerms(src, subformula);
                     break;
                 case 2:
-                    added = addSingleSign(src, subformula);
+                    added = addFactors(src, subformula);
                     break;
                 case 3:
-                    added = addFactors(src, subformula) ;
+                    added = addPower(src, subformula);
                     break;
                 case 4:
-                    added = addPower(src, subformula);
+                    added = addSingleSign(src, subformula);
                     break;
                 case 5:
                     added = addDouble(src, subformula);
@@ -104,10 +106,14 @@ public class AlgebricTree extends Tree {
                     added = addVariable(src, subformula);
                     break;
             }
+            } catch (AlgebraicFormulaSyntaxException ex) {
+                exception = true;
+                added = false;
+            }
             i++;
         }
         if(!added)
-            throw new AlgebraicFormulaSyntaxException(this);
+            throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
         return true;
     }
 
@@ -289,6 +295,13 @@ public class AlgebricTree extends Tree {
 
                 if (subsubstring.length() > 0) {
                     t2 = new TreeNode(t, new Object[]{subsubstring}, new FactorTreeNodeType(oldFactorSign));
+                    if(subsubstring.charAt(0)=='-') {
+                        subsubstring = subsubstring.substring(1);
+                        SignTreeNodeType signTreeNodeType = new SignTreeNodeType(-1.0);
+                        signTreeNodeType.instantiate(new Object[] {subsubstring});
+
+                        t2 = new TreeNode(t2, new Object[] {subsubstring}, signTreeNodeType);
+                    }
                     t.getChildren().add(t2);
                     if (!add(t2, subsubstring)) {
                         return false;
