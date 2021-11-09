@@ -295,7 +295,7 @@ public class AlgebraicTreeTest {
     }
 @Test
     public void testSimple4() {
-        assertTrue(testResult("1*8*-8", 1*8*-8, false));
+        assertTrue(testResult("1*8*-8", 1*8.*-8, false));
     }
 
     @Test
