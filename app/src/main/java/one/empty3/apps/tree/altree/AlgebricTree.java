@@ -192,7 +192,7 @@ public class AlgebricTree extends Tree {
             if (values.charAt(values.length() - 1) == '^' || values.charAt(values.length() - 1) == '^')
                 return false;
 
-            if (i == values.length() - 1 && (count == 0||(count==1&&values.charAt(i)==')')) && firstTermFound) {
+            if (i == values.length() - 1  && firstTermFound) {
                 isNewFactor = true;
                 newFactorPos = i + 1;
             }
@@ -254,7 +254,7 @@ public class AlgebricTree extends Tree {
                 firstTermFound = true;
                 newFactorSign = -1;
             }
-            if (i == values.length() - 1 && (count == 0||(count==1&&values.charAt(i)==')')) && firstTermFound) {
+            if (i == values.length() - 1  && firstTermFound) {
                 isNewFactor = true;
                 newFactorPos = i + 1;
             }
@@ -345,7 +345,9 @@ public class AlgebricTree extends Tree {
             } else if (values.charAt(i) == ')') {
                 count--;
             }
-            if (i == values.length() - 1 && (count == 0||(count==1&&values.charAt(i)==')')) && firstTermFound) {
+            if (i == values.length() - 1 
+                     
+                    && firstTermFound) {
                 isNewFactor = true;
                 newFactorPos = i + 1;
 /*                if (values.charAt(oldFactorPos - 1) == '-') {
