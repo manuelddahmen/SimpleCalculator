@@ -146,12 +146,12 @@ public class AlgebraicTreeTest {
 
     @Test
     public void testSimpleEquationAddSubMult() {
-        testResult("2*3+1*6-4", 2.0 * 3 + 1 * 6 - 4, false);
+        testResult("2*3+1*6-4", 2.0 * 3 + 1. * 6 - 4, false);
     }
 
     @Test
     public void testSimpleEquationAddSubMult2() {
-        testResult("2*3-1*6-4", 2.0 * 3 - 1 * 6 - 4, false);
+        testResult("2*3-1*6-4", 2.0 * 3 - 1. * 6 - 4, false);
     }
 
     @Test

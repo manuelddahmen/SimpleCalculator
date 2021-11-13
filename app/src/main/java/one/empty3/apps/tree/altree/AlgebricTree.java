@@ -76,45 +76,47 @@ public class AlgebricTree extends Tree {
         int length = 9;
         boolean exception = false;
         while(i<length && !added) {
+            src.getChildren().clear();
             try {
-            switch(i) {
-                case 0:
-                    added = addFormulaSeparator(src, subformula);
-                    break;
-                case 1:
-                    added = addTerms(src, subformula);
-                    break;
-                case 2:
-                    added = addFactors(src, subformula);
-                    break;
-                case 3:
-                    added = addPower(src, subformula);
-                    break;
-                case 4:
-                    added = addSingleSign(src, subformula);
-                    break;
-                case 5:
-                    added = addDouble(src, subformula);
-                    break;
-                case 6:
-                    added = addFunction(src, subformula);
-                    break;
-                case 7:
-                    added = addBracedExpression(src, subformula);
-                    break;
-                case 8:
-                    added = addVariable(src, subformula);
-                    break;
-            }
+                switch(i) {
+                    case 0:
+                        added = addFormulaSeparator(src, subformula);
+                        break;
+                    case 1:
+                        added = addTerms(src, subformula);
+                        break;
+                    case 2:
+                        added = addFactors(src, subformula);
+                        break;
+                    case 3:
+                        added = addPower(src, subformula);
+                        break;
+                    case 4:
+                        added = addDouble(src, subformula);
+                        break;
+                    case 5:
+                        added = addFunction(src, subformula);
+                        break;
+                    case 6:
+                        added = addBracedExpression(src, subformula);
+                        break;
+                    case 7:
+                        added = addVariable(src, subformula);
+                        break;
+                    case 8:
+                        added = addSingleSign(src, subformula);
+                        break;
+                }
             } catch (AlgebraicFormulaSyntaxException ex) {
                 exception = true;
                 added = false;
             }
             i++;
         }
-        if(!added)
+        if (!added) {
             throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
-        return true;
+        }
+        return added;
     }
 
     private boolean addFormulaSeparator(TreeNode src, String subformula) {
@@ -169,8 +171,10 @@ public class AlgebricTree extends Tree {
         if (subformula.length() > 1 && subformula.charAt(0) == '-') {
             src.getChildren().add(new TreeNode(src, new Object[]{subformula.substring(1)}, new SignTreeNodeType(-1.0)));
 
-            return add(src, subformula.substring(1));
-        } else return false;
+            if(add(src, subformula.substring(1)))
+                return true;
+        }
+        return false;
 
     }
 
@@ -302,11 +306,12 @@ public class AlgebricTree extends Tree {
 
                         t2 = new TreeNode(t2, new Object[] {subsubstring}, signTreeNodeType);
                     }
-                    t.getChildren().add(t2);
                     if (!add(t2, subsubstring)) {
                         return false;
-                    } else
+                    } else {
+                        t.getChildren().add(t2);
                         countTerms++;
+                    }
                 }
 
 
@@ -376,11 +381,12 @@ public class AlgebricTree extends Tree {
 
                 if (subsubstring.length() > 0) {
                         t2 = new TreeNode(t, new Object[]{subsubstring}, new TermTreeNodeType(oldFactorSign));
-                        t.getChildren().add(t2);
                         if (!add(t2, subsubstring)) {
                             return false;
-                        } else
+                        } else {
+                            t.getChildren().add(t2);
                             countTerms++;
+                        }
                 } else
                     return false;
 
