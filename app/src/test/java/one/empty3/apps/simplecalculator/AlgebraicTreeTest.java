@@ -300,11 +300,15 @@ public class AlgebraicTreeTest {
 
     @Test
     public void testSimple5() {
-        assertTrue(testResult("6+-6*-12", 6+-6*-12.0 , false));
+        assertTrue(testResult("6-6*-12", 6-6*-12.0 , false));
     }   
  @Test
     public void testSimple6() {
         assertTrue(testResult("5/-5*3.0",-3.0 , false));
+    }
+    @Test
+    public void testSimple7() {
+        assertTrue(testResult("1-1/3*4/5*2",1-1/3.*4/5.*2 , false));
     }
     @Test
     public void testSimpleParentheses() {

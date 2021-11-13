@@ -169,10 +169,11 @@ public class AlgebricTree extends Tree {
 
     private boolean addSingleSign(TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
         if (subformula.length() > 1 && subformula.charAt(0) == '-') {
-            src.getChildren().add(new TreeNode(src, new Object[]{subformula.substring(1)}, new SignTreeNodeType(-1.0)));
 
-            if(add(src, subformula.substring(1)))
+            if(add(src, subformula.substring(1))) {
+                src.getChildren().add(new TreeNode(src, new Object[]{subformula.substring(1)}, new SignTreeNodeType(-1.0)));
                 return true;
+            }
         }
         return false;
 
