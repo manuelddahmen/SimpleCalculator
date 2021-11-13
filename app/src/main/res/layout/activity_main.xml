@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/answerText"
-        android:layout_width="229dp"
+        android:layout_width="match_parentf"
         android:layout_height="172dp"
         android:layout_marginBottom="8dp"
         android:background="#C65959"
@@ -104,8 +104,8 @@
 
     <Button
         android:id="@+id/button9"
-        android:layout_width="136dp"
-        android:layout_height="69dp"
+        android:layout_width="135dp"
+        android:layout_height="68dp"
         android:text="9"
         app:layout_constraintStart_toEndOf="@id/button8"
         app:layout_constraintTop_toBottomOf="@id/button6" />
@@ -116,6 +116,7 @@
         android:layout_height="68dp"
         android:text="."
         app:layout_constraintEnd_toStartOf="@id/button0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button7" />
 
@@ -123,32 +124,23 @@
         android:id="@+id/button0"
         android:layout_width="136dp"
         android:layout_height="68dp"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="348dp"
-        android:text="0"
+         android:text="0"
         app:layout_constraintStart_toEndOf="@id/dotButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button8"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/button8" />
 
     <Button
         android:id="@+id/equalButton"
         android:layout_width="136dp"
         android:layout_height="68dp"
-        android:layout_marginStart="272dp"
-        android:layout_marginTop="348dp"
         android:text="="
         app:layout_constraintLeft_toRightOf="@id/button0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button9"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/button9" />
 
     <Button
         android:id="@+id/addButton"
         android:layout_width="135dp"
         android:layout_height="68dp"
         android:text="+"
-        app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dotButton" />
 
@@ -156,13 +148,11 @@
         android:id="@+id/multButton"
         android:layout_width="136dp"
         android:layout_height="68dp"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="416dp"
         android:text="*"
-        app:layout_constraintLeft_toRightOf="@id/addButton"
-        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintStart_toEndOf="@+id/addButton"
         app:layout_constraintTop_toBottomOf="@id/button0"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
 
     <Button
         android:id="@+id/sqrtButton"
@@ -192,24 +182,18 @@
         android:id="@+id/expButton"
         android:layout_width="136dp"
         android:layout_height="69dp"
-        android:layout_marginStart="272dp"
-        android:layout_marginTop="476dp"
         android:text="pow"
         app:layout_constraintStart_toEndOf="@id/divideButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sqrtButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/sqrtButton" />
 
     <EditText
         android:id="@+id/editTextCalculus"
-        android:layout_width="350dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:background="#673AB7"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/button1"
         app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
