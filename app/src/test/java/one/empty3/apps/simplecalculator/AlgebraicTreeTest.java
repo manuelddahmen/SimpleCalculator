@@ -311,6 +311,18 @@ public class AlgebraicTreeTest {
         assertTrue(testResult("1-1/3*4/5*2",1-1/3.*4/5.*2 , false));
     }
     @Test
+    public void testSimple8() {
+        assertTrue(testResult("1-2-3-4-5-6",1.-2-3-4-5-6 , false));
+    }
+    @Test
+    public void testSimple9() {
+        assertTrue(testResult("1/2/3/4/5/6",1./2/3/4/5/6 , false));
+    }
+    @Test
+    public void testSimple10() {
+        assertTrue(testResult("-1",-1 , false));
+    }
+    @Test
     public void testSimpleParentheses() {
         assertTrue(testResult("(2+3)*(4+5)", (2 + 3) * (4 + 5), true));
     }
