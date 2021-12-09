@@ -14,6 +14,7 @@
         android:layout_marginBottom="8dp"
         android:background="#C65959"
         android:shadowColor="#801414"
+        android:textFontWeight="30"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.005"
@@ -59,16 +60,15 @@
         android:layout_height="68dp"
         android:text="4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button1" />
+        app:layout_constraintTop_toBottomOf="@+id/button1"
+        app:layout_constraintEnd_toStartOf="@id/button5"/>
 
     <Button
         android:id="@+id/button5"
         android:layout_width="136dp"
         android:layout_height="68dp"
-        android:layout_marginStart="136dp"
         android:text="5"
         app:layout_constraintStart_toEndOf="@id/button4"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button2" />
 
     <Button
