@@ -4,6 +4,20 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\manue\\.keystore')
+            storePassword 'ab44md78'
+            keyAlias 'manuelddahmen'
+            keyPassword 'md44md78'
+        }
+        release {
+        storeFile file('C:\\Users\\manue\\.keystore')
+            storePassword 'ab44md78'
+            keyAlias 'manuelddahmen'
+            keyPassword 'md44md78'
+        }
+    }
     compileSdk 30
 
     defaultConfig {
@@ -14,16 +28,21 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            versionNameSuffix '-1.0'
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             applicationIdSuffix '.SimpleCalculator'
             versionNameSuffix '-1.0'
+            signingConfig signingConfigs.debug
+            minifyEnabled true
         }
     }
     compileOptions {

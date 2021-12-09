@@ -182,7 +182,7 @@
         android:id="@+id/expButton"
         android:layout_width="136dp"
         android:layout_height="69dp"
-        android:text="pow"
+        android:text="^"
         app:layout_constraintStart_toEndOf="@id/divideButton"
         app:layout_constraintTop_toBottomOf="@id/sqrtButton" />
 
