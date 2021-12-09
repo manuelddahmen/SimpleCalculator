@@ -184,66 +184,69 @@ public class AlgebricTree extends Tree {
 
         TreeNode t2;
         int i = 0;
-        boolean firstTermFound = false;
-        boolean isNewFactor = false;
+        boolean firstExpFound = false;
+        boolean isNewExp = false;
         int count = 0;
-        int newFactorPos = 0;
-        int oldFactorPos = 0;
-        char newFactor = '*';
-        double newFactorSign = 1;
-        double oldFactorSign = 1;
+        int newExpPos = 0;
+        int oldExpPos = 0;
+        char newExp = '^';
+        double newExpSign = 1;
+        double oldExpSign = 1;
         while (i < values.length()) {
+
             if (values.charAt(i) == '^' && /*9(i < values.length() - 1 || values.charAt(i + 1) != '*') &&*/ count == 0) {
-                newFactor = '^';
-                newFactorPos = i;
-                isNewFactor = true;
-                firstTermFound = true;
-                newFactorSign = 1;
-            } else if (i == values.length() - 1 && count == 0 && firstTermFound) {
-                isNewFactor = true;
-                newFactorPos = i + 1;
-                /*if (values.charAt(oldFactorPos - 1) == '/') {
-                    newFactorSign = -1;
-                    newFactor = '/';//??
-                } else if (values.charAt(oldFactorPos - 1) == '*') {
-                    newFactorSign = 1;
-                    newFactor = '*';//??
-                } else throw new AlgebraicFormulaSyntaxException("Ni + ni -");
-            */
+                newExp = '^';
+                newExpPos = i;
+                isNewExp = true;
+                firstExpFound = true;
+                newExpSign = 1;
+            } else if (values.charAt(i) == '/' && count == 0) {
+                newExp = '/';
+                isNewExp = true;
+                newExpPos = i;
+                firstExpFound = true;
+                newExpSign = -1;
+            }
+            if (i == values.length() - 1 && firstExpFound) {
+                isNewExp = true;
+                newExpPos = i + 1;
             }
             if (values.charAt(i) == '(') {
                 count++;
             } else if (values.charAt(i) == ')') {
                 count--;
             }
-            if (values.charAt(values.length() - 1) == '^' || values.charAt(values.length() - 1) == '^')
+            if (values.charAt(values.length() - 1) == '*' || values.charAt(values.length() - 1) == '/')
                 return false;
 
-            if (i == values.length() - 1 && firstTermFound) {
-                isNewFactor = true;
-                newFactorPos = i + 1;
-            }
-            if (isNewFactor && count == 0) {
-                String subsubstring = values.substring(oldFactorPos, newFactorPos);
+
+            if (isNewExp && count == 0) {
+                String subsubstring = values.substring(oldExpPos, newExpPos);
 
 
                 if (subsubstring.length() > 0) {
-                    t2 = new TreeNode(t, new Object[]{subsubstring}, new PowerTreeNodeType(oldFactorSign));
-                    t.getChildren().add(t2);
+                    t2 = new TreeNode(t, new Object[]{subsubstring}, new FactorTreeNodeType(oldExpSign));
+                    if(subsubstring.charAt(0)=='-') {
+                        subsubstring = subsubstring.substring(1);
+                        SignTreeNodeType signTreeNodeType = new SignTreeNodeType(-1.0);
+                        signTreeNodeType.instantiate(new Object[] {subsubstring});
+
+                        t2 = new TreeNode(t2, new Object[] {subsubstring}, signTreeNodeType);
+                    }
                     if (!add(t2, subsubstring)) {
                         return false;
-                    } else
+                    } else {
+                        t.getChildren().add(t2);
                         countTerms++;
-
+                    }
                 }
 
-
-                isNewFactor = false;
-                count = 0;
-                newFactorPos = i + 1;
-                oldFactorPos = i + 1;
-                newFactor = 0;
-                oldFactorSign = newFactorSign;
+//ab44md78
+//gen44md78
+                isNewExp = false;
+                newExpPos = i + 1;
+                oldExpPos = i + 1;
+                oldExpSign = newExpSign;
             }
 
             i++;
