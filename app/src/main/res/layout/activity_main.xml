@@ -195,7 +195,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck"
-        android:autofillHints="one.empty3..."
+        android:autofillHints="@string/edit_text_here_or_by_push_numbers"
         android:labelFor="@id/answerText"
         android:hint="@string/edit_text_here_or_by_push_numbers"/>
 
