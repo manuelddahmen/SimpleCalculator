@@ -28,7 +28,7 @@
         android:layout_height="68dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="152dp"
-        android:text="1"
+        android:text="@string/_1"
         app:layout_constraintEnd_toStartOf="@id/button2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,7 @@
         android:layout_width="136dp"
         android:layout_height="68dp"
         android:layout_marginTop="152dp"
-        android:text="2"
+        android:text="@string/_2"
         app:layout_constraintEnd_toStartOf="@id/button3"
         app:layout_constraintStart_toEndOf="@id/button1"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +49,7 @@
         android:layout_height="68dp"
         android:layout_marginStart="272dp"
         android:layout_marginTop="152dp"
-        android:text="3"
+        android:text="@string/_3"
         app:layout_constraintStart_toEndOf="@id/button2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +58,7 @@
         android:id="@+id/button4"
         android:layout_width="135dp"
         android:layout_height="68dp"
-        android:text="4"
+        android:text="@string/_4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button1"
         app:layout_constraintEnd_toStartOf="@id/button5"/>
@@ -67,7 +67,7 @@
         android:id="@+id/button5"
         android:layout_width="136dp"
         android:layout_height="68dp"
-        android:text="5"
+        android:text="@string/_5"
         app:layout_constraintStart_toEndOf="@id/button4"
         app:layout_constraintTop_toBottomOf="@id/button2" />
 
@@ -75,7 +75,7 @@
         android:id="@+id/button6"
         android:layout_width="136dp"
         android:layout_height="68dp"
-        android:text="6"
+        android:text="@string/_6"
         app:layout_constraintStart_toEndOf="@id/button5"
         app:layout_constraintTop_toBottomOf="@id/button3"
          />
@@ -84,7 +84,7 @@
         android:id="@+id/button7"
         android:layout_width="135dp"
         android:layout_height="69dp"
-        android:text="7"
+        android:text="@string/_7"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toLeftOf="@id/button8"
         app:layout_constraintStart_toEndOf="parent"
@@ -95,7 +95,7 @@
         android:id="@+id/button8"
         android:layout_width="136dp"
         android:layout_height="69dp"
-        android:text="8"
+        android:text="@string/_8"
         app:layout_constraintStart_toEndOf="@id/button7"
         app:layout_constraintTop_toBottomOf="@id/button5" />
 
@@ -103,7 +103,7 @@
         android:id="@+id/button9"
         android:layout_width="136dp"
         android:layout_height="69dp"
-        android:text="9"
+        android:text="@string/_9"
         app:layout_constraintStart_toEndOf="@id/button8"
         app:layout_constraintTop_toBottomOf="@id/button6" />
 
@@ -111,7 +111,7 @@
         android:id="@+id/dotButton"
         android:layout_width="135dp"
         android:layout_height="68dp"
-        android:text="."
+        android:text="@string/DOT"
         app:layout_constraintEnd_toStartOf="@id/button0"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +121,7 @@
         android:id="@+id/button0"
         android:layout_width="136dp"
         android:layout_height="68dp"
-         android:text="0"
+         android:text="@string/_0"
         app:layout_constraintStart_toEndOf="@id/dotButton"
         app:layout_constraintTop_toBottomOf="@id/button8" />
 
@@ -129,7 +129,7 @@
         android:id="@+id/equalButton"
         android:layout_width="136dp"
         android:layout_height="68dp"
-        android:text="="
+        android:text="@string/EQUALS"
         app:layout_constraintLeft_toRightOf="@id/button0"
         app:layout_constraintTop_toBottomOf="@id/button9" />
 
@@ -137,7 +137,7 @@
         android:id="@+id/addButton"
         android:layout_width="135dp"
         android:layout_height="68dp"
-        android:text="+"
+        android:text="@string/ADD"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dotButton" />
 
@@ -145,7 +145,7 @@
         android:id="@+id/multButton"
         android:layout_width="136dp"
         android:layout_height="68dp"
-        android:text="*"
+        android:text="@string/MUL"
 
         app:layout_constraintStart_toEndOf="@+id/addButton"
         app:layout_constraintTop_toBottomOf="@id/button0"
@@ -155,7 +155,7 @@
         android:id="@+id/sqrtButton"
         android:layout_width="136dp"
         android:layout_height="68dp"
-        android:text="sqrt"
+        android:text="@string/sqrt"
         app:layout_constraintStart_toEndOf="@id/multButton"
         app:layout_constraintTop_toBottomOf="@id/equalButton" />
 
@@ -163,7 +163,7 @@
         android:id="@+id/substractButton"
         android:layout_width="135dp"
         android:layout_height="69dp"
-        android:text="-"
+        android:text="@string/SUB"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/addButton" />
 
@@ -171,7 +171,7 @@
         android:id="@+id/divideButton"
         android:layout_width="136dp"
         android:layout_height="69dp"
-        android:text="/"
+        android:text="@string/DIV"
         app:layout_constraintLeft_toRightOf="@id/substractButton"
         app:layout_constraintTop_toBottomOf="@id/multButton" />
 
@@ -179,7 +179,7 @@
         android:id="@+id/expButton"
         android:layout_width="136dp"
         android:layout_height="69dp"
-        android:text="^"
+        android:text="@string/EXP"
         app:layout_constraintStart_toEndOf="@id/divideButton"
         app:layout_constraintTop_toBottomOf="@id/sqrtButton" />
 
@@ -194,6 +194,10 @@
         app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:autofillHints="one.empty3..."
+        android:labelFor="@id/answerText"
+        android:hint="@string/edit_text_here_or_by_push_numbers"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
