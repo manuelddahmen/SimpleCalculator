@@ -23,9 +23,7 @@ class MainActivity : AppCompatActivity() {
             val textAnswer : TextView = findViewById<EditText>(R.id.answerText)
             val editText = findViewById<EditText>(R.id.editTextCalculus)
 
-            var j:Int = 0
-
-            for(j in buttonsNumbers) {
+            for(j:Int in buttonsNumbers) {
                 findViewById<Button>(j)!!.setOnClickListener {
                     editText.setText(editText.getText().append(findViewById<Button>(j)!!.getText()))
                     println(j)
