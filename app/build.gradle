@@ -52,53 +52,53 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
+    kotlinOptions {flavorDimensions "featureVersion", "price"
+        productFlavors {
+
+            maxSdk29 {
+                dimension "featureVersion"
+                applicationIdSuffix ".maxSdk29"
+                compileSdk 29
+                defaultConfig {
+                    targetSdkVersion 31
+                    JavaVersion.VERSION_1_8
+                    minSdkVersion 28
+                }
+            }
+            minSdk30 {
+                dimension "featureVersion"
+                applicationIdSuffix ".sdk30"
+                compileSdk 30
+                defaultConfig {
+                    targetSdkVersion 30
+                    JavaVersion.VERSION_11
+                    minSdkVersion 29
+                }
+            }
+            /*  sdk31 {
+                  dimension "featureVersion"
+                  applicationIdSuffix ".sdk31"
+                  compileSdk 31
+                  defaultConfig {
+                      targetSdkVersion 31
+                      minSdkVersion 31
+                      JavaVersion.VERSION_11
+                  }
+              }*/
+            free {
+                dimension "price"
+                applicationIdSuffix ".free"
+            }
+            paid {
+                dimension "price"
+                applicationIdSuffix ".pro"
+
+            }
+        }
         jvmTarget = '1.8'
     }
 
-    flavorDimensions "featureVersion", "price"
-    productFlavors {
 
-        maxSdk29 {
-            dimension "featureVersion"
-            applicationIdSuffix ".maxSdk29"
-            compileSdk 29
-            defaultConfig {
-                targetSdkVersion 31
-                JavaVersion.VERSION_1_8
-                minSdkVersion 28
-            }
-        }
-        minSdk30 {
-            dimension "featureVersion"
-            applicationIdSuffix ".sdk30"
-            compileSdk 30
-            defaultConfig {
-                targetSdkVersion 30
-                JavaVersion.VERSION_11
-                minSdkVersion 29
-            }
-        }
-      /*  sdk31 {
-            dimension "featureVersion"
-            applicationIdSuffix ".sdk31"
-            compileSdk 31
-            defaultConfig {
-                targetSdkVersion 31
-                minSdkVersion 31
-                JavaVersion.VERSION_11
-            }
-        }*/
-        free {
-            dimension "price"
-            applicationIdSuffix ".free"
-        }
-        paid {
-            dimension "price"
-            applicationIdSuffix ".pro"
-
-        }
-    }
 
 }
 
