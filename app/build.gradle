@@ -60,7 +60,7 @@ android {
                 applicationIdSuffix ".maxSdk29"
                 compileSdk 29
                 defaultConfig {
-                    targetSdkVersion 31
+                    targetSdkVersion 30
                     JavaVersion.VERSION_1_8
                     minSdkVersion 28
                 }
@@ -85,11 +85,11 @@ android {
                       JavaVersion.VERSION_11
                   }
               }*/
-            free {
+            simpleCalculatror_free {
                 dimension "price"
                 applicationIdSuffix ".free"
             }
-            paid {
+            simpleCalculatror_paid {
                 dimension "price"
                 applicationIdSuffix ".pro"
 

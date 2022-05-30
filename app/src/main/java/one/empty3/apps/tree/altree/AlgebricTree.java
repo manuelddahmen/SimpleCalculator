@@ -326,8 +326,6 @@ public class AlgebricTree extends Tree {
             }
 
             i++;
-
-
         }
         return t.getChildren().size() > 0 && countTerms > 0;
     }
