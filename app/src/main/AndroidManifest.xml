@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="one.empty3.apps.simplecalculator">
+    package="one.empty3.apps.simplecalculator"
+    >
 
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/mobile"
         android:theme="@style/Theme.SimpleCalculator">
+        <!--<a href="https://www.flaticon.com/free-icons/electronics" title="electronics icons">Electronics icons created by 88 Cloud - Flaticon</a>-->
         <activity
             android:exported="true"
             android:name=".MainActivity"

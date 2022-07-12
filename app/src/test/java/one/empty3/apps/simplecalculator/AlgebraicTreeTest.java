@@ -134,6 +134,35 @@ public class AlgebraicTreeTest {
         return false;
     }
 
+    protected boolean testConstructOrEvalFails(String expr, double expectedResult, boolean echo) {
+        AlgebricTree algebricTree = null;
+        try {
+            System.out.println("Expression string : " + expr);
+            algebricTree = new AlgebricTree(expr);
+            algebricTree.construct();
+            if (echo)
+                System.out.println(algebricTree);
+            try {
+                Object result;
+                result = algebricTree.eval();
+                if (echo)
+                    System.out.println("Result : " + result);
+                if (echo)
+                    System.out.println("Expected : " + expectedResult);
+                fail();
+                return false;
+            } catch (TreeNodeEvalException e) {
+                assertTrue(true);
+                if(echo)
+                e.printStackTrace();
+            }
+        } catch (AlgebraicFormulaSyntaxException | NullPointerException e) {
+            assertTrue(true);
+            if(echo)
+            e.printStackTrace();
+        }
+        return false;
+    }
     @Test
     public void testSimpleEquation1() {
         testResult("1", 1.0, false);
@@ -334,5 +363,21 @@ public class AlgebraicTreeTest {
     @Test
     public void testSimple2() {
         assertTrue(testResult("1.5", 1.5, false));
+    }
+    @Test
+    public void testExp1() {
+        assertTrue(testResult("2^3", Math.pow(2, 3), true));
+    }
+    @Test
+    public void testExp2() {
+        assertTrue(testResult("2^3^4", Math.pow(2, Math.pow(3, 4)), true));
+    }
+    @Test
+    public void testExp3() {
+        assertTrue(testResult("23^34", Math.pow(23, 34), true));
+    }
+    @Test
+    public void testError() {
+        testConstructOrEvalFails("2^6^", -2, false);
     }
 }

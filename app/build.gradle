@@ -19,6 +19,7 @@ android {
         }
     }
 
+
     lintOptions {
         baseline file("lint-baseline.xml")
     }
@@ -27,8 +28,8 @@ android {
         applicationId "one.empty3.apps.simplecalculator"
         minSdk 28
         targetSdk 30
-        versionCode 2
-        versionName "1.0"
+        versionCode 10
+        versionName "2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
@@ -37,13 +38,13 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            versionNameSuffix '-1.0'
+            versionNameSuffix '-2.0'
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            //applicationIdSuffix '.SimpleCalculator'
-            versionNameSuffix '1.0'
+            applicationIdSuffix '.SimpleCalculator'
+            versionNameSuffix '-2.0'
             signingConfig signingConfigs.debug
             minifyEnabled true
         }
@@ -52,8 +53,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        flavorDimensions "featureVersion", "price"
+    kotlinOptions {flavorDimensions "featureVersion", "price"
         productFlavors {
 
             maxSdk29 {
@@ -61,7 +61,7 @@ android {
                 //applicationIdSuffix ".maxSdk29"
                 compileSdk 29
                 defaultConfig {
-                    targetSdkVersion 30
+                    targetSdkVersion 31
                     JavaVersion.VERSION_1_8
                     minSdkVersion 28
                 }
@@ -76,21 +76,21 @@ android {
                     minSdkVersion 29
                 }
             }
-            sdk31 {
-                dimension "featureVersion"
-                //applicationIdSuffix ".sdk31"
-                compileSdk 31
-                defaultConfig {
-                    targetSdkVersion 32
-                    minSdkVersion 31
-                    JavaVersion.VERSION_11
-                }
-            }
-            simpleCalculatror_free {
+            /*  sdk31 {
+                  dimension "featureVersion"
+                  applicationIdSuffix ".sdk31"
+                  compileSdk 31
+                  defaultConfig {
+                      targetSdkVersion 31
+                      minSdkVersion 31
+                      JavaVersion.VERSION_11
+                  }
+              }*/
+            free {
                 dimension "price"
-                //applicationIdSuffix ".free"
+                ///applicationIdSuffix ".free"
             }
-            simpleCalculatror_paid {
+            paid {
                 dimension "price"
                 //applicationIdSuffix ".pro"
 
@@ -98,6 +98,7 @@ android {
         }
         jvmTarget = '1.8'
     }
+
 
 
 }
@@ -113,4 +114,3 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
-

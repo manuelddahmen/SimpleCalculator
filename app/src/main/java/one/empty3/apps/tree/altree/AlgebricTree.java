@@ -46,6 +46,7 @@ public class AlgebricTree extends Tree {
     private String formula = "0.0";
     Map<String, Double> parametersValues = new HashMap<>();
     private TreeNode root;
+    private int stackSize = 0;
 
     public AlgebricTree(String formula) throws AlgebraicFormulaSyntaxException {
         this.formula = formula;
@@ -62,11 +63,17 @@ public class AlgebricTree extends Tree {
 
     public AlgebricTree construct() throws AlgebraicFormulaSyntaxException {
         root = new TreeNode(formula);
+        stackSize = 0; // Restine sommaire//
         add(root, formula);
         return this;
     }
 
     public boolean add(TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
+
+        stackSize++;
+        if(stackSize>30) {
+            throw new AlgebraicFormulaSyntaxException("Recursive error (bad formula form");
+        }
 
         if (src == null || subformula == null || subformula.length() == 0)
             return false;
@@ -106,17 +113,21 @@ public class AlgebricTree extends Tree {
                     case 8:
                         added = addSingleSign(src, subformula);
                         break;
+                    default:
+                        return false;
                 }
             } catch (AlgebraicFormulaSyntaxException ex) {
                 exception = true;
-                added = false;
+            }
+            if(added) {
+                stackSize--;
+                return true;
             }
             i++;
+
         }
-        if (!added) {
-            throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
-        }
-        return added;
+        stackSize=0;
+        throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
     }
 
     private boolean addFormulaSeparator(TreeNode src, String subformula) {
@@ -233,7 +244,7 @@ public class AlgebricTree extends Tree {
 
                         t2 = new TreeNode(t2, new Object[] {subsubstring}, signTreeNodeType);
                     }
-                    if (!add(t2, subsubstring)) {
+                    if (subsubstring.length() > 0 && !add(t2, subsubstring)) {
                         return false;
                     } else {
                         t.getChildren().add(t2);
@@ -554,7 +565,7 @@ public class AlgebricTree extends Tree {
     }
 
     public Double eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
-        //System.out.println(parametersValues.size());
+
         return root.eval();
     }
 
