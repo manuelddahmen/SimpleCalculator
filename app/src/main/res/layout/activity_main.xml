@@ -18,7 +18,7 @@
         android:background="#C65959"
         android:fontFamily="monospace"
         android:shadowColor="#801414"
-        android:text="Résultat"
+        android:text="@string/r_sultat"
         android:textColor="#FFFFFF"
         android:textFontWeight="30"
         android:textSize="34sp"
@@ -58,6 +58,9 @@
         android:layout_marginStart="272dp"
         android:layout_marginTop="152dp"
         android:text="@string/_3"
+        android:textAlignment="viewStart"
+        android:textColorHint="#FBD3D3"
+        app:iconTint="#F3EBEB"
         app:layout_constraintStart_toEndOf="@id/button2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -206,12 +209,25 @@
         android:inputType="textPersonName"
         android:labelFor="@id/answerText"
         android:textAlignment="center"
+        android:textColor="#F6E9E9"
+        android:textColorHint="#F4E7E7"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/AboutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/about_and_policies"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="openLink" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
