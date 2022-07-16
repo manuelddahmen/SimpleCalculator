@@ -18,7 +18,7 @@
         android:background="#C65959"
         android:fontFamily="monospace"
         android:shadowColor="#801414"
-        android:text="@string/r_sultat"
+        android:text="@string/result"
         android:textColor="#FFFFFF"
         android:textFontWeight="30"
         android:textSize="34sp"

@@ -126,7 +126,6 @@ public class AlgebricTree extends Tree {
             i++;
 
         }
-        stackSize=0;
         throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
     }
 

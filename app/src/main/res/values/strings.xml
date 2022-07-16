@@ -19,7 +19,7 @@
     <string name="DIV">/</string>
     <string name="EXP">^</string>
     <string name="edit_text_here_or_by_push_numbers">Edit text here or by push numbers</string>
-    <string name="r_sultat">Résultat</string>
-    <string name="about_and_policies">About and Policies</string>
-    <string name="POLICY_URI">https://empty3.one/android/User%20and%20Family%20Policy%20for%20Calculette%20Simple%20by%20Empty3.htm</string>
+    <string name="result">Result</string>
+    <string name="about_and_policies">About and privacy policy</string>
+    <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
 </resources>
