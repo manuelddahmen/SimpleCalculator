@@ -60,7 +60,6 @@ android {
 
             maxSdk29 {
                 dimension "featureVersion"
-                //applicationIdSuffix ".maxSdk29"
                 compileSdk 29
                 defaultConfig {
                     targetSdkVersion 31
@@ -70,7 +69,6 @@ android {
             }
             minSdk30 {
                 dimension "featureVersion"
-                //applicationIdSuffix ".sdk30"
                 compileSdk 30
                 defaultConfig {
                     targetSdkVersion 30
@@ -78,24 +76,29 @@ android {
                     minSdkVersion 29
                 }
             }
-            /*  sdk31 {
+            minSdk31 {
                   dimension "featureVersion"
-                  applicationIdSuffix ".sdk31"
                   compileSdk 31
                   defaultConfig {
                       targetSdkVersion 31
                       minSdkVersion 31
                       JavaVersion.VERSION_11
                   }
-              }*/
+              }
+            minSdk32 {
+                dimension "featureVersion"
+                compileSdk 32
+                defaultConfig {
+                    targetSdkVersion 32
+                    minSdkVersion 32
+                    JavaVersion.VERSION_11
+                }
+            }
             free {
                 dimension "price"
-                ///applicationIdSuffix ".free"
             }
             paid {
                 dimension "price"
-                //applicationIdSuffix ".pro"
-
             }
         }
         jvmTarget = '1.8'
@@ -111,6 +114,8 @@ dependencies {
     //implementation 'androidx.core:core-ktx:1.7.0'
     //implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     //noinspection GradleDynamicVersion
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

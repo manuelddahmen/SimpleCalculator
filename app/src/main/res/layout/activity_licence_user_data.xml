@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LicenceUserData">
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textViewUserData1"
+        android:layout_width="354dp"
+        android:layout_height="291dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Données utilisateur personnelles et sensibles
+Dans l'application image featuring, les seules données auxquelles l'application accède sont les fichiers multimédia ouvert par le bouton prise de vue ou choisir un fichier. Ceux-ci sont traités par l'application et éventuellement des copies de travail sont stockées dans le répertoire data de l'application et figure donc sur le système dans un format ou l'autre.
+Dans une future version il sera possible de partager vos résultats avec d'autres utilisateurs, internautes.
+Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme privées et ne sont pas collectées, ni traitées  par nos services. "
+        app:barrierAllowsGoneWidgets="false"
+        app:chainUseRtl="false"
+        app:layout_constrainedHeight="false"
+        app:layout_constrainedWidth="false"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonBack" />
+
+    <TextView
+        android:id="@+id/TextViewPrivacy"
+        android:layout_width="357dp"
+        android:layout_height="279dp"
+        android:layout_marginEnd="24dp"
+        android:text="Privacy policy and Families policy for Apps by DaTheWolf -- one.empty3
+Calculator (calculette simple) [Application]
+Image Featuring [Application]
+
+
+Privacy policy
+Calculator (calculette simple) [Application] is a calculus application designed for adults, children and all family.
+
+Application is not designed especially to children.
+
+
+
+Families Policy
+
+
+Application doesn’t share user-provided information with third parties; and
+
+Application doesn’t share the user’s physical location with other users.
+
+Application doesn’t display Ads
+
+Application doesn’t disclose the collection of any personal and sensitive information from children.
+
+
+
+User Data is collected as anonymous data on Google Store. Application is not collecting supplementary data.
+
+App name: Calculator (calculette simple)
+
+Contact: DAHMEN Manuel (dathewolf@gmail.com>)
+
+[Street Address]"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="343dp" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipLicence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="28dp"
+        android:text="Accept User Data Management Policy and Privacy "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/AboutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/about_and_policies"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="openLink" />
+
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="21dp"
+        android:text="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

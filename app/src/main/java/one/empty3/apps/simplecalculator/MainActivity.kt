@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -50,9 +51,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    fun openLink(view: View) {
-        val uri : Uri = Uri.parse(getString(R.string.POLICY_URI))
-        val intent:Intent  = Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+    fun openUserData(view: View) {
+        val message = ""
+        val intent: Intent = Intent(this, LicenceUserData::class.java).apply {
+            putExtra("class", this)
+        }
+        startActivity(intent)
     }
 }
