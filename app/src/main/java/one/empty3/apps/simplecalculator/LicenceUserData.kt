@@ -15,7 +15,7 @@ class LicenceUserData : AppCompatActivity() {
         findViewById<Button>(R.id.buttonBack).setOnClickListener {
             backToMain(it)
          }
-        findViewById<Button>(R.id.linkToPrivavy).setOnClickListener{
+        findViewById<Button>(R.id.AboutButton).setOnClickListener{
             openLink(it)
         }
     }
