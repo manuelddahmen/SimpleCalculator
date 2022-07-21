@@ -9,17 +9,17 @@ import android.view.View
 import android.widget.Button
 
 class LicenceUserData : AppCompatActivity() {
-    private lateinit var main: MainActivity
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_licence_user_data)
-        this.main = intent.extras?.get("class") as MainActivity
         findViewById<Button>(R.id.buttonBack).setOnClickListener {
             backToMain(it)
+         }
+        findViewById<Button>(R.id.linkToPrivavy).setOnClickListener{
+            openLink(it)
         }
     }
-    public fun backToMain(view:View) {
+    private fun backToMain(view:View) {
 
         val intent: Intent = Intent(view.context, MainActivity::class.java).apply {
         }

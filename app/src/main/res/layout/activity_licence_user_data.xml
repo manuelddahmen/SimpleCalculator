@@ -8,8 +8,9 @@
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <TextView
         android:id="@+id/textViewUserData1"
@@ -17,6 +18,7 @@
         android:layout_height="291dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="6dp"
         android:text="Données utilisateur personnelles et sensibles
 Dans l'application image featuring, les seules données auxquelles l'application accède sont les fichiers multimédia ouvert par le bouton prise de vue ou choisir un fichier. Ceux-ci sont traités par l'application et éventuellement des copies de travail sont stockées dans le répertoire data de l'application et figure donc sur le système dans un format ou l'autre.
 Dans une future version il sera possible de partager vos résultats avec d'autres utilisateurs, internautes.
@@ -25,6 +27,7 @@ Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme priv
         app:chainUseRtl="false"
         app:layout_constrainedHeight="false"
         app:layout_constrainedWidth="false"
+        app:layout_constraintBottom_toTopOf="@+id/TextViewPrivacy"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -35,6 +38,8 @@ Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme priv
         android:id="@+id/TextViewPrivacy"
         android:layout_width="357dp"
         android:layout_height="279dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="24dp"
         android:text="Privacy policy and Families policy for Apps by DaTheWolf -- one.empty3
 Calculator (calculette simple) [Application]
@@ -71,7 +76,7 @@ Contact: DAHMEN Manuel (dathewolf@gmail.com>)
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="343dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserData1" />
 
     <com.google.android.material.chip.Chip
         android:id="@+id/chipLicence"

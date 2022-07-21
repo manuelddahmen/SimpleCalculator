@@ -29,4 +29,5 @@
     <string name="DEL"><![CDATA[<<<]]></string>
     <string name="back">Back</string>
     <string name="accept_user_data_management_policy_and_privacy">Accept User Data Management Policy and Privacy</string>
+    <string name="about_privacy">About privacy</string>
 </resources>
