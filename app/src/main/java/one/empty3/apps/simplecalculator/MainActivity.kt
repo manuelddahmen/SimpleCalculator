@@ -20,23 +20,31 @@ class MainActivity : AppCompatActivity() {
             setContentView(R.layout.activity_main)
             val buttonsNumbers = arrayListOf<Int>(R.id.button0, R.id.button1, R.id.button2, R.id.button3,
                 R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.dotButton,
-                R.id.divideButton, R.id.multButton, R.id.addButton, R.id.substractButton, R.id.expButton, R.id.sqrtButton
-            )
+                R.id.divideButton, R.id.multButton, R.id.addButton, R.id.substractButton, R.id.expButton, R.id.delButton)
 
             val textAnswer : TextView = findViewById<EditText>(R.id.answerText)
             val editText = findViewById<EditText>(R.id.editTextCalculus)
 
             for(j:Int in buttonsNumbers) {
-                findViewById<Button>(j)!!.setOnClickListener {
-                    editText.setText(editText.getText().append(findViewById<Button>(j)!!.getText()))
-                    println(j)
+                val findViewById: Button = findViewById<Button>(j)!!
+                findViewById.setOnClickListener {
+                    if(findViewById == findViewById<Button>(R.id.delButton)) {
+                        val toString: String = editText.text.toString()
+                        if(toString.length>1) {
+                            editText.setText(editText.text.substring(0, toString.length - 1))
+                        } else if(toString.length==1) {
+                            editText.setText("")
+                        }
+                        return@setOnClickListener
+                    }
+                    editText.setText(editText.text.append(findViewById.text))
                     val tree: AlgebricTree = AlgebricTree(editText.text.toString());
 
                     try {
                         tree.construct()
                         val d: Double = tree.eval()
                         val labelAnswer: String = d.toString()
-                        textAnswer.setText(labelAnswer)
+                        textAnswer.text = labelAnswer
 
                     } catch (ex: AlgebraicFormulaSyntaxException) {
 
@@ -45,15 +53,17 @@ class MainActivity : AppCompatActivity() {
                     } catch (ex:kotlin.NullPointerException) {
                         ex.printStackTrace()
                     }
-                    println(tree.toString())
-
                 }
+            }
+
+            findViewById<Button>(R.id.AboutButton).setOnClickListener { it ->
+                openUserData(it)
             }
         }
 
     fun openUserData(view: View) {
-        val message = ""
-        val intent: Intent = Intent(this, LicenceUserData::class.java).apply {
+        val message:String = ""
+        val intent: Intent = Intent(view.context, LicenceUserData::class.java).apply {
             putExtra("class", this)
         }
         startActivity(intent)

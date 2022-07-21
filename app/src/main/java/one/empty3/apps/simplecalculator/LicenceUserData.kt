@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.view.View
+import android.widget.Button
 
 class LicenceUserData : AppCompatActivity() {
     private lateinit var main: MainActivity
@@ -14,9 +15,13 @@ class LicenceUserData : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_licence_user_data)
         this.main = intent.extras?.get("class") as MainActivity
+        findViewById<Button>(R.id.buttonBack).setOnClickListener {
+            backToMain(it)
+        }
     }
-    public fun backToMain() {
-        val intent: Intent = Intent(this, MainActivity::class.java).apply {
+    public fun backToMain(view:View) {
+
+        val intent: Intent = Intent(view.context, MainActivity::class.java).apply {
         }
         startActivity(intent)
     }

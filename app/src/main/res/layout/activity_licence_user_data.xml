@@ -80,7 +80,7 @@ Contact: DAHMEN Manuel (dathewolf@gmail.com>)
         android:layout_marginStart="34dp"
         android:layout_marginEnd="34dp"
         android:layout_marginBottom="28dp"
-        android:text="Accept User Data Management Policy and Privacy "
+        android:text="@string/accept_user_data_management_policy_and_privacy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -102,7 +102,7 @@ Contact: DAHMEN Manuel (dathewolf@gmail.com>)
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="21dp"
-        android:text="Back"
+        android:text="@string/back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
