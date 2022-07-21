@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout-land/tv.xml" value="0.14010416666666667" />
+        <entry key="..\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout-notnight/tv.xml" value="0.15104166666666666" />
         <entry key="..\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout-port-notouch-keysexposed-nokeys/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout/activity_licence_user_data.xml" value="0.1" />
         <entry key="..\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout/activity_main.xml" value="0.25" />

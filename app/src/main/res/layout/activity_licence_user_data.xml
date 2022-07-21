@@ -94,7 +94,7 @@ Contact: DAHMEN Manuel (dathewolf@gmail.com>)
         android:text="@string/about_and_policies"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="openLink" />
+         />
 
     <Button
         android:id="@+id/buttonBack"
