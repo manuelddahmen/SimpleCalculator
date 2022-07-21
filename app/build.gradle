@@ -4,7 +4,7 @@ plugins {
 }
 
 
-def versionCode10 = 4300
+def versionCode1000 = 5000
 android {
 
     signingConfigs {
@@ -67,7 +67,7 @@ android {
                 dimension "featureVersion"
                 compileSdk 29
                 defaultConfig {
-                    versionCode 129+versionCode10
+                    versionCode 129+versionCode1000
                     //noinspection ExpiredTargetSdkVersion
                     targetSdkVersion 29
                     JavaVersion.VERSION_1_8
@@ -78,7 +78,7 @@ android {
                 dimension "featureVersion"
                 compileSdk 30
                 defaultConfig {
-                    versionCode 130+versionCode10
+                    versionCode 130+versionCode1000
 
                     targetSdkVersion 30
                     JavaVersion.VERSION_11
@@ -89,7 +89,7 @@ android {
                   dimension "featureVersion"
                   compileSdk 31
                   defaultConfig {
-                      versionCode 131+versionCode10
+                      versionCode 131+versionCode1000
 
                       targetSdkVersion 31
                       minSdkVersion 31
@@ -101,7 +101,7 @@ android {
                 dimension "featureVersion"
                 compileSdk 32
                 defaultConfig {
-                    versionCode 32+versionCode10
+                    versionCode 32+versionCode1000
 
                     targetSdkVersion 32
                     minSdkVersion 32
