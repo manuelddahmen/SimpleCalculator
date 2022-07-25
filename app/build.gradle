@@ -4,7 +4,7 @@ plugins {
 }
 
 
-def versionCode1000 = 50000
+def versionCode1000 = 53000
 android {
 
     signingConfigs {
@@ -26,7 +26,7 @@ android {
     lintOptions {
         baseline file("lint-baseline.xml")
     }
-
+/*
     defaultConfig {
         applicationId "one.empty3.apps.simplecalculator"
         minSdk 28
@@ -38,7 +38,12 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+    }*/
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        applicationId "one.empty3.apps.simplecalculator"
     }
+
     buildFeatures {
         compose true
     }
@@ -50,7 +55,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            applicationIdSuffix '.SimpleCalculator'
             versionNameSuffix '-2.0'
             signingConfig signingConfigs.debug
             minifyEnabled true
@@ -60,63 +64,45 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {flavorDimensions "featureVersion", "price"
-        productFlavors {
-
-            maxSdk29 {
-                dimension "featureVersion"
-                compileSdk 29
-                defaultConfig {
-                    versionCode 129+versionCode1000
-                    //noinspection ExpiredTargetSdkVersion
-                    targetSdkVersion 29
-                    JavaVersion.VERSION_1_9
-                    minSdkVersion 28
-                }
+    flavorDimensions "featureVersion"
+    productFlavors {
+        maxSdk29 {
+            dimension "featureVersion"
+            compileSdkVersion 31
+            defaultConfig {
+                JavaVersion.VERSION_11
+                //noinspection ExpiredTargetSdkVersion
+                targetSdkVersion 32
+                minSdkVersion 29
+                versionCode 129 + versionCode1000
             }
-            minSdk30 {
-                dimension "featureVersion"
-                compileSdk 30
-                defaultConfig {
-                    versionCode 130+versionCode1000
-
-                    targetSdkVersion 30
-                    JavaVersion.VERSION_11
-                    minSdkVersion 29
-                }
-            }
-            minSdk31 {
-                  dimension "featureVersion"
-                  compileSdk 31
-                  defaultConfig {
-                      versionCode 131+versionCode1000
-
-                      targetSdkVersion 31
-                      minSdkVersion 31
-                      JavaVersion.VERSION_11
-                  }
-              }
-/*
-            minSdk32 {
-                dimension "featureVersion"
-                compileSdk 32
-                defaultConfig {
-                    versionCode 32+versionCode1000
-
-                    targetSdkVersion 32
-                    minSdkVersion 32
-                    JavaVersion.VERSION_11
-                }
-                            }
- */
-            free {
-                dimension "price"
-            }
-            paid {
-                dimension "price"
-            }
+            signingConfig signingConfigs.release
         }
-        jvmTarget = '1.8'
+/*
+        minSdk30 {
+            dimension "featureVersion"
+            compileSdkVersion 30
+            defaultConfig {
+                targetSdkVersion 30
+                JavaVersion.VERSION_11
+                minSdkVersion 30
+                versionCode 130+code
+            }
+            signingConfig signingConfigs.release
+        }
+
+        sdk31 {
+            dimension "featureVersion"
+            compileSdkVersion 31
+            defaultConfig {
+                targetSdkVersion 31
+                minSdkVersion 31
+                JavaVersion.VERSION_11
+                versionCode 131+code
+            }
+            signingConfig signingConfigs.release
+        }      jvmTarget = '1.8'
+    }*/
     }
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
@@ -126,9 +112,8 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
-
-
 }
+
 
 dependencies {
 
