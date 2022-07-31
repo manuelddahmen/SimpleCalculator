@@ -3,9 +3,9 @@
     package="one.empty3.apps.simplecalculator">
 
     <application
-        android:icon="@mipmap/ic_launcher"
+        android:icon=""
         android:label="@string/app_name"
-        android:roundIcon="@drawable/mobile"
+        android:roundIcon="@drawable/mite"
         android:theme="@style/Theme.SimpleCalculator">
         <activity
             android:name=".FormulaStore"
@@ -14,7 +14,7 @@
             android:theme="@style/Theme.SimpleCalculator" />
         <activity
             android:name=".LicenceUserData"
-            android:exported="false"></activity> <!-- <a href="https://www.flaticon.com/free-icons/electronics" title="electronics icons">Electronics icons created by 88 Cloud - Flaticon</a> -->
+            android:exported="false" /> <!-- <a href="https://www.flaticon.com/free-icons/electronics" title="electronics icons">Electronics icons created by 88 Cloud - Flaticon</a> -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
