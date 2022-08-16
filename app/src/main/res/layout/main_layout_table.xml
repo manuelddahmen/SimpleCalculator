@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="#F3E6E6"
+    android:backgroundTintMode="add"
+    android:orientation="vertical">
 
 
-    <LinearLayout android:orientation="horizontal"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="150dp"
+        android:orientation="horizontal">
+
         <EditText
             android:id="@+id/editTextCalculus"
             android:layout_width="match_parent"
@@ -23,132 +28,187 @@
             android:textAlignment="center"
             android:textColor="#F6E9E9"
             android:textColorHint="#F4E7E7"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            tools:ignore="DuplicateSpeakableTextCheck" />
     </LinearLayout>
-    <LinearLayout android:orientation="horizontal"
-    android:layout_width="wrap_content"
-    android:layout_height="48dp">
-        <Button
-            android:id="@+id/button1"
 
-            android:layout_width="48dp"
-            android:layout_height="match_parent"
+    "
 
-            android:text="@string/_1"
-            style="?android:attr/buttonBarButtonStyle" />
-
-        <Button
-            android:id="@+id/button2"
-
-            android:layout_width="48dp"
-            android:layout_height="match_parent"
-            android:text="@string/_2"
-            style="?android:attr/buttonBarButtonStyle" />
-
-    <Button
-        android:id="@+id/button3"
-
-        android:layout_width="48dp"
-        android:layout_height="match_parent"
-        android:text="@string/_3"
-        android:textAlignment="viewStart"
-        android:textColor="#D32F2F"
-        android:textColorHint="#FBD3D3"
-        style="?android:attr/buttonBarButtonStyle" />
-
-</LinearLayout>
-    <LinearLayout android:orientation="horizontal"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/calculatrice"
         android:layout_width="match_parent"
-        android:layout_height="48dp">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="48dp"
-            android:layout_height="match_parent"
-            android:text="@string/_4"
-            style="?android:attr/buttonBarButtonStyle" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button5"
-            
-            android:layout_width="48dp"
-            android:layout_height="match_parent"
-            android:text="@string/_5"
-            style="?android:attr/buttonBarButtonStyle" />
+            <Button
+                android:id="@+id/button1"
 
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="48dp"
-            android:layout_height="match_parent"
-            android:text="@string/_6"
-            style="?android:attr/buttonBarButtonStyle" />
-    </LinearLayout>
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
 
-    <LinearLayout android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="48dp">
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="48dp"
-        android:layout_height="match_parent"
-        android:text="@string/_7"
-        style="?android:attr/buttonBarButtonStyle" />
+                android:layout_height="match_parent"
+                android:text="@string/_1" />
 
-        <Button
-            android:id="@+id/button8"
-            android:layout_width="48dp"
-            android:layout_height="match_parent"
-            android:text="@string/_8"
-            style="?android:attr/buttonBarButtonStyle" />
+            <Button
+                android:id="@+id/button2"
 
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="48dp"
-        android:layout_height="match_parent"
-        android:text="@string/_9"
-        style="?android:attr/buttonBarButtonStyle" />
-</LinearLayout>
-<LinearLayout android:orientation="horizontal"
-    android:layout_width="wrap_content"
-    android:layout_height="48dp">
-    <Button
-        android:id="@+id/dotButton"
-        android:layout_width="48dp"
-        android:layout_height="match_parent"
-        android:text="@string/DOT"
-        style="?android:attr/buttonBarButtonStyle" />
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_2" />
 
-    <Button
-        android:id="@+id/button0"
-        android:layout_width="48dp"
-        android:layout_height="match_parent"
-         android:text="@string/_0"
-        style="?android:attr/buttonBarButtonStyle" />
+            <Button
+                android:id="@+id/button3"
 
-    <Button
-        android:id="@+id/equalButton"
-        android:layout_width="48dp"
-        android:layout_height="match_parent"
-        android:text="@string/EQUALS"
-        style="?android:attr/buttonBarButtonStyle" />
-</LinearLayout><LinearLayout android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp">
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_3"
+                android:textAlignment="viewStart"
+                android:textColorHint="#FBD3D3" />
 
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="48dp"
-        android:layout_height="match_parent"
-        android:text="@string/ADD"
-        style="?android:attr/buttonBarButtonStyle" />
+            <Button
+                android:id="@+id/buttonParenthesisA"
+                style="@android:style/Widget.Material.Light.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=")"
+                android:textColorHighlight="#7E66A8" />
 
-    <Button
-        android:id="@+id/multButton"
-        android:layout_width="48dp"
-        android:layout_height="match_parent"
-        android:text="@string/MUL"
-        style="?android:attr/buttonBarButtonStyle" />
-<!--
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button4"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_4" />
+
+            <Button
+                android:id="@+id/button5"
+
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_5" />
+
+            <Button
+                android:id="@+id/button6"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_6" />
+
+            <Button
+                android:id="@+id/buttonFunction"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:width="128dp"
+                android:text="function(" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button7"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_7" />
+
+            <Button
+                android:id="@+id/button8"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_8" />
+
+            <Button
+                android:id="@+id/button9"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_9" />
+
+            <Button
+                android:id="@+id/buttonParenthesis"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:width="48dp"
+                android:text=")" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/dotButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/DOT" />
+
+            <Button
+                android:id="@+id/button0"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/_0" />
+
+            <Button
+                android:id="@+id/equalButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/EQUALS" />
+
+            <Button
+                android:id="@+id/buttonComa"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="," />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/addButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/ADD" />
+
+            <Button
+                android:id="@+id/multButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/MUL" />
+            <!--
     <Button
         android:id="@+id/sqrtButton"
         android:layout_width="match_parent"
@@ -157,54 +217,63 @@
         app:layout_constraintStart_toEndOf="@id/multButton"
         app:layout_constraintTop_toBottomOf="@id/equalButton" />
 -->
-    <Button
-        android:id="@+id/delButton"
-        android:layout_width="48dp"
-        android:layout_height="wrap_content"
-        android:text="@string/DEL"
-        style="?android:attr/buttonBarButtonStyle" />
-</LinearLayout>
-    <LinearLayout android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp">
-    <Button
-        android:id="@+id/substractButton"
-        android:layout_width="48dp"
-        android:layout_height="match_parent"
-        android:text="@string/SUB"
-        style="?android:attr/buttonBarButtonStyle" />
+            <Button
+                android:id="@+id/delButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="@string/DEL" />
 
-    <Button
-        android:id="@+id/divideButton"
-        android:layout_width="48dp"
-        android:layout_height="match_parent"
-        android:text="@string/DIV"
-        style="?android:attr/buttonBarButtonStyle" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/expButton"
-        android:layout_width="48dp"
-        android:layout_height="match_parent"
-        android:text="@string/EXP"
-        style="?android:attr/buttonBarButtonStyle" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
 
-</LinearLayout>
+            <Button
+                android:id="@+id/substractButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/SUB" />
+
+            <Button
+                android:id="@+id/divideButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/DIV" />
+
+            <Button
+                android:id="@+id/expButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:text="@string/EXP" />
+
+        </LinearLayout>
 
 
-            <LinearLayout android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="48dp">
-                <Button
-                    android:id="@+id/AboutButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:text="@string/about_and_policies"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
 
-            </LinearLayout>
-    <LinearLayout android:layout_width="match_parent"
-        android:orientation="horizontal"
+            <Button
+                android:id="@+id/AboutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/about_and_policies" />
+
+        </LinearLayout>
+    </androidx.fragment.app.FragmentContainerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="150dp"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/answerText"
             android:layout_width="match_parent"
@@ -216,7 +285,7 @@
             android:textColor="#FFFFFF"
             android:textFontWeight="30"
             android:textSize="34sp"
-            android:typeface="monospace"/>
+            android:typeface="monospace" />
     </LinearLayout>
 
 </LinearLayout>

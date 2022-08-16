@@ -30,4 +30,8 @@
     <string name="back">Back</string>
     <string name="accept_user_data_management_policy_and_privacy">Accept User Data Management Policy and Privacy</string>
     <string name="about_privacy">About privacy</string>
+    <string name="dialog_message">Choisir une fonction</string>
+    <string name="dialog_title">Fonctions prédéfinies</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="ok_button">OK</string>
 </resources>

@@ -3,7 +3,7 @@
     package="one.empty3.apps.simplecalculator">
 
     <application
-        android:icon=""
+        android:icon="@drawable/mite"
         android:label="@string/app_name"
         android:roundIcon="@drawable/mite"
         android:theme="@style/Theme.SimpleCalculator">

@@ -1,6 +1,7 @@
 package one.empty3.apps.simplecalculator
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Application
 import android.content.Intent
 import android.net.Uri
@@ -10,6 +11,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import one.empty3.apps.simplecalculator.R
 import one.empty3.apps.tree.altree.*;
@@ -37,7 +39,9 @@ class MainActivity : AppCompatActivity() {
             R.id.addButton,
             R.id.substractButton,
             R.id.expButton,
-            R.id.delButton
+            R.id.delButton,
+            R.id.buttonParenthesis,
+            R.id.buttonParenthesisA
         )
 
         val textAnswer: TextView = findViewById<EditText>(R.id.answerText)
@@ -64,21 +68,32 @@ class MainActivity : AppCompatActivity() {
                         val d: Double = tree.eval()
                         val labelAnswer: String = d.toString()
                         textAnswer.text = labelAnswer
+                        Toast.makeText(getApplicationContext(), "Valide V", Toast.LENGTH_LONG).show()
 
                     } catch (ex: AlgebraicFormulaSyntaxException) {
-
+                        Toast.makeText(getApplicationContext(), "Syntaxe invalide", Toast.LENGTH_SHORT).show()
                     } catch (ex: kotlin.IndexOutOfBoundsException) {
+                        Toast.makeText(getApplicationContext(), "Erreur autre (array index)", Toast.LENGTH_SHORT).show()
                         ex.printStackTrace()
                     } catch (ex: kotlin.NullPointerException) {
+                        Toast.makeText(getApplicationContext(), "Erreur : null", Toast.LENGTH_SHORT).show()
                         ex.printStackTrace()
                     }
                 }
             }
         }
+        val buttonFunctionAdd : Button = findViewById(R.id.buttonFunction);
+        buttonFunctionAdd.setOnClickListener {
+
+            }
         findViewById<Button>(R.id.AboutButton).setOnClickListener { it ->
             openUserData(it)
         }
     }
+
+
+
+
 
     private fun openUserData(view: View) {
         val message: String = ""

@@ -4,7 +4,7 @@ plugins {
 }
 
 
-def versionCode1000 = 53000
+def versionCode1000 = 54000
 android {
 
     signingConfigs {
