@@ -32,13 +32,6 @@
             tools:ignore="DuplicateSpeakableTextCheck" />
     </LinearLayout>
 
-    "
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/calculatrice"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="48dp"
@@ -73,11 +66,11 @@
 
             <Button
                 android:id="@+id/buttonParenthesisA"
-                style="@android:style/Widget.Material.Light.Button"
-                android:layout_width="wrap_content"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text=")"
+                android:text="@string/open_brace"
                 android:textColorHighlight="#7E66A8" />
 
         </LinearLayout>
@@ -112,7 +105,7 @@
             <Button
                 android:id="@+id/buttonFunction"
                 style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:width="128dp"
@@ -149,11 +142,11 @@
             <Button
                 android:id="@+id/buttonParenthesis"
                 style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:width="48dp"
-                android:text=")" />
+                android:text="@string/close_brace" />
         </LinearLayout>
 
         <LinearLayout
@@ -185,9 +178,9 @@
             <Button
                 android:id="@+id/buttonComa"
                 style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="match_parent"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
-                android:text="," />
+                android:text="@string/coma" />
         </LinearLayout>
 
         <LinearLayout
@@ -267,7 +260,6 @@
                 android:text="@string/about_and_policies" />
 
         </LinearLayout>
-    </androidx.fragment.app.FragmentContainerView>
 
     <LinearLayout
         android:layout_width="match_parent"

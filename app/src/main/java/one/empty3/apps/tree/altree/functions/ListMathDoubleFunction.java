@@ -22,13 +22,14 @@ public class ListMathDoubleFunction {
             }
             s+=") : "+method.getReturnType().getName();
 
-            sequences.add(s);
+            if(method.getParameterCount()==1 && method.getReturnType().equals(Double.class))
+                sequences.add(s);
         }
         Field[] numbers = Math.class.getDeclaredFields();
         for (int i = 0; i < numbers.length; i++) {
             Field field = numbers[i];
             String s = ""+field.getName()+" : "+field.getType();
-            sequences.add(s);
+            //sequences.add(s);
         }
 
         CharSequence[] cs = new CharSequence[sequences.size()];

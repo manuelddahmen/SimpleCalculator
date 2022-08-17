@@ -34,4 +34,7 @@
     <string name="dialog_title">Fonctions prédéfinies</string>
     <string name="cancel_button">Cancel</string>
     <string name="ok_button">OK</string>
+    <string name="open_brace">(</string>
+    <string name="close_brace">)</string>
+    <string name="coma">,</string>
 </resources>
