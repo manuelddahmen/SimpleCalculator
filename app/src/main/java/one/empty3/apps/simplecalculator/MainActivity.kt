@@ -74,21 +74,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        val buttonFunctionAdd : Button = findViewById(R.id.buttonFunction)
+        val buttonFunctionAdd: Button = findViewById(R.id.buttonFunction)
         buttonFunctionAdd.setOnClickListener {
-                // Create an instance of the dialog fragment and show it
-                val dialog = StartGameDialogFragment()
-                dialog.show(supportFragmentManager, "one.empty3.apps.simplecalculator.StartGameDialogFragment")
+            // Create an instance of the dialog fragment and show it
+            val dialog = ChooseFunctionDialogFragment()
+            dialog.show(
+                getSupportFragmentManager(),
+                "one.empty3.apps.simplecalculator.ChooseFunctionDialogFragment"
+            )
             editText.text = editText.text.append(dialog.function)
 
-            }
+        }
         findViewById<Button>(R.id.AboutButton).setOnClickListener {
             openUserData(it)
         }
     }
-
-
-
 
 
     private fun openUserData(view: View) {

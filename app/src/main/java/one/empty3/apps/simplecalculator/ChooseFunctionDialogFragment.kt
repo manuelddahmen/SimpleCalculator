@@ -6,18 +6,17 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
 
-class StartGameDialogFragment : DialogFragment() {
+class ChooseFunctionDialogFragment : DialogFragment() {
     var function : String = ""
     var selectedItem = -1
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder: AlertDialog.Builder = activity.let {
-            AlertDialog.Builder(it)
-        }
+        val builder = AlertDialog.Builder(requireContext())
+
         val mathList : Array<out CharSequence> = ListMathDoubleFunction.getList()
         mathList.forEach { println(it) }
         return builder
             .setMessage(R.string.dialog_message).setTitle(R.string.dialog_title)
-            .setSingleChoiceItems(mathList, selectedItem) { dialog, which ->
+            .setSingleChoiceItems(mathList, selectedItem) { _, which ->
                 this.function = mathList[which].toString()
 
             }
@@ -29,5 +28,8 @@ class StartGameDialogFragment : DialogFragment() {
             }.create()
     }
 
+    companion object {
+        const val TAG = "one.empty3.apps.simplecalculator.ChooseFunctionDialogFragment"
+    }
 }
 
