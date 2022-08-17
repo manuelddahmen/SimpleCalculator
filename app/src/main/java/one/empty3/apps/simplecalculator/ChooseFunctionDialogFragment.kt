@@ -12,8 +12,8 @@ class ChooseFunctionDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireContext())
 
-        val mathList : Array<out CharSequence> = ListMathDoubleFunction.getList()
-        mathList.forEach { println(it) }
+        val mathList : Array<String> = ListMathDoubleFunction.getList()
+        //mathList.forEach { println(it) }
         return builder
             .setMessage(R.string.dialog_message).setTitle(R.string.dialog_title)
             .setSingleChoiceItems(mathList, selectedItem) { _, which ->
