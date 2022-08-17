@@ -8,21 +8,21 @@ import java.util.List;
 public class ListMathDoubleFunction {
     public static CharSequence[] getList() {
         List<CharSequence> sequences = new ArrayList<CharSequence>();
-        Method[] methods = Math.class.getMethods();
+        Method[] methods = Math.class.getDeclaredMethods();
         for (int i = 0; i < methods.length; i++) {
             Method method = methods[i];
             String s = "("+method.getName()+"(";
             for (int j = 0; j < method.getParameterTypes().length; j++) {
                 Class<?> parameterType = method.getParameterTypes()[j];
                 if(parameterType.equals(Double.class)) {
-                    s+=parameterType.getClass().getName();
+                    s+=parameterType.getName();
                 }
                 if(j < method.getParameterCount()-1)
                     s+=",";
             }
             s+=") : "+method.getReturnType().getName();
 
-            if(method.getParameterCount()==1 && method.getReturnType().equals(Double.class))
+            if(method.getParameterCount()<=1 && method.getReturnType().equals(double.class))
                 sequences.add(s);
         }
         Field[] numbers = Math.class.getDeclaredFields();

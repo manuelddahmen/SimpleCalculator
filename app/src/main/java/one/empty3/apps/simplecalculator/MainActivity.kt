@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import one.empty3.apps.simplecalculator.R
 import one.empty3.apps.tree.altree.*;
 import java.lang.Exception
+import java.security.AccessController.getContext
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,12 +72,12 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(getApplicationContext(), "Valide V", Toast.LENGTH_LONG).show()
 
                     } catch (ex: AlgebraicFormulaSyntaxException) {
-                        Toast.makeText(getApplicationContext(), "Syntaxe invalide", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(getApplicationContext(), "Syntaxe invalide", Toast.LENGTH_SHORT).show()
                     } catch (ex: kotlin.IndexOutOfBoundsException) {
-                        Toast.makeText(getApplicationContext(), "Erreur autre (array index)", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(getApplicationContext(), "Erreur autre (array index)", Toast.LENGTH_SHORT).show()
                         ex.printStackTrace()
                     } catch (ex: kotlin.NullPointerException) {
-                        Toast.makeText(getApplicationContext(), "Erreur : null", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(getApplicationContext(), "Erreur : null", Toast.LENGTH_SHORT).show()
                         ex.printStackTrace()
                     }
                 }
@@ -84,6 +85,10 @@ class MainActivity : AppCompatActivity() {
         }
         val buttonFunctionAdd : Button = findViewById(R.id.buttonFunction);
         buttonFunctionAdd.setOnClickListener {
+                // Create an instance of the dialog fragment and show it
+                val dialog = StartGameDialogFragment()
+                dialog.show(supportFragmentManager, "one.empty3.apps.simplecalculator.StartGameDialogFragment")
+            editText.setText(editText.text.append(dialog.function))
 
             }
         findViewById<Button>(R.id.AboutButton).setOnClickListener { it ->
