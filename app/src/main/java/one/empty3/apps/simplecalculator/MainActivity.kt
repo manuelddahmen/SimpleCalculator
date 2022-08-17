@@ -1,28 +1,21 @@
 package one.empty3.apps.simplecalculator
 
-import android.app.Activity
-import android.app.AlertDialog
-import android.app.Application
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import one.empty3.apps.simplecalculator.R
-import one.empty3.apps.tree.altree.*;
-import java.lang.Exception
-import java.security.AccessController.getContext
+import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException
+import one.empty3.apps.tree.altree.AlgebricTree
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout_table)
-        val buttonsNumbers = arrayListOf<Int>(
+        val buttonsNumbers = arrayListOf(
             R.id.button0,
             R.id.button1,
             R.id.button2,
@@ -49,49 +42,47 @@ class MainActivity : AppCompatActivity() {
         val editText = findViewById<EditText>(R.id.editTextCalculus)
 
         for (j: Int in buttonsNumbers) {
-            if (j != null) {
-                val findViewById: Button = findViewById<Button>(j)
-                findViewById!!.setOnClickListener {
-                    if (findViewById == findViewById<Button>(R.id.delButton)) {
-                        val toString: String = editText.text.toString()
-                        if (toString.length > 1) {
-                            editText.setText(editText.text.substring(0, toString.length - 1))
-                        } else if (toString.length == 1) {
-                            editText.setText("")
-                        }
-                        return@setOnClickListener
+            val findViewById: Button = findViewById(j)
+            findViewById.setOnClickListener {
+                if (findViewById == findViewById<Button>(R.id.delButton)) {
+                    val toString: String = editText.text.toString()
+                    if (toString.length > 1) {
+                        editText.setText(editText.text.substring(0, toString.length - 1))
+                    } else if (toString.length == 1) {
+                        editText.setText("")
                     }
-                    editText.setText(editText.text.append(findViewById.text))
-                    val tree: AlgebricTree = AlgebricTree(editText.text.toString());
+                    return@setOnClickListener
+                }
+                editText.text = editText.text.append(findViewById.text)
+                val tree = AlgebricTree(editText.text.toString())
 
-                    try {
-                        tree.construct()
-                        val d: Double = tree.eval()
-                        val labelAnswer: String = d.toString()
-                        textAnswer.text = labelAnswer
-                        Toast.makeText(getApplicationContext(), "Valide V", Toast.LENGTH_LONG).show()
+                try {
+                    tree.construct()
+                    val d: Double = tree.eval()
+                    val labelAnswer: String = d.toString()
+                    textAnswer.text = labelAnswer
+                    Toast.makeText(applicationContext, "Valide V", Toast.LENGTH_LONG).show()
 
-                    } catch (ex: AlgebraicFormulaSyntaxException) {
-                        //Toast.makeText(getApplicationContext(), "Syntaxe invalide", Toast.LENGTH_SHORT).show()
-                    } catch (ex: kotlin.IndexOutOfBoundsException) {
-                        //Toast.makeText(getApplicationContext(), "Erreur autre (array index)", Toast.LENGTH_SHORT).show()
-                        ex.printStackTrace()
-                    } catch (ex: kotlin.NullPointerException) {
-                        //Toast.makeText(getApplicationContext(), "Erreur : null", Toast.LENGTH_SHORT).show()
-                        ex.printStackTrace()
-                    }
+                } catch (ex: AlgebraicFormulaSyntaxException) {
+                    //Toast.makeText(getApplicationContext(), "Syntaxe invalide", Toast.LENGTH_SHORT).show()
+                } catch (ex: IndexOutOfBoundsException) {
+                    //Toast.makeText(getApplicationContext(), "Erreur autre (array index)", Toast.LENGTH_SHORT).show()
+                    ex.printStackTrace()
+                } catch (ex: NullPointerException) {
+                    //Toast.makeText(getApplicationContext(), "Erreur : null", Toast.LENGTH_SHORT).show()
+                    ex.printStackTrace()
                 }
             }
         }
-        val buttonFunctionAdd : Button = findViewById(R.id.buttonFunction);
+        val buttonFunctionAdd : Button = findViewById(R.id.buttonFunction)
         buttonFunctionAdd.setOnClickListener {
                 // Create an instance of the dialog fragment and show it
                 val dialog = StartGameDialogFragment()
                 dialog.show(supportFragmentManager, "one.empty3.apps.simplecalculator.StartGameDialogFragment")
-            editText.setText(editText.text.append(dialog.function))
+            editText.text = editText.text.append(dialog.function)
 
             }
-        findViewById<Button>(R.id.AboutButton).setOnClickListener { it ->
+        findViewById<Button>(R.id.AboutButton).setOnClickListener {
             openUserData(it)
         }
     }
@@ -101,7 +92,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun openUserData(view: View) {
-        val message: String = ""
         val intent: Intent = Intent(view.context, LicenceUserData::class.java).apply {
             putExtra("class", "")
         }
