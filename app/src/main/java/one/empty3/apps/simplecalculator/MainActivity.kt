@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
 import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException
 import one.empty3.apps.tree.altree.AlgebricTree
 
@@ -76,15 +77,19 @@ class MainActivity : AppCompatActivity() {
         }
         val buttonFunctionAdd: Button = findViewById(R.id.buttonFunction)
         buttonFunctionAdd.setOnClickListener {
-            // Create an instance of the dialog fragment and show it
-            val dialog = ChooseFunctionDialogFragment()
-            dialog.show(
-                getSupportFragmentManager(),
-                "one.empty3.apps.simplecalculator.ChooseFunctionDialogFragment"
-            )
-            editText.text = editText.text.append(dialog.function)
-
-        }
+            val stringFragment : StringFragment= StringFragment()
+                val ft: FragmentTransaction = supportFragmentManager.beginTransaction();
+                ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+            ft.show(stringFragment);
+                ft.commit();
+            }            // Create an instance of the dialog fragment and show it
+            //val dialog = ChooseFunctionDialogFragment()
+            //dialog.show(
+            //    getSupportFragmentManager(),
+            //    "one.empty3.apps.simplecalculator.ChooseFunctionDialogFragment"
+            //)
+        //       this.setContentView(R.layout.fragment_item_list)
+//            editText.text = editText.text.append(dialog.function)
         findViewById<Button>(R.id.AboutButton).setOnClickListener {
             openUserData(it)
         }
