@@ -2,6 +2,7 @@ package one.empty3.apps.simplecalculator
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils.replace
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -77,12 +78,16 @@ class MainActivity : AppCompatActivity() {
         }
         val buttonFunctionAdd: Button = findViewById(R.id.buttonFunction)
         buttonFunctionAdd.setOnClickListener {
-            val stringFragment : StringFragment= StringFragment()
-                val ft: FragmentTransaction = supportFragmentManager.beginTransaction();
-                ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
-            ft.show(stringFragment);
-                ft.commit();
-            }            // Create an instance of the dialog fragment and show it
+//            val stringFragment : StringFragment= StringFragment()
+//                val ft: FragmentTransaction = supportFragmentManager.beginTransaction();
+//                ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+            val dialog = ChooseFunctionDialogFragment()
+            dialog.show(
+                getSupportFragmentManager(),
+                "one.empty3.apps.simplecalculator.ChooseFunctionDialogFragment"
+            )
+
+        }            // Create an instance of the dialog fragment and show it
             //val dialog = ChooseFunctionDialogFragment()
             //dialog.show(
             //    getSupportFragmentManager(),

@@ -39,7 +39,7 @@ class StringFragment() : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val viewFragment = inflater.inflate(R.layout.fragment_item_list, container, false)
 
         val view : RecyclerView = viewFragment.findViewById(R.id.list)
@@ -53,7 +53,7 @@ class StringFragment() : Fragment() {
                 adapter = MyStringRecyclerViewAdapter(myListPlaceHolder())
             }
         }
-        return view
+        return viewFragment
     }
 
     private fun myListPlaceHolder(): List<PlaceholderContent.PlaceholderItem> {
