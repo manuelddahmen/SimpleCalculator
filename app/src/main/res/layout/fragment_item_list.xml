@@ -7,14 +7,14 @@
 <androidx.recyclerview.widget.RecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
-    android:name="one.empty3.apps.simplecalculator.StringFragment"
+    android:name="one.empty3.apps.simplecalculator.StringFunction"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".StringFragment"
-    tools:listitem="@layout/fragment_item" >
+    tools:context=".StringFunction"
+    tools:listitem="@layout/fragment_item_list" >
 
 </androidx.recyclerview.widget.RecyclerView>
     <!--<androidx.appcompat.widget.LinearLayoutCompat
