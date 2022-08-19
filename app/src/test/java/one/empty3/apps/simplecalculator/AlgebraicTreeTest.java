@@ -333,16 +333,16 @@ public class AlgebraicTreeTest {
     }
 @Test
     public void testSimple4() {
-        assertTrue(testResult("1*8*-8", 1*8.*-8, false));
+        assertTrue(testResult("1*8*(-8)", 1*8.*-8, false));
     }
 
     @Test
     public void testSimple5() {
-        assertTrue(testResult("6-6*-12", 6-6*-12.0 , false));
+        assertTrue(testResult("6-6*(-12)", 6-6*-12.0 , false));
     }   
  @Test
     public void testSimple6() {
-        assertTrue(testResult("-5/-5*3.0",-5./-5*3.0 , false));
+        assertTrue(testResult("(-5)/(-5)*3.0", 3.0, false));
     }
     @Test
     public void testSimple7() {
@@ -396,6 +396,14 @@ public class AlgebraicTreeTest {
     @Test
     public void testSimple12()  {
         testConstructOrEvalFails("(-1+9)", (-1+9), false);
+    }
+    @Test
+    public void testSimple13()  {
+        testConstructOrEvalFails("-1+9", +9-1, false);
+    }
+    @Test
+    public void testSimple14()  {
+        testConstructOrEvalFails("(-1+9)", (+9-1), false);
     }
     @Test
     public void testSimpleFunctionDefined() {
