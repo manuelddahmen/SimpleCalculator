@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
 //                val ft: FragmentTransaction = supportFragmentManager.beginTransaction();
 //                ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
             val dialog = ChooseFunctionDialogFragment()
+            val stringArrayAdapter = StringArrayAdapter()
             dialog.show(
                 getSupportFragmentManager(),
                 "one.empty3.apps.simplecalculator.ChooseFunctionDialogFragment"

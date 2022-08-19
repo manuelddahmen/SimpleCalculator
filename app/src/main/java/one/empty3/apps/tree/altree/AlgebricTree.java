@@ -110,7 +110,7 @@ public class AlgebricTree extends Tree {
                     case 7:
                         added = addVariable(src, subformula);
                         break;
-                    case 8:
+                    case 8: // Mettre - en 4??
                         added = addSingleSign(src, subformula);
                         break;
                     default:
@@ -235,7 +235,7 @@ public class AlgebricTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    t2 = new TreeNode(t, new Object[]{subsubstring}, new FactorTreeNodeType(oldExpSign));
+                    t2 = new TreeNode(t, new Object[]{subsubstring}, new PowerTreeNodeType(oldExpSign));
                     if(subsubstring.charAt(0)=='-') {
                         subsubstring = subsubstring.substring(1);
                         SignTreeNodeType signTreeNodeType = new SignTreeNodeType(-1.0);

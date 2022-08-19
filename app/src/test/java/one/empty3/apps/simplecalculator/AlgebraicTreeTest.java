@@ -39,6 +39,8 @@ import static org.junit.Assert.fail;
  * Created by Manuel Dahmen on 15-12-16.
  */
 public class AlgebraicTreeTest {
+    private static final double DELTA = Double.MIN_VALUE;
+
     @Before
     public void setUp() throws Exception {
 
@@ -84,13 +86,14 @@ public class AlgebraicTreeTest {
             if (echo)
                 System.out.println(algebricTree);
             try {
-                Object result;
+                double result;
                 result = algebricTree.eval();
                 if (echo)
                     System.out.println("Result : " + result);
                 if (echo)
                     System.out.println("Expected : " + expectedResult);
-                assertTrue((double) result == expectedResult);
+                assertTrue((result<expectedResult+DELTA(expectedResult)
+                        && result>expectedResult-DELTA(expectedResult)));
                 return true;
             } catch (TreeNodeEvalException e) {
                 e.printStackTrace();
@@ -106,6 +109,11 @@ public class AlgebraicTreeTest {
         return false;
     }
 
+    private double DELTA(double expectedResult) {
+        double abs = Math.abs(Math.max(expectedResult / 10E5, 1E-5));
+        return abs;
+    }
+
     protected boolean testResult(String expr, double expectedResult, boolean echo) {
         AlgebricTree algebricTree = null;
         try {
@@ -115,13 +123,14 @@ public class AlgebraicTreeTest {
             if (echo)
                 System.out.println(algebricTree);
             try {
-                Object result;
+                double result;
                 result = algebricTree.eval();
                 if (echo)
                     System.out.println("Result : " + result);
                 if (echo)
                     System.out.println("Expected : " + expectedResult);
-                assertEquals((double) result, expectedResult, 0.0);
+                assertTrue((result<expectedResult+DELTA(expectedResult)
+                        && result>expectedResult-DELTA(expectedResult)));
                 return true;
             } catch (TreeNodeEvalException e) {
                 e.printStackTrace();
@@ -370,7 +379,7 @@ public class AlgebraicTreeTest {
     }
     @Test
     public void testExp2() {
-        assertTrue(testResult("2^3^4", Math.pow(2, Math.pow(3, 4)), true));
+        assertTrue(testResult("2^(3^4)", Math.pow(2, Math.pow(3, 4)), true));
     }
     @Test
     public void testExp3() {
@@ -379,5 +388,21 @@ public class AlgebraicTreeTest {
     @Test
     public void testError() {
         testConstructOrEvalFails("2^6^", -2, false);
+    }
+    @Test
+    public void testSimple11()  {
+        testConstructOrEvalFails("-1+9", -1+9, false);
+    }
+    @Test
+    public void testSimple12()  {
+        testConstructOrEvalFails("(-1+9)", (-1+9), false);
+    }
+    @Test
+    public void testSimpleFunctionDefined() {
+        double x = -2.0;
+        HashMap<String, Double> vars = new HashMap<>();
+        vars.put("x", x);
+
+        testResultVariable("-x+(2*x)", -x+(2*x), vars, true);
     }
 }

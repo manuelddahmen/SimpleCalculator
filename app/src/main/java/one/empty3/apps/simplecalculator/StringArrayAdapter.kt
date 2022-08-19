@@ -16,11 +16,15 @@ class StringArrayAdapter() : RecyclerView.Adapter<StringArrayAdapter.ViewHolder>
     private var mathList: Array<String> = ListMathDoubleFunction.getList()
 
     class ViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
+
         //val item = itemView.findViewById(R.id.icon) as Icon
-        val name = itemView.findViewById(R.id.text_view_recyclerview_function) as TextView
+        val textView = itemView.findViewById(R.id.text_view_recyclerview_function) as TextView
+        var name:String = textView.text.toString()
     }
 
-    constructor(parcel: Parcel) : this()
+    constructor(parcel: Parcel) : this() {
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val from = LayoutInflater.from(parent.context)
@@ -30,7 +34,7 @@ class StringArrayAdapter() : RecyclerView.Adapter<StringArrayAdapter.ViewHolder>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val function = mathList[position]
-        holder.name.text =  function
+        holder.name =  function
     }
 
     override fun getItemCount(): Int {

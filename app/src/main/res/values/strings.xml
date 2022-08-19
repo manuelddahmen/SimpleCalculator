@@ -39,4 +39,5 @@
     <string name="coma">,</string>
     <string name="fragment_function_ok">Ok</string>
     <string name="fragment_function_cancel" />
+    <string name="function_string">Function String</string>
 </resources>
