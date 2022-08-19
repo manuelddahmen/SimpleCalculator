@@ -358,7 +358,7 @@ public class AlgebraicTreeTest {
     }
     @Test
     public void testSimple10() {
-        assertTrue(testResult("-1",-1 , false));
+        assertTrue(testResult("-1",-1 , true));
     }
     @Test
     public void testSimpleParentheses() {

@@ -32,6 +32,8 @@
 
 package one.empty3.apps.tree.altree;
 
+import androidx.annotation.NonNull;
+
 /*__
  * Created by manuel on 16-12-16.
  */
@@ -53,5 +55,12 @@ public class SignTreeNodeType extends TreeNodeType {
     @Override
     public Double eval() {
         return sign;
+    }
+
+    @NonNull
+    public String toString() {
+        String string = super.toString();
+        string += "\nSign sign : " + sign;
+        return string;
     }
 }

@@ -35,7 +35,6 @@ package one.empty3.apps.tree.altree;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
 
 
 /*__
@@ -68,6 +67,24 @@ public class AlgebricTree extends Tree {
         return this;
     }
 
+    /***
+     * Particularité
+     * @param src
+     */
+    private void checkForSignTreeNode(TreeNode src) {
+        //System.out.println("DEBUG TREE: current tree" +src);
+        if(src.getChildren().size()>=2 && src.getChildren().get(1).type.getClass()
+                .equals(SignTreeNodeType.class)) {
+            TreeNode sign = src.getChildren().remove(1);
+            TreeNode son0 = src.getChildren().remove(0);
+            double sign1 = ((SignTreeNodeType) sign.type).getSign();
+            src.getChildren().add(new TreeNode(src, new Object[]{""+sign1},
+                    new SignTreeNodeType(sign1)));
+            TreeNode son1 = src.getChildren().get(0);
+            son1.getChildren().add(son0);
+        }
+    }
+
     public boolean add(TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
 
         stackSize++;
@@ -85,37 +102,50 @@ public class AlgebricTree extends Tree {
         while(i<length && !added) {
             src.getChildren().clear();
             try {
+                int caseChoice = -1;
+                int lastAdded = -1;
                 switch(i) {
                     case 0:
                         added = addFormulaSeparator(src, subformula);
+                        if(added) caseChoice = 0;
                         break;
                     case 1:
                         added = addTerms(src, subformula);
+                        if(added) caseChoice = 1;
                         break;
                     case 2:
                         added = addFactors(src, subformula);
+                        if(added) caseChoice = 2;
                         break;
                     case 3:
                         added = addPower(src, subformula);
+                        if(added) caseChoice = 3;
                         break;
-                    case 4:
-                        added = addDouble(src, subformula);
+                    case 4: // Mettre - en 4??
+                        added = addSingleSign(src, subformula);
                         break;
                     case 5:
-                        added = addFunction(src, subformula);
+                        added = addDouble(src, subformula);
+                        if(added) caseChoice = 5;
                         break;
                     case 6:
-                        added = addBracedExpression(src, subformula);
+                        added = addFunction(src, subformula);
+                        if(added) caseChoice = 6;
                         break;
                     case 7:
-                        added = addVariable(src, subformula);
+                        added = addBracedExpression(src, subformula);
+                        if(added) caseChoice = 7;
                         break;
-                    case 8: // Mettre - en 4??
-                        added = addSingleSign(src, subformula);
+                    case 8:
+                        added = addVariable(src, subformula);
+                        if(added) caseChoice = 8;
                         break;
                     default:
                         return false;
                 }
+                if(added)
+                    checkForSignTreeNode(src);
+
             } catch (AlgebraicFormulaSyntaxException ex) {
                 exception = true;
             }
@@ -354,13 +384,13 @@ public class AlgebricTree extends Tree {
         double newFactorSign = 1;
         double oldFactorSign = 1;
         while (i < values.length()) {
-            if (values.charAt(i) == '+' /*&& (i < values.length() - 1 || values.charAt(i + 1) != '+')*/ && count == 0) {
+            if (values.charAt(i) == '+' && count == 0 && i>0/*&& (i < values.length() - 1 || values.charAt(i + 1) != '+')*/ && count == 0) {
                 newFactor = '+';
                 newFactorPos = i;
                 isNewFactor = true;
                 firstTermFound = true;
                 newFactorSign = 1;
-            } else if (values.charAt(i) == '-' && count == 0) {
+            } else if (values.charAt(i) == '-' && count == 0 && i>0) {
                 newFactor = '-';
                 isNewFactor = true;
                 newFactorPos = i;
