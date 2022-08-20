@@ -340,7 +340,7 @@ public class AlgebraicTreeTest {
     }   
  @Test
     public void testSimple6() {
-        assertTrue(testResult("(-5)/(-5)*3.0", 3.0, false));
+        assertTrue(testResult("-5/-5*3.0", 3.0, false));
     }
     @Test
     public void testSimple7() {
