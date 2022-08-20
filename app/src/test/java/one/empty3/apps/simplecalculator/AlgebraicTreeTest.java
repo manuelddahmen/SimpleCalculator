@@ -76,7 +76,7 @@ public class AlgebraicTreeTest {
 
     }
 
-    private boolean testResultVariable(String expr, double expectedResult, Map<String, Double> map, boolean echo) {
+    private void testResultVariable(String expr, double expectedResult, Map<String, Double> map, boolean echo) {
         AlgebricTree algebricTree = null;
         try {
             System.out.println("Expression string : " + expr);
@@ -94,7 +94,6 @@ public class AlgebraicTreeTest {
                     System.out.println("Expected : " + expectedResult);
                 assertTrue((result<expectedResult+DELTA(expectedResult)
                         && result>expectedResult-DELTA(expectedResult)));
-                return true;
             } catch (TreeNodeEvalException e) {
                 e.printStackTrace();
                 assertFalse(true);
@@ -106,7 +105,6 @@ public class AlgebraicTreeTest {
             ex.printStackTrace();
             assertFalse(true);
         }
-        return false;
     }
 
     private double DELTA(double expectedResult) {
@@ -391,20 +389,13 @@ public class AlgebraicTreeTest {
     }
     @Test
     public void testSimple11()  {
-        testConstructOrEvalFails("-1+9", -1+9, false);
+        testResult("-1+9", -1+9., true);
     }
     @Test
     public void testSimple12()  {
-        testConstructOrEvalFails("(-1+9)", (-1+9), false);
+        testResult("(-1+9)", (-1+9.), true);
     }
-    @Test
-    public void testSimple13()  {
-        testConstructOrEvalFails("-1+9", +9-1, false);
-    }
-    @Test
-    public void testSimple14()  {
-        testConstructOrEvalFails("(-1+9)", (+9-1), false);
-    }
+
     @Test
     public void testSimpleFunctionDefined() {
         double x = -2.0;

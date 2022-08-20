@@ -397,6 +397,8 @@ public class AlgebricTree extends Tree {
                 firstTermFound = true;
                 newFactorSign = -1;
             }
+            if((values.charAt(i)=='-'||values.charAt(i)=='+')&&i==0) {
+            }
 
             if (values.charAt(i) == '(') {
                 count++;
