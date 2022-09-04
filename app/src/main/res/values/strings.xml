@@ -37,7 +37,7 @@
     <string name="open_brace">(</string>
     <string name="close_brace">)</string>
     <string name="coma">,</string>
-    <string name="fragment_function_ok">Ok</string>
-    <string name="fragment_function_cancel" />
+    <string name="fragment_function_ok">OK</string>
+    <string name="fragment_function_cancel" >Cancel</string>
     <string name="function_string">Function String</string>
 </resources>

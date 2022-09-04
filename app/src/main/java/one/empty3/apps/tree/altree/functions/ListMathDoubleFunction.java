@@ -7,12 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListMathDoubleFunction {
+    public static String functionName = "";
+    public boolean isExited;
+
     public static String[] getList() {
         List<String> sequences = new ArrayList<String>();
         Method[] methods = Math.class.getDeclaredMethods();
         for (int i = 0; i < methods.length; i++) {
             Method method = methods[i];
             String s = ""+method.getName()+"(";
+            String s1 = s;
             for (int j = 0; j < method.getParameters().length; j++) {
                 Parameter parameter = method.getParameters()[j];
                 if(parameter.getType().equals(Double.class)) {
@@ -24,7 +28,7 @@ public class ListMathDoubleFunction {
             s+=") : "+method.getReturnType().getName();
 
             if(method.getParameterCount()<=1 && method.getReturnType().equals(double.class))
-                sequences.add(s);
+                sequences.add(s1);
         }
         Field[] numbers = Math.class.getDeclaredFields();
         for (int i = 0; i < numbers.length; i++) {

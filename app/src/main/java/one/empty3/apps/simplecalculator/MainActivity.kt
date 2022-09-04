@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException
 import one.empty3.apps.tree.altree.AlgebricTree
+import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,11 +85,22 @@ class MainActivity : AppCompatActivity() {
             val dialog = ChooseFunctionDialogFragment()
             val stringArrayAdapter = StringArrayAdapter()
             dialog.show(
-                getSupportFragmentManager(),
+                supportFragmentManager,
                 "one.empty3.apps.simplecalculator.ChooseFunctionDialogFragment"
             )
+            Thread {
+                run {
+                    while (!dialog.isExited) {
+                        Thread.sleep(100)
+                    }
 
-        }            // Create an instance of the dialog fragment and show it
+                    val result: String = dialog.function_name
+                    if (result.isNotEmpty())
+                        editText.text = editText.text.append(result)
+                }
+            }.start()
+        }
+        // Create an instance of the dialog fragment and show it
             //val dialog = ChooseFunctionDialogFragment()
             //dialog.show(
             //    getSupportFragmentManager(),

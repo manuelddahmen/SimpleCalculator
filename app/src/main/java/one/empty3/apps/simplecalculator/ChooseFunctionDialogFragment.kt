@@ -7,35 +7,63 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListAdapter
-import android.widget.ListView
 import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.RecyclerView
 import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
-import android.widget.ArrayAdapter as ArrayAdapter
 
 class ChooseFunctionDialogFragment : DialogFragment() {
+    public var isExited: Boolean = false
+    var function_name = ""
+    private lateinit var rv: RecyclerView
+    private lateinit var main2022: ListMathDoubleFunction
     var function : String = ""
     var selectedItem = -1
+
+
+    public fun setMainAnd(main2022 : ListMathDoubleFunction, rv: RecyclerView) {
+        this.main2022 = main2022
+        ListMathDoubleFunction.functionName = ""
+        this.rv = rv
+    }
+
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
+        val ret =  activity?.let {
             val mathList : Array<String> = ListMathDoubleFunction.getList()
 
             val builder = AlertDialog.Builder(it)
             // Get the layout inflater
             val inflater = requireActivity().layoutInflater;
-
+            
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
-            builder.setView(inflater.inflate(R.layout.fragment_item_list, null))
+            val inflate = inflater.inflate(R.layout.fragment_item_list, null)
+            builder.setView(inflate)
                 // Add action buttons
                 .setPositiveButton(R.string.fragment_function_ok,
                     DialogInterface.OnClickListener { dialog, id ->
+                        this.function_name =  ListMathDoubleFunction.functionName
+                        isExited = true;
+
                     })
                 .setNegativeButton(R.string.fragment_function_cancel,
                     DialogInterface.OnClickListener { dialog, id ->
+                        this.function_name = ""
+                        isExited = true;
                     })
 
-                builder.create()
+
+
+
+            val  rv:RecyclerView=  inflate.findViewById(R.id.list)
+
+            val myStringRecyclerViewAdapter =
+                MyStringRecyclerViewAdapter(mathList)
+            rv.adapter = myStringRecyclerViewAdapter
+            myStringRecyclerViewAdapter.setMainAnd(mathList, rv)
+
+            return builder.create()
+
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 

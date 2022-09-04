@@ -1,4 +1,6 @@
 package one.empty3.apps.simplecalculator
+/*
+package one.empty3.apps.simplecalculator
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,9 +13,11 @@ import android.view.ViewGroup
 import one.empty3.apps.simplecalculator.placeholder.PlaceholderContent
 import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
 
+*/
 /**
  * A fragment representing a list of Items.
- */
+ *//*
+
 class StringFragment() : Fragment() {
     private lateinit var list : ArrayList<PlaceholderContent.PlaceholderItem>
     private var columnCount = 1
@@ -77,3 +81,4 @@ class StringFragment() : Fragment() {
     }
 }
 
+*/
