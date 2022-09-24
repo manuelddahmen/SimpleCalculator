@@ -60,17 +60,17 @@ class MyStringRecyclerViewAdapter(private var values: Array<String> = ListMathDo
         holder.itemView.setOnClickListener {
             ListMathDoubleFunction.functionName = tv2.text as String
             holder.itemView.setBackgroundColor(Color.Blue.toArgb())
-            Toast.makeText(rv.context, item, Toast.LENGTH_LONG)
+            Toast.makeText(rv.context, item, Toast.LENGTH_LONG).show()
         }
         tv1.setOnClickListener {
             ListMathDoubleFunction.functionName = tv2.text as String
             tv1.setBackgroundColor(Color.Blue.toArgb())
-            Toast.makeText(rv.context, item, Toast.LENGTH_LONG)
+            Toast.makeText(rv.context, item, Toast.LENGTH_LONG).show()
         }
         tv2.setOnClickListener {
             ListMathDoubleFunction.functionName = tv2.text as String
             tv2.setBackgroundColor(Color.Blue.toArgb())
-            Toast.makeText(rv.context, item, Toast.LENGTH_LONG)
+            Toast.makeText(rv.context, item, Toast.LENGTH_LONG).show()
         }
     }
 
