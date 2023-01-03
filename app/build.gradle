@@ -92,7 +92,6 @@ android {
             compileSdkVersion 31
             defaultConfig {
                 JavaVersion.VERSION_11
-                //noinspection ExpiredTargetSdkVersion
                 targetSdkVersion 32
                 minSdkVersion 29
                 versionName "2.0"
