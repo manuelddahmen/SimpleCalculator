@@ -29,21 +29,22 @@ import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.compose.ui.res.stringArrayResource
 import androidx.recyclerview.widget.RecyclerView
 import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
 
 class StringArrayAdapter() : RecyclerView.Adapter<StringArrayAdapter.ViewHolder>(), Parcelable {
     private var mathList: Array<String> = ListMathDoubleFunction.getList()
 
-    class ViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
+    constructor(parcel: Parcel) : this() {
+        mathList = parcel.createStringArray()!!
+    }
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         //val item = itemView.findViewById(R.id.icon) as Icon
         val textView = itemView.findViewById(R.id.text_view_recyclerview_function) as TextView
-        var name:String = textView.text.toString()
-    }
-
-    constructor(parcel: Parcel) : this() {
-
+        var name: String = textView.text.toString()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -54,19 +55,19 @@ class StringArrayAdapter() : RecyclerView.Adapter<StringArrayAdapter.ViewHolder>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val function = mathList[position]
-        holder.name =  function
+        holder.name = function
     }
 
     override fun getItemCount(): Int {
         return mathList.size
     }
 
-    override fun describeContents(): Int {
-        TODO("Not yet implemented")
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeStringArray(mathList)
     }
 
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        TODO("Not yet implemented")
+    override fun describeContents(): Int {
+        return 0
     }
 
     companion object CREATOR : Parcelable.Creator<StringArrayAdapter> {
@@ -78,6 +79,4 @@ class StringArrayAdapter() : RecyclerView.Adapter<StringArrayAdapter.ViewHolder>
             return arrayOfNulls(size)
         }
     }
-
-
 }
