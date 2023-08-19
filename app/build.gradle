@@ -32,7 +32,7 @@ kotlin {
 def compose_version = '1.4.3'
 ¨*/
 def kotlin_version = '1.8.22'
-def versionCode1000 = 200300034
+def versionCode1000 = 200400034
 def compose_version = '1.5.0'
 def compose_compiler_version = "1.4.8"
 android {
@@ -97,10 +97,10 @@ android {
     defaultConfig {
         JavaVersion.VERSION_11
         compileSdk 34
-        targetSdkVersion 34
+        targetSdk 34
         minSdkVersion 29
         versionName "4.0"
-        versionCode 4001000
+        versionCode versionCode1000
         signingConfig signingConfigs.release
     }
 
