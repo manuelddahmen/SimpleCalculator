@@ -30,9 +30,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException
-import one.empty3.apps.tree.altree.AlgebricTree
-import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
+import one.empty3.apps.tree.AlgebraicFormulaSyntaxException
+import one.empty3.apps.tree.AlgebricTree
+import one.empty3.apps.tree.functions.ListMathDoubleFunction
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

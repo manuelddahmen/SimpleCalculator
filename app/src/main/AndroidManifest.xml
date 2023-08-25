@@ -6,10 +6,12 @@
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <application
+        android:enableOnBackInvokedCallback="true"
         android:icon="@drawable/mite"
         android:label="@string/app_name"
         android:roundIcon="@drawable/mite"
-        android:theme="@style/Theme.SimpleCalculator">
+        android:theme="@style/Theme.SimpleCalculator"
+        tools:targetApi="tiramisu">
         <activity
             android:name=".ScrollingActivity"
             android:exported="false"

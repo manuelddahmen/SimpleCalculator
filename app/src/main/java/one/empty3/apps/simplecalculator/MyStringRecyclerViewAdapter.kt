@@ -33,7 +33,7 @@ import androidx.compose.ui.graphics.toArgb
 
 import one.empty3.apps.simplecalculator.placeholder.PlaceholderContent.PlaceholderItem
 import one.empty3.apps.simplecalculator.databinding.FragmentItemBinding
-import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
+import one.empty3.apps.tree.functions.ListMathDoubleFunction
 
 
 class MyStringRecyclerViewAdapter(private var values: Array<String> = ListMathDoubleFunction.getList()) :

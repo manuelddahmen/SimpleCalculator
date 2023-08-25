@@ -31,7 +31,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.compose.ui.res.stringArrayResource
 import androidx.recyclerview.widget.RecyclerView
-import one.empty3.apps.tree.altree.functions.ListMathDoubleFunction
+import one.empty3.apps.tree.functions.ListMathDoubleFunction
 
 class StringArrayAdapter() : RecyclerView.Adapter<StringArrayAdapter.ViewHolder>(), Parcelable {
     private var mathList: Array<String> = ListMathDoubleFunction.getList()

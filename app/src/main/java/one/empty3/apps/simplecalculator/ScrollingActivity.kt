@@ -25,8 +25,8 @@ import android.widget.EditText
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import one.empty3.apps.simplecalculator.databinding.ActivityScrollingBinding
-import one.empty3.apps.tree.altree.AlgebricTree
-import one.empty3.apps.tree.altree.ListInstructions
+import one.empty3.apps.tree.AlgebricTree
+import one.empty3.apps.tree.ListInstructions
 import org.jetbrains.annotations.NotNull
 import java.lang.NullPointerException
 import java.lang.RuntimeException
@@ -45,20 +45,16 @@ class ScrollingActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = title
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-
-        val text = findViewById<EditText>(R.id.textCalculator)
-
-        text.setOnClickListener {
+            val text = findViewById<EditText>(R.id.textCalculator)
             parseText(text.text.toString())
         }
     }
 
     private fun parseText(@NotNull text: String) {
         try {
+            variables = ListInstructions()
             variables.addInstructions(text)
+            variables.runInstructions()
         } catch (ex : RuntimeException) {
             ex.printStackTrace()
         } catch (ex : NullPointerException) {

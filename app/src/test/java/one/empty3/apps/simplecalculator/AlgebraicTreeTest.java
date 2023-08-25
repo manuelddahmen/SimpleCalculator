@@ -19,9 +19,9 @@
  */
 package one.empty3.apps.simplecalculator;
 
-import one.empty3.apps.tree.altree.AlgebraicFormulaSyntaxException;
-import one.empty3.apps.tree.altree.AlgebricTree;
-import one.empty3.apps.tree.altree.TreeNodeEvalException;
+import one.empty3.apps.tree.AlgebraicFormulaSyntaxException;
+import one.empty3.apps.tree.AlgebricTree;
+import one.empty3.apps.tree.TreeNodeEvalException;
 
 import org.junit.After;
 import org.junit.Before;
