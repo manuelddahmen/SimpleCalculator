@@ -20,12 +20,16 @@
 
 package one.empty3.apps.tree;
 
+import androidx.core.util.ConsumerKt;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class ListInstructions {
     LinkedHashMap<String, String> listVariablesDef = new LinkedHashMap<>();
@@ -83,18 +87,26 @@ public class ListInstructions {
             }
         }
     }
-    public void runInstructions() {
+    public String[] runInstructions() {
+        String [] errors = new String[listVariablesDef.size()];
+        Map.Entry<String, String>[] instructions;
+        instructions = new Map.Entry[listVariablesDef.size()];
+
+        listVariablesDef.entrySet().toArray(instructions);
+
         HashMap<String, Double> currentParamsValues = new HashMap<>();
-        for(Map.Entry<String, String> entry:listVariablesDef.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
+        int i=0;
+        for(Map.Entry instruction : instructions) {
+            String key = (String) instruction.getKey();
+            String value = (String) instruction.getValue();
 
             Double result = null;
             try {
                 if(value!=null) {
                     AlgebricTree tree = new AlgebricTree(value);
-                    tree.construct();
                     tree.setParametersValues(currentParamsValues);
+
+                    tree.construct();
 
                     result = tree.eval();
                 }
@@ -102,11 +114,15 @@ public class ListInstructions {
                     currentParamsValues.put(key, result);
                 }
             } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException e) {
-                e.printStackTrace();
+                System.err.println("Was null 133131");
+            } catch (NullPointerException ignored) {
+                System.err.println("Was null 133531");
             }
 
-            System.out.printf(String.format(Locale.getDefault(), "Result of line : (%s) <<< %f", key, result));
-
+            errors[i] = String.format(Locale.getDefault(), "-- Result of line : (%d) <<< %f ", i, result);
+            i++;
         }
+
+        return errors;
     }
 }

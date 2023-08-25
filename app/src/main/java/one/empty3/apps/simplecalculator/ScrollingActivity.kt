@@ -33,6 +33,7 @@ import java.lang.RuntimeException
 
 class ScrollingActivity : AppCompatActivity() {
 
+    private var text: EditText? = null
     private lateinit var binding: ActivityScrollingBinding
     private var variables = ListInstructions()
 
@@ -44,17 +45,25 @@ class ScrollingActivity : AppCompatActivity() {
 
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = title
+
+        text = findViewById<EditText>(R.id.textCalculator)
+
         binding.fab.setOnClickListener { view ->
-            val text = findViewById<EditText>(R.id.textCalculator)
-            parseText(text.text.toString())
+            parseText(text!!.text.toString())
         }
     }
 
-    private fun parseText(@NotNull text: String) {
+    private fun parseText(@NotNull textIns: String) {
         try {
             variables = ListInstructions()
-            variables.addInstructions(text)
-            variables.runInstructions()
+            variables.addInstructions(textIns)
+            val errors = variables.runInstructions()
+
+            errors.forEach {
+                if(it!=null)
+                    text!!.text.append('\n').append(it).append("\n")
+            }
+
         } catch (ex : RuntimeException) {
             ex.printStackTrace()
         } catch (ex : NullPointerException) {
