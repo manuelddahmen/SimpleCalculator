@@ -22,6 +22,7 @@ package one.empty3.apps.tree.altree;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -84,11 +85,26 @@ public class ListInstructions {
         }
     }
     public void runInstructions() {
+        HashMap<String, Double> currentParamsValues = new HashMap<>();
         for(Map.Entry<String, String> entry:listVariablesDef.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
 
+            Double result = null;
+            try {
+                if(value!=null) {
+                    AlgebricTree tree = new AlgebricTree(value);
+                    tree.construct();
+                    tree.setParametersValues(currentParamsValues);
 
+                    result = tree.eval();
+                }
+                if(key!=null && value!=null) {
+                    currentParamsValues.put(key, result);
+                }
+            } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

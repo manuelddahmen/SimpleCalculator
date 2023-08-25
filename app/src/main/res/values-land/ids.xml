@@ -20,6 +20,5 @@
   -->
 
 <resources>
-    <item name="linkToPrivavy" type="id" />
     <item name="textCalculatorButton" type="id" />
 </resources>

@@ -151,5 +151,5 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
     //implementation "androidx.work:work-runtime:"
-    implementation "one.empty3:empty3-library-3d:2023.7-1"
+    //implementation "one.empty3:empty3-library-3d:2023.7-1"
 }

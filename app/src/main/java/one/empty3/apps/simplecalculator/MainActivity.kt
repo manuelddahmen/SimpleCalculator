@@ -131,6 +131,11 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.AboutButton).setOnClickListener {
             openUserData(it)
         }
+        findViewById<Button>(R.id.textCalculatorButton).setOnClickListener(View.OnClickListener {
+            val intentText:Intent = Intent(Intent.ACTION_EDIT)
+            intentText.setClass(applicationContext, ScrollingActivity::class.java)
+            startActivity(intentText)
+        })
     }
 
 

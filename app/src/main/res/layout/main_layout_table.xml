@@ -277,6 +277,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/about_and_policies" />
+            <Button
+                android:id="@+id/textCalculatorButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/text_calculator"/>
 
         </LinearLayout>
 
