@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2023.
+  ~
+  ~
+  ~  Copyright 2012-2023 Manuel Daniel Dahmen
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~  http://www.apache.org/licenses/LICENSE-2.0
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  ~
+  ~
+  -->
+
+<resources>
+      
+  <string name="app_name">Calculadora simple</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">raíz cuadrada</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">Edite el texto aquí o presionando números</string>
+      
+  <string name="result">Resultado</string>
+      
+  <string name="about_and_policies">Acerca de y política de privacidad</string>
+      
+  <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Données utilisateur personalles et sensibles Dans l\'application imagen que presenta, les seules données auxquelles l\'application accède sont les fichiers multimedia ouvert par le bouton prise de vue ou choisir un fichier. Estos son datos de la aplicación y eventos de copias de trabajo almacenadas en el repertorio de datos de la aplicación y figuras del sistema en un formato o en otro. En una versión futura, será posible compartir los resultados con otros usuarios, internautas. Ces données sont considérées par nous, DAHMEN Manuel at vacío3.one comme privées et ne sont pas collectionées, nitreatmentées par nos services.</string>
+      
+  <string name="title_activity_formula_store">Tienda de fórmulas</string>
+      
+  <string name="store_formula">Fórmula de la tienda</string>
+      
+  <string name="add">Agregar</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">Atrás</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">Aceptar Política de Gestión de Datos de Usuario y Privacidad</string>
+      
+  <string name="about_privacy">Acerca de la privacidad</string>
+      
+  <string name="dialog_message">Seleccionar una función</string>
+      
+  <string name="dialog_title">Funciones predeterminadas</string>
+      
+  <string name="cancel_button">Cancelar</string>
+      
+  <string name="ok_button">DE ACUERDO</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">DE ACUERDO</string>
+      
+  <string name="fragment_function_cancel">Cancelar</string>
+      
+  <string name="function_string">Cadena de función</string>
+      
+  <string name="title_activity_scrolling">Actividad de desplazamiento</string>
+      
+  <string name="large_text">El material es la metáfora.\n\n Una metáfora material es la teoría unificadora de un espacio racionalizado y un sistema de movimiento. El material se basa en la realidad táctil, inspirado en el estudio del papel y la tinta, pero tecnológicamente avanzado y abierto a la imaginación y la magia.\n Las superficies y los bordes del material proporcionan señales visuales que se basan en la realidad. El uso de atributos táctiles familiares ayuda a los usuarios a comprender rápidamente las posibilidades. Sin embargo, la flexibilidad del material crea nuevas posibilidades que reemplazan a las del mundo físico, sin romper las reglas de la física.\n Los fundamentos de la luz, la superficie y el movimiento son clave para transmitir cómo los objetos se mueven, interactúan y existen en el espacio y en relación entre sí. La iluminación realista muestra uniones, divide el espacio e indica partes móviles.\n\n Audaz, gráfico, intencional.\n\n Los elementos fundamentales del diseño tipográfico impreso, las cuadrículas, el espacio, la escala, el color y el uso de imágenes guían los tratamientos visuales. Estos elementos hacen mucho más que complacer a la vista. Crean jerarquía, significado y enfoque. Las opciones de color deliberadas, las imágenes de borde a borde, la tipografía a gran escala y los espacios en blanco intencionales crean una interfaz gráfica y audaz que sumerge al usuario en la experiencia.\n Un énfasis en las acciones del usuario hace que la funcionalidad principal sea inmediatamente evidente y proporciona puntos de referencia para el usuario.\n\n El movimiento proporciona significado.\n\n El movimiento respeta y refuerza al usuario como motor principal. Las acciones principales del usuario son puntos de inflexión que inician el movimiento y transforman todo el diseño.\n Toda la acción tiene lugar en un único entorno. Los objetos se presentan al usuario sin romper la continuidad de la experiencia, incluso cuando se transforman y reorganizan.\n El movimiento es significativo y apropiado y sirve para centrar la atención y mantener la continuidad.  La retroalimentación es sutil pero clara. Las transiciones son eficientes pero coherentes.\n\n Mundo 3D.\n\n El entorno material es un espacio 3D, lo que significa que todos los objetos tienen dimensiones x, y, z. El eje z está alineado perpendicularmente al plano de la pantalla, con el eje z positivo extendiéndose hacia el espectador. Cada hoja de material ocupa una única posición a lo largo del eje z y tiene un espesor estándar de 1 dp.\n En la web, el eje z se utiliza para crear capas y no para perspectiva. El mundo 3D se emula manipulando el eje y.\n\n Luz y sombra.\n\n Dentro del entorno material, luces virtuales iluminan la escena. Las luces clave crean sombras direccionales, mientras que la luz ambiental crea sombras suaves desde todos los ángulos.\n Estas dos fuentes de luz proyectan sombras en el entorno material. En el desarrollo de Android, las sombras ocurren cuando las fuentes de luz son bloqueadas por láminas de material en varias posiciones a lo largo del eje z. En la web, las sombras se representan manipulando únicamente el eje y. El siguiente ejemplo muestra la tarjeta con una altura de 6dp.\n\n Elevación en reposo.\n\n Todos los objetos materiales, independientemente de su tamaño, tienen una elevación en reposo o elevación predeterminada que no cambia. Si un objeto cambia de elevación, debe volver a su elevación en reposo lo antes posible.\n\n Elevaciones de componentes.\n\n La elevación en reposo para un tipo de componente es consistente en todas las aplicaciones (por ejemplo, La elevación FAB no varía de 6 dp en una aplicación a 16 dp en otra aplicación).\n Los componentes pueden tener diferentes elevaciones de reposo entre plataformas, dependiendo de la profundidad del entorno (p.ej., La TV tiene mayor profundidad que el móvil o el escritorio).\n\n Elevación responsiva y compensaciones de elevación dinámicas.\n\n Algunos tipos de componentes tienen elevación responsiva, lo que significa que cambian la elevación en respuesta a la entrada del usuario (por ejemplo, normal, enfocado y presionado) o eventos del sistema. Estos cambios de elevación se implementan consistentemente utilizando compensaciones de elevación dinámicas.\n Los desplazamientos de elevación dinámicos son la elevación objetivo hacia la que se mueve un componente, en relación con el estado de reposo del componente. Garantizan que los cambios de elevación sean consistentes entre acciones y tipos de componentes. Por ejemplo, todos los componentes que se elevan al presionar tienen el mismo cambio de elevación en relación con su elevación en reposo.\n Una vez que se completa o cancela el evento de entrada, el componente volverá a su elevación en reposo.\n\n Evitar interferencias de elevación.\n\n Los componentes con elevaciones sensibles pueden encontrarse con otros componentes a medida que se mueven entre sus elevaciones en reposo y sus desplazamientos de elevación dinámicos. Debido a que el material no puede atravesar otro material, los componentes evitan interferir entre sí de varias maneras,  ya sea por componente o utilizando todo el diseño de la aplicación.\n A nivel de componentes, los componentes se pueden mover o quitar antes de que causen interferencias.  Por ejemplo, un botón de acción flotante (FAB) puede desaparecer o moverse fuera de la pantalla antes de que un usuario recoja una tarjeta, o puede moverse si aparece una cafetería.\n En el nivel de diseño, diseñe el diseño de su aplicación para minimizar las oportunidades de interferencia.  Por ejemplo, coloque el FAB a un lado del flujo de tarjetas para que no interfiera cuando un usuario intente recoger una de las tarjetas.\n\n</string>
+      
+  <string name="action_settings">Ajustes</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">calculadora de texto</string>
+      
+  <string name="title_activity_settings">ConfiguraciónActividad</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">Mensajes</string>
+      
+  <string name="sync_header">sincronizar</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">Su firma</string>
+      
+  <string name="reply_title">Acción de respuesta predeterminada</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">Sincronizar el correo electrónico periódicamente</string>
+      
+  <string name="attachment_title">Descargar archivos adjuntos entrantes</string>
+      
+  <string name="attachment_summary_on">Descargar automáticamente archivos adjuntos para correos electrónicos entrantes</string>
+      
+  <string name="attachment_summary_off">Descargue archivos adjuntos solo cuando se soliciten manualmente</string>
+  
+</resources>

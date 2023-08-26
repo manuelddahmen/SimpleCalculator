@@ -30,7 +30,11 @@ import one.empty3.apps.tree.ListInstructions
 import org.jetbrains.annotations.NotNull
 import java.lang.NullPointerException
 import java.lang.RuntimeException
-
+/*
+    c=1
+    b=c+4
+    a=c/b
+ */
 class ScrollingActivity : AppCompatActivity() {
 
     private var text: EditText? = null
@@ -53,7 +57,7 @@ class ScrollingActivity : AppCompatActivity() {
         }
     }
 
-    private fun parseText(@NotNull textIns: String) {
+    private fun parseText(textIns: String) {
         try {
             variables = ListInstructions()
             variables.addInstructions(textIns)

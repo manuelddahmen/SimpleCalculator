@@ -24,32 +24,69 @@ import androidx.core.util.ConsumerKt;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class ListInstructions {
-    LinkedHashMap<String, String> listVariablesDef = new LinkedHashMap<>();
+    public class Instruction {
+        private int id;
+        private String leftHand;
+        private String expression;
+
+        public Instruction(int id, String leftHand, String expression) {
+            this.id = id;
+            this.leftHand = leftHand;
+            this.expression = expression;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getLeftHand() {
+            return leftHand;
+        }
+
+        public void setLeftHand(String leftHand) {
+            this.leftHand = leftHand;
+        }
+
+        public String getExpression() {
+            return expression;
+        }
+
+        public void setExpression(String expression) {
+            this.expression = expression;
+        }
+    }
+    private ArrayList<Instruction> assignations;
 
     public ListInstructions() {
 
     }
 
-    public void setListVariablesDef(LinkedHashMap<String, String> listVariablesDef) {
-        this.listVariablesDef = listVariablesDef;
+    public ArrayList<Instruction> getAssignations() {
+        return assignations;
     }
 
-    public LinkedHashMap<String, String> getListVariablesDef() {
-        return listVariablesDef;
+    public void setAssignations(ArrayList<Instruction> assignations) {
+        this.assignations = assignations;
     }
 
     public void addInstructions(@NotNull String toString) {
 
         if(toString!=null && !toString.isEmpty()) {
-            listVariablesDef = new LinkedHashMap<>();
+            assignations = new ArrayList<>();
 
             String text = toString;
 
@@ -80,7 +117,7 @@ public class ListInstructions {
                             j++;
                         }
                         if (j == variable.length()) {
-                            listVariablesDef.put(variable, value);
+                            assignations.add(new Instruction(i, variable, value));
                         }
                     }
                 }
@@ -88,17 +125,16 @@ public class ListInstructions {
         }
     }
     public String[] runInstructions() {
-        String [] errors = new String[listVariablesDef.size()];
-        Map.Entry<String, String>[] instructions;
-        instructions = new Map.Entry[listVariablesDef.size()];
+        String [] errors = new String[assignations.size()];
+        Instruction[] instructions = new Instruction[assignations.size()];
 
-        listVariablesDef.entrySet().toArray(instructions);
+        assignations.toArray(instructions);
 
         HashMap<String, Double> currentParamsValues = new HashMap<>();
         int i=0;
-        for(Map.Entry instruction : instructions) {
-            String key = (String) instruction.getKey();
-            String value = (String) instruction.getValue();
+        for(Instruction instruction : instructions) {
+            String key = (String) instruction.getLeftHand();
+            String value = (String) instruction.getExpression();
 
             Double result = null;
             try {

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name">简单计算器</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">。</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">开方</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">在此处编辑文本或通过推送数字编辑文本</string>
+      
+  <string name="result">结果</string>
+      
+  <string name="about_and_policies">关于和隐私政策</string>
+      
+  <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">如果用户使用人员和敏感人员在应用程序图像中使用图像，则应用程序将获得多媒体文件或文件中的按钮奖。该应用程序的特征是应用程序的全部数据和系统中的数据副本以及格式或作者的工作副本的事件。在未来版本中，可能会出现用户、用户之间的结果。DAHMEN Manuel 在 empty3.one 上提供私人服务，但不提供集体服务，不提供任何服务。</string>
+      
+  <string name="title_activity_formula_store">配方商店</string>
+      
+  <string name="store_formula">储存配方</string>
+      
+  <string name="add">添加</string>
+      
+  <string name="DEL">&lt;&lt;&lt;&lt;</string>
+      
+  <string name="back">后退</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">接受用户数据管理政策和隐私</string>
+      
+  <string name="about_privacy">关于隐私</string>
+      
+  <string name="dialog_message">选择功能</string>
+      
+  <string name="dialog_title">预定义功能</string>
+      
+  <string name="cancel_button">取消</string>
+      
+  <string name="ok_button">好的</string>
+      
+  <string name="open_brace">（</string>
+      
+  <string name="close_brace">）</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">好的</string>
+      
+  <string name="fragment_function_cancel">取消</string>
+      
+  <string name="function_string">函数字符串</string>
+      
+  <string name="title_activity_scrolling">滚动活动</string>
+      
+  <string name="large_text">物质是隐喻。\n\n 物质隐喻是合理化空间和运动系统的统一理论。该材料以触觉现实为基础，受到纸张和墨水研究的启发，但技术先进，对想象力和魔法开放。\n 材料的表面和边缘提供了基于现实的视觉线索。使用熟悉的触觉属性可以帮助用户快速理解可供性。然而，材料的灵活性创造了新的可供性，取代了物理世界中的可供性，同时又不违反物理规则。\n 光、表面和运动的基础知识是传达物体如何在空间中移动、相互作用和存在以及相互关系的关键。真实的灯光显示接缝、划分空间并指示移动部件。\n\n 大胆、生动、有意。\n\n 基于印刷的设计排版、网格、空间、比例、颜色和图像使用的基本元素指导视觉处理。这些元素的作用远不止于赏心悦目。它们创造层次、意义和焦点。深思熟虑的颜色选择、边到边的图像、大规模的排版和有意的留白创造了一个大胆的图形界面，让用户沉浸在体验中。\n 对用户操作的强调使核心功能立即显而易见，并为用户提供了路径点。\n\n 运动提供意义。\n\n 运动尊重并强化用户作为原动力。主要的用户操作是发起运动的拐点，改变整个设计。\n 所有操作都发生在单一环境中。对象呈现给用户时不会破坏体验的连续性，即使它们发生了变化和重组。\n 动作是有意义且适当的，有助于集中注意力并保持连续性。反馈微妙而清晰。过渡既高效又连贯。\n\n 3D 世界。\n\n 材质环境是一个 3D 空间，这意味着所有对象都有 x、y 和 z 维度。z 轴与显示器平面垂直对齐，正 z 轴向观看者延伸。每片材料沿 z 轴占据一个位置，并具有标准 1dp 厚度。\n 在网络上，z 轴用于分层而不是透视。通过操纵 y 轴来模拟 3D 世界。\n\n 光与影。\n\n 在物质环境中，虚拟灯光照亮了场景。主光产生定向阴影，而环境光从各个角度产生柔和的阴影。\n 物质环境中的阴影是由这两个光源投射的。在 Android 开发中，当光源被沿 z 轴不同位置的材料片阻挡时，就会出现阴影。在网络上，仅通过操纵 y 轴来描绘阴影。以下示例显示高度为 6dp 的卡片。\n\n 静止高度。\n\n 所有材质对象，无论大小，都具有静止标高或不改变的默认标高。如果物体改变高度，它应该尽快返回到其静止高度。\n\n 组件标高。\n\n 组件类型的静止高度在应用程序中是一致的（例如，FAB 高度不会从一个应用程序中的 6dp 到另一应用程序中的 16dp 变化）。\n 根据环境的深度（例如，电视比移动设备或桌面设备具有更大的深度）。\n\n 响应式高程和动态高程偏移。\n\n 某些组件类型具有响应式标高，这意味着它们会根据用户输入（例如，正常、聚焦和按下）或系统事件来更改标高。这些海拔变化始终使用动态海拔偏移来实现。\n 动态标高偏移是组件相对于其静止状态移动的目标标高。它们确保标高变化在操作和组件类型之间保持一致。例如，所有在压力下升起的组件相对于其静止高度具有相同的高度变化。\n 一旦输入事件完成或取消，组件将返回到其静止高度。\n\n 避免高程干扰。\n\n 具有响应式标高的组件在其静止标高和动态标高偏移之间移动时可能会遇到其他组件。由于材料无法穿过其他材料，因此组件可以通过多种方式避免相互干扰，无论是基于每个组件还是使用整个应用程序布局。\n 在组件级别上，组件可以在造成干扰之前移动或移除。例如，浮动操作按钮 (FAB) 可以在用户拿起卡片之前消失或移出屏幕，或者如果出现小吃栏则可以移动。\n 在布局级别上，设计应用程序布局以最大程度地减少干扰机会。例如，将 FAB 放置在卡片流的一侧，这样当用户尝试拿起其中一张卡片时，FAB 就不会干扰。\n\n</string>
+      
+  <string name="action_settings">设置</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">文本计算器</string>
+      
+  <string name="title_activity_settings">设置活动</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">留言</string>
+      
+  <string name="sync_header">同步</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">你的签名</string>
+      
+  <string name="reply_title">默认回复操作</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">定期同步电子邮件</string>
+      
+  <string name="attachment_title">下载传入的附件</string>
+      
+  <string name="attachment_summary_on">自动下载传入电子邮件的附件</string>
+      
+  <string name="attachment_summary_off">仅在手动请求时下载附件</string>
+  
+</resources>
