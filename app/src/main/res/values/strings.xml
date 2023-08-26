@@ -60,7 +60,7 @@
     <string name="fragment_function_ok">OK</string>
     <string name="fragment_function_cancel">Cancel</string>
     <string name="function_string">Function String</string>
-    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="title_activity_scrolling">Calc Note</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
