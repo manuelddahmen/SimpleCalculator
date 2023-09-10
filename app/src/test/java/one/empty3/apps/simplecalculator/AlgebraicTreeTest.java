@@ -37,6 +37,7 @@ import static org.junit.Assert.fail;
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
+ * Updated by Manuel Dahmen on 10-11-23
  */
 public class AlgebraicTreeTest {
     private static final double DELTA = Double.MIN_VALUE;
@@ -340,7 +341,7 @@ public class AlgebraicTreeTest {
     }   
  @Test
     public void testSimple6() {
-        assertTrue(testResult("-5/-5*3.0", 3.0, false));
+        assertTrue(testResult("-5/-5*3.0", -5.0/-5*3.0, true));
     }
     @Test
     public void testSimple7() {
@@ -402,6 +403,6 @@ public class AlgebraicTreeTest {
         HashMap<String, Double> vars = new HashMap<>();
         vars.put("x", x);
 
-        testResultVariable("-x+(2*x)", -x+(2*x), vars, true);
+        testResultVariable("(-x)+(2*x)", -x+(2*x), vars, true);
     }
 }

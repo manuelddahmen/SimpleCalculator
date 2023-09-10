@@ -29,8 +29,9 @@ import org.junit.Test
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
+ * Updated by Manuel Dahmen on 10-11-23
  */
-class AlgebraicTreeTest() {
+class ExampleUnitTest() {
     @Before
     @Throws(Exception::class)
     fun setUp() {

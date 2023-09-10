@@ -82,17 +82,20 @@ public class AlgebricTree extends Tree {
 
     public AlgebricTree construct() throws AlgebraicFormulaSyntaxException {
         root = new TreeNode(formula);
-        stackSize = 0; // Restine sommaire//
+        stackSize = 0;
+
+        //addSingleSign(root, formula);
         add(root, formula);
         return this;
     }
 
     /***
-     * Particularité
+     * ???
      * @param src
+     * @param formula
+     * @return
      */
-    private void checkForSignTreeNode(one.empty3.apps.tree.TreeNode src) {
-        //System.out.println("DEBUG TREE: current tree" +src);
+    private boolean checkForSignTreeNode(TreeNode src, String subformula) {
         if (src.getChildren().size() >= 2 && src.getChildren().get(1).type.getClass()
                 .equals(SignTreeNodeType.class)) {
             one.empty3.apps.tree.TreeNode sign = src.getChildren().remove(1);
@@ -102,8 +105,17 @@ public class AlgebricTree extends Tree {
                     new SignTreeNodeType(sign1)));
             one.empty3.apps.tree.TreeNode son1 = src.getChildren().get(0);
             son1.getChildren().add(son0);
+            return true;
         }
-    }
+        return true;
+/*        if(subformula.length()>1 && subformula.startsWith("-")
+                || subformula.startsWith("+")) {
+            SignTreeNodeType sign1 = new SignTreeNodeType((subformula.charAt(0)=='-')?-1.:1.);
+            src.getChildren().add(new TreeNode(src, new Object[] {""+-1}, sign1));
+            return true;
+        }
+        return false;
+*/    }
 
     public boolean add(one.empty3.apps.tree.TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
 
@@ -119,6 +131,7 @@ public class AlgebricTree extends Tree {
         boolean added = false;
         int length = 9;
         boolean exception = false;
+
         while (i < length && !added) {
             src.getChildren().clear();
             try {
@@ -127,44 +140,68 @@ public class AlgebricTree extends Tree {
                 switch (i) {
                     case 0:
                         added = addFormulaSeparator(src, subformula);
-                        if (added) caseChoice = 0;
+                        if (added) {
+                            //checkForSignTreeNode(src, formula);
+                            caseChoice = 0;
+                        }
                         break;
                     case 1:
                         added = addTerms(src, subformula);
-                        if (added) caseChoice = 1;
+                        if (added) {
+                            //checkForSignTreeNode(src, formula);
+                            caseChoice = 1;
+                        }
                         break;
                     case 2:
                         added = addFactors(src, subformula);
-                        if (added) caseChoice = 2;
+                        if (added) {
+                            //checkForSignTreeNode(src, formula);
+                            caseChoice = 2;
+                        }
                         break;
                     case 3:
                         added = addPower(src, subformula);
-                        if (added) caseChoice = 3;
+                        if (added) {
+                            //checkForSignTreeNode(src, formula);
+                            caseChoice = 3;
+                        }
                         break;
                     case 4: // Mettre - en 4??
-                        added = addSingleSign(src, subformula);
+                        //added = addSingleSign(src, subformula);
                         break;
                     case 5:
                         added = addDouble(src, subformula);
-                        if (added) caseChoice = 5;
+                        if (added) {
+                            //checkForSignTreeNode(src, formula);
+                            caseChoice = 5;
+                        }
                         break;
                     case 6:
                         added = addFunction(src, subformula);
-                        if (added) caseChoice = 6;
+                        if (added) {
+                            //checkForSignTreeNode(src, formula);
+                            caseChoice = 6;
+                        }
                         break;
                     case 7:
                         added = addBracedExpression(src, subformula);
-                        if (added) caseChoice = 7;
+                        if (added) {
+                            //checkForSignTreeNode(src, formula);
+                            caseChoice = 7;
+                        }
                         break;
                     case 8:
-                        added = addVariable(src, subformula);
-                        if (added) caseChoice = 8;
+                        //added = addVariable(src, subformula);
+                        if (added) {
+                            //checkForSignTreeNode(src, formula);
+                            caseChoice = 8;
+                        }
                         break;
                     default:
                         return false;
                 }
                 if (added)
-                    checkForSignTreeNode(src);
+                    checkForSignTreeNode(src, formula);
 
             } catch (AlgebraicFormulaSyntaxException ex) {
                 exception = true;

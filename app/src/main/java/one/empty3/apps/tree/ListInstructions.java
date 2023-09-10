@@ -108,6 +108,7 @@ public class ListInstructions {
                     variable = splitInstructionEquals[0].trim();
                     value = splitInstructionEquals[1].trim();
                 }
+                boolean assigned = false;
                 if(splitInstructionEquals.length>=1) {
 
                     if ((variable != null ? variable.length() : 0) >0 && Character.isLetter(variable.toCharArray()[0])) {
@@ -118,6 +119,20 @@ public class ListInstructions {
                         }
                         if (j == variable.length()) {
                             assignations.add(new Instruction(i, variable, value));
+                            assigned = true;
+                        }
+                    }
+                }
+                if(!assigned) {
+                    if(splitInstructionEquals.length==1) {
+                        if(variable!=null && !variable.isEmpty()) {
+                            if(!variable.startsWith("--")) {
+                                assignations.add(new Instruction(i, "", variable));
+                            }
+                        } else if(value!=null && !value.isEmpty()) {
+                            if(!value.startsWith("--")) {
+                                assignations.add(new Instruction(i, "", value));
+                            }
                         }
                     }
                 }
@@ -148,6 +163,7 @@ public class ListInstructions {
                 }
                 if(key!=null && value!=null && result!=null) {
                     currentParamsValues.put(key, result);
+                } else if(key==null && value!=null && result!=null) {
                 }
             } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException e) {
                 System.err.println("Was null 133131");
