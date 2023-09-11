@@ -22,7 +22,9 @@ package one.empty3.apps.simplecalculator
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils.replace
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -135,6 +137,36 @@ class MainActivity : AppCompatActivity() {
             val intentText:Intent = Intent(Intent.ACTION_EDIT)
             intentText.setClass(applicationContext, ScrollingActivity::class.java)
             startActivity(intentText)
+        })
+
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val tree = AlgebricTree(editText.text.toString())
+
+                try {
+                    tree.construct()
+                    val d: Double = tree.eval()
+                    val labelAnswer: String = d.toString()
+                    textAnswer.text = labelAnswer
+                    Toast.makeText(applicationContext, "Valide V", Toast.LENGTH_LONG).show()
+
+                } catch (ex: AlgebraicFormulaSyntaxException) {
+                    //Toast.makeText(getApplicationContext(), "Syntaxe invalide", Toast.LENGTH_SHORT).show()
+                } catch (ex: IndexOutOfBoundsException) {
+                    //Toast.makeText(getApplicationContext(), "Erreur autre (array index)", Toast.LENGTH_SHORT).show()
+                    ex.printStackTrace()
+                } catch (ex: NullPointerException) {
+                    //Toast.makeText(getApplicationContext(), "Erreur : null", Toast.LENGTH_SHORT).show()
+                    ex.printStackTrace()
+                }
+
+            }
+            override fun beforeTextChanged(s:CharSequence, start:Int, count:Int, after:Int) {
+
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
         })
     }
 

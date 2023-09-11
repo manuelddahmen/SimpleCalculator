@@ -90,11 +90,11 @@ public class ListInstructions {
 
             String text = toString;
 
-            String [] splittedLines = text.split("\n");
+            String [] splitLines = text.split("\n");
 
-            for (int i = 0; i < splittedLines.length; i++) {
+            for (int i = 0; i < splitLines.length; i++) {
 
-                String line = splittedLines[i];
+                String line = splitLines[i];
 
                 String[] splitInstructionEquals = line.split("=");
 
@@ -126,11 +126,11 @@ public class ListInstructions {
                 if(!assigned) {
                     if(splitInstructionEquals.length==1) {
                         if(variable!=null && !variable.isEmpty()) {
-                            if(!variable.startsWith("--")) {
+                            if(!variable.startsWith("#")) {
                                 assignations.add(new Instruction(i, "", variable));
                             }
                         } else if(value!=null && !value.isEmpty()) {
-                            if(!value.startsWith("--")) {
+                            if(!value.startsWith("#")) {
                                 assignations.add(new Instruction(i, "", value));
                             }
                         }
@@ -171,7 +171,7 @@ public class ListInstructions {
                 System.err.println("Was null 133531");
             }
 
-            errors[i] = String.format(Locale.getDefault(), "-- Result of line : (%d) <<< %f ", i, result);
+            errors[i] = String.format(Locale.getDefault(), "# Result of line : (%d) <<< %f ", i, result);
             i++;
         }
 

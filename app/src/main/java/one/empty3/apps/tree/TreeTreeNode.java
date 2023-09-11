@@ -24,12 +24,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import one.empty3.apps.tree.AlgebraicFormulaSyntaxException;
-import one.empty3.apps.tree.AlgebricTree;
-import one.empty3.apps.tree.TreeNode;
-import one.empty3.apps.tree.TreeNodeEvalException;
-import one.empty3.apps.tree.TreeNodeType;
-
 public class TreeTreeNode extends one.empty3.apps.tree.TreeNode {
     private final one.empty3.apps.tree.AlgebricTree tree;
     private Method method = null;

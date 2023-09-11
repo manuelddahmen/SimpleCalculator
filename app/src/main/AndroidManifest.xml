@@ -7,9 +7,9 @@
 
     <application
         android:enableOnBackInvokedCallback="true"
-        android:icon="@drawable/mite"
+        android:icon="@drawable/mobile"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/mite"
+        android:roundIcon="@drawable/mobile"
         android:theme="@style/Theme.SimpleCalculator"
         tools:targetApi="tiramisu">
         <activity
