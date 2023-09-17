@@ -19,6 +19,7 @@
  */
 package one.empty3.apps.simplecalculator
 
+import one.empty3.library1.shader.Vec
 import one.empty3.library1.tree.*
 import org.junit.After
 import org.junit.Assert
@@ -452,5 +453,14 @@ class ExampleUnitTest1() {
 
     companion object {
         private val DELTA = Double.MIN_VALUE
+    }
+
+    @Test
+    fun testVectorSimple1() {
+        val r = 12.0
+        val vars = HashMap<String, Double>()
+        vars["r"] = r
+        testResultVariable("(0,1,0)", 0.0,
+            vars, true)
     }
 }

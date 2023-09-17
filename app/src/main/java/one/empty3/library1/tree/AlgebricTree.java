@@ -53,6 +53,8 @@
 
 package one.empty3.library1.tree;
 
+import androidx.annotation.NonNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -115,24 +117,16 @@ public class AlgebricTree extends Tree {
         if (src == null || subformula == null || subformula.length() == 0)
             return false;
 
-        int i = 0;
+        int i = 2;
         boolean added = false;
-        int length = 9;
+        int length = 11;
         boolean exception = false;
-        while (i < length && !added) {
+        while (i <= length && !added) {
             src.getChildren().clear();
             try {
                 int caseChoice = -1;
                 int lastAdded = -1;
                 switch (i) {
-                    case 0:
-                        added = addFormulaSeparator(src, subformula);
-                        if (added) caseChoice = 0;
-                        break;
-                    case 1:
-                        added = addComa(src, formula);
-                        if(added) caseChoice = 1;
-                        break;
                     case 2:
                         added = addTerms(src, subformula);
                         if (added) caseChoice = 2;
@@ -146,28 +140,32 @@ public class AlgebricTree extends Tree {
                         if (added) caseChoice = 4;
                         break;
                     case 5:
-                        added = addFormulaSeparator(src, formula);
+                        added = addVector(src, formula);
                         if(added) caseChoice = 5;
                         break;
-                    case 6: // Mettre - en 4??
-                        added = addSingleSign(src, subformula);
+                    case 6:
+                        added = addFormulaSeparator(src, formula);
                         if(added) caseChoice = 6;
                         break;
-                    case 7:
-                        added = addDouble(src, subformula);
-                        if (added) caseChoice = 7;
+                    case 7: // Mettre - en 4??
+                        added = addSingleSign(src, subformula);
+                        if(added) caseChoice = 7;
                         break;
                     case 8:
-                        added = addFunction(src, subformula);
+                        added = addDouble(src, subformula);
                         if (added) caseChoice = 8;
                         break;
                     case 9:
-                        added = addBracedExpression(src, subformula);
+                        added = addFunction(src, subformula);
                         if (added) caseChoice = 9;
                         break;
                     case 10:
-                        added = addVariable(src, subformula);
+                        added = addBracedExpression(src, subformula);
                         if (added) caseChoice = 10;
+                        break;
+                    case 11:
+                        added = addVariable(src, subformula);
+                        if (added) caseChoice = 11;
                         break;
                     default:
                         return false;
@@ -186,10 +184,6 @@ public class AlgebricTree extends Tree {
 
         }
         throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
-    }
-
-    private boolean addComa(TreeNode src, String formula) {
-        return false;
     }
 
     private boolean addFormulaSeparator(TreeNode src, String subformula) {
@@ -274,12 +268,6 @@ public class AlgebricTree extends Tree {
                 isNewExp = true;
                 firstExpFound = true;
                 newExpSign = 1;
-            } else if (values.charAt(i) == '/' && count == 0) {
-                newExp = '/';
-                isNewExp = true;
-                newExpPos = i;
-                firstExpFound = true;
-                newExpSign = -1;
             }
             if (i == values.length() - 1 && firstExpFound) {
                 isNewExp = true;
@@ -713,9 +701,12 @@ public class AlgebricTree extends Tree {
         return root.eval();
     }
 
+    @NonNull
     public String toString() {
-        String s = "Arbre algébrique\n" +
-                "Racine: " + root.getClass() + root.toString();
+        String s = "Arbre algébrique\n";
+        if(root!=null) {
+            s+="Racine: " + root.getClass() + root.toString();
+        }
         return s;
     }
 

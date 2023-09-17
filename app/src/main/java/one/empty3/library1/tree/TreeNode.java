@@ -178,8 +178,9 @@ public class TreeNode {
             else
                 return s1;
         }
-
-        return type.eval();
+        Double eval = type.eval();
+        
+        return eval==null?0.0:eval;
 
     }
 
