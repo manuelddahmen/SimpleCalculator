@@ -59,7 +59,7 @@ import one.empty3.library1.tree.VariableTreeNodeType;
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  */
-public abstract class TreeNodeValue extends one.empty3.apps.tree.TreeNode {
+public abstract class TreeNodeValue extends TreeNode {
 
     public TreeNodeValue(TreeNode parent, Object[] values) {
         super(parent, values, new VariableTreeNodeType());
