@@ -1,57 +1,24 @@
 
 /*
- * Copyright (c) 2023.
+ * Copyright (c) 2023. Manuel Daniel Dahmen
  *
  *
- *  Copyright 2012-2023 Manuel Daniel Dahmen
+ *    Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- *  limitations under the License.
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
-/*
- *  This file is part of Empty3.
- *
- *     Empty3 is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     Empty3 is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
- */
-
-/*
- * This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>
- */
-
-package one.empty3.apps.tree;
+package one.empty3.library.core.raytracer.tree;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,7 +31,7 @@ public class AlgebricTree extends Tree {
 
     private String formula = "0.0";
     Map<String, Double> parametersValues = new HashMap<>();
-    private one.empty3.apps.tree.TreeNode root;
+    private TreeNode root;
     private int stackSize = 0;
 
     public AlgebricTree(String formula) throws AlgebraicFormulaSyntaxException {
@@ -91,24 +58,26 @@ public class AlgebricTree extends Tree {
      * Particularité
      * @param src
      */
-    private void checkForSignTreeNode(one.empty3.apps.tree.TreeNode src) {
+    private void checkForSignTreeNode(TreeNode src) {
         //System.out.println("DEBUG TREE: current tree" +src);
-        if (src.getChildren().size() >= 2 && src.getChildren().get(1).type.getClass()
+        if(src.getChildren().size()>=2 && src.getChildren().get(1).type.getClass()
                 .equals(SignTreeNodeType.class)) {
-            one.empty3.apps.tree.TreeNode sign = src.getChildren().remove(1);
-            one.empty3.apps.tree.TreeNode son0 = src.getChildren().remove(0);
+            TreeNode sign = src.getChildren().remove(1);
+            TreeNode son0 = src.getChildren().remove(0);
             double sign1 = ((SignTreeNodeType) sign.type).getSign();
-            src.getChildren().add(new one.empty3.apps.tree.TreeNode(src, new Object[]{"" + sign1},
+            src.getChildren().add(new TreeNode(src, new Object[]{""+sign1},
                     new SignTreeNodeType(sign1)));
-            one.empty3.apps.tree.TreeNode son1 = src.getChildren().get(0);
+            TreeNode son1 = src.getChildren().get(0);
             son1.getChildren().add(son0);
         }
     }
 
-    public boolean add(one.empty3.apps.tree.TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
+
+
+    public boolean add(TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
 
         stackSize++;
-        if (stackSize > 30) {
+        if(stackSize>30) {
             throw new AlgebraicFormulaSyntaxException("Recursive error (bad formula form");
         }
 
@@ -119,66 +88,57 @@ public class AlgebricTree extends Tree {
         boolean added = false;
         int length = 9;
         boolean exception = false;
-        while (i < length && !added) {
+        while(i<length && !added) {
             src.getChildren().clear();
             try {
                 int caseChoice = -1;
                 int lastAdded = -1;
-                switch (i) {
+                switch(i) {
                     case 0:
                         added = addFormulaSeparator(src, subformula);
-                        if (added) caseChoice = 0;
+                        if(added) caseChoice = 0;
                         break;
                     case 1:
-                        added = addComa(src, formula);
+                        added = addTerms(src, subformula);
                         if(added) caseChoice = 1;
                         break;
                     case 2:
-                        added = addTerms(src, subformula);
-                        if (added) caseChoice = 2;
+                        added = addFactors(src, subformula);
+                        if(added) caseChoice = 2;
                         break;
                     case 3:
-                        added = addFactors(src, subformula);
-                        if (added) caseChoice = 3;
-                        break;
-                    case 4:
                         added = addPower(src, subformula);
-                        if (added) caseChoice = 4;
+                        if(added) caseChoice = 3;
+                        break;
+                    case 4: // Mettre - en 4??
+                        added = addSingleSign(src, subformula);
                         break;
                     case 5:
-                        added = addFormulaSeparator(src, formula);
+                        added = addDouble(src, subformula);
                         if(added) caseChoice = 5;
                         break;
-                    case 6: // Mettre - en 4??
-                        added = addSingleSign(src, subformula);
+                    case 6:
+                        added = addFunction(src, subformula);
                         if(added) caseChoice = 6;
                         break;
                     case 7:
-                        added = addDouble(src, subformula);
-                        if (added) caseChoice = 7;
+                        added = addBracedExpression(src, subformula);
+                        if(added) caseChoice = 7;
                         break;
                     case 8:
-                        added = addFunction(src, subformula);
-                        if (added) caseChoice = 8;
-                        break;
-                    case 9:
-                        added = addBracedExpression(src, subformula);
-                        if (added) caseChoice = 9;
-                        break;
-                    case 10:
                         added = addVariable(src, subformula);
-                        if (added) caseChoice = 10;
+                        if(added) caseChoice = 8;
                         break;
                     default:
                         return false;
                 }
-                if (added)
+                if(added)
                     checkForSignTreeNode(src);
 
             } catch (AlgebraicFormulaSyntaxException ex) {
                 exception = true;
             }
-            if (added) {
+            if(added) {
                 stackSize--;
                 return true;
             }
@@ -188,11 +148,7 @@ public class AlgebricTree extends Tree {
         throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
     }
 
-    private boolean addComa(TreeNode src, String formula) {
-        return false;
-    }
-
-    private boolean addFormulaSeparator(one.empty3.apps.tree.TreeNode src, String subformula) {
+    private boolean addFormulaSeparator(TreeNode src, String subformula) {
         String[] s;
         s = subformula.split("=");
         if (s.length > 1) {
@@ -204,7 +160,7 @@ public class AlgebricTree extends Tree {
         return true;
     }
 
-    private boolean addVariable(one.empty3.apps.tree.TreeNode src, String subformula)
+    private boolean addVariable(TreeNode src, String subformula)
             throws AlgebraicFormulaSyntaxException {
         if (Character.isLetter(subformula.charAt(0))) {
             int i = 1;
@@ -227,7 +183,7 @@ public class AlgebricTree extends Tree {
     }
 
 
-    private boolean addDouble(one.empty3.apps.tree.TreeNode src, String subformula) {
+    private boolean addDouble(TreeNode src, String subformula) {
         try {
             Double d = Double.parseDouble(subformula);
             DoubleTreeNodeType doubleTreeNodeType = new DoubleTreeNodeType();
@@ -240,11 +196,11 @@ public class AlgebricTree extends Tree {
         }
     }
 
-    private boolean addSingleSign(one.empty3.apps.tree.TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
+    private boolean addSingleSign(TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
         if (subformula.length() > 1 && subformula.charAt(0) == '-') {
 
-            if (add(src, subformula.substring(1))) {
-                src.getChildren().add(new one.empty3.apps.tree.TreeNode(src, new Object[]{subformula.substring(1)}, new SignTreeNodeType(-1.0)));
+            if(add(src, subformula.substring(1))) {
+                src.getChildren().add(new TreeNode(src, new Object[]{subformula.substring(1)}, new SignTreeNodeType(-1.0)));
                 return true;
             }
         }
@@ -252,10 +208,10 @@ public class AlgebricTree extends Tree {
 
     }
 
-    public boolean addPower(one.empty3.apps.tree.TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+    public boolean addPower(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
         int countTerms = 0;
 
-        one.empty3.apps.tree.TreeNode t2;
+        TreeNode t2;
         int i = 0;
         boolean firstExpFound = false;
         boolean isNewExp = false;
@@ -298,13 +254,13 @@ public class AlgebricTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    t2 = new one.empty3.apps.tree.TreeNode(t, new Object[]{subsubstring}, new PowerTreeNodeType(oldExpSign));
-                    if (subsubstring.charAt(0) == '-') {
+                    t2 = new TreeNode(t, new Object[]{subsubstring}, new PowerTreeNodeType(oldExpSign));
+                    if(subsubstring.charAt(0)=='-') {
                         subsubstring = subsubstring.substring(1);
                         SignTreeNodeType signTreeNodeType = new SignTreeNodeType(-1.0);
-                        signTreeNodeType.instantiate(new Object[]{subsubstring});
+                        signTreeNodeType.instantiate(new Object[] {subsubstring});
 
-                        t2 = new one.empty3.apps.tree.TreeNode(t2, new Object[]{subsubstring}, signTreeNodeType);
+                        t2 = new TreeNode(t2, new Object[] {subsubstring}, signTreeNodeType);
                     }
                     if (subsubstring.length() > 0 && !add(t2, subsubstring)) {
                         return false;
@@ -329,10 +285,10 @@ public class AlgebricTree extends Tree {
         return t.getChildren().size() > 0 && countTerms > 0;
     }
 
-    public boolean addFactors(one.empty3.apps.tree.TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+    public boolean addFactors(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
         int countTerms = 0;
 
-        one.empty3.apps.tree.TreeNode t2;
+        TreeNode t2;
         int i = 0;
         boolean firstTermFound = false;
         boolean isNewFactor = false;
@@ -375,13 +331,13 @@ public class AlgebricTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    t2 = new one.empty3.apps.tree.TreeNode(t, new Object[]{subsubstring}, new FactorTreeNodeType(oldFactorSign));
-                    if (subsubstring.charAt(0) == '-') {
+                    t2 = new TreeNode(t, new Object[]{subsubstring}, new FactorTreeNodeType(oldFactorSign));
+                    if(subsubstring.charAt(0)=='-') {
                         subsubstring = subsubstring.substring(1);
                         SignTreeNodeType signTreeNodeType = new SignTreeNodeType(-1.0);
-                        signTreeNodeType.instantiate(new Object[]{subsubstring});
+                        signTreeNodeType.instantiate(new Object[] {subsubstring});
 
-                        t2 = new one.empty3.apps.tree.TreeNode(t2, new Object[]{subsubstring}, signTreeNodeType);
+                        t2 = new TreeNode(t2, new Object[] {subsubstring}, signTreeNodeType);
                     }
                     if (!add(t2, subsubstring)) {
                         return false;
@@ -403,10 +359,10 @@ public class AlgebricTree extends Tree {
         return t.getChildren().size() > 0 && countTerms > 0;
     }
 
-    public boolean addTerms(one.empty3.apps.tree.TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+    public boolean addTerms(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
         int countTerms = 0;
 
-        one.empty3.apps.tree.TreeNode t2;
+        TreeNode t2;
         int i = 0;
         boolean firstTermFound = false;
         boolean isNewFactor = false;
@@ -417,20 +373,20 @@ public class AlgebricTree extends Tree {
         double newFactorSign = 1;
         double oldFactorSign = 1;
         while (i < values.length()) {
-            if (values.charAt(i) == '+' && count == 0 && i > 0/*&& (i < values.length() - 1 || values.charAt(i + 1) != '+')*/ && count == 0) {
+            if (values.charAt(i) == '+' && count == 0 && i>0/*&& (i < values.length() - 1 || values.charAt(i + 1) != '+')*/ && count == 0) {
                 newFactor = '+';
                 newFactorPos = i;
                 isNewFactor = true;
                 firstTermFound = true;
                 newFactorSign = 1;
-            } else if (values.charAt(i) == '-' && count == 0 && i > 0) {
+            } else if (values.charAt(i) == '-' && count == 0 && i>0) {
                 newFactor = '-';
                 isNewFactor = true;
                 newFactorPos = i;
                 firstTermFound = true;
                 newFactorSign = -1;
             }
-            if ((values.charAt(i) == '-' || values.charAt(i) == '+') && i == 0) {
+            if((values.charAt(i)=='-'||values.charAt(i)=='+')&&i==0) {
             }
 
             if (values.charAt(i) == '(') {
@@ -457,13 +413,13 @@ public class AlgebricTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    t2 = new one.empty3.apps.tree.TreeNode(t, new Object[]{subsubstring}, new TermTreeNodeType(oldFactorSign));
-                    if (!add(t2, subsubstring)) {
-                        return false;
-                    } else {
-                        t.getChildren().add(t2);
-                        countTerms++;
-                    }
+                        t2 = new TreeNode(t, new Object[]{subsubstring}, new TermTreeNodeType(oldFactorSign));
+                        if (!add(t2, subsubstring)) {
+                            return false;
+                        } else {
+                            t.getChildren().add(t2);
+                            countTerms++;
+                        }
                 } else
                     return false;
 
@@ -484,7 +440,7 @@ public class AlgebricTree extends Tree {
     }
 
 
-    public boolean addFunction(one.empty3.apps.tree.TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+    public boolean addFunction(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
         try {
             int i = 1;
             int count = 0;
@@ -524,7 +480,7 @@ public class AlgebricTree extends Tree {
                         fParamString, parametersValues
                 );
 
-                one.empty3.apps.tree.TreeNode t2 = new TreeTreeNode(t, new Object[]{fParamString, parametersValues, fName},
+                TreeNode t2 = new TreeTreeNode(t, new Object[]{fParamString, parametersValues, fName},
                         mathFunctionTreeNodeType);
                 if (!add(t2, fParamString))
                     return false;
@@ -547,7 +503,7 @@ public class AlgebricTree extends Tree {
      * ajouter {; , .}
      */
 
-    public boolean addMethodCall(one.empty3.apps.tree.TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+    public boolean addMethodCall(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
         int i = 1;
         boolean isNewFactor = false;
         int count = 0;
@@ -581,7 +537,7 @@ public class AlgebricTree extends Tree {
                         "", parametersValues
                 );
 
-                one.empty3.apps.tree.TreeNode t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues, fParamString},
+                TreeNode t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues, fParamString},
                         mathFunctionTreeNodeType);
                 if (!add(t2, fParamString))
                     return false;
@@ -597,8 +553,8 @@ public class AlgebricTree extends Tree {
         return t.getChildren().size() > 0;
     }
 
-    public boolean addBracedExpression(one.empty3.apps.tree.TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
-        one.empty3.apps.tree.TreeNode tBraced;
+    public boolean addBracedExpression(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+        TreeNode tBraced;
         int i = 0;
         int count = 0;
         while (i < values.length()) {
@@ -645,5 +601,13 @@ public class AlgebricTree extends Tree {
 
     public Map<String, Double> getParametersValues() {
         return parametersValues;
+    }
+
+    public String getFormula() {
+        return formula;
+    }
+
+    public TreeNode getRoot() {
+        return root;
     }
 }

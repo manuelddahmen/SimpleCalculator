@@ -1,0 +1,180 @@
+JFDML JFormDesigner: "8.1.0.0.283" Java: "17.0.7" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.bundlePackage": "one.empty3.library.core.testing2"
+	"i18n.bundleName": "bundle"
+	"i18n.autoExternalize": true
+	"i18n.keyPrefix": "ShowTestResult"
+	contentType: "form/swing"
+	root: new FormRoot {
+		auxiliary() {
+			"JavaCodeGenerator.defaultVariableGetter": true
+			"JavaCodeGenerator.memberVariableThis": true
+			"JavaCodeGenerator.i18nInitMethod": true
+		}
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :::p, comp jSplitPane1:::::x, space :::p}}"
+			"$verticalGroup": "par l {comp jSplitPane1::t::404:x}"
+		} ) {
+			name: "this"
+			"defaultCloseOperation": 0
+			"background": new java.awt.Color( 204, 204, 255, 255 )
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/one/empty3/library/mite.png" )
+			"undecorated": false
+			"$sizePolicy": 1
+			"preferredSize": new java.awt.Dimension( 640, 800 )
+			auxiliary() {
+				"JavaCodeGenerator.preInitCode": "try {\n    UIManager.setLookAndFeel( new FlatDarkLaf() );\n} catch( Exception ex ) {\n    System.err.println( \"Failed to initialize LaF\" );\n}\n\n// create UI here..."
+				"undecorated.forceValue": true
+			}
+			add( new FormContainer( "javax.swing.JSplitPane", new FormLayoutManager( class javax.swing.JSplitPane ) ) {
+				name: "jSplitPane1"
+				"orientation": 0
+				"continuousLayout": true
+				"resizeWeight": 0.8
+				auxiliary() {
+					"JavaCodeGenerator.preInitCode": "try {\n    UIManager.setLookAndFeel( new FlatLightLaf() );\n} catch( Exception ex ) {\n    System.err.println( \"Failed to initialize LaF\" );\n}\n\n// create UI here..."
+				}
+				add( new FormContainer( "javax.swing.JPanel", null ) {
+					name: "jPanel1"
+					"background": new java.awt.Color( 204, 255, 204, 255 )
+					"minimumSize": new java.awt.Dimension( 200, 200 )
+					"alignmentX": 0.0f
+					"alignmentY": 0.0f
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "jPanelPreviewImageMouseClicked", true ) )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "left"
+				} )
+				add( new FormContainer( "javax.swing.JSplitPane", new FormLayoutManager( class javax.swing.JSplitPane ) ) {
+					name: "jSplitPane2"
+					"minimumSize": new java.awt.Dimension( 200, 200 )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+						"$layoutConstraints": "fill,insets 0,hidemode 3,gap 5 5"
+						"$columnConstraints": "[fill][fill][fill][fill][fill][fill][fill][fill]"
+						"$rowConstraints": "[fill][fill][fill][]"
+					} ) {
+						name: "jPanel2"
+						add( new FormComponent( "javax.swing.JCheckBox" ) {
+							name: "jCheckBoxOGL"
+							"text": "Open GL"
+							"selectedIcon": new com.jformdesigner.model.SwingIcon( 0, "/one/empty3/library/core/testing2/RESULT_SUCCESS.jpg" )
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jCheckBoxOGLActionPerformed", true ) )
+						}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+							"value": "cell 0 0"
+						} )
+						add( new FormComponent( "javax.swing.JCheckBox" ) {
+							name: "jCheckBoxModeles"
+							"text": "Modèles"
+							"selectedIcon": new com.jformdesigner.model.SwingIcon( 0, "/one/empty3/library/core/testing2/RESULT_SUCCESS.jpg" )
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jCheckBoxModelesActionPerformed", true ) )
+						}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+							"value": "cell 1 0"
+						} )
+						add( new FormComponent( "javax.swing.JCheckBox" ) {
+							name: "jCheckBoxFilmRec"
+							"text": "Enregistrer film"
+							"selectedIcon": new com.jformdesigner.model.SwingIcon( 0, "/one/empty3/library/core/testing2/RESULT_SUCCESS.jpg" )
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jCheckBoxFilmRecActionPerformed", true ) )
+						}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+							"value": "cell 1 0"
+						} )
+						add( new FormComponent( "javax.swing.JCheckBox" ) {
+							name: "jCheckBoxImagesRec"
+							"text": "Enregistrer images"
+							"selectedIcon": new com.jformdesigner.model.SwingIcon( 0, "/one/empty3/library/core/testing2/RESULT_SUCCESS.jpg" )
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jCheckBoxImagesRecActionPerformed", true ) )
+						}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+							"value": "cell 2 0"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "jTextField2"
+							"text": "movie#no"
+						}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+							"value": "cell 0 1"
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "button3"
+							"text": "Pause"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "pause", true ) )
+						}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+							"value": "cell 0 2"
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "jButtonDemarrerNouveauFilm"
+							"text": "(fermer et) créer nouveau"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jButtonDemarrerNouveauFilmActionPerformed", true ) )
+						}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+							"value": "cell 1 1"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "jTextField1"
+							"text": "frame#no"
+						}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+							"value": "cell 2 1"
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "button4"
+							"text": "Quitter"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "formWindowClosing1", true ) )
+						}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+							"value": "cell 1 2"
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "buttonShowModel"
+							"text": new FormMessage( null, "ShowTestResult.buttonShowModel.text" )
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showModel", true ) )
+						}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+							"value": "cell 2 2"
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "button2"
+							"text": "Parcourir"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "parcourir", true ) )
+						}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+							"value": "cell 0 3"
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "left"
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane1"
+						add( new FormComponent( "javax.swing.JEditorPane" ) {
+							name: "editorPane1"
+							addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "editorPane1MouseClicked", true ) )
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "right"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "right"
+				} )
+			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar1"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu1"
+					"text": new FormMessage( null, "ShowTestResult.menu1.text" )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem4"
+						"text": new FormMessage( null, "ShowTestResult.menuItem4.text" )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem1"
+						"text": new FormMessage( null, "ShowTestResult.menuItem1.text" )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem2"
+						"text": new FormMessage( null, "ShowTestResult.menuItem2.text" )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem3"
+						"text": new FormMessage( null, "ShowTestResult.menuItem3.text" )
+					} )
+				} )
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 915, 435 )
+		} )
+	}
+}

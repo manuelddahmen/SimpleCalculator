@@ -1,0 +1,81 @@
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
+ */
+
+package one.empty3.library;/*
+ * 2013 Manuel Dahmen
+ */
+
+import org.monte.media.avi.AVIReader;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/*__
+ *
+ * @author Manuel DAHMEN
+ */
+public class AVIInfo {
+
+    public static void main(String[] args) {
+        try {
+            if (args.length < 1) {
+
+                Logger.getAnonymousLogger().log(Level.INFO, "Syntaxe : AVIInfo nom_du_Fichier.avi");
+                System.exit(-1);
+
+            }
+
+            File f = new File(args[0]);
+
+            AVIReader reader = new AVIReader(f);
+
+            Logger.getAnonymousLogger().log(Level.INFO, "Durée: " + reader.getDuration());
+            Logger.getAnonymousLogger().log(Level.INFO, "Format de fichier: " + reader.getFileFormat().toString());
+            Logger.getAnonymousLogger().log(Level.INFO, "Nombre de piste: " + reader.getTrackCount());
+            Logger.getAnonymousLogger().log(Level.INFO, "Nombre de piste: " + reader.getVideoDimension().getHeight() + "coordArr" + reader.getVideoDimension().getHeight());
+            for (int t = 0; t < reader.getTrackCount(); t++) {
+                Logger.getAnonymousLogger().log(Level.INFO, "Track " + t);
+                Logger.getAnonymousLogger().log(Level.INFO, "Durée: " + reader.getDuration(t));
+                Logger.getAnonymousLogger().log(Level.INFO, "Chunk count: " + reader.getChunkCount(t));
+                Logger.getAnonymousLogger().log(Level.INFO, "Format: " + reader.getFormat(t));
+                Logger.getAnonymousLogger().log(Level.INFO, "Read time: " + reader.getReadTime(t));
+                Logger.getAnonymousLogger().log(Level.INFO, "Time scale: " + reader.getTimeScale(t));
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(AVIInfo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+}
