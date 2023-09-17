@@ -78,12 +78,11 @@ class ExampleUnitTest1() {
         try {
             println("Expression string : $expr")
             algebricTree = AlgebricTree(expr)
-            algebricTree.setParametersValues(map)
+            algebricTree.parametersValues = map
             algebricTree.construct()
             if (echo) println(algebricTree)
             try {
-                val result: Double
-                result = algebricTree.eval()
+                val result: Double = algebricTree.eval()
                 if (echo) println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
                 Assert.assertTrue(
@@ -460,7 +459,6 @@ class ExampleUnitTest1() {
         val r = 12.0
         val vars = HashMap<String, Double>()
         vars["r"] = r
-        testResultVariable("(0,1,0)", 0.0,
-            vars, true)
+        testResultVariable("(0,1,0)", 0.0, vars, true)
     }
 }

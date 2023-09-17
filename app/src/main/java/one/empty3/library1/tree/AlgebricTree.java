@@ -665,7 +665,7 @@ public class AlgebricTree extends Tree {
         return t.getChildren().size() > 0;
     }
 
-    public boolean addBracedExpression(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+    public boolean addBracedExpression(TreeNode src, String values) throws AlgebraicFormulaSyntaxException {
         TreeNode tBraced;
         int i = 0;
         int count = 0;
@@ -682,10 +682,10 @@ public class AlgebricTree extends Tree {
                 TreeTreeNodeType mathFunctionTreeNodeType = new TreeTreeNodeType(
                         subsubstring, parametersValues
                 );
-                TreeNode t2 = new TreeTreeNode(t, new Object[]{subsubstring, parametersValues, ""}, mathFunctionTreeNodeType);
+                TreeNode t2 = new VectorTreeNode(src, new Object[]{subsubstring, parametersValues, ""}, mathFunctionTreeNodeType);
                 if (!add(t2, subsubstring))
                     return false;
-                t.getChildren().add(t2);
+                src.getChildren().add(t2);
             }
 
 
@@ -693,7 +693,7 @@ public class AlgebricTree extends Tree {
 
         }
 
-        return t.getChildren().size() > 0;
+        return src.getChildren().size() > 0;
     }
 
     public Double eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
