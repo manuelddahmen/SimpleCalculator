@@ -29,207 +29,209 @@
  */
 package one.empty3.library.core.tribase;
 
-import one.empty3.library.ColorTexture;
-import one.empty3.library.Point3D;
-import one.empty3.library.StructureMatrix;
-import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
-import one.empty3.library.core.nurbs.FctXY;
-import one.empty3.library.core.nurbs.ParametricCurve;
-import one.empty3.library.core.nurbs.ParametricSurface;
-
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TubulaireN2 extends ParametricSurface {
-    public double TAN_FCT_INCR = 0.00000001;
-    public double NORM_FCT_INCR = 0.00001;
+import javaAnd.awt.Color;
+import one.empty3.library.PObjet;
+import one.empty3.library.Point3D;
+import one.empty3.library.Representable;
+import one.empty3.library.TRI;
+import one.empty3.library.TRIConteneur;
+import one.empty3.library.TRIObject;
+import one.empty3.library.TextureCol;
+import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 
-    protected StructureMatrix<ParametricCurve> soulCurve = new StructureMatrix<>(0, ParametricCurve.class);
-    protected StructureMatrix<FctXY> diameterFunction = new StructureMatrix<>(0, FctXY.class);
-    private Point3D lastTan = null;
+public class TubulaireN2 extends Representable implements TRIGenerable, TRIConteneur {
+
+    private ArrayList<Point3D> points = new ArrayList<>();
+    private final float TAN_FCT = 0.00005f;
+    private final float NORM_FCT = 0.0005f;
+    public double PERCENT = 0.05f;
+    //private double ratio;
+    private CourbeParametriquePolynomialeBezier beziers;
+    private double diam = 3.0f;
+    private int N_TOURS = 40;
+    private TRIObject tris = null;
 
     public TubulaireN2() {
-        super();
-        soulCurve.setElem(new CourbeParametriquePolynomialeBezier());
-        diameterFunction.setElem(new FctXY());
-        declareProperties();
+        this.points = new ArrayList<Point3D>();
     }
 
-    public TubulaireN2(ParametricCurve curve, double diameter) {
-        soulCurve.setElem(curve);
-        soulCurve.getElem().texture(new ColorTexture(Color.BLACK));
-        FctXY fctXY = new FctXY();
-        fctXY.setFormulaX("" + diameter);
-        diameterFunction.setElem(fctXY);
-        declareProperties();
+    public void add(Point3D e) {
+        points.add(e);
+    }
+
+    public void addPoint(Point3D p) {
+        points.add(p);
     }
 
     public Point3D calculerNormale(double t) {
-        Point3D n = calculerTangente(t + NORM_FCT_INCR).moins(calculerTangente(t)).mult(1.0 / NORM_FCT_INCR);
-        if (n.equals(Point3D.O0)||n.isAnyNaN()) {
-            int i = 0;
-            while (i < 3 && (n.equals(Point3D.O0) ||
-                    n.isAnyNaN())) {
-                n = calculerTangente(t).prodVect(
-                        new Point3D(i == 0 ? 1.0 : 0.0, i == 1 ? 1.0 : 0.0, i == 2 ? 1.0 : 0.0));
+        if (t < 1.0 - NORM_FCT) {
 
-                i++;
-            }
-
+            return calculerTangente(t + NORM_FCT).moins(calculerTangente(t));
+        } else {
+            return null;
         }
-        return n;
     }
 
-    public Point3D[] calculerAxes(double t, Point3D tangent, int iMin) {
-
-        Point3D n = new Point3D(2., 2., 2.);
-
-        Point3D axe2;
-        if (n.norme() != 1.0) {
-
-            int i = 0;
-            while (i < 3  && (n.dot(tangent) != 0.0 ||
-                    n.isAnyNaN() || i<iMin)) {
-                n = tangent.prodVect(new Point3D(i == 0 ? 1.0 : 0.0, i == 1 ? 1.0 : 0.0, i == 2 ? 1.0 : 0.0)).norme1();
-                i++;
-            }
-        }
-
-        axe2 = tangent.prodVect(n).norme1();
-
-        return new Point3D[] { n , axe2 };
+    public Point3D calculerPoint(double t) {
+        return beziers.calculerPoint3D(t);
     }
 
     public Point3D calculerTangente(double t) {
-        return soulCurve.getElem().calculerPoint3D(t + TAN_FCT_INCR).moins(
-                soulCurve.getElem().calculerPoint3D(t)).mult(1.0 / TAN_FCT_INCR);
+        if (t < 1.0 - TAN_FCT) {
+
+            return calculerPoint(t + TAN_FCT).moins(calculerPoint(t));
+        } else {
+            return null;
+        }
+    }
+
+    public PObjet calculPoints(IFct1D3D funct, double value, double angle) {
+        return null;
+    }
+
+    public Point3D cerclePerp(Point3D vect, double angle) {
+        return null;
+    }
+
+    public void clear() {
+        points.clear();
+    }
+
+    public void diam(float diam) {
+        this.diam = diam;
+    }
+
+    @Override
+    public TRIObject generate() {
+        android.graphics.Color color = Color.valueOf(texture().getColorAt(0.5, 0.5));
+        if (tris == null) {
+            tris = new TRIObject();
+
+            generateWire();
+
+            double length = 1;
+
+            ArrayList<Point3D> tour0 = vectPerp(0);
+            for (double t = 0; t < length; t += PERCENT) {
+                ArrayList<Point3D> tour1 = vectPerp(t);
+                for (int i = 3; i < tour1.size() - 1; i++) {
+                    double s = 1.0 * (i - 3) / tour1.size();
+                    TRI t1 = new TRI(tour0.get(i), tour1.get(i), tour1.get(i + 1), texture());
+                    t1.texture(new TextureCol(Color.valueOf(texture().getColorAt(t, s))));
+                    TRI t2 = new TRI(tour0.get(i), tour0.get(i + 1), tour1.get(i + 1), texture());
+                    t2.texture(new TextureCol(Color.valueOf(texture().getColorAt(t, s))));
+
+                    tris.add(t1);
+                    tris.add(t2);
+                }
+
+                tour0 = tour1;
+            }
+        }
+        return tris;
+    }
+
+    public void generateWire() {
+        Logger.getAnonymousLogger().log(Level.INFO, "WIRE SIZE " + points.size());
+
+        Object[] toArray = points.toArray();
+        Point3D[] arr = new Point3D[toArray.length];
+        int i = 0;
+        for (Object o : toArray) {
+            if (o != null && o instanceof Point3D) {
+                Point3D p = (Point3D) o;
+                arr[i] = p;
+                i++;
+            }
+
+        }
+        beziers = new CourbeParametriquePolynomialeBezier(arr);
+
+    }
+
+    @Override
+    public Representable getObj() {
+        generate();
+        return tris;
+    }
+
+    @Override
+    public Iterable<TRI> iterable() {
+        generate();
+        return tris.getTriangles();
     }
 
     public void nbrAnneaux(int n) {
-        setIncrU(1.0 / n);
+        this.PERCENT = 1.0 / n;
     }
 
     public void nbrRotations(int r) {
-        setIncrV(1.0 / r);
+        this.N_TOURS = r;
+    }
+
+    public void radius(double d) {
+        diam = d;
+    }
+
+    public double tMax() {
+        return (double) 1;
     }
 
     @Override
     public String toString() {
-        String s = "tubulaire3 (\n\t("
-                + soulCurve.getElem().toString();
-        s += "\n\n)\n\t" + diameterFunction.toString() + "\n\t" + texture().toString() + "\n)\n";
+        String s = "tubulaire (\n\t(";
+        Iterator<Point3D> it = points.iterator();
+        while (it.hasNext()) {
+            s += "\n\t" + it.next().toString();
+        }
+        s += "\n\n)\n\t" + diam + "\n\t" + texture().toString() + "\n)\n";
         return s;
     }
 
-    public Point3D[] vectPerp(double t, double v) {
-        Point3D[][] vecteurs = new Point3D[3][3];
 
-        for (int i = 0; i < 3; i++)
-            for (int j = 0; j < 3; j++) {
-                vecteurs[i][j] = new Point3D(0., 0., 0.);
-                for (int k = 0; k < 3; k++)
-                    vecteurs[i][j].set(j, k == i ? 1. : 0.);
-            }
+    private ArrayList<Point3D> vectPerp(double t) {
+        ArrayList<Point3D> vecteurs = new ArrayList<Point3D>();
 
-        Point3D tangente = Point3D.O0;
-        int k = 0;
-        while (tangente.equals(Point3D.O0) && k < 3) {
-            tangente = calculerTangente(t);
-            if (tangente.equals(Point3D.O0) || tangente.isAnyNaN()) {
-                //TODO
-                tangente =
-                        lastTan==null?new Point3D(k == 0 ? 1. : 0,
-                                        k == 1 ? 1. : 0, k == 2 ? 1. : 0)
-                                : lastTan;
-            } else {
-                lastTan = tangente;
-                break;
-            }
-            k++;
-        }
-        if (tangente.norme() == 0.0)
-            Logger.getAnonymousLogger().log(Level.INFO, "Error in TubulaireN2 tangente==0");
+        Point3D p = calculerPoint(t);
+        Point3D tangente = calculerTangente(t);
+
+        Point3D ref1 = new Point3D(0d, 0d, 1d);
+        Point3D ref2 = new Point3D(1d, 0d, 0d);
+        Point3D ref3 = new Point3D(0d, 1d, 0d);
 
         tangente = tangente.norme1();
 
-        Point3D px = null;
-        Point3D py = null;
-        int j = 0;
-        double min = 1d;
-        double minI = 1000d; // TODO
-        int iMin = 0;
-        for (int i = 0; i < 3; i++) {
+        if (tangente != null) {
+            Point3D px = calculerNormale(t);///tangente.prodVect(ref1);
 
-            Point3D[] perps = calculerAxes(t, tangente, i);
-            px = perps[0];//TODO .prodVect(refs[i])).norme1();
-            py = perps[1];
-
-
-            vecteurs[i][0] = tangente.norme1();
-            vecteurs[i][1] = px;
-            vecteurs[i][2] = py;
-
-            minI = Math.abs(px.dot(py));// Math.abs(px.prodVect(py).norme() - 1.);
-
-            if (minI <= min) {
-                min = minI;
-                j = i;
+            if (px.norme() == 0) {
+                px = tangente.prodVect(ref2);
+            }
+            if (px.norme() == 0) {
+                px = tangente.prodVect(ref3);
             }
 
+            Point3D py = px.prodVect(tangente);
+
+            px = px.norme1();
+            py = py.norme1();
+
+            vecteurs.add(px);
+            vecteurs.add(py);
+            vecteurs.add(tangente);
+
+            for (int i = 0; i < N_TOURS + 1; i++) {
+                double angle = 2.0f * Math.PI * i / N_TOURS;
+                vecteurs.add(p.plus(px.mult(Math.cos(angle) * diam)).plus(
+                        py.mult(Math.sin(angle) * diam)));
+            }
         }
-
-        if (min >= 1.0)
-            Logger.getAnonymousLogger().log(Level.INFO, "Error in TubulaireN2 vectPerp; px.cross.py.norme!=1");
-
-
-        return vecteurs[j];
+        return vecteurs;
     }
 
-    @Override
-    public Point3D calculerPoint3D(double u, double v) {
-        Point3D[] vectPerp = vectPerp(u, v);
-        return soulCurve.getElem().calculerPoint3D(u).plus(
-                vectPerp[1].mult(diameterFunction.getElem().result(u) * Math.cos(2 * Math.PI * v))).plus(
-                vectPerp[2].mult(diameterFunction.getElem().result(u) * Math.sin(2 * Math.PI * v)));
-    }
-
-    /*old
-        @Override
-        public Point3D calculerPoint3D(double u, double v) {
-            Point3D[] vectPerp = vectPerp(u);
-            return soulCurve.getElem().calculerPoint3D(u).plus(
-                    vectPerp[1].mult(diameterFunction.getElem().result(u) * Math.cos(2 * Math.PI * v))).plus(
-                    vectPerp[2].mult(diameterFunction.getElem().result(u) * Math.sin(2 * Math.PI * v)));
-        }
-    */
-    @Override
-    public void declareProperties() {
-        super.declareProperties();
-        soulCurve.getElem().declareProperties();
-        diameterFunction.getElem().declareProperties();
-        getDeclaredDataStructure().put("soulCurve/Ame de la courbe", soulCurve);
-        getDeclaredDataStructure().put("diameterFunction/Fonction de positon sur la courbe - diamètre (var='x')", diameterFunction);
-
-    }
-
-    public StructureMatrix<ParametricCurve> getSoulCurve() {
-        return soulCurve;
-    }
-
-
-    public StructureMatrix<FctXY> getDiameterFunction() {
-        return diameterFunction;
-    }
-
-
-    public void setSoulCurve(ParametricCurve b) {
-        this.soulCurve.setElem(b);
-    }
-
-    public void setDiameter(double d) {
-        FctXY fctXY = new FctXY();
-        fctXY.setFormulaX("" + d);
-        this.diameterFunction.setElem(fctXY);
-    }
 }

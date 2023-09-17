@@ -19,7 +19,9 @@
 
 package one.empty3.library;
 
-import java.awt.*;
+import javaAnd.awt.*;
+
+import javaAnd.awt.Point;
 
 /*__
  * Created by manue on 06-11-19.
@@ -67,7 +69,7 @@ public class ArcBall2 {
     }
     public ArcBall2(Camera camera, Point3D point, double radius, ZBufferImpl zBuffer)
     {
-       currentCamera = camera;
+        currentCamera = camera;
         pointCenter = point;
         this.radius = radius;
         this.zBuffer = zBuffer;

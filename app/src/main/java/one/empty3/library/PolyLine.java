@@ -1,27 +1,59 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 package one.empty3.library;
 
 import one.empty3.library.core.nurbs.ParametricCurve;
 
-import java.awt.*;
 import java.util.List;
 
 /*__
@@ -32,19 +64,9 @@ public class PolyLine extends ParametricCurve {
 
     public PolyLine() {
         super();
-    }
 
-    public PolyLine(Point3D[] point3DS, Color random) {
-        for (Point3D point3D : point3DS) {
-            add(point3D);
-        }
-        texture(new ColorTexture(random));
-    }
-    public PolyLine(Point3D[] point3DS, ITexture random) {
-        for (Point3D point3D : point3DS) {
-            points.add(point3D);
-        }
-        texture(random);
+        //points.add(1, Point3D.random(1d));
+        //points.add(1, Point3D.random(1d));
     }
 
     public List<Point3D> getPoints() {
@@ -62,7 +84,7 @@ public class PolyLine extends ParametricCurve {
         int i = (int) t * size;
         if (i >= size)
             i = size - 1;
-        int j = (i + 1) >= size? i : i + 1;
+        int j = (i + 1) >= size ? i : i + 1;
         Point3D p1 = points.getData1d().get(i);
         Point3D p2 = points.getData1d().get(j);
         double d = t - 1.0 * i / size;
@@ -71,10 +93,16 @@ public class PolyLine extends ParametricCurve {
     }
 
     public void add(Point3D point3D) {
+        int newLength;
         if (points == null)
             points = new StructureMatrix<>(1, Point3D.class);
         else {
-            points.getData1d().add(point3D);
+            newLength = points.getData1d().size() + 1;
+            List<Point3D> tmp = points.getData1d();
+            points = new StructureMatrix<>();
+            for (int i = 0; i < tmp.size(); i++)
+                points.add(i, tmp.get(i));
+            points.add(1, point3D);
         }
     }
 

@@ -21,8 +21,6 @@ package one.empty3.library;
 
 import one.empty3.library.core.nurbs.ParametricCurve;
 
-import java.text.DecimalFormat;
-
 /*__*
  *
  * TODO Check all the constructors.
@@ -50,29 +48,29 @@ public class Circle extends ParametricCurve {
     }
 
 
-        public Circle(Point3D center, Point3D vAxis, double radius) {
-            this(new Axe(center.plus(vAxis.norme1()), center.moins(vAxis.norme1())),
-                    radius);
+    public Circle(Point3D center, Point3D vAxis, double radius) {
+        this(new Axe(center.plus(vAxis.norme1()), center.moins(vAxis.norme1())),
+                radius);
+    }
+    /*
+        private void calculerRepere2() {
+
         }
-/*
-    private void calculerRepere2() {
 
-    }
+        public Circle(Point3D center, Point3D[] vAxis, double radius) {
 
-    public Circle(Point3D center, Point3D[] vAxis, double radius) {
+            this.vAxis = vAxis[2];
+            vectY = vAxis[2];
+            vectX = vAxis[0];
+            vectZ = vAxis[1];
+            this.radius = radius;
+            calculerRepere3();
+        }
 
-        this.vAxis = vAxis[2];
-        vectY = vAxis[2];
-        vectX = vAxis[0];
-        vectZ = vAxis[1];
-        this.radius = radius;
-        calculerRepere3();
-    }
+        private void calculerRepere3() {
 
-    private void calculerRepere3() {
-
-    }
-*/
+        }
+    */
     public void calculerRepere1() {
         boolean success = false;
         int i = 0;
@@ -119,7 +117,7 @@ public class Circle extends ParametricCurve {
         return getCenter().plus(
                 (
                         getVectX().mult(
-                                Math.cos(2.0 * Math.PI * t))
+                                        Math.cos(2.0 * Math.PI * t))
                                 .plus(
                                         getVectY().mult(
                                                 Math.sin(2.0 * Math.PI * t)))
@@ -169,71 +167,84 @@ public class Circle extends ParametricCurve {
         this.center = center;
     }
 
+    @Override
+    public StructureMatrix<Point3D> getBoundRect2d() {
+        StructureMatrix<Point3D> boundRect2d1 = super.getBoundRect2d();
+//FLAGIT        RectF boundRect2d = new RectF();
+        center = axis.getElem().getCenter();
+        boundRect2d1.setElem(new Point3D((double) (float) (center.get(0) - radius.getElem()),
+                (double) (float) (center.get(1)-radius.getElem()), 0.));
+        boundRect2d1.setElem(new Point3D((double) (float) (center.get(0)+radius.getElem()),
+                (double) (float) (center.get(1)+radius.getElem()), 0.));
 
-        // Function to find the circle on
+        return boundRect2d1;
+    }
+
+    // Function to find the circle on
 // which the given three points lie
-        public Circle(int x1, int y1,
-                               int x2, int y2,
-                               int x3, int y3)
-        {
-            this();
+    public Circle(int x1, int y1,
+                  int x2, int y2,
+                  int x3, int y3)
+    {
+        this();
 
-            int x12 = x1 - x2;
-            int x13 = x1 - x3;
+        int x12 = x1 - x2;
+        int x13 = x1 - x3;
 
-            int y12 = y1 - y2;
-            int y13 = y1 - y3;
+        int y12 = y1 - y2;
+        int y13 = y1 - y3;
 
-            int y31 = y3 - y1;
-            int y21 = y2 - y1;
+        int y31 = y3 - y1;
+        int y21 = y2 - y1;
 
-            int x31 = x3 - x1;
-            int x21 = x2 - x1;
+        int x31 = x3 - x1;
+        int x21 = x2 - x1;
 
-            // x1^2 - x3^2
-            int sx13 = (int)(Math.pow(x1, 2) -
-                    Math.pow(x3, 2));
+        // x1^2 - x3^2
+        int sx13 = (int)(Math.pow(x1, 2) -
+                Math.pow(x3, 2));
 
-            // y1^2 - y3^2
-            int sy13 = (int)(Math.pow(y1, 2) -
-                    Math.pow(y3, 2));
+        // y1^2 - y3^2
+        int sy13 = (int)(Math.pow(y1, 2) -
+                Math.pow(y3, 2));
 
-            int sx21 = (int)(Math.pow(x2, 2) -
-                    Math.pow(x1, 2));
+        int sx21 = (int)(Math.pow(x2, 2) -
+                Math.pow(x1, 2));
 
-            int sy21 = (int)(Math.pow(y2, 2) -
-                    Math.pow(y1, 2));
+        int sy21 = (int)(Math.pow(y2, 2) -
+                Math.pow(y1, 2));
 
-            int f = ((sx13) * (x12)
-                    + (sy13) * (x12)
-                    + (sx21) * (x13)
-                    + (sy21) * (x13))
-                    / (2 * ((y31) * (x12) - (y21) * (x13)));
-            int g = ((sx13) * (y12)
-                    + (sy13) * (y12)
-                    + (sx21) * (y13)
-                    + (sy21) * (y13))
-                    / (2 * ((x31) * (y12) - (x21) * (y13)));
+        int f = ((sx13) * (x12)
+                + (sy13) * (x12)
+                + (sx21) * (x13)
+                + (sy21) * (x13))
+                / (2 * ((y31) * (x12) - (y21) * (x13)));
+        int g = ((sx13) * (y12)
+                + (sy13) * (y12)
+                + (sx21) * (y13)
+                + (sy21) * (y13))
+                / (2 * ((x31) * (y12) - (x21) * (y13)));
 
-            int c = -(int)Math.pow(x1, 2) - (int)Math.pow(y1, 2) -
-                    2 * g * x1 - 2 * f * y1;
+        int c = -(int)Math.pow(x1, 2) - (int)Math.pow(y1, 2) -
+                2 * g * x1 - 2 * f * y1;
 
-            // eqn of circle be x^2 + y^2 + 2*g*x + 2*f*y + c = 0
-            // where centre is (h = -g, k = -f) and radius r
-            // as r^2 = h^2 + k^2 - c
-            int h = -g;
-            int k = -f;
-            int sqr_of_r = h * h + k * k - c;
+        // eqn of circle be x^2 + y^2 + 2*g*x + 2*f*y + c = 0
+        // where centre is (h = -g, k = -f) and radius r
+        // as r^2 = h^2 + k^2 - c
+        int h = -g;
+        int k = -f;
+        int sqr_of_r = h * h + k * k - c;
 
-            // r is the radius
-            double r = Math.sqrt(sqr_of_r);
+        // r is the radius
+        double r = Math.sqrt(sqr_of_r);
 
-            Point3D cPoint3D = new Point3D((double) h, (double) k, 0.0);
-            StructureMatrix<Axe> axeSm = new StructureMatrix<>(1, Point3D.class);
-            Axe axe = new Axe(cPoint3D.moins(Point3D.Z.mult(-r)), cPoint3D.moins(Point3D.Z.mult(r)));
-            axeSm.setElem(axe);
-            setAxis(axeSm);
-            setRadius(r);
+        Point3D cPoint3D = new Point3D((double) h, (double) k, 0.0);
+        StructureMatrix<Axe> axeSm = new StructureMatrix<>(1, Point3D.class);
+        Axe axe = new Axe(cPoint3D.moins(Point3D.Z.mult(-r)), cPoint3D.moins(Point3D.Z.mult(r)));
+        axeSm.setElem(axe);
+        setAxis(axeSm);
+        setRadius(r);
 
-        }
+    }
+
 }

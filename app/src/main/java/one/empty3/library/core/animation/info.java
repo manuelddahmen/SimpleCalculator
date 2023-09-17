@@ -1,4 +1,4 @@
-package one.empty3.library.core.animation;/*Should be considered.
+/*Should be considered.
 
 Décrire l'âme, de chaque mouvement en détails, le repère mobile de déplacement.
 

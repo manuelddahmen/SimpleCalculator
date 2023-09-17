@@ -1,26 +1,64 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*
  * 2013 Manuel Dahmen
  */
 package one.empty3.library.core.script;
+
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import one.empty3.library.*;
 import one.empty3.library.Polygon;
@@ -32,8 +70,10 @@ import one.empty3.library.core.tribase.TRIEllipsoide;
 import one.empty3.library.core.tribase.TRISphere;
 import one.empty3.library.core.tribase.Tubulaire;
 
-import java.awt.*;
+
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -105,6 +145,7 @@ public class InterpreteFacade {
         return t;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     Representable intepreteColline() throws InterpreteException {
         InterpretesBase interpreteH = new InterpretesBase();
         ArrayList<Integer> pattern;
@@ -121,13 +162,15 @@ public class InterpreteFacade {
 
         switch (type) {
             case 1:
-                return (Representable) new CollineModele1(1000);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    return (Representable) new CollineModele1(1000);
+                }
             case 2:
-                return (Representable)new CollineModele2(1000);
+                return (Representable) new CollineModele2(1000);
             case 3:
-                return (Representable)new CollineModele3(1000);
+                return (Representable) new CollineModele3(1000);
             default:
-                return (Representable)new CollineModele1(1000);
+                return (Representable) new CollineModele1(1000);
         }
     }
 
@@ -249,7 +292,7 @@ public class InterpreteFacade {
             return "";
         }
         return java.util.ResourceBundle.getBundle(
-                "info.emptycanvas.one.empty3.library/scripts/InterpreteLangage")
+                        "info.emptycanvas.one.empty3.library/scripts/InterpreteLangage")
                 .getString(" ");
     }
 
@@ -296,12 +339,12 @@ public class InterpreteFacade {
         try {
             while (true) {
                 String id = interpreteIdentifier();
-                Logger.getAnonymousLogger().log(Level.INFO, id);
+                System.out.println(id);
                 if ("camera".equals(id == null ? "NULL" : id.toLowerCase())) {
                     interpreteBlank();
                     c = interpreteCamera();
                     cameras.add(1, c);
-                    Logger.getAnonymousLogger().log(Level.INFO, id);
+                    System.out.println(id);
                 } else {
                     break;
                 }
@@ -317,9 +360,10 @@ public class InterpreteFacade {
         return cameras;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Color interpreteColor() throws InterpreteException {
         InterpreteCouleur pc = new InterpreteCouleur();
-        Color c = Color.BLACK;
+        Color c = Color.valueOf(0, 0, 0);
         try {
             c = (Color) pc.interprete(text, pos);
             pos = pc.getPosition();
@@ -458,6 +502,7 @@ public class InterpreteFacade {
         return lumieres;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public LumierePointSimple interpreteLumierePoint() throws InterpreteException {
         InterpretesBase ib = new InterpretesBase();
         ArrayList<Integer> pattern = new ArrayList<Integer>();
@@ -472,7 +517,10 @@ public class InterpreteFacade {
         Point3D pl = interpretePoint3D();
         // Intensite au point (*)
         double intensite = 1.0;
-        Color c = interpreteColor();
+        Color c = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            c = interpreteColor();
+        }
 
         LumierePointSimple lps = new LumierePointSimple(c, pl, intensite);
 
@@ -594,27 +642,28 @@ public class InterpreteFacade {
         }
         return s;
     }
-/*
-    public PolyMap interpretePolyMapDef() throws InterpreteException {
-        InterpretePolyMapDef interpreteH;
-        interpreteH = new InterpretePolyMapDef();
-        interpreteH.setRepertoire(repertoire);
-        PolyMap pm = null;
-        try {
-            pm = (PolyMap) interpreteH.interprete(text, pos);
-            pos = interpreteH.getPosition();
-        } catch (InterpreteException ex) {
-            throw new InterpreteException(
-                    java.util.ResourceBundle
-                            .getBundle(
-                                    "info.emptycanvas.one.empty3.library/scripts/InterpretePolyMap")
-                            .getString(
-                                    "POLYMAP:  ERREUR D'ANALYSE SYNTAXIQUE "),
-                    ex);
+
+    /*
+        public PolyMap interpretePolyMapDef() throws InterpreteException {
+            InterpretePolyMapDef interpreteH;
+            interpreteH = new InterpretePolyMapDef();
+            interpreteH.setRepertoire(repertoire);
+            PolyMap pm = null;
+            try {
+                pm = (PolyMap) interpreteH.interprete(text, pos);
+                pos = interpreteH.getPosition();
+            } catch (InterpreteException ex) {
+                throw new InterpreteException(
+                        java.util.ResourceBundle
+                                .getBundle(
+                                        "info.emptycanvas.one.empty3.library/scripts/InterpretePolyMap")
+                                .getString(
+                                        "POLYMAP:  ERREUR D'ANALYSE SYNTAXIQUE "),
+                        ex);
+            }
+            return pm;
         }
-        return pm;
-    }
-*/
+    */
     public Barycentre interpretePosition() throws InterpreteException {
         InterpretePosition interpreteH = new InterpretePosition();
         interpreteH.setRepertoire(repertoire);
@@ -657,7 +706,7 @@ public class InterpreteFacade {
 
     }
 
-    public ITexture  interpreteTColor() {
+    public ITexture interpreteTColor() {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -808,7 +857,7 @@ public class InterpreteFacade {
             return "";
         }
         return java.util.ResourceBundle.getBundle(
-                "info.emptycanvas.one.empty3.library/scripts/InterpreteLangage")
+                        "info.emptycanvas.one.empty3.library/scripts/InterpreteLangage")
                 .getString(")");
     }
 

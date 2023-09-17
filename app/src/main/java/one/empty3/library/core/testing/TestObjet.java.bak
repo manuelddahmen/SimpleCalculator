@@ -50,18 +50,19 @@ import org.monte.media.avi.AVIWriter;
 import org.monte.media.math.Rational;
 import org.monte.media.mp3.MP3AudioInputStream;
 
-import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioFormat;
+import javaAnd.awt.image.imageio.ImageIO;import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
+
+import android.graphics.Bitmap;
+import one.empty3.feature.app.replace.java.awt.image.RenderedImage;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Properties;
@@ -252,7 +253,9 @@ public abstract class TestObjet implements Test, Runnable {
             aviOpen = true;
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean unterminable() {
@@ -334,7 +337,9 @@ public abstract class TestObjet implements Test, Runnable {
             out.close();
 
             zip.addFile(fichier.getName(), resultImageAsRawBytes);
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         o.println(fichier.getAbsolutePath());
 
     }
@@ -695,7 +700,9 @@ public abstract class TestObjet implements Test, Runnable {
 
             ECBufferedImage eci = new ECBufferedImage(bi);
             biic.setImage(eci);
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         str.setMessage("ERROR EXCEPTION");
     }
 
@@ -705,7 +712,7 @@ public abstract class TestObjet implements Test, Runnable {
     public void reportStop() {
     }
 
-    public void reportSuccess(File film) {
+    public void reportSucces(File film) {
         try {
             InputStream is = getClass().getResourceAsStream(
                     "/pouce-leve.jpg");

@@ -24,6 +24,7 @@ package one.empty3.library.core.tribase;
 
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.nurbs.ParametricSurface;
 
 public class Plan3D extends ParametricSurface {
@@ -52,7 +53,7 @@ public class Plan3D extends ParametricSurface {
         return p0.getElem().plus(vX.getElem().moins(p0.getElem()).mult(u)
                 .plus(vY.getElem().moins(p0.getElem()).mult(v)));
     }
-@Override
+    @Override
     public Point3D calculerNormale3D(double u, double v) {
         Point3D o,x,y;
         o = p0.getElem();

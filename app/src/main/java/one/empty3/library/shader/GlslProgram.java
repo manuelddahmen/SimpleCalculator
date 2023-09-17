@@ -1,20 +1,21 @@
 /*
- * Copyright (c) 2022-2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
  */
 
 package one.empty3.library.shader;
@@ -173,7 +174,7 @@ class WindowC extends JFrame implements GLEventListener {
  
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
-        Logger.getAnonymousLogger().log(Level.INFO, "reshape");
+        System.out.println("reshape");
         this.display(drawable);
         
     }
@@ -182,9 +183,11 @@ class WindowC extends JFrame implements GLEventListener {
         
         Vector<String> lines = new Vector<String>();
         
-        try (Stream<String> stream = Files.lines(Paths.get(filename))) {
+        try (Stream<String> stream = Files.getLines()(Paths.get(filename))) {
             stream.forEach(x -> lines.add(x  + "\n"));
-        
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         
         // CONVERT VECTOR TO ARRAY
         Object[] objArray = lines.toArray();

@@ -1,26 +1,64 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
  */
 
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
+ */
 package one.empty3.library.core.extra;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.*;
-import java.awt.*;
+
 import java.util.Random;
 
 /*__
@@ -33,10 +71,11 @@ public class CollineModele1 extends Representable implements TRIGenerable {
     private String id;
     private double deltaInterne = 100;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public CollineModele1(int numTRIS) {
 
         Point3D p0 = new Point3D(0d, 0d, 0d);
-        Color c0 = new Color(128, 0, 255);
+        Color c0 = Color.valueOf(128, 0, 255);
 
         for (int i = 0; i < numTRIS; i++) {
             Point3D[] p = new Point3D[3];
@@ -81,7 +120,7 @@ public class CollineModele1 extends Representable implements TRIGenerable {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public TextureCol texture() {
+    public TextureCol texture(Bitmap img) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*__
@@ -27,6 +60,7 @@
  */
 package one.empty3.library.core.nurbs;
 
+import one.empty3.library.ITexture;
 import one.empty3.library.Point3D;
 import one.empty3.library.Representable;
 import one.empty3.library.StructureMatrix;
@@ -35,26 +69,24 @@ import one.empty3.library.StructureMatrix;
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_
  */
 public class ParametricCurve extends Representable {
-    public final double INCR_TAN = 0.00001;
-    public final double INCR_NOR = 0.0000001;
+    private double INCR_TAN = 0.00001;
+    private double INCR_NOR = 0.0000001;
 
     private double incrTAN;
 
-    private static Globals globals;
+    private static ParametricCurve.Globals globals;
 
 
     static {
-        if(globals==null)
-
-        {
+        if (globals == null) {
             Globals globals1 = new Globals();
             ParametricCurve.setGlobals(globals1);
             globals1.setIncrU(0.0001);
         }
 
     }
-    public ParametricCurve()
-    {
+
+    public ParametricCurve() {
         super();
         startU.setElem(0.0);
         endU.setElem(1.0);
@@ -63,7 +95,7 @@ public class ParametricCurve extends Representable {
     }
 
     protected StructureMatrix<Double> startU = new StructureMatrix<>(0, Double.class);
-    protected StructureMatrix<Double>  endU= new StructureMatrix<>(0, Double.class);
+    protected StructureMatrix<Double> endU = new StructureMatrix<>(0, Double.class);
     protected StructureMatrix<Boolean> connected = new StructureMatrix<>(0, Boolean.class);
     private Parameters parameters = new Parameters(true);
     private StructureMatrix<Double> incrU = new StructureMatrix<>(0, Double.class);
@@ -80,22 +112,20 @@ public class ParametricCurve extends Representable {
         this.parameters = parameters;
     }
 
-    public Point3D calculerPoint3D(double t)
-    {
+    public Point3D calculerPoint3D(double t) {
         throw new UnsupportedOperationException("To implements. Subclasses");
     }
 
-    public Point3D calculerVitesse3D(double t)
-    {
-        return calculerPoint3D(t*(1+INCR_TAN)).moins(calculerPoint3D(t)).mult(INCR_TAN);
+    public Point3D calculerVitesse3D(double t) {
+        return calculerPoint3D(t * (1 + INCR_TAN)).moins(calculerPoint3D(t)).mult(INCR_TAN);
     }
-    public Point3D calculerTangente(double t)
-    {
-        return calculerPoint3D(t*(1+INCR_TAN)).moins(calculerPoint3D(t)).mult(INCR_TAN);
+
+    public Point3D calculerTangente(double t) {
+        return calculerPoint3D(t * (1 + INCR_TAN)).moins(calculerPoint3D(t)).mult(INCR_TAN);
     }
-    public Point3D tangente(Double t)
-    {
-        return calculerPoint3D(t*1.0001).moins(calculerPoint3D(t));
+
+    public Point3D tangente(Double t) {
+        return calculerPoint3D(t * 1.0001).moins(calculerPoint3D(t));
     }
 
     public Double endU() {
@@ -107,14 +137,14 @@ public class ParametricCurve extends Representable {
     }
 
     public StructureMatrix<Double> getIncrU() {
-        Double incr = 1.0;
+        Double incr = 0.1;
         if (parameters.isGlobal()) {
             incr = parameters.getIncrU();
         } else {
             incr = globals.getIncrU();
         }
         StructureMatrix<Double> doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
-        doubleStructureMatrix.setElem(incr <= incrU.getElem()? incrU.getElem() : incr);
+        doubleStructureMatrix.setElem(incr <= incrU.getElem() ? incrU.getElem() : incr);
         return doubleStructureMatrix;
     }
 
@@ -140,7 +170,11 @@ public class ParametricCurve extends Representable {
     }
 
     public Point3D calculerNormale(double u) {
-        return calculerPoint3D(u+INCR_TAN).moins(calculerPoint3D(u-INCR_TAN)).norme1();
+        return calculerPoint3D(u + INCR_TAN).moins(calculerPoint3D(u - INCR_TAN)).norme1();
+    }
+
+    public ITexture texture() {
+        return texture;
     }
 
     public static class Globals {
@@ -175,10 +209,12 @@ public class ParametricCurve extends Representable {
 
             return Parameters.this.incrU;
         }
+
         public Double getStartU() {
 
             return Parameters.this.startU;
         }
+
         public Double getEndU() {
 
             return Parameters.this.endU;
@@ -199,13 +235,13 @@ public class ParametricCurve extends Representable {
         public void setEndU(Double endU) {
             Parameters.this.endU = endU;
         }
+
         public void setStartU(Double endU) {
             Parameters.this.startU = endU;
         }
     }
 
-    public ParametricCurve morph(Double incrU)
-    {
+    public ParametricCurve morph(Double incrU) {
         // TODO
         return this;
     }
@@ -256,6 +292,13 @@ public class ParametricCurve extends Representable {
     public Point3D calculerCurveT(double tCurve, double t) {
         return calculerPoint3D(tCurve);
     }
+
+
+    public StructureMatrix<Point3D> getBoundRect2d() {
+        StructureMatrix<Point3D> boundRect2d = super.getBoundRect2d();
+        return boundRect2d;
+    }
+
 }
 
 

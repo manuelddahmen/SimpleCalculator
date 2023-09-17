@@ -19,10 +19,11 @@
 
 package one.empty3.library;
 
+import android.graphics.Bitmap;
+
+import javaAnd.awt.image.BufferedImage;
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.tribase.Plan3D;
-
-import java.awt.image.BufferedImage;
 
 /***
  * Created by manue on 17-03-19.
@@ -34,20 +35,20 @@ public abstract class HeightMapSurface extends ParametricSurface {
 
     public HeightMapSurface() {
         ImageContainer imageContainer = new ImageContainer();
-        imageContainer.getImage().setElem(new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_ARGB));
+        imageContainer.getImage().setElem(Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888));
         image.setElem(imageContainer);
 
         surface.setElem(new Plan3D());
     }
 
     public HeightMapSurface(ParametricSurface ps, BufferedImage image) {
-        this.image.setElem(new ImageContainer(image));
+        this.image.setElem(new ImageContainer(image.getBitmap()));
         this.surface.setElem(ps);
     }
 
     public Point3D height(double u, double v) {
 
-        BufferedImage elem = image.getElem().getImage().getElem();
+        Bitmap elem = image.getElem().getImage().getElem();
 
         int i = (int) (u * (image.getElem().getImage().getElem().getWidth() ));
         int j = (int) (v * (image.getElem().getImage().getElem().getHeight()));
@@ -59,7 +60,7 @@ public abstract class HeightMapSurface extends ParametricSurface {
 
         return surface.getElem().calculerPoint3D(u, v).plus(
                 surface.getElem().calculerTangenteU(u,v).prodVect(surface.getElem().calculerTangenteV(u,v)
-                ).norme1().mult(elem.getRGB(i,j)));
+                ).norme1().mult(elem.getPixel(i,j)));
     }
 
     @Override

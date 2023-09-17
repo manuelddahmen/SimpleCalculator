@@ -1,42 +1,83 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 package one.empty3.library.core.raytracer;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.ECBufferedImage;
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.Representable;
 import one.empty3.library.core.nurbs.ParametricSurface;
+import one.empty3.library.core.script.ImageIO2;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import javaAnd.awt.image.imageio.ImageIO;
 
 public class RtRaytracer {
     public static double maxDistance = 999999.9f;            // La distance parcourue par le rayon avant de toucher la node
 
 
     /* [ Coeur du raytracer. L'algo du raytracing se trouve dans cette fonction, dont le r?le est de calculer ] */
-/* [ la couleur finale du pixel courant, en lui passant le rayon primaire ?mis.                           ] */
+    /* [ la couleur finale du pixel courant, en lui passant le rayon primaire ?mis.                           ] */
     public static RtColor rayTrace(RtScene scene, RtRay ray, int depth) {
         RtColor finalColor = new RtColor(0.0f, 0.0f, 0.0f, 0.0f);    // La couleur finale (noire au debut ... couleur de fond)
         double tmpDistance = maxDistance + 1;                    // Une distance temporaire
@@ -123,7 +164,8 @@ public class RtRaytracer {
 
 
     /* [ Fonction de rendu. Parcoure tous les pixels de l'image, cr?e le rayon correpondant et lance le raytracing ] */
-/* [ avec ce rayon. Enregistre le rendu final dans un fichier image.                                           ] */
+    /* [ avec ce rayon. Enregistre le rendu final dans un fichier image.                                           ] */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static boolean Render(RtScene scene, int width, int height, String outputfilename) throws IOException {
         RtRay currentRay = new RtRay();            // Le rayon primaire ?mis courant (de l'oeil, ? travers un pixel, vers la sc?ne).
         Point3D vDir;                // Le vecteur directeur (unitaire) du rayon.
@@ -133,24 +175,23 @@ public class RtRaytracer {
         int tmpG;
         int tmpB;
         int tmpA = 0;
-        ECBufferedImage bi2 = new ECBufferedImage(width, height,
-                ECBufferedImage.TYPE_INT_RGB);
+        Bitmap bi2 = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
-        // On cree le fichier destination
+        // On crée le fichier destination
         mOutputFileRAW = new PrintWriter(new FileOutputStream(new File(outputfilename + ".ppm")));
         mOutputFileRAW.println("P3");
         mOutputFileRAW.println("# Image genereted with Empty3 http://gitlab/Graphics3D/Empty3");
         mOutputFileRAW.println("" + width);
         mOutputFileRAW.println("" + height);
         mOutputFileRAW.println("" + 256);
-        // On parcoure tous les pixels de l'image finale
+        // On parcourt tous les pixels de l'image finale
         for (int y = 0; y < height; y++)
             for (int x = 0; x < width; x++) {
-                // [---Creation du rayon ? emetrre---]
-                // L'origine du rayon est la position de la camera
+                // [---Creation du rayon ? émettre ---]
+                // L'origine du rayon est la position de la caméra
                 currentRay.mVStart = scene.getActiveCamera().getPosition();
 
-                // On calcule le veteur directeur gr?ce ? une m?thode de la classe RtCamera
+                // On calcule le vecteur directeur grâce à une méthode de la classe RtCamera
                 vDir = scene.getActiveCamera().calcDirVec(x, y, width, height);
                 Point3D vDirX1 = scene.getActiveCamera().calcDirVec(x + 1, y, width, height);
                 Point3D vDirX_1 = scene.getActiveCamera().calcDirVec(x - 1, y, width, height);
@@ -182,7 +223,7 @@ public class RtRaytracer {
 
 
                 if (zMin < currentRay.distance) {
-                    tmpColor = new RtColor(new Color(choisi.texture().getColorAt(0.5, 0.5)));
+                    tmpColor = new RtColor(Color.valueOf(choisi.getTexture().getColorAt(0.5, 0.5)));
                 }
 
                 // Affichage de notre "barre de progression" ;)
@@ -200,12 +241,12 @@ public class RtRaytracer {
 
                 // On decompose la couleur dans les trois couleurs de base (Rouge Vert Bleu).
                 //RtColor fc = RtColor.normalizeColor(tmpColor);
-                tmpR = (int) (tmpColor.getRed() * 256);
-                tmpG = (int) (tmpColor.getGreen() * 256);
-                tmpB = (int) (tmpColor.getBlue() * 256);
+                tmpR = (int) (tmpColor.red() * 256);
+                tmpG = (int) (tmpColor.green() * 256);
+                tmpB = (int) (tmpColor.blue() * 256);
                 tmpA = (int) (tmpColor.getAlpha() * 256);
                 int elementCouleur = 0xFF000000 | ((tmpA << 24) | (tmpR << 16) | (tmpG << 8) | (tmpB << 0));
-                bi2.setRGB(x, y, elementCouleur);
+                bi2.setPixel(x, y, elementCouleur);
 
                 // Et on ecrit finalement la couleur de ce pixel dans le fichier
                 mOutputFileRAW.println(tmpR + " " + " " + tmpG + " " + tmpB + "\n");

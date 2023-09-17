@@ -1,34 +1,51 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
  */
 
 package one.empty3.library;
 
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*__
  * Created by manue on 03-11-19.
  */
 public class ArcBall {
     Representable representable;
+
     public int glhProjectf(float objx, float objy, float objz, float[] modelview, float[] projection, int[] viewport, Point3D a) {
         // Transformation vectors
         float fTempo[] = new float[8];
@@ -218,7 +235,7 @@ public class ArcBall {
         r3[3] = MAT0(m, 3, 3);
         r3[7] = 1.0f;
         r3[4] = r3[5] = r3[6] = 0.0f;
-   /* choose pivot - or die */
+        /* choose pivot - or die */
         if (Math.abs(r3[0]) > Math.abs(r2[0]))
             SWAP_ROWS_FLOAT(r3, r2);
         if (Math.abs(r2[0]) > Math.abs(r1[0]))
@@ -227,7 +244,7 @@ public class ArcBall {
             SWAP_ROWS_FLOAT(r1, r0);
         if (0.0 == r0[0])
             return 0;
-   /* eliminate first variable */
+        /* eliminate first variable */
         m1 = r1[0] / r0[0];
         m2 = r2[0] / r0[0];
         m3 = r3[0] / r0[0];
@@ -267,14 +284,14 @@ public class ArcBall {
             r2[7] -= m2 * s;
             r3[7] -= m3 * s;
         }
-   /* choose pivot - or die */
+        /* choose pivot - or die */
         if (Math.abs(r3[1]) > Math.abs(r2[1]))
             SWAP_ROWS_FLOAT(r3, r2);
         if (Math.abs(r2[1]) > Math.abs(r1[1]))
             SWAP_ROWS_FLOAT(r2, r1);
         if (0.0 == r1[1])
             return 0;
-   /* eliminate second variable */
+        /* eliminate second variable */
         m2 = r2[1] / r1[1];
         m3 = r3[1] / r1[1];
         r2[2] -= m2 * r1[2];
@@ -301,27 +318,27 @@ public class ArcBall {
             r2[7] -= m2 * s;
             r3[7] -= m3 * s;
         }
-   /* choose pivot - or die */
+        /* choose pivot - or die */
         if (Math.abs(r3[2]) > Math.abs(r2[2]))
             SWAP_ROWS_FLOAT(r3, r2);
         if (0.0 == r2[2])
             return 0;
-   /* eliminate third variable */
+        /* eliminate third variable */
         m3 = r3[2] / r2[2];
         r3[3] -= m3 * r2[3];
         r3[4] -= m3 * r2[4];
         r3[5] -= m3 * r2[5];
         r3[6] -= m3 * r2[6];
         r3[7] -= m3 * r2[7];
-   /* last check */
+        /* last check */
         if (0.0 == r3[3])
             return 0;
-        s = 1.0f / r3[3];		/* now back substitute row 3 */
+        s = 1.0f / r3[3];        /* now back substitute row 3 */
         r3[4] *= s;
         r3[5] *= s;
         r3[6] *= s;
         r3[7] *= s;
-        m2 = r2[3];			/* now back substitute row 2 */
+        m2 = r2[3];            /* now back substitute row 2 */
         s = 1.0f / r2[2];
         r2[4] = s * (r2[4] - r3[4] * m2);
         r2[5] = s * (r2[5] - r3[5] * m2);
@@ -337,7 +354,7 @@ public class ArcBall {
         r0[5] -= r3[5] * m0;
         r0[6] -= r3[6] * m0;
         r0[7] -= r3[7] * m0;
-        m1 = r1[2];			/* now back substitute row 1 */
+        m1 = r1[2];            /* now back substitute row 1 */
         s = 1.0f / r1[1];
         r1[4] = s * (r1[4] - r2[4] * m1);
         r1[5] = s * (r1[5] - r2[5] * m1);
@@ -348,7 +365,7 @@ public class ArcBall {
         r0[5] -= r2[5] * m0;
         r0[6] -= r2[6] * m0;
         r0[7] -= r2[7] * m0;
-        m0 = r0[1];			/* now back substitute row 0 */
+        m0 = r0[1];            /* now back substitute row 0 */
         s = 1.0f / r0[0];
         r0[4] = s * (r0[4] - r1[4] * m0);
         r0[5] = s * (r0[5] - r1[5] * m0);
@@ -556,10 +573,10 @@ public class ArcBall {
     // reset the arcball
     public void arcball_init(Representable representable) {
         this.representable = representable;
-        if(representable!=null) {
+        if (representable != null) {
             List<Double> d = representable.getRotation().getElem().getRot().getElem().getD().data1d;
             int size = d.size();
-            Logger.getAnonymousLogger().log(Level.INFO, "List size rot = " + size);
+            System.out.println("List size rot = " + size);
             Double[] a = new Double[12];
             int[] i = new int[]{0};
             d.forEach(new Consumer<Double>() {
@@ -577,9 +594,10 @@ public class ArcBall {
             quatcopy(ab_quat, a);
         }
     }
+
     // reset the arcball
     public void arcball_reset(Representable representable) {
-        if(representable!=null) {
+        if (representable != null) {
             arcball_init(representable);
             quatidentity(ab_quat);
             quatidentity(ab_last);
@@ -588,7 +606,7 @@ public class ArcBall {
 
     // begin arcball rotation
     public void arcball_start(int mx, int my) {
-        if(representable!=null) {
+        if (representable != null) {
 // saves a copy of the current rotation for comparison
             quatcopy(ab_last, ab_quat);
             if (ab_planar) ab_start = planar_coords(mx, my);

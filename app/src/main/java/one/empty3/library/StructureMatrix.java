@@ -20,8 +20,12 @@
 package one.empty3.library;
 
 
-import javaAnd.awt.Point;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +34,7 @@ import java.util.function.Consumer;
 /*__
  * Created by manue on 07-09-19.
  */
-public class StructureMatrix<T> {
+public class StructureMatrix<T> implements Serializable, Serialisable {
     public static final int INSERT_ROW = 0;
     public static final int INSERT_COL = 1;
     private int dim;
@@ -64,13 +68,14 @@ public class StructureMatrix<T> {
         this.classType = classType;
     }
 
-    public void setElem(T value) {
+    public void setElem(@NotNull T value) {
         dim = 0;
         if(value instanceof Point3D) {
 
         }
         this.data0d = value;
-        this.classType = value.getClass();
+        if(value!=null)
+            this.classType = value.getClass();
         listenersPropertyChanged(null, value, 0, 0, 0);
     }
 
@@ -452,4 +457,77 @@ public class StructureMatrix<T> {
 
     }
 
+    @Override
+    public Serialisable decode(DataInputStream in) {
+        StructureMatrix<T> structureMatrix = new StructureMatrix<>();
+
+        try {
+            structureMatrix.setDim(in.readInt());
+
+
+            switch (getDim()) {
+
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return structureMatrix;
+    }
+
+    @Override
+    public int encode(DataOutputStream out) {
+
+        try {
+            out.write(getDim());
+            switch (getDim()) {
+                case 0: out.write(((Serialisable)data0d).type());
+                break;
+                case 1:
+                    getData1d().forEach(t -> {
+                        try {
+                            out.write(((Serialisable)t).type());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                    break;
+                case 2:
+                    getData2d().forEach(new Consumer<List<T>>() {
+                        @Override
+                        public void accept(List<T> ts) {
+                            ts.forEach(new Consumer<T>() {
+                                @Override
+                                public void accept(T t) {
+                                    try {
+                                        out.write(((Serialisable)t).type());
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+
+                                }
+                            });
+                        }
+                    });
+
+                    break;
+
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+
+    @Override
+    public int type() {
+        return 2;
+    }
 }

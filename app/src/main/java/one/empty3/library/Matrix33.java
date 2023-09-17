@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*
@@ -25,8 +58,6 @@
 package one.empty3.library;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*__
  * @author MANUEL DAHMEN
@@ -53,8 +84,6 @@ public class Matrix33 extends Representable {
     }
 
     private StructureMatrix<Double> d = new StructureMatrix<>(1, Double.class);
-    private int dim1;
-    private int dim2;
 
     public Matrix33(Matrix33 copy) {
         this();
@@ -64,14 +93,12 @@ public class Matrix33 extends Representable {
     public Matrix33() {
         d = new StructureMatrix<>(1, Double.class);
         d.setAll(new Double[]{1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0});
-        dim1 = dim2 = (int) Math.sqrt(d.getData1d().size());
 
     }
 
     public Matrix33(Double[] d) {
-        dim1 = dim2 = (int) Math.sqrt(d.length);
         if (d.length != 9) {
-            Logger.getAnonymousLogger().log(Level.INFO, "Erreur dans Matrix33 . 9 éléments requis");
+            System.out.println("Erreur dans Matrix33 . 9 éléments requis");
             throw new IndexOutOfBoundsException("Matrix33 9 " + d.length);
         }
         this.d.setAll(d);
@@ -79,10 +106,9 @@ public class Matrix33 extends Representable {
 
     public Matrix33(double[] d) {
         if (d.length != 9) {
-            Logger.getAnonymousLogger().log(Level.INFO, "Erreur dans Matrix33 . 9 éléments requis");
+            System.out.println("Erreur dans Matrix33 . 9 éléments requis");
             throw new IndexOutOfBoundsException("Matrix33 9 " + d.length);
         }
-        dim1 = dim2 = (int) Math.sqrt(d.length);
         Double[] D = new Double[9];
         for (int i = 0; i < 9; i++) {
             D[i] = d[i];
@@ -98,13 +124,6 @@ public class Matrix33 extends Representable {
 
                 d.setElem(p[i].get(j), i * 3 + j);
             }
-        }
-        dim1 = dim2 = (int) Math.sqrt(p.length);
-    }
-
-    public Matrix33(int columns, int lines) {
-        for(int i=0; i<columns*lines; i++) {
-            d.setElem(0.0, i);
         }
     }
 
@@ -328,53 +347,5 @@ public class Matrix33 extends Representable {
             rowVectors[l] = p;
         }
         return rowVectors;
-    }
-
-    public double determinant() {
-        double det = 0.0;
-        for(int i=0; i<getDim1(); i++)
-            for(int j=0; j<getDim2(); j++) {
-                det += cofactor(i, j).determinant()*(d.getElem(j*getDim1()+j));
-            }
-        return determinant();
-    }
-
-    private Matrix33 subMatrice(int i, int j) {
-        return null;
-    }
-
-    private Matrix33 cofactor(int i, int j) {
-        if(getDim1()==2&&getDim2()==2)
-            return new Matrix33( new double[] {
-                    get((i-1)%3,((j-1)%3)),
-                    get((i-1)%3,((j+1)%3)),
-                    get((i+1)%3,((j+1)%3)),
-                    get((i-1)%3,((j+1)%3)) });
-        else if(dim1==1&&dim2==1){
-            return new Matrix33(new double[] {get(0, 0)});
-        }
-        Matrix33 matrix33 = new Matrix33(dim1 - 1, dim2 - 1);
-        int row=0, column=0;
-        for(int r=0; r<dim1; r++) {
-            for(int c=0; c<dim2; c++) {
-                if(r!=i && c!=j) {
-                    matrix33.set(column, row, d.getElem(dim1 - 1) * row + column);
-                } else {
-
-                }
-                column++;
-            }
-            column=0;
-            row++;
-        }
-        return matrix33;
-    }
-
-    private int getDim1() {
-        return dim1;
-    }
-
-    private int getDim2() {
-        return dim2;
     }
 }

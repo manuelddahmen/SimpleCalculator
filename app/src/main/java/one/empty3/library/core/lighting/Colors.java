@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*
@@ -24,12 +57,17 @@
  */
 package one.empty3.library.core.lighting;
 
-import java.awt.*;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.Random;
 
 /*__
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_
  */
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class Colors {
     /*
     public class ColorDist implements Comparable {
@@ -45,11 +83,11 @@ public class Colors {
         }
     }
     */
-    public static Color TRANSPARENT = new Color(1f, 0f, 0f, .5f);
+    public static Color TRANSPARENT = Color.valueOf(1f, 0f, 0f, .5f);
     private static final Random random = new Random();
 
     public static Color random() {
-        return new Color(
+        return Color.valueOf(
                 (float) random.nextDouble(),
                 (float) random.nextDouble(),
                 (float) random.nextDouble()
@@ -67,6 +105,7 @@ public class Colors {
      * @param norm summary totally normal verse
      * @return moyenne ponderee in bloom
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static Color mean(Color[] c, double[] d, double norm) {
         int compNo = 4;
         if (c == null || d == null || c.length != d.length)
@@ -79,7 +118,7 @@ public class Colors {
         for (int i = 0; i < c.length; i++) {
             float proximityTerm = ((float) d[i]);
             sum += proximityTerm;
-            c[i].getRGBComponents(f);
+            f = c[i].getComponents();
             for (int j = 0; j < compNo; j++)
                 r[j] += (float) (f[j] * proximityTerm * norm);
         }
@@ -111,7 +150,7 @@ public class Colors {
             float proxymityTerm = (float) Math.exp(-((float) d[i]) / (1f + (float) d[i]));
 
             sum += proxymityTerm;
-            c[i].getRGBComponents(f);
+            f = c[i].getComponents(f);
             for (int j = 0; j < compNo; j++)
                 r[j] += (float) (f[j] * proxymityTerm * norm);
         }
@@ -126,6 +165,7 @@ public class Colors {
      * @param n number of effective computed values from array index 0
      * @return interpoled color.
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static Color proxymity(ColorDist[] cd, double norm, int n) {
         int compNo = 4;
         if (cd == null)
@@ -145,7 +185,7 @@ public class Colors {
             float proxymityTerm = (float) Math.exp(-(float) (1f * cd[i].dist / cd[cd.length - 1].dist));
 
             sum += proxymityTerm;
-            cd[i].color.getRGBComponents(f);
+            f = cd[i].color.getComponents();
             for (int j = 0; j < compNo; j++)
                 r[j] += (float) (f[j] * proxymityTerm * norm / n);
         }
@@ -154,7 +194,7 @@ public class Colors {
             if (Float.isNaN(r[i]) || Float.isInfinite(r[i]))
                 r[i] = 1f;
         }
-        return new Color(r[0], r[1], r[2]);
+        return Color.valueOf(r[0], r[1], r[2]);
     }
 
 
@@ -182,7 +222,7 @@ public class Colors {
 
             // besoin de distMin pour faire partiviper les autres?
             float proximityTerm = (float) (cd[i].dist);
-            cd[i].color.getRGBComponents(f);
+            f = cd[i].color.getComponents();
             for (int j = 0; j < compNo; j++)
                 r[j] += (float) (f[j] * proximityTerm * norm);
         }
@@ -195,7 +235,7 @@ public class Colors {
             if (Float.isNaN(r[i]) || Float.isInfinite(r[i]))
                 r[i] = 1f;
         }
-        return new Color(r[0], r[1], r[2]);
+        return Color.valueOf(r[0], r[1], r[2]);
     }
 
 }

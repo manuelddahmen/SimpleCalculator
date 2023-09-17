@@ -1,28 +1,58 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 package one.empty3.library.stl_loader;
 
-import one.empty3.library.Point3D;
-import one.empty3.library.RepresentableConteneur;
-import one.empty3.library.Scene;
-import one.empty3.library.TRI;
+import one.empty3.library.*;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -30,9 +60,9 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 // New from JDK 1.4 for endian related problems
 
@@ -113,12 +143,12 @@ public class StlFile {
     public void setBasePath(String pathName) {
         basePath = pathName;
         if (basePath == null || "".equals(basePath)) {
-            basePath = "." + File.separator;
+            basePath = "." + java.io.File.separator;
         }
-        basePath = basePath.replace('/', File.separatorChar);
-        basePath = basePath.replace('\\', File.separatorChar);
-        if (!basePath.endsWith(File.separator)) {
-            basePath = basePath + File.separator;
+        basePath = basePath.replace('/', java.io.File.separatorChar);
+        basePath = basePath.replace('\\', java.io.File.separatorChar);
+        if (!basePath.endsWith(java.io.File.separator)) {
+            basePath = basePath + java.io.File.separator;
         }
     } // End of setBasePath
 
@@ -304,7 +334,7 @@ public class StlFile {
         Point3D outList[] = new Point3D[inList.size()];
 
         if (DEBUG == 1) {
-            Logger.getAnonymousLogger().log(Level.INFO, "Number of facets of the object=" + inList.size());
+            System.out.println("Number of facets of the object=" + inList.size());
         }
 
         // To-do
@@ -340,19 +370,19 @@ public class StlFile {
         int Number_faces; // First info (after the header) on the file
 
         if (DEBUG == 1) {
-            Logger.getAnonymousLogger().log(Level.INFO, "Machine's endian: " + ByteOrder.nativeOrder());
+            System.out.println("Machine's endian: " + ByteOrder.nativeOrder());
         }
 
         // Get file's name
         if (fromUrl) {
             // FileInputStream can only read local files!?
-            Logger.getAnonymousLogger().log(Level.INFO, "This version doesn't support reading binary files from internet");
+            System.out.println("This version doesn't support reading binary files from internet");
         } else { // It's a local file
             data = new FileInputStream(file);
 
             // First 80 bytes aren't important
             if (80 != data.read(Info)) { // File is incorrect
-                //Logger.getAnonymousLogger().log(Level.INFO, "Format Error: 80 bytes expected");
+                //System.out.println("Format Error: 80 bytes expected");
                 throw new IncorrectFormatException();
             } else { // We must first read the number of faces -> 4 bytes int
                 // It depends on the endian so..
@@ -370,7 +400,7 @@ public class StlFile {
                 dataBuffer.order(ByteOrder.nativeOrder());
 
                 if (DEBUG == 1) {
-                    Logger.getAnonymousLogger().log(Level.INFO, "Number of faces= " + Number_faces);
+                    System.out.println("Number of faces= " + Number_faces);
                 }
 
                 // We can create that array directly as we know how big it's going to be
@@ -390,7 +420,7 @@ public class StlFile {
                         }
                     } catch (IOException e) {
                         // Quitar
-                        Logger.getAnonymousLogger().log(Level.INFO, "Format Error: iteration number " + i);
+                        System.out.println("Format Error: iteration number " + i);
                         throw new IncorrectFormatException();
                     }
                 }//End for
@@ -493,7 +523,7 @@ public class StlFile {
         Point3D vertex = new Point3D();
 
         if (DEBUG == 1) {
-            Logger.getAnonymousLogger().log(Level.INFO, "Reading face number " + index);
+            System.out.println("Reading face number " + index);
         }
 
         // Read the Normal
@@ -503,7 +533,7 @@ public class StlFile {
         normArray[index].setZ(in.getDouble());
 
         if (DEBUG == 1) {
-            Logger.getAnonymousLogger().log(Level.INFO, "Normal: X=" + normArray[index].getX() + " Y=" + normArray[index].getY() + " Z=" + normArray[index].getZ());
+            System.out.println("Normal: X=" + normArray[index].getX() + " Y=" + normArray[index].getY() + " Z=" + normArray[index].getZ());
         }
 
         // Read vertex1
@@ -513,7 +543,7 @@ public class StlFile {
         coordArray[index * 3].setZ(in.getDouble());
 
         if (DEBUG == 1) {
-            Logger.getAnonymousLogger().log(Level.INFO, "Vertex 1: X=" + coordArray[index * 3].getX() + " Y=" + coordArray[index * 3].getY() + " Z=" + coordArray[index * 3].getZ());
+            System.out.println("Vertex 1: X=" + coordArray[index * 3].getX() + " Y=" + coordArray[index * 3].getY() + " Z=" + coordArray[index * 3].getZ());
         }
 
         // Read vertex2
@@ -523,7 +553,7 @@ public class StlFile {
         coordArray[index * 3 + 1].setZ(in.getDouble());
 
         if (DEBUG == 1) {
-            Logger.getAnonymousLogger().log(Level.INFO, "Vertex 2: X=" + coordArray[index * 3 + 1].getX() + " Y=" + coordArray[index * 3 + 1].getY() + " Z=" + coordArray[index * 3 + 1].getZ());
+            System.out.println("Vertex 2: X=" + coordArray[index * 3 + 1].getX() + " Y=" + coordArray[index * 3 + 1].getY() + " Z=" + coordArray[index * 3 + 1].getZ());
         }
 
         // Read vertex3
@@ -533,7 +563,7 @@ public class StlFile {
         coordArray[index * 3 + 2].setZ(in.getDouble());
 
         if (DEBUG == 1) {
-            Logger.getAnonymousLogger().log(Level.INFO, "Vertex 3: X=" + coordArray[index * 3 + 2].getX() + " Y=" + coordArray[index * 3 + 2].getY() + " Z=" + coordArray[index * 3 + 2].getZ());
+            System.out.println("Vertex 3: X=" + coordArray[index * 3 + 2].getX() + " Y=" + coordArray[index * 3 + 2].getY() + " Z=" + coordArray[index * 3 + 2].getZ());
         }
 
     }// End of readFacetB
@@ -586,7 +616,7 @@ public class StlFile {
                 System.err.println("Format Error:expecting 'endsolid', line " + parser.lineno());
             } else {
                 if (DEBUG == 1) {
-                    Logger.getAnonymousLogger().log(Level.INFO, "File readed");
+                    System.out.println("File readed");
                 }
             }
         }//End of Ascii reading
@@ -636,7 +666,7 @@ public class StlFile {
                 v.setX(parser.nval);
 
                 if (DEBUG == 1) {
-                    Logger.getAnonymousLogger().log(Level.INFO, "Normal:");
+                    System.out.println("Normal:");
                     System.out.print("X=" + v.getX() + " ");
                 }
 
@@ -649,7 +679,7 @@ public class StlFile {
                     if (parser.getNumber()) {
                         v.setZ(parser.nval);
                         if (DEBUG == 1) {
-                            Logger.getAnonymousLogger().log(Level.INFO, "Z=" + v.getZ());
+                            System.out.println("Z=" + v.getZ());
                         }
 
                         // We add that vector to the Normal's array
@@ -676,7 +706,7 @@ public class StlFile {
      */
     private void readSolid(StlFileParser parser) {
         if (!parser.sval.equals("solid")) {
-            Logger.getAnonymousLogger().log(Level.INFO, "Expecting solid on line " + parser.lineno());
+            System.out.println("Expecting solid on line " + parser.lineno());
             // If the first word is not "solid" then we consider the file is binary
             // Can give us problems if the comment of the binary file begins by "solid"
             this.setAscii(false);
@@ -693,7 +723,7 @@ public class StlFile {
             } else { // Store the object Name
                 this.setObjectName(parser.sval);
                 if (DEBUG == 1) {
-                    Logger.getAnonymousLogger().log(Level.INFO, "Object Name:" + this.getObjectName().toString());
+                    System.out.println("Object Name:" + this.getObjectName().toString());
                 }
                 this.readEOL(parser);
             }
@@ -715,7 +745,7 @@ public class StlFile {
                 p.setX(parser.nval);
 
                 if (DEBUG == 1) {
-                    Logger.getAnonymousLogger().log(Level.INFO, "Vertex:");
+                    System.out.println("Vertex:");
                     System.out.print("X=" + p.getX() + " ");
                 }
 
@@ -728,7 +758,7 @@ public class StlFile {
                     if (parser.getNumber()) {
                         p.setZ(parser.nval);
                         if (DEBUG == 1) {
-                            Logger.getAnonymousLogger().log(Level.INFO, "Z=" + p.getZ());
+                            System.out.println("Z=" + p.getZ());
                         }
 
                         // We add that vertex to the array of vertex
@@ -753,21 +783,21 @@ public class StlFile {
     private void setBasePathFromFilename(String fileName) {
         // Get ready to parse the file name
         StringTokenizer stok
-                = new StringTokenizer(fileName, File.separator);
+                = new StringTokenizer(fileName, java.io.File.separator);
 
         //  Get memory in which to put the path
         StringBuilder sb = new StringBuilder(MAX_PATH_LENGTH);
 
         // Check for initial slash
-        if (fileName != null && fileName.startsWith(File.separator)) {
-            sb.append(File.separator);
+        if (fileName != null && fileName.startsWith(java.io.File.separator)) {
+            sb.append(java.io.File.separator);
         }
 
         // Copy everything into path except the file name
         for (int i = stok.countTokens() - 1; i > 0; i--) {
             String a = stok.nextToken();
             sb.append(a);
-            sb.append(File.separator);
+            sb.append(java.io.File.separator);
         }
         setBasePath(sb.toString());
     } // End of setBasePathFromFilename

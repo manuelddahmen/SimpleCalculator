@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*__
@@ -27,14 +60,19 @@
  */
 package one.empty3.library;
 
-import java.awt.*;
+
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 /*__
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_
  */
+@RequiresApi(api = Build.VERSION_CODES.O)
 public final class LumierePonctuellePeriodique extends Lumiere {
 
-    private Color couleurLumiere = Color.RED;
+    private Color couleurLumiere = Color.valueOf(Color.RED);
     private Point3D position;
     private double k = 1;
     private double r0 = 11;
@@ -48,9 +86,9 @@ public final class LumierePonctuellePeriodique extends Lumiere {
     public int getCouleur(int base, Point3D p, Point3D n) {
         double x = (n.norme1().prodScalaire(position.moins(p).norme1()) + 1) / 2;
         double r = x;
-        Color couleurObjet = new Color(base);
-        return new Color((float) ((couleurObjet.getRed() / 256.0) * r + (couleurLumiere.getRed() / 256.0) * (1 - r)), (float) ((couleurObjet.getGreen() / 256.0) * r + (couleurLumiere.getGreen() / 256.0) * (1 - r)), (float) ((couleurObjet.getBlue()
-                / 256.0) * r + (couleurLumiere.getBlue() / 256.0) * (1 - r))).getRGB();
+        Color couleurObjet = Color.valueOf(base);
+        return Color.valueOf((float) ((couleurObjet.red() / 256.0) * r + (couleurLumiere.red() / 256.0) * (1 - r)), (float) ((couleurObjet.green() / 256.0) * r + (couleurLumiere.green() / 256.0) * (1 - r)), (float) ((couleurObjet.blue()
+                / 256.0) * r + (couleurLumiere.blue() / 256.0) * (1 - r))).toArgb();
     }
 
     public void r0(int r0) {

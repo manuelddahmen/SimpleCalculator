@@ -1,32 +1,28 @@
 /*
- * Copyright (c) 2022-2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
  */
 
 package one.empty3.library.lang;
 
-import java.io.File;
 import java.util.*;
 
 public class ParseCode {
-    int i = 0;
-    String brut;
-    String uncommented = "";
-    int start, end;
     List<Token> tokens = new ArrayList();
     List<Node> nodes = new ArrayList();
     String special = "!%*&()+\\|/[]{}<>=.:,;?'\"";
@@ -43,15 +39,16 @@ public class ParseCode {
         //removeComments();
         // separer en tokens typés
     }
+
     /* public boolean addToken() {
         Token t = new Token();
         return true;
     }
     */
-
-    public void setBrut(String brut) {
-        this.brut = brut;
-    }
+    int i = 0;
+    String brut;
+    String uncomm;
+    int start, end;
 
     public void removeComments() {
         StringBuilder sb = new StringBuilder();
@@ -140,21 +137,16 @@ public class ParseCode {
 
 
                 // String forbidden = "\"\'\n\r/";
-                uncommented = brut.substring
+                uncomm = brut.substring
                         (start, end);
-                boolean passed = false;
-                try {
-                    passed = parseSpace() ||
-                            parseSpecialChar() ||
-                            parseKeyword() ||
-                            parseName() ||
-                            parseLiteral();
+                boolean passed = parseSpace() ||
+                        parseSpecialChar() ||
+                        parseKeyword() ||
+                        parseName() ||
+                        parseLiteral();
 
-                }catch (Exception ex) {
-                    ex.printStackTrace();
-                }
 
-                sb.append(brut.charAt(i));
+                //sb.append(brut.charAt(i));
 
             }
 
@@ -162,22 +154,22 @@ public class ParseCode {
             i++;
         }
 
-        uncommented = sb.toString();
+
     }
 
     public boolean parseSpace() {
         int pos = i;
         boolean b = false;
-        while (!b && i < uncommented.length()) {
-            char a = uncommented.charAt(pos);
+        do {
+            char a = uncomm.charAt(pos);
             if (a == ' ' || a == '\n' || a == '\t' || a == '\r') {
                 pos++;
                 b = true;
             }
-        }
+        } while (!b && i < uncomm.length());
         if (b) {
             tokens.add(new Token("space",
-                    uncommented.substring(i, pos), Token.TokenTypeTxt.Space));
+                    uncomm.substring(i, pos)));
             pos = i;
             return true;
         }
@@ -186,8 +178,8 @@ public class ParseCode {
 
     public boolean parseSpecialChar() {
         boolean b = false;
-        while (i< uncommented.length() &&isSpecialChar(uncommented, i)) {
-            char special = uncommented.charAt(i);
+        while (isSpecialChar(uncomm, i)) {
+            char special = uncomm.charAt(i);
             i++;
             b = true;
         }
@@ -197,40 +189,40 @@ public class ParseCode {
     }
 
     public boolean parseKeyword() {
-        char a = uncommented.charAt(i);
+        char a = uncomm.charAt(i);
         int j = 0;
         while (Character.isLetter(a)) {
             j++;
-            a = uncommented.charAt(i + j);
+            a = uncomm.charAt(i + j);
         }
-        if (isSpecialChar(uncommented, i + j) ||
-                isWhitespace(uncommented, i + j)) {
+        if (isSpecialChar(uncomm, i + j) ||
+                isWhitespace(uncomm, i + j)) {
             List<String> list = Arrays.asList(keywords);
 
-            String k = uncommented.substring(i, i + j);
+            String k = uncomm.substring(i, i + j);
             if (k.length() > 0 && list.contains(k))
                 tokens.add(new Token("keyword",
-                        k, Token.TokenTypeTxt.Keyword));
+                        k));
             return true;
         }
         return false;
     }
 
     public boolean parseName() {
-        char a = uncommented.charAt(i);
+        char a = uncomm.charAt(i);
         int j = 0;
         while (Character.isLetter(a) || (j > 0
                 && (Character.isLetterOrDigit(a) ||
                 a == '_'))) {
             j++;
-            a = uncommented.charAt(i + j);
+            a = uncomm.charAt(i + j);
         }
         List<String> list = Arrays.asList(keywords);
 
-        String k = uncommented.substring(i, i + j);
+        String k = uncomm.substring(i, i + j);
         if (k.length() > 0 && !list.contains(k)) {
             tokens.add(new Token("name",
-                    k, Token.TokenTypeTxt.Name));
+                    k));
             i = i + j;
             return true;
         }
@@ -239,7 +231,6 @@ public class ParseCode {
 
     public boolean isSpecialChar(String uncomm,
                                  int pos) {
-
         return special.indexOf(uncomm.charAt(pos)) >= 0;
 
     }
@@ -281,29 +272,23 @@ public class ParseCode {
     }
 
     public boolean parseLiteral() {
+        int pos = i;
         // bool
-        if (uncommented.substring(i, i + "false".length()).equals("false")) {
+        if (uncomm.substring(i, i + "false".length()).equals("false")) {
             tokens.add(new Token("boolean:false",
-                    uncommented.substring(i, i + "false".length()), Token.TokenTypeTxt.Literal));
+                    uncomm.substring(i, i + "false".length())));
 
             return true;
         }
-        if (uncommented.substring(i, i + "true".length()).equals("true")) {
+        if (uncomm.substring(i, i + "true".length()).equals("true")) {
             tokens.add(new Token("boolean:true",
-                    uncommented.substring(i, i + "true".length()), Token.TokenTypeTxt.Literal));
+                    uncomm.substring(i, i + "true".length())));
             return true;
         }
 
         //tokens.add(new Token("float|double|string|int|char|boolean|long",
         // k));
         return false;
-    }
-    public void parseTokensToTree() {
-        List<Token> tokens = this.tokens;
-
-        tokens.forEach(token -> {
-            System.out.printf("Token : %s\n", token);
-        });
     }
 
     public void block() {
@@ -322,14 +307,5 @@ public class ParseCode {
     }
 
     public static void main(String[] args) {
-        ParseCode parseCode = new ParseCode();
-        parseCode.setBrut("/* */ ");
-        parseCode.removeComments();
-        System.out.println(parseCode.code);
-        parseCode.parseTokensToTree();
-    }
-
-    public List<Token> parseFile(File txt) {
-        return tokens;
     }
 }

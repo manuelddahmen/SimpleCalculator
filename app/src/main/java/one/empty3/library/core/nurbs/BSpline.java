@@ -1,28 +1,63 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
  */
 
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
+ */
 package one.empty3.library.core.nurbs;
 
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
+import one.empty3.library.StructureMatrix;
 
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Iterator;
 
 /*__
@@ -44,6 +79,7 @@ public class BSpline extends ParametricCurve {
     private StructureMatrix<Point3D> controls = new StructureMatrix<>(1, Point3D.class);
     private StructureMatrix<Double> T = new StructureMatrix<>(1, Double.class);
     private StructureMatrix<Integer> degree = new StructureMatrix<>(0, Integer.class);
+
     public BSpline() {
 
         degree.setElem(3);
@@ -56,22 +92,16 @@ public class BSpline extends ParametricCurve {
         add1();
     }
 
-    public void add1()
-
-    {
+    public void add1() {
         T.getData1d().clear();
         int endI = controls.getData1d().size() + 1 + 2 * degree.getElem();
         for (int i = 0; i < endI; i++)
-            if(i<degree.getElem())
-            {
+            if (i < degree.getElem()) {
                 T.add(1, 0.0);
-            } else if(i>=endI-degree.getElem())
-            {
+            } else if (i >= endI - degree.getElem()) {
                 T.add(1, 1.0);
-            }
-            else
-            {
-                T.add(1, 1.0*i/(controls.getData1d().size()));
+            } else {
+                T.add(1, 1.0 * i / (controls.getData1d().size()));
             }
 
 
@@ -79,7 +109,7 @@ public class BSpline extends ParametricCurve {
 
     public void add(Point3D point) {
         controls.add(1, point);
- }
+    }
 
     public double boor(double t, int i, int d) {
         if (d <= 0) {
@@ -88,9 +118,9 @@ public class BSpline extends ParametricCurve {
             else
                 return 0.0;
         }
-        return avoidNaN((t - get(i))*boor(t, i, d - 1), get(i + d) - t)
+        return avoidNaN((t - get(i)) * boor(t, i, d - 1), get(i + d) - t)
                 +
-                avoidNaN((get(i + d + 1) - t)* boor(t, i + 1, d - 1), get(i + d + 1) - get(i + 1));
+                avoidNaN((get(i + d + 1) - t) * boor(t, i + 1, d - 1), get(i + d + 1) - get(i + 1));
     }
 
     private double avoidNaN(double a, double b) {
@@ -102,11 +132,11 @@ public class BSpline extends ParametricCurve {
     public Point3D calculerPoint3D(double t) {
         Point3D p = Point3D.O0;
         double boor = 0d;
-        for (int i = 0; i < controls.getData1d().size()-degree.getElem(); i++) {
+        for (int i = 0; i < controls.getData1d().size() - degree.getElem(); i++) {
             boor += boor(t, i, degree.getElem());
             p = p.plus(controls.getElem(i).mult(boor));
         }
-        //Logger.getAnonymousLogger().log(Level.INFO, "p = " + p.toString() + "\tt = " + t);
+        //System.out.println("p = " + p.toString() + "\tt = " + t);
         return p;//.mult(1/boor);
     }
 
@@ -148,17 +178,17 @@ public class BSpline extends ParametricCurve {
     public String toString() {
         String s = "bspline \n(\n\n";
         Iterator<Point3D> ps = iterator();
-        s+="\n controls (";
+        s += "\n controls (";
         while (ps.hasNext()) {
             s += "\n" + ps.next().toString() + "\n";
         }
         Iterator<Double> iterator = T.getData1d().iterator();
 
-        s+="\n) knots (";
+        s += "\n) knots (";
         while (iterator.hasNext()) {
             s += "\n" + iterator.next().toString() + "\n";
         }
-        s+="\n) \n)";
+        s += "\n) \n)";
 
         return s;
     }
@@ -168,7 +198,8 @@ public class BSpline extends ParametricCurve {
     }
 
     public void setControls(ArrayList<Point3D> controls) {
-        this.controls.setAll(controls);}
+        this.controls.setAll(controls);
+    }
 
     public StructureMatrix<Double> getT() {
         return T;

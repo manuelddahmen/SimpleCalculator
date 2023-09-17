@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*
@@ -22,15 +55,24 @@
  */
 package one.empty3.library;
 
-import java.awt.*;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import one.empty3.library.core.animation.Animation;
+
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Iterator;
 import java.util.List;
-import one.empty3.tests.Animation;
 
 public class Scene extends Representable implements Serializable {
 
-    public static final String VERSION = "2021.6";
+    public static final String VERSION = "2019.1";
     /*__
      *
      */
@@ -39,7 +81,7 @@ public class Scene extends Representable implements Serializable {
     public String description;
     public StructureMatrix<Camera> cameraActive = new StructureMatrix<>(0, Camera.class);
     private StructureMatrix<Representable> objets = new StructureMatrix<>(1, Representable.class);
-    private StructureMatrix<one.empty3.tests.Animation> animations = new StructureMatrix<>(1, Animation.class);
+    private StructureMatrix<Animation> animations = new StructureMatrix<>(1, Animation.class);
     private StructureMatrix<Camera> cameras = new StructureMatrix<>(1, Camera.class);
     private StructureMatrix<ITexture> colors = new StructureMatrix<>(1, ITexture.class);
     private StructureMatrix<Lumiere> lumieres = new StructureMatrix<>(1, Lumiere.class);
@@ -60,17 +102,36 @@ public class Scene extends Representable implements Serializable {
     public Scene() {
 
         super();
+        Camera camera = new Camera();
+        cameras.setElem(camera, 0);
+        cameraActive.setElem(camera);
     }
 
 
     public boolean add(Representable add) {
-        //objets.getData1d().add(add);
-        return objets.getData1d().add(add);
+
+        this.dernierAjout = add;
+
+        //add.scene(this);
+
+        objets.add(1, add);
+
+        return true;
+
     }
 
     public boolean add(Representable add, ZBuffer zBuffer) {
+
+        this.dernierAjout = add;
+
+
+        //add.scene(this);
+
         add.setPainter(new Painter(zBuffer, this));
-        return objets.getData1d().add(add);
+
+        objets.add(1, add);
+
+        return true;
 
     }
 
@@ -81,7 +142,7 @@ public class Scene extends Representable implements Serializable {
 
     @Deprecated
     public void camera(Camera c) {
-        cameraActive(c);
+        cameraActive.setElem(c);
     }
 
     public Camera cameraActive() {
@@ -90,12 +151,14 @@ public class Scene extends Representable implements Serializable {
         } else if (cameras.data1d.size() > 0) {
             return cameras.getElem(0);
         }
-        return null;
+        return Camera.PARDEFAULT;
     }
 
     public void cameraActive(Camera c) {
         this.cameraActive.setElem(c);
-        cameras.setElem( c, 0);
+        if (!cameras.getData1d().contains(c)) {
+            cameras.getData1d().add(0, c);
+        }
     }
 
     public List<Camera> cameras() {
@@ -103,6 +166,7 @@ public class Scene extends Representable implements Serializable {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     protected int colorAdd(int[] cs) {
         float[] compArray = new float[4];
         float[] compArray3 = new float[4];
@@ -110,12 +174,12 @@ public class Scene extends Representable implements Serializable {
         int l = cs.length;
         for (int c = 0; c < l; c++) {
             for (int i = 0; i < 3; i++) {
-                compArray3 = new Color(cs[i]).getRGBComponents(compArray);
+                compArray3 = Color.valueOf(cs[i]).getComponents(compArray);
 
                 compArray3[i] += compArray[i] / l;
             }
         }
-        int res = new Color(compArray3[0], compArray3[1], compArray3[2], compArray3[3]).getRGB();
+        int res = Color.valueOf(compArray3[0], compArray3[1], compArray3[2], compArray3[3]).toArgb();
 
         return res;
     }
@@ -215,12 +279,32 @@ public class Scene extends Representable implements Serializable {
         return Lumiere.getInt(t);
     }
 
+    public Representable place(MODObjet aThis) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+
     public boolean remove(Representable rem) {
         return objets.getData1d().remove(rem);
     }
 
     public int size() {
         return objets.getData1d().size();
+    }
+
+    @Override
+    public boolean supporteTexture() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void texture(ITexture c) {
+        colors.getData1d().add(c);
+    }
+
+    public ArrayList<ITexture> textures() {
+        return (ArrayList<ITexture>) colors.getData1d()
+                ;
     }
 
     @Override
@@ -237,7 +321,7 @@ public class Scene extends Representable implements Serializable {
             }
         }
         str += "cameras (\n\t";
-        if (cameras.getData1d().isEmpty() && cameraActive()!=null) {
+        if (cameras.getData1d().isEmpty()) {
             str += "\n\t" + cameraActive().toString() + "\n";
         }
         Iterator<Camera> itC = cameras.getData1d().iterator();
@@ -245,11 +329,14 @@ public class Scene extends Representable implements Serializable {
             str += "\n\t" + itC.next().toString() + "\n";
         }
         str += "\n)";
-        str+= cameraActive!=null?cameraActive.toString():"";
+
         str += "\n\n)\n";
         return str;
     }
 
+    public void updateFromText(Representable selectedComponent, String text) {
+        //throw new UnsupportedOperationException("Not yet implemented");
+    }
 
     /*__
      * @return
@@ -325,11 +412,11 @@ public class Scene extends Representable implements Serializable {
         this.objets = objets;
     }
 
-    public StructureMatrix<one.empty3.tests.Animation> getAnimations() {
+    public StructureMatrix<Animation> getAnimations() {
         return animations;
     }
 
-    public void setAnimations(StructureMatrix<one.empty3.tests.Animation> animations) {
+    public void setAnimations(StructureMatrix<Animation> animations) {
         this.animations = animations;
     }
 
@@ -382,6 +469,6 @@ public class Scene extends Representable implements Serializable {
     }
 
     public void clear() {
-        objets.getData1d().clear();
+        objets.reset();
     }
 }

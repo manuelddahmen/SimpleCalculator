@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*
@@ -24,14 +57,18 @@
  */
 package one.empty3.library;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Objects;
+
+import javaAnd.awt.image.imageio.ImageIO;
 
 public class TourDeRevolution extends Representable {
 
@@ -40,15 +77,14 @@ public class TourDeRevolution extends Representable {
     private TRIObject o;
     private PObjet op;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public TourDeRevolution(File image, Axe axe) {
-        try {
-            this.courbe = new CourbeDeImage(ImageIO.read(image));
-            courbe.anayliserImage();
-
-        } catch (Exception ex) {}
+        this.courbe = new CourbeDeImage(Objects.requireNonNull(ImageIO.read(image)).bitmap);
+        courbe.anayliserImage();
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static void main(String[] argss) {
         try {
             System.out.print(new File(".").getCanonicalPath());
@@ -63,20 +99,19 @@ public class TourDeRevolution extends Representable {
         s.add(tr);
         z.scene(s);
         z.draw();
-        try {
-            ImageIO.write(z.image(), "png",
-                    ImageIO.createImageOutputStream(new File("result2TR.png")));
-        } catch (Exception ex) {}
-
+        ImageIO.write(z.image(), "jpg",
+                (new File("result2TR.jpg")));
     }
 
     // @Override
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void generateB() {
 
         Color[] colors = new Color[256];
         for (int i = 0; i < 255; i++) {
             double a = 1.0 * i / 255 * 2 * Math.PI;
-            colors[i] = new Color(0.0f/*1*((float)Math.sin(a)+1)/2*/, 1 * (float) (Math.sin(a) + 1) / 2, 1 * (float) (Math.cos(a) + 1) / 2);
+            colors[i] = Color.valueOf(0, (int) ((float) (Math.sin(a) + 1) / 2),
+                    (int) (1 * (float) (Math.cos(a) + 1) / 2));
         }
         o = new TRIObject();
         op = new PObjet();
@@ -93,7 +128,7 @@ public class TourDeRevolution extends Representable {
             double diamx = p.getX();
             double diamy = p.getY();
 
-            Logger.getAnonymousLogger().log(Level.INFO, ""+courbe.getPoints().size());
+            System.out.println(courbe.getPoints().size());
             int i = 0;
             for (i = 0; i < max; i++) {
                 double a = 2 * Math.PI * i / max;
@@ -109,13 +144,13 @@ public class TourDeRevolution extends Representable {
 
         }
 
-         for (int i = 0; i < max; i++)
-             for (int j = 0; j < points[0].size(); j++) {
-         if (i > 0 && j > 0) {
-         o.add(new TRI(points[j].get(i), points[j-1].get(i), points[j-1].get(i-1), Color.red));
-         o.add(new TRI(points[j].get(i), points[j].get(i-1), points[j-1].get(i-1), Color.red));
-         }
-         }
+        for (int i = 0; i < max; i++)
+            for (int j = 0; j < points[0].size(); j++) {
+                if (i > 0 && j > 0) {
+                    o.add(new TRI(points[j].get(i), points[j - 1].get(i), points[j - 1].get(i - 1), Color.valueOf(Color.RED)));
+                    o.add(new TRI(points[j].get(i), points[j].get(i - 1), points[j - 1].get(i - 1), Color.valueOf(Color.RED)));
+                }
+            }
 
     }
 

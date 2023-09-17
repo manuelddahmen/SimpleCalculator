@@ -19,18 +19,19 @@
 
 package one.empty3.library.core;
 
+import javaAnd.awt.Point;
 import one.empty3.library.*;
 
-import java.awt.*;
+import javaAnd.awt.*;
 
 /*__
  * Created by manue on 23-11-19.
  */
 public class CameraArcBall {
 
-/*__
- * Created by manue on 06-11-19.
- */
+    /*__
+     * Created by manue on 06-11-19.
+     */
     private final ZBufferImpl zBuffer;
     private Point3D pointCenter;
     private double radius;

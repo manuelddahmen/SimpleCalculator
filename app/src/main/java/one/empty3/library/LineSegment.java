@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*
@@ -24,11 +57,15 @@
  */
 package one.empty3.library;
 
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.core.lighting.Infini;
 import one.empty3.library.core.nurbs.CurveElem;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
-import java.awt.*;
 
 /*__
  * @author MANUEL DAHMEN
@@ -44,12 +81,12 @@ public class LineSegment extends ParametricCurve implements CurveElem {
     private StructureMatrix<Point3D> extremite = new StructureMatrix<>(0, Point3D.class);
     // overflow
 
-    public LineSegment()
-    {
+    public LineSegment() {
         super();
         this.setOrigine(new Point3D());
         this.setExtremite(new Point3D());
-     }
+        setIncrU(0.1);
+    }
 
     // prodScalaire product (3D) which allows vector operations in arguments
     public LineSegment(Point3D p1, Point3D p2) {
@@ -110,7 +147,7 @@ public class LineSegment extends ParametricCurve implements CurveElem {
         Point3D dir, w0, w; // ray vectors
         double r, a, b; // params to calc ray-plane intersect
 
-        Point3D intersection;
+        Point3D I;
         // get triangle edge vectors and plane normal
         u = T.getSommet().getElem(1).moins(T.getSommet().getElem(0));
         v = T.getSommet().getElem(2).moins(T.getSommet().getElem(0));
@@ -139,7 +176,7 @@ public class LineSegment extends ParametricCurve implements CurveElem {
             return Infini.Default; // => no intersect
         }        // for a segment, also test if (r > 1.0) => no intersect
 
-        intersection = ray.getOrigine().plus(dir.mult(r)); // intersect point of ray and
+        I = ray.getOrigine().plus(dir.mult(r)); // intersect point of ray and
         // plane
 
         // is I inside T?
@@ -147,7 +184,7 @@ public class LineSegment extends ParametricCurve implements CurveElem {
         uu = u.prodScalaire(u);
         uv = u.prodScalaire(v);
         vv = v.prodScalaire(v);
-        w = intersection.moins(T.getSommet().getElem(0));
+        w = I.moins(T.getSommet().getElem(0));
         wu = w.prodScalaire(u);
         wv = w.prodScalaire(v);
         D = uv * uv - uu * vv;
@@ -165,82 +202,52 @@ public class LineSegment extends ParametricCurve implements CurveElem {
             return Infini.Default;
         }
 
-        return intersection; // I is in T
+        return I; // I is in T
     }
 
     public Representable intersection(TRI tri) {
         return intersect3D_RayTriangle(this, tri);
     }
 
-
-    /**
-     * Return the distance from a point to a segment
-     *
-     * @param ps,pe the start/end of the segment
-     * @param p the given point
-     * @return the distance from the given point to the segment
-     */
-    private static double distanceToSegment(Point ps, Point pe, Point p) {
-
-        if (ps.x==pe.x && ps.y==pe.y) return distance(ps,p);
-
-        int sx=pe.x-ps.x;
-        int sy=pe.y-ps.y;
-
-        int ux=p.x-ps.x;
-        int uy=p.y-ps.y;
-
-        int dp=sx*ux+sy*uy;
-        if (dp<0) return distance(ps,p);
-
-        int sn2 = sx*sx+sy*sy;
-        if (dp>sn2) return distance(pe,p);
-
-        double ah2 = dp*dp / sn2;
-        int un2=ux*ux+uy*uy;
-        return Math.sqrt(un2-ah2);
+    public Representable place(MODObjet aThis) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    /**
-     * return the distance between two points
-     *
-     * @param p1,p2 the two points
-     * @return dist the distance
-     */
-    private static double distance(Point p1, Point p2) {
-        int d2 = (p2.x-p1.x)*(p2.x-p1.x)+(p2.y-p1.y)*(p2.y-p1.y);
-        return Math.sqrt(d2);
-    }
-
-    /** Methode qui calcule la projection orthogonale du point P sur une droite D representee par un point X et un vecteur V (P = X + kV).
-     *  ATTENTION : cette methode renvoit le coefficient k.
-     * @param X Un point de la droite D.
-     * @param V Le vecteur directeur de la droite D.
-     * @param P Le point dont on souhaite connaitre le projeté sur la droite D.
-     * @return Le coefficient de k de P = X + kV.*/
-    public static double IntersectionCoef(Point3D X, Point3D V, Point3D P)
-    {
-        int Size = 3 ;
-        double num = 0.0, den = 0.0 ;
-
-        for (int i=0 ; i < Size ; i++)
-        {
-            num += V.get(i) * (P.get(i)-X.get(i)) ;
-            den += Math.pow(V.get(i), 2.0) ;
-        }
-
-        if ( Math.abs(den) < 0.00001 )
-            throw new ArithmeticException("Denominator equal to zero => Vector V is a vector null.") ;
-        return num / den ;
+    public Barycentre position() {
+        throw new UnsupportedOperationException("Not supported yet."); // To
+        // change
+        // body
+        // of
+        // generated
+        // methods,
+        // choose
+        // Tools
+        // |
+        // Templates.
     }
 
 
     @Override
+    public boolean supporteTexture() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
     public String toString() {
-        Color c = new Color(texture.getColorAt(0.5, 0.5));
+        Color c = Color.valueOf(texture.getColorAt(0.5, 0.5));
         return "Droite (\n\t" + origine.toString() + "\n\t"
-                + extremite.toString() + "\n\t( " + c.getRed() + " , "
-                + c.getGreen() + " , " + c.getBlue() + " )\n)\n";
+                + extremite.toString() + "\n\t( " + c.red() + " , "
+                + c.green() + " , " + c.blue() + " )\n)\n";
+    }
+
+    public int mesure() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Point3D calculerVitesse3D(double t) {
+        return getExtremite().moins(getOrigine()).norme1();
     }
 
     @Override
@@ -250,8 +257,8 @@ public class LineSegment extends ParametricCurve implements CurveElem {
         getDeclaredDataStructure().put("extremite/point extremite", extremite);
 
     }
-    public Double getLength()
-    {
+
+    public Double getLength() {
         return getOrigine().moins(getExtremite()).norme();
     }
 }

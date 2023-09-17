@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*
@@ -26,8 +59,11 @@ package one.empty3.library.core.extra;
 
 import one.empty3.library.*;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 /*__
  * @author MANUEL DAHMEN
@@ -38,7 +74,7 @@ import java.awt.image.BufferedImage;
  */
 public class SimpleSphereAvecTexture extends SimpleSphere {
 
-    private BufferedImage img;
+    private Bitmap img;
     private Axe axe;
     private double angle;
     private String fichier;
@@ -48,28 +84,29 @@ public class SimpleSphereAvecTexture extends SimpleSphere {
      * @param r
      * @param col
      */
-    public SimpleSphereAvecTexture(Point3D c, double r, Color col) {
+    public SimpleSphereAvecTexture(Point3D c, double r, int col) {
         super(c, r, col);
     }
 
-    public SimpleSphereAvecTexture(Point3D c, double r, Color col,
-                                   BufferedImage bufferedImage) {
+    public SimpleSphereAvecTexture(Point3D c, double r, int col,
+                                   Bitmap bufferedImage) {
         super(c, r, col);
         texture(bufferedImage);
     }
 
     public SimpleSphereAvecTexture(Point3D c, Matrix33 m3d, double angle, double r,
-                                   Color col, ECBufferedImage img) {
+                                   int col, Bitmap img) {
         super(c, r, col);
         this.axe = axe;
         this.angle = angle;
-        texture(img);
+        getTexture();
     }
 
     public void fichier(String f) {
         fichier = f;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public TRIObject generate() {
         TRIObject t = new TRIObject();
@@ -86,13 +123,13 @@ public class SimpleSphereAvecTexture extends SimpleSphere {
             incrLong = 2 * Math.PI * Math.cos(a) / numLongQuad;
             b = 0;
             while (b < 2 * Math.PI && incrLong > 0.0001) {
-                //Logger.getAnonymousLogger().log(Level.INFO, "a;b " + a +";"+b);
+                //System.out.println("a;b " + a +";"+b);
                 pCur[0] = CoordPoint(a, b);
                 pCur[1] = CoordPoint(a + incrLat, b);
                 pCur[2] = CoordPoint(a, b + incrLong);
                 pCur[3] = CoordPoint(a + incrLat, b + incrLong);
                 try {
-                    Color color = new Color(img.getRGB(
+                    Color color = Color.valueOf(img.getPixel(
                             (int) ((a + Math.PI) / Math.PI * img.getHeight()),
                             (int) ((b) / 2 / Math.PI * img.getWidth())));
                     t.add(new TRI(pCur[0], pCur[1], pCur[3], color));
@@ -106,9 +143,6 @@ public class SimpleSphereAvecTexture extends SimpleSphere {
         return t;
     }
 
-    public void texture(BufferedImage bufferedImage) {
-        this.img = bufferedImage;
-    }
 
     @Override
     public String toString() {

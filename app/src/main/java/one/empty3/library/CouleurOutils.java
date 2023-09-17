@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*
@@ -24,13 +57,18 @@
  */
 package one.empty3.library;
 
-import java.awt.*;
+
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 /*__
  * @author manuel
  */
 public class CouleurOutils {
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static Color couleurFactio(Color c1, Color cFond, TRI t, Point3D lumiere, boolean plus) {
         Point3D v1 = t.normale().norme1();
         Point3D v2 = lumiere.norme1();
@@ -40,8 +78,8 @@ public class CouleurOutils {
         if (!plus) {
             signe = -1;
         }
-        int[] cFondC = new int[]{cFond.getRed(), cFond.getGreen(), cFond.getBlue()};
-        int[] res = new int[]{c1.getRed(), c1.getGreen(), c1.getBlue()};
+        float[] cFondC = new float[]{cFond.red(), cFond.green(), cFond.blue()};
+        float[] res = new float[]{c1.red(), c1.green(), c1.blue()};
 
         for (int i = 0; i < 3; i++) {
             res[i] += signe * (int) (Math.abs(cFondC[i] * cos));
@@ -52,33 +90,36 @@ public class CouleurOutils {
                 res[i] = 255;
             }
         }
-        return new Color(res[0], res[1], res[2]);
+        return Color.valueOf(res[0], res[1], res[2]);
     }
 
     public static String couleurID() {
         return "c";
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static Color couleurRatio(Color c1, Color c2, double r) {
 
-        return new Color(
-                (float) (c1.getRed() * r + c2.getRed() * (1 - r)),
-                (float) (c1.getGreen() * r + c2.getGreen() * (1 - r)),
-                (float) (c1.getBlue() * r + c2.getBlue() * (1 - r))
+        return Color.valueOf(
+                (float) (c1.red() * r + c2.red() * (1 - r)),
+                (float) (c1.green() * r + c2.green() * (1 - r)),
+                (float) (c1.blue() * r + c2.blue() * (1 - r))
         );
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static String toStringColor(Color couleur) {
-        return "(" + couleur.getRed() + ", " + couleur.getGreen() + ", "
-                + couleur.getBlue() + ")";
+        return "(" + couleur.red() + ", " + couleur.green() + ", "
+                + couleur.blue() + ")";
     }
 
     public String couleurLongID() {
         return "Couleur";
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Color randomColor() {
-        return new Color((float) Math.random(),
+        return Color.valueOf((float) Math.random(),
                 (float) Math.random(),
                 (float) Math.random());
     }

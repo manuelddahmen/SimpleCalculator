@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*
@@ -30,8 +63,15 @@ package one.empty3.library;
  * PACKAGE be.ibiiztera.md.pmatrix.pushmatrix OWNER DAHMEN MANUEL
  */
 
-import java.awt.*;
+
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 
 public class LumiereScene {/*
      public class Lumiere
@@ -74,7 +114,7 @@ public class LumiereScene {/*
      {
      double ratio = 0.0;
      double a = 0.0;
-     double [] c  = new double[] {co.getRed(), co.getGreen(), co.getBlue()};
+     double [] c  = new double[] {co.red(), co.green(), co.blue()};
      for(int i=0; i<lumieres.size(); i++)
      ratio += lumieres.get(i).ratio();
      for(int i=0; i<lumieres.size(); i++)
@@ -87,13 +127,13 @@ public class LumiereScene {/*
      switch(comp)
      {
      case 0:
-     compVal = l.couleur().getRed() - c[comp];
+     compVal = l.couleur().red() - c[comp];
      break;
      case 1:
-     compVal = l.couleur().getGreen() - c[comp];
+     compVal = l.couleur().green() - c[comp];
      break;
      case 2:
-     compVal = l.couleur().getBlue() - c[comp];
+     compVal = l.couleur().blue() - c[comp];
      break;
      }
      c[comp] += 
@@ -110,13 +150,14 @@ public class LumiereScene {/*
      c[comp] = 0;
 
      }
-     return new Color((int)c[0], (int)c[1], (int)c[2]);
+     return Color.valueOf((int)c[0], (int)c[1], (int)c[2]);
      }
      */
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public ITexture calculer(ArrayList<Lumiere> ls, Point3D p) {
-        Color synthese = new Color(p.texture().getColorAt(0.5, 0.5));
+        Color synthese = Color.valueOf(p.getTexture().getColorAt(0.5, 0.5));
 
         /* Calcul */
         if (ls.size() > 0) {
@@ -127,19 +168,20 @@ public class LumiereScene {/*
 
             float[] f = synthese(ratio, colors);
 
-            synthese = new Color(f[0], f[1], f[2]);
+            synthese = Color.valueOf(f[0], f[1], f[2]);
         }
 
         return new TextureCol(synthese);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private float[] synthese(float[] ratio, Color[] colors) {
 
         float[] c = new float[]{0, 0, 0};
-        float[] incr = new float[]{0, 0, 0};
+        float[] incr;
 
         for (int i = 0; i < ratio.length; i++) {
-            colors[i].getColorComponents(incr);
+            incr = colors[i].getComponents();
             for (int j = 0; j < 3; j++) {
                 c[j] += incr[j] / ratio.length;
             }

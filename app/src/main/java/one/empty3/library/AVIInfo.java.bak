@@ -51,7 +51,7 @@ public class AVIInfo {
         try {
             if (args.length < 1) {
 
-                Logger.getAnonymousLogger().log(Level.INFO, "Syntaxe : AVIInfo nom_du_Fichier.avi");
+                System.out.println("Syntaxe : AVIInfo nom_du_Fichier.avi");
                 System.exit(-1);
 
             }
@@ -60,17 +60,17 @@ public class AVIInfo {
 
             AVIReader reader = new AVIReader(f);
 
-            Logger.getAnonymousLogger().log(Level.INFO, "Durée: " + reader.getDuration());
-            Logger.getAnonymousLogger().log(Level.INFO, "Format de fichier: " + reader.getFileFormat().toString());
-            Logger.getAnonymousLogger().log(Level.INFO, "Nombre de piste: " + reader.getTrackCount());
-            Logger.getAnonymousLogger().log(Level.INFO, "Nombre de piste: " + reader.getVideoDimension().getHeight() + "coordArr" + reader.getVideoDimension().getHeight());
+            System.out.println("Durée: " + reader.getDuration());
+            System.out.println("Format de fichier: " + reader.getFileFormat().toString());
+            System.out.println("Nombre de piste: " + reader.getTrackCount());
+            System.out.println("Nombre de piste: " + reader.getVideoDimension().getHeight() + "coordArr" + reader.getVideoDimension().getHeight());
             for (int t = 0; t < reader.getTrackCount(); t++) {
-                Logger.getAnonymousLogger().log(Level.INFO, "Track " + t);
-                Logger.getAnonymousLogger().log(Level.INFO, "Durée: " + reader.getDuration(t));
-                Logger.getAnonymousLogger().log(Level.INFO, "Chunk count: " + reader.getChunkCount(t));
-                Logger.getAnonymousLogger().log(Level.INFO, "Format: " + reader.getFormat(t));
-                Logger.getAnonymousLogger().log(Level.INFO, "Read time: " + reader.getReadTime(t));
-                Logger.getAnonymousLogger().log(Level.INFO, "Time scale: " + reader.getTimeScale(t));
+                System.out.println("Track " + t);
+                System.out.println("Durée: " + reader.getDuration(t));
+                System.out.println("Chunk count: " + reader.getChunkCount(t));
+                System.out.println("Format: " + reader.getFormat(t));
+                System.out.println("Read time: " + reader.getReadTime(t));
+                System.out.println("Time scale: " + reader.getTimeScale(t));
             }
 
         } catch (IOException ex) {

@@ -1,4 +1,4 @@
-package one.empty3.library.core.script;/*
+/*
  * Copyright (c) 2016. Tous les fichiers dans ce programme sont soumis à la License Publique Générale GNU créée par la Free Softxware Association, Boston.
  * La plupart des licenses de parties tièrces sont compatibles avec la license principale.
  * Les parties tierces peuvent être soumises à d'autres licenses.
@@ -17,9 +17,12 @@ package one.empty3.library.core.script;/*
 //package one.empty3.library.core.script;
 //
 //import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 //import one.empty3.library.PolyMap;
 //
 //import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 //
 ///*__
 // * @author Se7en

@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*
@@ -24,29 +57,35 @@
  */
 package one.empty3.library;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import android.graphics.Color;
+
 import one.empty3.library.core.raytracer.RtIntersectInfo;
 import one.empty3.library.core.raytracer.RtRay;
 
-import java.awt.*;
-
 public class TRI extends Representable {
 
-    private StructureMatrix<Point3D> sommet= new StructureMatrix<>(1, Point3D.class);
+    private StructureMatrix<Point3D> sommet = new StructureMatrix<>(1, Point3D.class);
 
     public TRI() {
         super();
-        sommet.setElem(Point3D.X,  0);
-        sommet.setElem(Point3D.Y,  1);
+        sommet.setElem(Point3D.X, 0);
+        sommet.setElem(Point3D.Y, 1);
         sommet.setElem(Point3D.O0, 2);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public TRI(Point3D coordPoint3D, Point3D coordPoint3D0, Point3D coordPoint3D1) {
-        this(coordPoint3D, coordPoint3D0, coordPoint3D1, Color.black);
+        this(coordPoint3D, coordPoint3D0, coordPoint3D1, Color.valueOf(0, 0, 1));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public TRI(Point3D point3d, Point3D point3d2, Point3D point3d3,
-               Color red) {
-        sommet.setElem(point3d,  0);
+               android.graphics.Color red) {
+        sommet.setElem(point3d, 0);
         sommet.setElem(point3d2, 1);
         sommet.setElem(point3d3, 2);
         this.texture(new TextureCol(red));
@@ -54,7 +93,7 @@ public class TRI extends Representable {
 
     public TRI(Point3D point3d, Point3D point3d2, Point3D point3d3,
                ITexture red) {
-        sommet.setElem(point3d,  0);
+        sommet.setElem(point3d, 0);
         sommet.setElem(point3d2, 1);
         sommet.setElem(point3d3, 2);
         this.texture = red;
@@ -117,7 +156,7 @@ public class TRI extends Representable {
     @Override
     public void declareProperties() {
         super.declareProperties();
-        getDeclaredDataStructure().put("sommet/points sommets du triangle",sommet);
+        getDeclaredDataStructure().put("sommet/points sommets du triangle", sommet);
 
     }
 }

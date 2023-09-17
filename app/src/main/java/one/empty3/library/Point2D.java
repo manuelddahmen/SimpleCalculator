@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*
@@ -22,7 +55,6 @@
  */
 package one.empty3.library;
 
-import java.awt.*;
 
 public class Point2D {
 
@@ -44,7 +76,7 @@ public class Point2D {
         y = p1.getY();
     }
 
-    public Point2D(java.awt.Point coordonneesPoint2D) {
+    public Point2D(javaAnd.awt.Point coordonneesPoint2D) {
         x = coordonneesPoint2D.getX();
         y = coordonneesPoint2D.getY();
     }
@@ -79,14 +111,6 @@ public class Point2D {
         double distance = Math.sqrt((x - p2a.getX()) * (x - p2a.getX()) + (y - p2a.getY()) * (y - p2a.getY()));
         return distance > d && distance < e;
     }
-    public double prodScalaire(Point2D v2) {
-        return getX()*v2.getX()+getY()*v2.getY();
-    }
-
-    public Point2D prodVect(Point2D v2) {
-        return new Point2D(v2.getY() - getX(),   getY() - v2.getX());
-
-    }
 
     public double getX() {
         return x;
@@ -117,7 +141,7 @@ public class Point2D {
     }
 
     public Point2D norme1() {
-        return mult(1 / norme());
+        return this.mult(1 / norme());
     }
 
     public Point2D plus(Point2D p) {

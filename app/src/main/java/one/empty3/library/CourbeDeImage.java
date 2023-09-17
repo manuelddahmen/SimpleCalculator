@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*
@@ -24,17 +57,22 @@
  */
 package one.empty3.library;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.Hashtable;
 import java.util.Set;
 
 public class CourbeDeImage {
 
-    private BufferedImage image;
+    private Bitmap image;
     private Hashtable<Point2D, Color> points;
 
-    public CourbeDeImage(BufferedImage image) {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public CourbeDeImage(Bitmap image) {
         super();
         this.image = image;
         this.points = new Hashtable<Point2D, Color>();
@@ -42,16 +80,17 @@ public class CourbeDeImage {
         anayliserImage();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void anayliserImage() {
         for (int i = 0; i < image.getWidth(); i++) {
             int y0 = -1;
             int y1 = -1;
             for (int j = 0; j < image.getHeight(); j++) {
-                if (!new Color(image.getRGB(i, j)).equals(Color.white)) {
+                if (!Color.valueOf(image.getPixel(i, j)).equals(Color.WHITE)) {
                     y0 = y1;
                     y1 = j;
                     if (y0 == -1 || (y1 > y0 + 1)) {
-                        points.put(new Point2D(i, j), new Color(image.getRGB(i, j)));
+                        points.put(new Point2D(i, j), Color.valueOf(image.getPixel(i, j)));
                         break;
                     }
                 }
@@ -63,11 +102,11 @@ public class CourbeDeImage {
     public void classerPoints() {
     }
 
-    public BufferedImage getImage() {
+    public Bitmap getImage() {
         return image;
     }
 
-    public void setImage(ECBufferedImage image) {
+    public void setImage(Bitmap image) {
         this.image = image;
     }
 

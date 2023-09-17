@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*__
@@ -35,7 +68,7 @@ import one.empty3.library.StructureMatrix;
 /*__
  * @author Manuel Dahmen _manuel.dahmen@gmx.com_
  */
-public class SurfaceParametriquePolynomialeBezier extends SurfaceParametriquePolynomiale implements SurfaceElem{
+public class SurfaceParametriquePolynomialeBezier extends SurfaceParametriquePolynomiale implements SurfaceElem {
 
 
     public double B(int i, int n, double t) {
@@ -46,9 +79,9 @@ public class SurfaceParametriquePolynomialeBezier extends SurfaceParametriquePol
     @Override
     public Point3D calculerPoint3D(double u, double v) {
         Point3D sum = Point3D.O0;
-        for (int i = 0; i <getPower1(); i++) {
+        for (int i = 0; i < getPower1(); i++) {
             for (int j = 0; j < getPower2(); j++) {
-                sum = sum.plus(coefficients.getElem(i,j).mult(B(i, power1.getElem() - 1, u) * B(j, power2.getElem() - 1, v)));
+                sum = sum.plus(coefficients.getElem(i, j).mult(B(i, power1.getElem() - 1, u) * B(j, power2.getElem() - 1, v)));
             }
         }
         return sum;
@@ -92,11 +125,11 @@ public class SurfaceParametriquePolynomialeBezier extends SurfaceParametriquePol
     public String toString() {
         String s = "bezier2(";
 
-        s += "controls : "+coefficients.toString();
-        s += "power1 : "+power1.toString();
-        s += "power2 : "+power2.toString();
+        s += "controls : " + coefficients.toString();
+        s += "power1 : " + power1.toString();
+        s += "power2 : " + power2.toString();
 
-        s+=")";
+        s += ")";
         return s;
     }
 }

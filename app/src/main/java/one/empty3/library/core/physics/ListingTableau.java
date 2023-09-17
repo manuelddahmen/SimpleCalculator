@@ -1,4 +1,4 @@
-package one.empty3.library.core.physics;/*
+/*
  * Copyright (c) 2016. Tous les fichiers dans ce programme sont soumis à la License Publique Générale GNU créée par la Free Softxware Association, Boston.
  * La plupart des licenses de parties tièrces sont compatibles avec la license principale.
  * Les parties tierces peuvent être soumises à d'autres licenses.
@@ -13,13 +13,16 @@ package one.empty3.library.core.physics;/*
 package one.empty3.library.core.physics;
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
-import java.awt.*;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Arrays;
 
 public class ListingTableau {
@@ -62,7 +65,7 @@ public class ListingTableau {
             }
             f.calculer();
 
-            Logger.getAnonymousLogger().log(Level.INFO, frame);
+            System.out.println(frame);
 
             frame++;
 
@@ -85,7 +88,7 @@ public class ListingTableau {
                     billes.get(k * Y * X + j * X + i).vitesse = new Point3D(
                             (i - X / 2) / 1f, (j - Y / 2) / 1f,
                             (k - Z / 2) / 1f);
-                    billes.get(k * Y * X + j * X + i).color = new Color(1.0f * i
+                    billes.get(k * Y * X + j * X + i).color = Color.valueOf(1.0f * i
                             / X, 1.0f * j / Y, 1.0f * k / Z);
                     billes.get(k * Y * X + j * X + i).masse = 1;
                     billes.get(k * Y * X + j * X + i).attraction = 1;

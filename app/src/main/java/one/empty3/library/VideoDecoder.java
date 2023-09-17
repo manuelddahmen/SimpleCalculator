@@ -1,20 +1,21 @@
 /*
- * Copyright (c) 2022-2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
  */
 
 package one.empty3.library;
@@ -23,8 +24,42 @@ package one.empty3.library;
 
 
 
-import java.awt.image.BufferedImage;
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
+ */
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.io.File;
 
 public abstract class VideoDecoder extends Thread {
@@ -33,7 +68,7 @@ public abstract class VideoDecoder extends Thread {
     protected File file;
     protected boolean stop = false;
     protected static final long MAXSIZE = 4;
-    protected ArrayList<ECBufferedImage> imgBuf = new ArrayList();
+    protected ArrayList<Bitmap> imgBuf = new ArrayList();
 
 
     /***
@@ -44,6 +79,8 @@ public abstract class VideoDecoder extends Thread {
     public VideoDecoder(File file, TextureMov refTextureMov) {
         this.file = file;
         this.text = refTextureMov;
+        // start();
+
     }
 
     public int size() {
@@ -54,15 +91,11 @@ public abstract class VideoDecoder extends Thread {
         return eof;
     }
 
-    public ECBufferedImage current() {
+    public Bitmap current() {
 
-        if(!imgBuf.isEmpty()) {
-            ECBufferedImage c = imgBuf.get(0);
-            imgBuf.remove(0);
-            return c;
-        } else {
-            return null;
-        }
+        Bitmap c = imgBuf.get(0);
+        imgBuf.remove(0);
+        return c;
 
     }
 }

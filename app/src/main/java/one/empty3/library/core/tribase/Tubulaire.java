@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*__
@@ -29,19 +62,24 @@
  */
 package one.empty3.library.core.tribase;
 
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import one.empty3.library.*;
 
-import java.awt.*;
+
 import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class Tubulaire extends Representable implements TRIGenerable, TRIConteneur {
 
     public float PERCENT = 0.05f;
-    private Color couleur = Color.BLUE;
+    private Color couleur = Color.valueOf(Color.BLUE);
     private String id;
     private ArrayList<Point3D> points;
     //private double ratio;
@@ -110,6 +148,7 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
         this.diam = diam;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public TRIObject generate() {
         if (tris == null) {
@@ -125,9 +164,9 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
                 for (int i = 3; i < tour1.size() - 1; i++) {
                     TRI t1 = new TRI(tour0.get(i), tour1.get(i), tour1.get(i + 1), couleur);
                     TRI t2 = new TRI(tour0.get(i), tour0.get(i + 1), tour1.get(i + 1), couleur);
-                    t1.setCouleur(CouleurOutils.couleurFactio(couleur, Color.white, t1, new Point3D(0d, 0d, 1d), false));
-                    t2.setCouleur(CouleurOutils.couleurFactio(couleur, Color.white, t1, new Point3D(0d, 0d, 1d), false));
-                    t1.setCouleur(CouleurOutils.couleurFactio(couleur, Color.white, t1, new Point3D(0d, 0d, 1d), false));
+                    t1.setCouleur(CouleurOutils.couleurFactio(couleur, Color.valueOf(Color.WHITE), t1, new Point3D(0d, 0d, 1d), false));
+                    t2.setCouleur(CouleurOutils.couleurFactio(couleur, Color.valueOf(Color.WHITE), t1, new Point3D(0d, 0d, 1d), false));
+                    t1.setCouleur(CouleurOutils.couleurFactio(couleur, Color.valueOf(Color.WHITE), t1, new Point3D(0d, 0d, 1d), false));
                     t1.setCouleur(couleur);
                     t2.setCouleur(couleur);
                     tris.add(t1);
@@ -141,7 +180,7 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
     }
 
     public void generateWire() {
-        Logger.getAnonymousLogger().log(Level.INFO, "WIRE SIZE " + points.size());
+        System.out.println("WIRE SIZE " + points.size());
         beziers = new ArrayList<BezierCubique>();
 
         for (int i = 0; i < points.size() - 3; i += 4) {
@@ -158,15 +197,17 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
             beziers.add(bc);
         }
 
-        Logger.getAnonymousLogger().log(Level.INFO, "Beziers = " + beziers.size());
+        System.out.println("Beziers = " + beziers.size());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public Representable getObj() {
         generate();
         return tris;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public Iterable<TRI> iterable() {
         generate();
@@ -189,6 +230,7 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
         return (double) beziers.size();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public String toString() {
         String s = "tubulaire (\n\t(";
@@ -203,9 +245,10 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
     /*public void ratio(double r) {
      ratio = r;
      }*/
+    @RequiresApi(api = Build.VERSION_CODES.O)
     protected String toStringColor() {
-        return "(" + couleur.getRed() + ", " + couleur.getGreen() + ", "
-                + couleur.getBlue() + ")";
+        return "(" + couleur.red() + ", " + couleur.green() + ", "
+                + couleur.blue() + ")";
     }
 
     private ArrayList<Point3D> vectPerp(double t) {
@@ -234,7 +277,7 @@ public class Tubulaire extends Representable implements TRIGenerable, TRIContene
 
             px = px.norme1();
             py = py.norme1();
-            //Logger.getAnonymousLogger().log(Level.INFO, "px.py: " +px.prodScalaire(py)+"px.tg: "+px.prodScalaire(tangente)+"py.tg "+py.prodScalaire(tangente));
+            //System.out.println("px.py: " +px.prodScalaire(py)+"px.tg: "+px.prodScalaire(tangente)+"py.tg "+py.prodScalaire(tangente));
             vecteurs.add(px);
             vecteurs.add(py);
             vecteurs.add(tangente);

@@ -1,43 +1,78 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 package one.empty3.library;
 
 //import com.xuggle.mediatool.IMediaReader;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
+
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.io.File;
+import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
 
 
+
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class TextureMov extends ITexture {
-    BufferedImage image;
+    Bitmap image;
     VideoDecoder defs;
     private File file = null;
-    private int transparent = Color.BLACK.getRGB();
-
-    public TextureMov() {
-    }
-
-    public TextureMov(String filename) {
-        init(filename);
-    }
+    private int transparent = Color.valueOf(1, 1, 1).toArgb();
 
     public File getFile() {
         return file;
@@ -48,33 +83,31 @@ public class TextureMov extends ITexture {
         init(file.getAbsolutePath());
     }
 
+    public TextureMov() {
+    }
+
+    public TextureMov(String filename) {
+        init(filename);
+    }
+
     public void init(String filename) {
         this.file = new File(filename);
         defs = VideoDecoderFactory.createInstance(file, this);
-        defs.start();
+        //defs.start();
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public int getColorAt(double u, double v) {
-        Point2D coord = super.getCoord(u, v);
-        u = coord.x;
-        v = coord.y;
+
+
         if (image == null)
-            image = defs.current();
-                /*try {
-                    throw new EOFVideoException();
-                } catch (EOFVideoException e) {
-                    e.printStackTrace();
-                    System.err.println("Plus de frames");
-                }
-*/
-        if(image==null)
-            return transparent;
+            return 0;
 
         int x = (int) (u * image.getWidth());
         int y = (int) (v * image.getHeight());
         if (x >= 0 && x < image.getWidth() && y >= 0 && y < image.getHeight()) {
-            int rgb = image.getRGB(x, y);
+            int rgb = image.getPixel(x, y);
             int a = rgb >> 24 & 0xFF;
             int r = rgb >> 16 & 0xFF;
             int g = rgb >> 8 & 0xFF;
@@ -82,7 +115,7 @@ public class TextureMov extends ITexture {
             return rgb & 0x00FFFFFF;
 
         } else
-            return Color.TRANSLUCENT;
+            return Color.valueOf(0, 0, 0, 0).toArgb();
     }
 
     protected void current() {
@@ -99,7 +132,7 @@ public class TextureMov extends ITexture {
 
     @Override
     public void timeNext(long milli) {
-        nextFrame();
+
     }
 
 
@@ -113,15 +146,16 @@ public class TextureMov extends ITexture {
 
 
     public boolean nextFrame() {
-        image = defs.current();
+        current();
         return image != null;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void setTransparent(Color black) {
-        this.transparent = black.getRGB();
+        this.transparent = black.toArgb();
     }
 
-    public BufferedImage getImage() {
+    public Bitmap getImage() {
         return image;
     }
 }

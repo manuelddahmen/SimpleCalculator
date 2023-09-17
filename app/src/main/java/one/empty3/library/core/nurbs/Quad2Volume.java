@@ -1,27 +1,28 @@
 /*
- * Copyright (c) 2022-2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
  */
 
 package one.empty3.library.core.nurbs;
 
 import one.empty3.library.Point3D;
-import one.empty3.library.Polygon;
 import one.empty3.library.StructureMatrix;
+import one.empty3.library.Polygon;
 
 public class Quad2Volume extends ParametricVolume {
     private StructureMatrix<Polygon> polygons = new StructureMatrix<>(1, Polygon.class);
@@ -33,9 +34,9 @@ public class Quad2Volume extends ParametricVolume {
      */
     @Override
     public Point3D calculerPoint3D(Point3D p0) {
-        double u=p0.get(0);
-        double v=p0.get(1);
-        double w=p0.get(2);
+        double u = p0.get(0);
+        double v = p0.get(1);
+        double w = p0.get(2);
 
         Polygon polygon1 = polygons.getData1d().get(0);
         Polygon polygon2 = polygons.getData1d().get(1);

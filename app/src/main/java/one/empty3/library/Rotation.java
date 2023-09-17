@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 package one.empty3.library;
@@ -24,22 +57,24 @@ import java.util.HashMap;
 /*__
  * Created by Win on 26-01-16.
  */
-public class Rotation implements MatrixPropertiesObject  {
+public class Rotation implements MatrixPropertiesObject {
     protected StructureMatrix<Matrix33> rot;
     protected StructureMatrix<Point3D> centreRot;
     protected boolean unmodified = true;
+
     public Rotation() {
-            rot  = new StructureMatrix<>(0, Matrix33.class);
-            centreRot = new StructureMatrix<>(0, Point3D.class);
-            this.rot.setElem(Matrix33.I);
-            this.centreRot.setElem(Point3D.O0);
+        rot = new StructureMatrix<>(0, Matrix33.class);
+        centreRot = new StructureMatrix<>(0, Point3D.class);
+        this.rot.setElem(Matrix33.I);
+        this.centreRot.setElem(Point3D.O0);
     }
+
     public Rotation(Matrix33 rot, Point3D centreRot) {
         this();
-        if(rot==null)
-           rot = Matrix33.I;
-         if(centreRot==null)
-             centreRot = Point3D.O0;    
+        if (rot == null)
+            rot = Matrix33.I;
+        if (centreRot == null)
+            centreRot = Point3D.O0;
        /* if(this.rot==null||this.rot.getElem()==null)
             this.rot = rot1;
         if(this.centreRot==null||this.centreRot.getElem()==null)
@@ -57,13 +92,13 @@ public class Rotation implements MatrixPropertiesObject  {
         this.unmodified = unmodified;
     }
 
-    public Point3D rotation(Point3D p ) {
-        if(p!=null&&centreRot!=null&&rot!=null) {
-           try {
+    public Point3D rotation(Point3D p) {
+        if (p != null && centreRot != null && rot != null) {
+            try {
                 return centreRot.getElem().plus(rot.getElem().mult(p.moins(centreRot.getElem())));
-           } catch(NullPointerException ex) {
+            } catch (NullPointerException ex) {
                 ex.printStackTrace();
-           }
+            }
         }
         return p;
     }
@@ -88,7 +123,9 @@ public class Rotation implements MatrixPropertiesObject  {
     public void setCentreRot(StructureMatrix<Point3D> centreRot) {
         this.centreRot = centreRot;
     }
-    private HashMap<String , StructureMatrix> declaredDataStructures = new HashMap<>();
+
+    private HashMap<String, StructureMatrix> declaredDataStructures = new HashMap<>();
+
     @Override
     public StructureMatrix getDeclaredProperty(String name) {
         return declaredDataStructures.get(name);
@@ -108,6 +145,6 @@ public class Rotation implements MatrixPropertiesObject  {
 
     @Override
     public MatrixPropertiesObject copy() throws CopyRepresentableError, IllegalAccessException, InstantiationException {
-        return new Rotation((Matrix33)getRot().copy().getElem(), (Point3D) (getCentreRot().copy().getElem()));
+        return new Rotation((Matrix33) getRot().copy().getElem(), (Point3D) (getCentreRot().copy().getElem()));
     }
 }

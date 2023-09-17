@@ -1,63 +1,98 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ *  This file is part of Empty3.
  *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ *//*
 
+
+ */
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
+ *//*
+
+
+ */
 /*__
  * *
  * Global license  GNU GPL v2
  * author Manuel Dahmen _manuel.dahmen@gmx.com_
- */
+ *//*
+
 package one.empty3.library;
 
-import one.empty3.library.core.nurbs.ParametricCurve;
-import one.empty3.library.core.nurbs.ParametricSurface;
-import one.empty3.library.core.nurbs.Point3DS;
-import one.empty3.library.core.nurbs.ThickSurface;
+import one.empty3.library.core.nurbs.*;
 import one.empty3.pointset.PCont;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Picture;
+import javaAnd.awt.Point
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/***
+*/
+/**
  * * Classe de rendu graphique
+ * <p>
+ * P2 écran 2 int
+ * P3 x y z
+ * Tgt x y z
+ * N x y z
+ * Tex u v w TextId [12 double 1 int
+ * (1 double)imeid 1 ref. ]
+ * T
+ * Representable container
+ * <p>
+ * <p>
+ * Point x y z t x y z n x y z t u v w
+ * Int textId int4 out rgba
+ * Representable surface line point3d
+ * <p>
+ * <p>
+ * Draw buffer with data
+ * Iterate on objects
+ * <p>
+ * Textures and lights
+ *
+ * @return image null
+ *//*
 
- P2 écran 2 int
- P3 x y z
- Tgt x y z
- N x y z
- Tex u v w TextId [12 double 1 int
- (1 double)imeid 1 ref. ]
- T
- Representable container
-
- */
 class Data {
 
-    /**
-     * Point x y z t x y z n x y z t u v w
-     * Int textId int4 out rgba
-     * Representable surface line point3d
-     */
+    */
+/**
+ * Point x y z t x y z n x y z t u v w
+ * Int textId int4 out rgba
+ * Representable surface line point3d
+ *//*
+
     Double[][][] dataP;
     Representable[][] container;
     ZBufferImpl8 zBuffer;
@@ -74,7 +109,7 @@ class Data {
         this.ha = h;
 
 
-        Logger.getAnonymousLogger().log(Level.INFO, "la,ha " + la + ", " + ha);
+        System.out.println("la,ha " + la + ", " + ha);
 
 
     }
@@ -101,8 +136,8 @@ class Data {
                            Representable r) {
         Point p = null;
         if ((p = testP(px, py, pz)) != null) {
-            int x = (int) p.getX();
-            int y = (int) p.getY();
+            int x = (int) p.x;
+            int y = (int) p.y;
             dataP[0][y][x] = px;
             dataP[1][y][x] = py;
             dataP[2][y][x] = pz;
@@ -115,11 +150,13 @@ class Data {
             dataP[9][y][x] = u;
             dataP[10][y][x] = v;
             dataP[11][y][x] = w;
-             /*if(r==null){
+             */
+/*if(r==null){
                  r = zBuffer;
-                        }(*/
+                        }(*//*
+
             container[y][x] = r;
-            //Logger.getAnonymousLogger().log(Level.INFO, "x,y "+x+", "+y+" u,v : " + u+" "+v+" r " +r.getClass());
+            //System.out.println("x,y "+x+", "+y+" u,v : " + u+" "+v+" r " +r.getClass());
             return true;
         }
         return false;
@@ -144,8 +181,8 @@ class Data {
         double deep = zBuffer.camera().distanceCamera(x3d);
 
 
-        int x = (int) ce.getX();
-        int y = (int) ce.getY();
+        int x = (int) ce.x;
+        int y = (int) ce.y;
         if ((x >= 0) & (x < la) & (y >= 0) & (y < ha)
                 && (deep < dataP[13][y][x])) {
             dataP[13][y][x] = deep;
@@ -155,8 +192,8 @@ class Data {
         return null;
     }
 
-    public ECBufferedImage getBufferedImage() {
-        BufferedImage bi = new BufferedImage(la, ha, BufferedImage.TYPE_INT_RGB);
+    public Bitmap getBitmap() {
+        Bitmap bi = Bitmap.createBitmap(la, ha, Bitmap.Config.ARGB_8888);
 
         int[] c = new int[4];
         for (int j = 0; j < ha; j++)
@@ -164,12 +201,12 @@ class Data {
                 if (dataP[9][j][i] != null && dataP[10][j][i] != null) {
                     c[0] = container[j][i].texture().getColorAt(
                             dataP[9][j][i], dataP[10][j][i]);
-                    bi.setRGB(i, j, i, j, c, 0, la);
+                    bi.setPixel(i, j, c[0]);
                 } else
-                    Logger.getAnonymousLogger().log(Level.INFO, "error texture null Data.getBufferedImage");
+                    System.out.println("error texture null Data.getBitmap");
 
 
-        return new ECBufferedImage(bi);
+        return bi;
 
     }
 
@@ -185,9 +222,11 @@ public class ZBufferImpl8 extends ZBufferImpl {
     public static final int SURFACE_DISPLAY_COL_TRI = 4;
     public static final int SURFACE_DISPLAY_LINES = 5;
     public static final int SURFACE_DISPLAY_POINTS = 6;
-    /*__
-     * Couleur de fond (texture: couleur, image, vidéo, ...
-     */
+    */
+/*__
+ * Couleur de fond (texture: couleur, image, vidéo, ...
+ *//*
+
     // DEFINITIONS
     public static double INFINI_PROF = Double.MAX_VALUE;
     protected Point3D planproj = null;
@@ -196,7 +235,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
     protected boolean experimental = true;
     protected double angleX = Math.PI / 3;
     protected double angleY = Math.PI / 3;
-    protected ECBufferedImage bi;
+    protected Picture bi;
     protected ImageMap ime;
     public static Point3D INFINI = new Point3D(0d, 0d, INFINI_PROF);
     private Camera cameraC = new Camera();
@@ -267,20 +306,24 @@ public class ZBufferImpl8 extends ZBufferImpl {
         this.scene().cameraActive(c);
     }
 
-    /***
-     *
-     * Draw buffer with data
-     * Iterate on objects
-     */
+    */
+/***
+ *
+ * Draw buffer with data
+ * Iterate on objects
+ *//*
+
     public void predraw() {
         draw();
     }
 
-    /**
-     * Textures and lights
-     * @return image null
-     */
-    public BufferedImage finishDraw() {
+    */
+/**
+ * Textures and lights
+ * @return image null
+ *//*
+
+    public BufferedImageAndroid finishDraw() {
         return null;
 
     }
@@ -300,15 +343,18 @@ public class ZBufferImpl8 extends ZBufferImpl {
         draw(scene());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void draw(Representable r) {
         Point3D.start();
-        /*
-         * if (r instanceof RepresentableType) { try { ((RepresentableType)
-         * r).draw(this); } catch (Exception ex) { ex.printStackTrace(); } return; }
-         *
-         * if (r.getPainter() != null) { try { r.paint(); } catch (Exception ex) {
-         * ex.printStackTrace(); } }
-         */
+        */
+/*
+ * if (r instanceof RepresentableType) { try { ((RepresentableType)
+ * r).draw(this); } catch (Exception ex) { ex.printStackTrace(); } return; }
+ *
+ * if (r.getPainter() != null) { try { r.paint(); } catch (Exception ex) {
+ * ex.printStackTrace(); } }
+ *//*
+
         // COLLECTION
         r.texture().timeNext();
 
@@ -333,17 +379,19 @@ public class ZBufferImpl8 extends ZBufferImpl {
 
         } else
 
-            /* OBJECTS */
+            */
+/* OBJECTS *//*
+
             if (r instanceof Point3D) {
                 Point3D p = (Point3D) r;
                 add(p.get(0), p.get(1), p.get(2), null, null, null, null, null, null, 0.0, 0.0, 0.0, p);
             } else if (r instanceof ThickSurface) {
-                // Logger.getAnonymousLogger().log(Level.INFO, "Surface");
+                // System.out.println("Surface");
                 ThickSurface n = (ThickSurface) r;
                 // TODO Dessiner les bords
 
                 for (double u = n.getStartU(); u <= n.getEndU(); u += n.getIncrU()) {
-                    // Logger.getAnonymousLogger().log(Level.INFO, "(u,v) = ("+u+","+")");
+                    // System.out.println("(u,v) = ("+u+","+")");
                     for (double v = n.getStartU(); v <= n.getEndV(); v += n.getIncrV()) {
                         Point3D p1, p2, p3, p4;
 
@@ -413,41 +461,49 @@ public class ZBufferImpl8 extends ZBufferImpl {
             } else
                 // GENERATORS
                 if (r instanceof ParametricSurface) {
-                    // Logger.getAnonymousLogger().log(Level.INFO, "Surface");
+                    // System.out.println("Surface");
                     ParametricSurface n = (ParametricSurface) r;
                     // TODO Dessiner les bords
                     for (double u = n.getStartU(); u <= n.getEndU() - n.getIncrU(); u += n.getIncrU()) {
-                        // Logger.getAnonymousLogger().log(Level.INFO, "(u,v) = ("+u+","+")");
+                        // System.out.println("(u,v) = ("+u+","+")");
                         for (double v = n.getStartV(); v <= n.getEndV() - n.getIncrV(); v += n.getIncrV()) {
-                            /*
-                             * draw(new TRI(n.calculerPoint3D(u, v), n.calculerPoint3D(u + n.getIncrU(), v),
-                             * n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()), n.texture()), n);
-                             * draw(new TRI(n.calculerPoint3D(u, v), n.calculerPoint3D(u, v + n.getIncrV()),
-                             * n. calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()), n.texture()), n);
-                             */
-                            /*
-                             * tracerTriangle(n.calculerPoint3D(u, v), n.calculerPoint3D(u + n.getIncrU(),
-                             * v), n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()), new
-                             * Color(n.texture().getColorAt(0.5,0.5))); tracerTriangle(n.calculerPoint3D(u,
-                             * v), n.calculerPoint3D(u, v + n.getIncrV()), n.calculerPoint3D(u +
-                             * n.getIncrU(), v + n.getIncrV()), new Color(n.texture().getColorAt(0.5,0.5)));
-                             *//*
-                             * tracerTriangle(n.calculerPoint3D(u, v), n.calculerPoint3D(u + n.getIncrU(),
-                             * v), n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()), n.texture());
-                             * tracerTriangle(n.calculerPoint3D(u, v), n.calculerPoint3D(u, v +
-                             * n.getIncrV()), n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()),
-                             * n.texture());
-                             *
-                             */
-                            /*
-                             * Point3D[][] point3DS = {{n.calculerPoint3D(u, v), n.calculerPoint3D(u +
-                             * n.getIncrU(), v)}, {n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()),
-                             * n.calculerPoint3D(u, v + n.getIncrV())}};
-                             *
-                             * SurfaceParametricPolygonalBezier surfaceParametriquePolynomialeBezier = new
-                             * SurfaceParametricPolygonalBezier(point3DS);
-                             * draw(surfaceParametriquePolynomialeBezier, n);
-                             */
+                            */
+/*
+ * draw(new TRI(n.calculerPoint3D(u, v), n.calculerPoint3D(u + n.getIncrU(), v),
+ * n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()), n.texture()), n);
+ * draw(new TRI(n.calculerPoint3D(u, v), n.calculerPoint3D(u, v + n.getIncrV()),
+ * n. calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()), n.texture()), n);
+ *//*
+
+ */
+/*
+ * tracerTriangle(n.calculerPoint3D(u, v), n.calculerPoint3D(u + n.getIncrU(),
+ * v), n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()), new
+ * Color(n.texture().getColorAt(0.5,0.5))); tracerTriangle(n.calculerPoint3D(u,
+ * v), n.calculerPoint3D(u, v + n.getIncrV()), n.calculerPoint3D(u +
+ * n.getIncrU(), v + n.getIncrV()), Color.valueOf(n.texture().getColorAt(0.5,0.5)));
+ *//*
+ */
+/*
+ * tracerTriangle(n.calculerPoint3D(u, v), n.calculerPoint3D(u + n.getIncrU(),
+ * v), n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()), n.texture());
+ * tracerTriangle(n.calculerPoint3D(u, v), n.calculerPoint3D(u, v +
+ * n.getIncrV()), n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()),
+ * n.texture());
+ *
+ *//*
+
+ */
+/*
+ * Point3D[][] point3DS = {{n.calculerPoint3D(u, v), n.calculerPoint3D(u +
+ * n.getIncrU(), v)}, {n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()),
+ * n.calculerPoint3D(u, v + n.getIncrV())}};
+ *
+ * SurfaceParametricPolygonalBezier surfaceParametriquePolynomialeBezier = new
+ * SurfaceParametricPolygonalBezier(point3DS);
+ * draw(surfaceParametriquePolynomialeBezier, n);
+ *//*
+
                             Point3D p1, p2, p3, p4;
                             p1 = n.calculerPoint3D(u, v);
                             p2 = n.calculerPoint3D(u + n.getIncrU(), v);
@@ -478,7 +534,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
                                 ime.testDeep(rotate(p3, r));
                                 ime.testDeep(rotate(p4, r));
                             } else {
-                                Logger.getAnonymousLogger().log(Level.INFO, "Surface" + n.getClass() + " u,v,u1,v1 = " + u + "," + v + " u1,v1 "
+                                System.out.println("Surface" + n.getClass() + " u,v,u1,v1 = " + u + "," + v + " u1,v1 "
                                         + (u + n.getIncrU()) + " " + (v + n.getIncrV()));
                                 tracerQuad(rotate(p1, n), rotate(p2, n),
                                         rotate(p3, n), rotate(p4, n),
@@ -486,14 +542,16 @@ public class ZBufferImpl8 extends ZBufferImpl {
 
                             }
 
-                            /*
-                             * line(n.calculerPoint3D(u, v), n.calculerPoint3D(u + n.getIncrU(), v),
-                             * n.texture, u); line( n.calculerPoint3D(u + n.getIncrU(), v),
-                             * n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()), n.texture, v); line(
-                             * n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()), n.calculerPoint3D(u, v
-                             * + n.getIncrV()), n.texture, u); line( n.calculerPoint3D(u, v + n.getIncrV()),
-                             * n.calculerPoint3D(u, v), n.texture, v);
-                             */
+                            */
+/*
+ * line(n.calculerPoint3D(u, v), n.calculerPoint3D(u + n.getIncrU(), v),
+ * n.texture, u); line( n.calculerPoint3D(u + n.getIncrU(), v),
+ * n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()), n.texture, v); line(
+ * n.calculerPoint3D(u + n.getIncrU(), v + n.getIncrV()), n.calculerPoint3D(u, v
+ * + n.getIncrV()), n.texture, u); line( n.calculerPoint3D(u, v + n.getIncrV()),
+ * n.calculerPoint3D(u, v), n.texture, v);
+ *//*
+
 
                             //
                             //
@@ -522,7 +580,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
                     if (r instanceof TRIObject) {
                         TRIObject o = (TRIObject) r;
                         for (TRI t : o.getTriangles()) {
-                            // Logger.getAnonymousLogger().log(Level.INFO, "Triangle suivant");
+                            // System.out.println("Triangle suivant");
 
                             draw(t);
 
@@ -563,13 +621,15 @@ public class ZBufferImpl8 extends ZBufferImpl {
                         }
                     } else if (r instanceof PCont) {
                         PCont b = (PCont) r;
-                        b.getPoints().forEach(new Consumer() {
-                            @Override
-                            public void accept(Object o) {
-                                ime.testDeep(rotate((Point3D) o, b)
-                                        , ((Point3D) o).texture().getColorAt(0, 0));
-                            }
-                        });
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            b.getPoints().forEach(new Consumer() {
+                                @Override
+                                public void accept(Object o) {
+                                    ime.testDeep(rotate((Point3D) o, b)
+                                            , ((Point3D) o).texture().getColorAt(0, 0));
+                                }
+                            });
+                        }
                     } else if (r instanceof POConteneur) {
                         POConteneur c = (POConteneur) r;
                         for (Point3D p : c.iterable()) {
@@ -620,6 +680,13 @@ public class ZBufferImpl8 extends ZBufferImpl {
     }
 
 
+    private void tracerLines(Point3D p1, Point3D p2, Point3D p3, Point3D p4, ITexture texture, double u, double v,
+                             double u1, double v1, ParametricSurface n) {
+        line(p1, p2, texture, u, v, u + u1, v, n);
+        line(p2, p3, texture, u + u1, v, u + u1, v + v1, n);
+        line(p3, p4, texture, u + u1, v, u, v + v1, n);
+        line(p4, p1, texture, u, v + v1, u, v, n);
+    }
 
 
     public double echelleEcran() {
@@ -627,10 +694,10 @@ public class ZBufferImpl8 extends ZBufferImpl {
     }
 
     public int getColorAt(Point p) {
-        if (ime.getIME().getElementProf((int) p.getX(), (int) p.getY()) >= INFINI_PROF) {
-            return ime.getIME().getElementCouleur((int) p.getX(), (int) p.getY());
+        if (ime.getIME().getElementProf((int) p.x, (int) p.y) >= INFINI_PROF) {
+            return ime.getIME().getElementCouleur((int) p.x, (int) p.y);
         } else {
-            return Color.TRANSLUCENT;
+            return Color.TRANSPARENT;
         }
     }
 
@@ -642,9 +709,11 @@ public class ZBufferImpl8 extends ZBufferImpl {
         return new ZBufferImpl(x, y);
     }
 
-    /*__
-     * @return hauteur du zbuffer
-     */
+    */
+/*__
+ * @return hauteur du zbuffer
+ *//*
+
     public int hauteur() {
         return ha;
     }
@@ -655,8 +724,9 @@ public class ZBufferImpl8 extends ZBufferImpl {
         ha = height;
     }
 
-    public ECBufferedImage image() {
-               /*
+    public Bitmap image() {
+               */
+/*
         ECBufferedImage bi2 = new ECBufferedImage(la, ha, ECBufferedImage.TYPE_INT_RGB);
         for (int i = 0; i < la; i++) {
             for (int j = 0; j < ha; j++) {
@@ -667,13 +737,14 @@ public class ZBufferImpl8 extends ZBufferImpl {
         }
         this.bi = bi2;
         return bi2;
-        */
+        *//*
+
         return image2();
 
     }
 
-    public ECBufferedImage image2() {
-        return data1.getBufferedImage();
+    public Picture image2() {
+        return bi;
 
 
     }
@@ -686,19 +757,23 @@ public class ZBufferImpl8 extends ZBufferImpl {
     }
 
 
-    /*__
-     * @return largeur du zbuffer
-     */
+    */
+/*__
+ * @return largeur du zbuffer
+ *//*
+
     public int largeur() {
         return la;
     }
 
     @Override
-    /*__
-     * @param p1 first point
-     * @param p2 second point
-     * @param t  colour of de la line
-     */
+    */
+/*__
+ * @param p1 first point
+ * @param p2 second point
+ * @param t  colour of de la line
+ *//*
+
     public void line(Point3D p1, Point3D p2, ITexture t) {
         Point x1 = camera().coordonneesPoint2D(p1, this);
         Point x2 = camera().coordonneesPoint2D(p2, this);
@@ -706,7 +781,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
             return;
         }
         Point3D n = p1.moins(p2).norme1();
-        double itere = Math.max(Math.abs(x1.getX() - x2.getX()), Math.abs(x1.getY() - x2.getY())) * 4 + 1;
+        double itere = Math.max(Math.abs(x1.x - x2.x), Math.abs(x1.y - x2.y)) * 4 + 1;
         for (int i = 0; i < itere; i++) {
             Point3D p = p1.plus(p2.moins(p1).mult(i / itere));
             p.texture(t);
@@ -723,7 +798,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
             return;
         }
         Point3D n = p1.moins(p2).norme1();
-        double itere = Math.max(Math.abs(x1.getX() - x2.getX()), Math.abs(x1.getY() - x2.getY())) * 4 + 1;
+        double itere = Math.max(Math.abs(x1.x - x2.x), Math.abs(x1.y - x2.y)) * 4 + 1;
         for (int i = 0; i < itere; i++) {
             Point3D p = p1.plus(p2.moins(p1).mult(i / itere));
             if (curve != null)
@@ -744,8 +819,8 @@ public class ZBufferImpl8 extends ZBufferImpl {
             return;
         }
         Point3D n = p1.moins(p2).norme1();
-        double itereU = Math.max(Math.abs(x1.getX() - x2.getX()), Math.abs(x1.getY() - x2.getY())) * 4 + 1;
-        double itereV = Math.max(Math.abs(x1.getX() - x2.getX()), Math.abs(x1.getY() - x2.getY())) * 4 + 1;
+        double itereU = Math.max(Math.abs(x1.x - x2.x), Math.abs(x1.y - x2.y)) * 4 + 1;
+        double itereV = Math.max(Math.abs(x1.x - x2.x), Math.abs(x1.y - x2.y)) * 4 + 1;
         for (int i = 0; i < itereU; i++) {
             Point3D p = p1.plus(p2.moins(p1).mult(i / itereU));
             //p.addData("u", u);
@@ -786,12 +861,24 @@ public class ZBufferImpl8 extends ZBufferImpl {
         return Map;
 
     }
+*/
+/*
+    private double maxDistance(Point p1, Point p2, Point p3) {
+        return Math.max(Math.max(Point.distance(p1.x, p1.y, p2.x, p2.y), Point.distance(p2.x, p2.y, p3.x, p3.y)),
+                Point.distance(p3.x, p3.y, p1.x, p1.y));
+    }
 
+    private double maxDistance(Point p1, Point p2, Point p3, Point p4) {
+        return Math
+                .max(Math.max(Math.max(Point.distance(p1.x, p1.y, p2.x, p2.y), Point.distance(p2.x, p2.y, p3.x, p3.y)),
+                        Point.distance(p3.x, p3.y, p4.x, p4.y)), Point.distance(p4.x, p4.y, p1.x, p1.y));
+    }
 
+*//*
 
     public void plotPoint(Color color, Point3D p) {
         if (p != null && color != null) {
-            ime.testDeep(p, color.getRGB());
+            ime.testDeep(p, color.toArgb());
         }
 
     }
@@ -841,14 +928,16 @@ public class ZBufferImpl8 extends ZBufferImpl {
         this.colorationActive = a;
     }
 
-    /*
+    */
+/*
         public void next() {
             if (texture() instanceof TextureMov) {
                 ((TextureMov) texture()).nextFrame();
             }
             idImg++;
         }
-    */
+    *//*
+
     @Override
     public void testDeep(Point3D p, Color c) {
 
@@ -869,14 +958,31 @@ public class ZBufferImpl8 extends ZBufferImpl {
     }
 
     public void testPoint(Point3D p, Color c) {
-        int cc = c.getRGB();
+        int cc = c.toArgb();
 
         if (scene().lumiereActive() != null) {
-            cc = scene().lumiereActive().getCouleur(c.getRGB(), p, p.getNormale());
+            cc = scene().lumiereActive().getCouleur(c.toArgb(), p, p.getNormale());
         }
         ime.testDeep(p, cc);
     }
 
+    private void tracerAretes(Point3D point3d, Point3D point3d2, Color c) {
+        Point p1 = camera().coordonneesPoint2D(point3d, this);
+        Point p2 = camera().coordonneesPoint2D(point3d2, this);
+        if (p1 == null || p2 == null) {
+            return;
+        }
+        double iteres = Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y + 1);
+        for (double a = 0; a < 1.0; a += 1 / iteres) {
+            Point pp = new Point(p1);
+            Point3D p = point3d.mult(a).plus(point3d2.mult(1 - a));
+            pp.set(p1.x + (int) (a * (p2.x - p1.x)),
+                    p1.y + (int) (a * (p2.y - p1.y)));
+            ime.testDeep(p, c.toArgb());
+
+        }
+
+    }
 
     public boolean add(Double px, Double py, Double pz, Double
             tx, Double ty, Double tz, Double nx, Double ny, Double nz,
@@ -885,7 +991,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
         // ime.testDeep(new Point3D(px, py, pz), new Point3D(nx, ny, nz), r.texture().getColorAt(u, v));
         if (data1.addData(px, py, pz,
                 tx, ty, tz, nx, ny, nz, u, v, w, r)) {
-            //Logger.getAnonymousLogger().log(Level.INFO, ":");
+            //System.out.println(":");
             return true;
         }
         return false;
@@ -914,12 +1020,12 @@ public class ZBufferImpl8 extends ZBufferImpl {
 
         int col = t.getColorAt(u0, v0);
 
-        double iteres1 = 1.0 / (Math.abs(p1.getX() - p2.getX()) + Math.abs(p1.getY() - p2.getY()));
+        double iteres1 = 1.0 / (Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y));
         for (double a = 0; a < 1.0; a += iteres1) {
             Point3D p3d = pp1.plus(pp1.mult(-1d).plus(pp2).mult(a));
             Point pp = camera().coordonneesPoint2D(p3d, this);
             if (pp != null) {
-                double iteres2 = 1.0 / (Math.abs(pp.getX() - p3.getX()) + Math.abs(pp.getY() - p3.getY()));
+                double iteres2 = 1.0 / (Math.abs(pp.x - p3.x) + Math.abs(pp.y - p3.y));
                 for (double b = 0; b < 1.0; b += iteres2) {
                     Point3D p = p3d.plus(p3d.mult(-1d).plus(pp3).mult(b));
                     p.texture(t);
@@ -1061,14 +1167,16 @@ public class ZBufferImpl8 extends ZBufferImpl {
         private boolean notests = false;
 
 
-        /* 
+        */
+/*
            P3 x y z
            Tgt x y z
            N x y z 
            Tex u v w TextId 
            T
            
-        */
+        *//*
+
         public Box2D() {
             SceneCadre cadre = currentScene.getCadre();
             if (cadre.isCadre()) {
@@ -1077,9 +1185,11 @@ public class ZBufferImpl8 extends ZBufferImpl {
                         test(cadre.get(i));
                     }
                 }
-                /*
-                 * if (!cadre.isExterieur()) { notests = true; }
-                 */
+                */
+/*
+ * if (!cadre.isExterieur()) { notests = true; }
+ *//*
+
             }
 
             if (!notests) {
@@ -1116,14 +1226,16 @@ public class ZBufferImpl8 extends ZBufferImpl {
                         test(t.getSommet().getElem(0));
                         test(t.getSommet().getElem(1));
                         test(t.getSommet().getElem(2));
-                    } /* else if (r instanceof BSpline) {
+                    } */
+/* else if (r instanceof BSpline) {
                         BSpline b = (BSpline) r;
                         Iterator<Point3D> ts = b.iterator();
                         while (ts.hasNext()) {
                             Point3D p = ts.next();
                             test(p);
                         }
-                    } */ else if (r instanceof BezierCubique) {
+                    } *//*
+ else if (r instanceof BezierCubique) {
                         BezierCubique b = (BezierCubique) r;
                         Iterator<Point3D> ts = b.iterator();
                         while (ts.hasNext()) {
@@ -1273,9 +1385,11 @@ public class ZBufferImpl8 extends ZBufferImpl {
         public float w = 10.0f;
         public float h = w * la / ha;
 
-        /*__
-         * @param scene
-         */
+        */
+/*__
+ * @param scene
+ *//*
+
         public Box2DPerspective(Scene scene) {
         }
     }
@@ -1312,12 +1426,12 @@ public class ZBufferImpl8 extends ZBufferImpl {
                 return;
             }
             double prof = -1000;
-            int x = (int) ce.getX();
-            int y = (int) ce.getY();
-            if (x >= 0 & x < la & y >= 0 & y < ha && c.getAlpha() == 255) {
+            int x = (int) ce.x;
+            int y = (int) ce.y;
+            if (x >= 0 & x < la & y >= 0 & y < ha && c.alpha() == 255) {
                 ime.setElementID(x, y, idImg);
                 ime.setElementPoint(x, y, x3d);
-                ime.setElementCouleur(x, y, c.getRGB());
+                ime.setElementCouleur(x, y, c.toArgb());
                 ime.setDeep(x, y, prof);
             }
         }
@@ -1338,10 +1452,12 @@ public class ZBufferImpl8 extends ZBufferImpl {
             idImg++;
         }
 
-        /*
-         * private boolean checkCoordinates(int coordArr, int y) { if (coordArr >= 0 & coordArr < la & y >= 0
-         * & y < ha) { return true; } return false; }
-         */
+        */
+/*
+ * private boolean checkCoordinates(int coordArr, int y) { if (coordArr >= 0 & coordArr < la & y >= 0
+ * & y < ha) { return true; } return false; }
+ *//*
+
         public void setIME(int x, int y) {
             ime.setElementID(x, y, idImg);
         }
@@ -1355,12 +1471,16 @@ public class ZBufferImpl8 extends ZBufferImpl {
                 return;
             double deep = camera().distanceCamera(x3d);
 
-            int x = (int) ce.getX();
-            int y = (int) ce.getY();
+            int x = (int) ce.x;
+            int y = (int) ce.y;
             if (x >= 0 & x < la & y >= 0 & y < ha
-                    && (deep < ime.getElementProf(x, y) /*
-             * || ime.getElementID(coordArr, y) != idImg
-             */) /* && (((cc>>24)&0xff) == 0) */) {
+                    && (deep < ime.getElementProf(x, y) */
+/*
+ * || ime.getElementID(coordArr, y) != idImg
+ *//*
+) */
+/* && (((cc>>24)&0xff) == 0) *//*
+) {
                 if (scene().lumiereActive() != null) {
                     cc = scene().lumiereTotaleCouleur(c, x3d, x3d.getNormale());
 
@@ -1375,11 +1495,12 @@ public class ZBufferImpl8 extends ZBufferImpl {
         public void testDeep(Point3D p, Point3D n, Color c) {
             // Color cc = c.getCouleur();
             p.setNormale(n);
-            testDeep(p, c.getRGB());
+            testDeep(p, c.toArgb());
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         public void testDeep(Point3D p, Point3D n, int c) {
-            testDeep(p, n, new Color(c));
+            testDeep(p, n, Color.valueOf(c));
         }
 
         public void testDeep(Point3D p, ITexture texture) {
@@ -1387,8 +1508,9 @@ public class ZBufferImpl8 extends ZBufferImpl {
 
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         public void dessine(Point3D p, ITexture texture) {
-            dessine(p, new Color(texture.getColorAt(0.5, 0.5)));
+            dessine(p, Color.valueOf(texture.getColorAt(0.5, 0.5)));
 
         }
 
@@ -1400,11 +1522,12 @@ public class ZBufferImpl8 extends ZBufferImpl {
             testDeep(p, p.getNormale(), c);
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         public void testDeep(Point3D pFinal, Point3D point3D, int colorAt, Representable n) {
             testDeep(pFinal, point3D, colorAt);
             Point point = camera().coordonneesPoint2D(pFinal, that);
             if (ime != null && point != null) {
-                ime.setElementRepresentable((int) point.getX(), (int) point.getY(), n);
+                ime.setElementRepresentable((int) point.x, (int) point.y, n);
             }
         }
 
@@ -1414,7 +1537,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
     }
 
     public void dessine(Point3D p, ITexture texture) {
-        ime.dessine(p, new Color(texture.getColorAt(0.5, 0.5)));
+        ime.dessine(p, Color.valueOf(texture.getColorAt(0.5, 0.5)));
     }
 
     public class ImageMapElement {
@@ -1543,37 +1666,43 @@ public class ZBufferImpl8 extends ZBufferImpl {
         return clickAt((int) (x * largeur()), (int) y * hauteur());
     }
 
-    /*__
-     *
-     * @param x Coordonnees de l'image ds ZBuffer
-     * @param y Coordonnees de l'image ds ZBuffer
-     * @return Point3D avec texture. Si vide Point3D.INFINI
-     */
+    */
+/*__
+ *
+ * @param x Coordonnees de l'image ds ZBuffer
+ * @param y Coordonnees de l'image ds ZBuffer
+ * @return Point3D avec texture. Si vide Point3D.INFINI
+ *//*
+
     public Point3D clickAt(int x, int y) {
         Point3D p = ime.getIME().getElementPoint(x, y);
         p.texture(new TextureCol(ime.getIME().getElementCouleur(x, y)));
         return p;
     }
 
-    /*__
-     *
-     * @param x Coordonnees de l'image ds ZBuffer
-     * @param y Coordonnees de l'image ds ZBuffer
-     * @return Point3D avec texture. Si vide Point3D.INFINI
-     */
+    */
+/*__
+ *
+ * @param x Coordonnees de l'image ds ZBuffer
+ * @param y Coordonnees de l'image ds ZBuffer
+ * @return Point3D avec texture. Si vide Point3D.INFINI
+ *//*
+
     public Representable representableAt(int x, int y) {
         Representable p = ime.getIME().getElementRepresentable(x, y);
         return p;
     }
 
-    /*__
-     *
-     * @param x Coordonnées dans le composant
-     * @param y Coordonnées dans le composant
-     * @param orig point 3D à inverser dans le repère de la caméra
-     * @param camera Caméra où calculer. null="this.camera()"
-     * @return axe p1: camera.axe, p3 à dist.
-     */
+    */
+/*__
+ *
+ * @param x Coordonnées dans le composant
+ * @param y Coordonnées dans le composant
+ * @param orig point 3D à inverser dans le repère de la caméra
+ * @param camera Caméra où calculer. null="this.camera()"
+ * @return axe p1: camera.axe, p3 à dist.
+ *//*
+
     public Point3D invert(int x, int y, Point3D orig, Camera camera) {
         x = (x - largeur() / 2);
         y = (y - hauteur() / 2);
@@ -1599,3 +1728,4 @@ public class ZBufferImpl8 extends ZBufferImpl {
 
 
 }
+*/

@@ -1,20 +1,53 @@
 /*
- * Copyright (c) 2023. Manuel Daniel Dahmen
+ * Copyright (c) 2023.
  *
  *
- *    Copyright 2012-2023 Manuel Daniel Dahmen
+ *  Copyright 2012-2023 Manuel Daniel Dahmen
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *  limitations under the License.
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *
+ */
+
+/*
+ *  This file is part of Empty3.
+ *
+ *     Empty3 is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     Empty3 is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with Empty3.  If not, see <https://www.gnu.org/licenses/>. 2
+ */
+
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>
  */
 
 /*
@@ -25,39 +58,51 @@
  */
 package one.empty3.library.core.testing;
 
-import one.empty3.gui.DataModel;
-import one.empty3.library.*;
-import one.empty3.library.core.export.ObjExport;
-import one.empty3.library.core.export.STLExport;
-import one.empty3.library.core.script.ExtensionFichierIncorrecteException;
-import one.empty3.library.core.script.Loader;
-import one.empty3.library.core.script.VersionNonSupporteeException;
-import org.jcodec.api.awt.AWTSequenceEncoder;
-import org.jcodec.common.io.FileChannelWrapper;
-import org.jcodec.common.io.NIOUtils;
-import org.jcodec.common.model.Rational;
+import android.graphics.Bitmap;
+import android.media.AudioFormat;
+import android.media.MediaRecorder;
 
-import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Properties;
-import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import one.empty3.library.Camera;
+import one.empty3.library.ITexture;
+import one.empty3.library.PaintingAct;
+import one.empty3.library.Point3D;
+import one.empty3.library.RegisterOutput;
+import one.empty3.library.Representable;
+import one.empty3.library.Scene;
+import one.empty3.library.ZBuffer;
+import one.empty3.library.ZBufferFactory;
+import one.empty3.library.ZBufferImpl;
+import one.empty3.library.core.export.ObjExport;
+import one.empty3.library.core.export.STLExport;
+import one.empty3.library.core.script.ExtensionFichierIncorrecteException;
+import one.empty3.library.core.script.Loader;
+import one.empty3.library.core.script.VersionNonSupporteeException;
 
 /*__
  * @author Manuel DAHMEN
  */
 public abstract class TestObjet implements Test, Runnable {
+    public static Resolution PAL = new Resolution(1280, 720);
+    public static Resolution HD720 = new Resolution(1280, 720);
+    public static Resolution HD1080 = new Resolution(1920, 1080);
+    public static Resolution UHD = new Resolution(1920 * 2, 1080 * 2);
+    public static Resolution VGAZIZI = new Resolution(640, 480);
+
     public static final int GENERATE_NOTHING = 0;
     public static final int GENERATE_IMAGE = 1;
     public static final int GENERATE_MODEL = 2;
@@ -72,24 +117,15 @@ public abstract class TestObjet implements Test, Runnable {
     public static final int ON_MAX_FRAMES_CONTINUE = 1;
     public static final int ENCODER_MONTE = 0;
     public static final int ENCODER_HUMBLE = 1;
-    public static Resolution PAL = new Resolution(1280, 720);
-    public static Resolution HD720 = new Resolution(1280, 720);
-    public static Resolution HD1080 = new Resolution(1920, 1080);
-    public static Resolution UHD = new Resolution(1920 * 2, 1080 * 2);
-    public static Resolution VGA = new Resolution(640, 480);
-    public static Resolution VGAZIZI = new Resolution(320, 200);
+    protected int encoder = 0;
     protected Scene scene = new Scene();
     protected String description = "@ Manuel Dahmen \u2610";
     protected Camera c;
     protected int frame = 0;
     protected ArrayList<TestInstance.Parameter> dynParams;
-    protected ITexture couleurFond;
-    protected ZBufferImpl z;
-    AWTSequenceEncoder encoder;
     Properties properties = new Properties();
-    one.empty3.library.core.testing2.ShowTestResult str;
     private File avif;
-    //private AVIWriter aw;
+    private MediaRecorder aw;
     private boolean aviOpen = false;
     private String filmName;
     private int idxFilm;
@@ -106,10 +142,10 @@ public abstract class TestObjet implements Test, Runnable {
     private int resx = 640;
     private int resy = 480;
     private File dir = null;
-    private ECBufferedImage ri;
+    private Bitmap ri;
     private String filename = "frame";
     private String fileExtension = "JPG";
-    private boolean publish = true;
+    private boolean publish = false;
     private boolean isometrique = false;
     private boolean loop = true;
     private int maxFrames = 5000;
@@ -125,33 +161,36 @@ public abstract class TestObjet implements Test, Runnable {
     private String sousdossier;
     private boolean D3 = false;
     private ImageContainer biic;
-    private ECBufferedImage riG;
-    private ECBufferedImage riD;
+    private Bitmap riG;
+    private Bitmap riD;
     private File fileG;
     private File fileD;
     private boolean pause = false;
     private boolean pauseActive = false;
+    protected ITexture couleurFond;
     private File directory;
     private ZipWriter zip;
     private boolean stop = false;
+    protected ZBufferImpl z;
     private RegisterOutput o = new RegisterOutput();
     private int onTextureEnds = ON_TEXTURE_ENDS_STOP;
     private int onMaxFrameEvent = ON_MAX_FRAMES_STOP;
     private ExportAnimationData dataWriter;
     private File audioTrack;
     private boolean isAudioDone;
-    private AudioInputStream audioIn;
+    //private AudioInputStream audioIn;
     private int audioTrackNo;
     private int videoTrackNo;
     private int fps = 25;
     //private Buffer buf;
-    //private ManualVideoCompile compiler;
     private boolean isVBR;
     private AudioFormat audioFormat;
     private Resolution dimension = HD1080;
     private String name;
-    private FileChannelWrapper out;
-    private File file0;
+
+    protected ZBufferImpl z() {
+        return z;
+    }
 
     public TestObjet() {
 
@@ -161,6 +200,7 @@ public abstract class TestObjet implements Test, Runnable {
     public TestObjet(ArrayList<TestInstance.Parameter> params) {
         init();
     }
+
 
     public TestObjet(boolean binit) {
         if (binit) {
@@ -173,13 +213,15 @@ public abstract class TestObjet implements Test, Runnable {
         }
     }
 
-
-    protected ZBufferImpl z() {
-        return z;
-    }
-
     public void setProperties(Properties p) {
         this.getClass();
+    }
+
+    public static void main(String[] args) {
+        TestObjet gui = new TestObjetSub();
+        gui.loop(true);
+        gui.setMaxFrames(2000);
+        new Thread(gui).start();
     }
 
     public ExportAnimationData getDataWriter() {
@@ -200,7 +242,7 @@ public abstract class TestObjet implements Test, Runnable {
         dimension = new Resolution(x, y);
     }
 
-    public BufferedImage img() {
+    public Bitmap img() {
         return ri;
     }
 
@@ -209,17 +251,20 @@ public abstract class TestObjet implements Test, Runnable {
         avif = new File(this.dir.getAbsolutePath() + File.separator
                 + sousdossier + this.getClass().getName() + "__" + filmName + idxFilm + ".AVI");
 
-        out = null;
-        encoder = null;
-        try {
-            out = NIOUtils.writableFileChannel(avif.getAbsolutePath());
-            // for Android use: AndroidSequenceEncoder
-            encoder = new AWTSequenceEncoder(out, Rational.R(25, 1));
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-            NIOUtils.closeQuietly(out);
+        if ((generate & GENERATE_MOVIE) > 0) {
+
+            if (encoder == 1) {
+
+                initCompiler();
+            } else {
+                if (isAviOpen()) {
+                    aw.stop();
+                    aw = null;
+                    aviOpen = false;
+
+                }
+            }
         }
-        aviOpen = true;
     }
 
     private boolean unterminable() {
@@ -227,7 +272,7 @@ public abstract class TestObjet implements Test, Runnable {
     }
 
     public boolean isAviOpen() {
-        return (aviOpen && encoder != null);
+        return aviOpen;
     }
 
     public void setAviOpen(boolean aviOpen) {
@@ -264,7 +309,6 @@ public abstract class TestObjet implements Test, Runnable {
 
     public void camera(Camera c) {
         scene().cameraActive(c);
-        z().camera(c);
     }
 
     public boolean D3() {
@@ -279,19 +323,15 @@ public abstract class TestObjet implements Test, Runnable {
         return directory;
     }
 
-    protected void ecrireImage(RenderedImage ri, String type, File fichier) {
+    protected void ecrireImage(Bitmap ri, String type, File fichier) {
         if (fichier == null) {
             o.println("Erreur OBJET FICHIER (java.io.File) est NULL");
             System.exit(1);
         }
 
-        Graphics g = ((BufferedImage) ri).getGraphics();
-        g.setColor(Color.black);
-        g.drawString(description, 0, 1100);
-
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(ri, type, baos);
+            ri.compress(Bitmap.CompressFormat.JPEG, 10, baos);
 
             baos.flush(); // Is this necessary??
             byte[] resultImageAsRawBytes = baos.toByteArray();
@@ -302,21 +342,21 @@ public abstract class TestObjet implements Test, Runnable {
             out.close();
 
             zip.addFile(fichier.getName(), resultImageAsRawBytes);
-
-            o.println(fichier.getAbsolutePath());
-        } catch (Exception ex) {
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        o.println(fichier.getAbsolutePath());
 
     }
 
     public void exportFrame(String format, String filename) throws IOException {
 
         STLExport.save(
-                file0 = new File(directory.getAbsolutePath() + File.separator + "stlExportFormatTXT" + filename + ".stl"),
+                new File(directory.getAbsolutePath() + File.separator + filename + ".stl"),
                 scene(),
                 false);
         ObjExport.save(
-                /*file0=*/new File(directory.getAbsolutePath() + File.separator + "objExportFormatTXT" + filename + ".obj"),
+                new File(directory.getAbsolutePath() + File.separator + filename + ".obj"),
                 scene(),
                 false);
     }
@@ -325,6 +365,23 @@ public abstract class TestObjet implements Test, Runnable {
 
     public int frame() {
         return frame;
+    }
+
+    public TestInstance.Parameter getDynParameter(String name) {
+        Iterator<TestInstance.Parameter> prms = dynParams.iterator();
+
+        while (prms.hasNext()) {
+            TestInstance.Parameter prm = prms.next();
+
+            if (name.equals(prm.name)) {
+                return prm;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<TestInstance.Parameter> getDynParameters() {
+        return dynParams;
     }
 
     ArrayList<TestInstance.Parameter> getDynParams() {
@@ -349,6 +406,11 @@ public abstract class TestObjet implements Test, Runnable {
 
     public void setGenerate(int generate) {
         this.generate = generate;
+    }
+
+    public ArrayList<TestInstance.Parameter> getInitParameters() {
+        return initParams;
+
     }
 
     public ArrayList<TestInstance.Parameter> getInitParams() {
@@ -407,24 +469,9 @@ public abstract class TestObjet implements Test, Runnable {
                     + File.separator + "empty3.config"));
 
 
-        } catch (FileNotFoundException ex) {
-            Logger.getAnonymousLogger().log(Level.INFO, "userHome/empty3.config not found use default");
-            config = new Properties();
-            config.put("folderoutput",
-                    System.getProperty("user.home")
-                            + File.separator + "EmptyCanvasTest");
-            try {
-                config.store(new FileOutputStream(new File(System.getProperty("user.home")
-                                + File.separator + "empty3.config")),
-                        "Config file for empty3.one library");
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
         } catch (Exception ex) {
             config.setProperty("folderoutput", "./EmptyCanvasTests");
-            Logger.getAnonymousLogger().log(Level.INFO, "userHome/empty3.config not found use default");
+            System.out.println("userHome/empty3.config not found use default");
         }
         //          try {
         if (config.getProperty("folderoutput") != null) {
@@ -463,7 +510,8 @@ public abstract class TestObjet implements Test, Runnable {
         ///setMaxFrames(100);
         loop(true);
 
-        //compiler = new ManualVideoCompile();
+
+        aw = new MediaRecorder();
     }
 
     private String dateForFilename(Date date) {
@@ -640,50 +688,11 @@ public abstract class TestObjet implements Test, Runnable {
 
     }
 
-    public void publishResult() {
-        if (getPublish()) {
-
-            str = new one.empty3.library.core.testing2.ShowTestResult(ri);
-            str.setImageContainer(biic);
-            str.setTestObjet(this);
-            new Thread(str).start();
-        }
-    }
-
-    private boolean getPublish() {
-        return publish;
-    }
-
-    public void setPublish(boolean publish) {
-        this.publish = publish;
-    }
 
     public void publishResult(boolean publish) {
         this.publish = publish;
     }
 
-    public void reportException(Exception ex) {
-        ex.printStackTrace();
-        try {
-            InputStream is = getClass().getResourceAsStream(
-                    "/FAILED.png");
-
-            if (is == null) {
-                o.println("Erreur d'initialisation: pas correct!");
-                System.exit(-1);
-            }
-
-            RenderedImage i = ImageIO.read(is);
-            BufferedImage bi = (BufferedImage) i;
-
-            ECBufferedImage eci = new ECBufferedImage(bi);
-            //biic.setImage(eci);
-        } catch (Exception ex1) {
-            ex1.printStackTrace();
-        }
-
-        str.setMessage("ERROR EXCEPTION");
-    }
 
     public void reportPause(boolean phase) {
     }
@@ -691,34 +700,6 @@ public abstract class TestObjet implements Test, Runnable {
     public void reportStop() {
     }
 
-    public void reportSuccess(File film) {
-        try {
-            InputStream is = getClass().getResourceAsStream(
-                    "/RENDEREDOK.png");
-
-            if (is == null) {
-                o.println("Erreur d'initialisation: pas correct!");
-                System.exit(-1);
-            }
-
-            RenderedImage i = ImageIO.read(is);
-            BufferedImage bi = (BufferedImage) i;
-
-            ECBufferedImage eci = new ECBufferedImage(bi);
-            //biic.setImage(eci);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        try {
-            if (file.exists()) {
-                Desktop dt = Desktop.getDesktop();
-                dt.open(file);
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
 
     public boolean copyResources() {
         // TODO Parcourir les textures de la scène
@@ -731,9 +712,6 @@ public abstract class TestObjet implements Test, Runnable {
     }
 
     public void initCompiler() {
-
-       /* compiler.init(avif.getAbsolutePath()
-                , resx, resy, fps, 0);*/
     }
 
     public void run() {
@@ -741,12 +719,11 @@ public abstract class TestObjet implements Test, Runnable {
             init();
 
 
-        z = ZBufferFactory.newInstance(resx, resy);
+        z = ZBufferFactory.instance(resx, resy, D3);
         z.scene(scene);
         //z.next();
-        long timeStart = System.currentTimeMillis();
-
-        long lastInfoEllapsedMillis = System.currentTimeMillis();
+        timeStart = System.nanoTime();
+        lastInfoEllapsedMillis = System.nanoTime();
         if ((generate & GENERATE_OPENGL) > 0) {
             throw new UnsupportedOperationException("No class for OpenGL here");
         }
@@ -778,11 +755,17 @@ public abstract class TestObjet implements Test, Runnable {
         try {
             zip.init(zipf);
         } catch (FileNotFoundException e1) {
-            reportException(e1);
             e1.printStackTrace();
             return;
         }
 
+
+        ginit();
+
+
+        /*if (scene().texture() != null) {
+            z.backgroundTexture(scene().texture());
+        }*/
 
         o.println("");
         o.println(directory().getAbsolutePath());
@@ -790,38 +773,8 @@ public abstract class TestObjet implements Test, Runnable {
 
         o.println("Starting movie  {0}" + runtimeInfoSucc());
 
-        ginit();
-
 
         while ((nextFrame() || unterminable()) && !stop) {
-
-
-            byte[] audioBuffer = null;
-            // Advance audio to movie time + 1 second (audio must be ahead of video by 1 second)
-            while (audioTrack != null && !isAudioDone /*&& aw.getDuration(audioTrackNo).doubleValue() < 1.0
-             *frame() / fps*/) {
-                // => variable bit rate: format can change at any time
-                audioFormat = audioIn.getFormat();
-                if (audioFormat == null) {
-                    break;
-                }
-                int asSize = audioFormat.getFrameSize();
-                int asDuration = (int) (audioFormat.getSampleRate() / audioFormat.getFrameRate());
-                if (audioBuffer == null || audioBuffer.length < asSize) {
-                    audioBuffer = new byte[asSize];
-                }
-                int len = 0;
-                try {
-                    len = audioIn.read(audioBuffer);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (len == -1) {
-                    isAudioDone = true;
-                } else {
-
-                }
-            }
 
 
             pauseActive = true;
@@ -829,6 +782,7 @@ public abstract class TestObjet implements Test, Runnable {
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -839,85 +793,66 @@ public abstract class TestObjet implements Test, Runnable {
                 finit();
             } catch (Exception ex) {
                 ex.printStackTrace();
-                reportException(ex);
             }
             if ((generate & GENERATE_OPENGL) > 0) {
                 o.println("No OpenGL");
             } else {
                 try {
-                    timeStart = System.currentTimeMillis();
                     testScene();
-                    lastInfoEllapsedMillis = System.currentTimeMillis() - timeStart;
-                    reportSuccess(null);
+
                 } catch (Exception e1) {
-                    reportException(e1);
                     return;
                 }
             }
-            System.out.println("Time for frame°"+frame()+" (scene configuration: " + lastInfoEllapsedMillis/1000f);
 
-            //Logger.getAnonymousLogger().log(Level.INFO, z.scene());
-            timeStart = System.currentTimeMillis();
+            //System.out.println(z.scene());
 
             if ((generate & GENERATE_IMAGE) > 0) {
                 try {
-                    if (scene() != null && scene().cameraActive() != null)
-                        scene().cameraActive().declareProperties();
-
-                    z.idzpp();
-
-                    z.draw(scene());
+                    z.draw();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
 
-                if(getGenerate(TestObjet.GENERATE_IMAGE)) {
-                    ri = z.image2();
 
-                    afterRenderFrame();
+                ri = Bitmap.createBitmap(z.image2());
 
-                    // ri.getGraphics().drawString(description, 0, 0);
+                afterRenderFrame();
 
-                    if ((generate & GENERATE_MOVIE) > 0 && encoder != null) {
+                // ri.getGraphics().drawString(description, 0, 0);
 
-                        try {
-                            encoder.encodeImage((BufferedImage) ri);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        o.println(
-                                "No file open for avi writing");
-
+                if ((generate & GENERATE_MOVIE) > 0 && isAviOpen()) {
+                    if (encoder == ENCODER_MONTE) {
+                        dataWriter.writeFrameData(frame(), "Writing movie frame");
+                    } else if (encoder == ENCODER_HUMBLE) {
                     }
-                    ecrireImage(ri, type, file);
+                } else {
+                    o.println(
+                            "No file open for avi writing");
 
-                    biic.setImage(ri != null ? ri : (frame % 2 == 0 ? riG : riD));
-                    biic.setStr("" + frame);
                 }
+                ecrireImage(ri, type, file);
+
+                biic.setStr("" + frame);
             }
-            lastInfoEllapsedMillis = System.currentTimeMillis() - timeStart;
-            System.out.println("Time for frame°"+frame()+" (scene rendering: " + lastInfoEllapsedMillis/1000f);
-            try {
-                File foutm = new File(this.dir.getAbsolutePath()
-                        + File.separator + filename + ".bmo");
-                new Loader().saveTxt(foutm, scene);
-                dataWriter.writeFrameData(frame(), "Save text file: " + foutm.getAbsolutePath());
-                foutm = new File(this.dir.getAbsolutePath()
-                        + File.separator + filename + "-description.xml");
-                DataModel dataModel = new DataModel();
-                dataModel.setScene(scene());
-                dataModel.save(foutm.getAbsolutePath());
-                dataWriter.writeFrameData(frame(), "Save bin: " + foutm.getAbsolutePath());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if (isSaveBMood()) {
+                try {
+                    File foutm = new File(this.dir.getAbsolutePath()
+                            + File.separator + filename + ".bmood");
+                    new Loader().saveBin(foutm, scene);
+                    dataWriter.writeFrameData(frame(), "Save bin: " + foutm.getAbsolutePath());
+                } catch (VersionNonSupporteeException ex) {
+                    o.println(ex.getLocalizedMessage());
+                } catch (ExtensionFichierIncorrecteException e) {
+                    e.printStackTrace();
+                }
             }
 
 
             if ((generate & GENERATE_MODEL) > 0) {
                 try {
                     o.println("Start generating model");
-                    String filename = "export-" + frame;
+                    String filename = "export-" + frame + ".STL";
                     exportFrame("export", filename);
                     dataWriter.writeFrameData(frame(), "Export model: " + filename);
                     o.println("End generating model");
@@ -930,17 +865,15 @@ public abstract class TestObjet implements Test, Runnable {
 
             }
 
-
-            if (publish) {
+/*
+            if(publish) {
                 ImageContainer imageContainer = new ImageContainer();
                 biic.setImage(ri);
                 imageContainer.setImage(biic.getImage());
 
                 str.setImageContainer(imageContainer);
-
-                str.dessine();
             }
-
+  */
             z.idzpp();
 
         }
@@ -957,16 +890,13 @@ public abstract class TestObjet implements Test, Runnable {
                 //reportException(e);
             }
         }
-        if ((generate & GENERATE_MOVIE) > 0 && encoder != null) {
-            try {
-                encoder.finish();
-            } catch (IOException e) {
-                e.printStackTrace();
+        if ((generate & GENERATE_MOVIE) > 0 && true) {
+            if (encoder == ENCODER_MONTE) {
+            } else {
 
-            } finally {
-                NIOUtils.closeQuietly(out);
             }
         }
+
         String cmd;
 
         if (loop() && avif != null) {
@@ -1001,6 +931,7 @@ public abstract class TestObjet implements Test, Runnable {
 
     }
 
+
     public void saveBMood(boolean b) {
         saveTxt = b;
     }
@@ -1013,19 +944,6 @@ public abstract class TestObjet implements Test, Runnable {
         representable.setPaintingAct(getZ(), scene(), pa);
     }
 
-    public void closeView() {
-
-        if (str != null) {
-            try {
-                str.dispose();
-                str.stopThreads();
-                str = null;
-            } catch (NullPointerException ex) {
-                o.println("Can't stop thread");
-
-            }
-        }
-    }
 
     public void scene(Scene load) {
         scene = load;
@@ -1100,7 +1018,9 @@ public abstract class TestObjet implements Test, Runnable {
             try {
                 new Loader().load(f, scene);
 
-            } catch (VersionNonSupporteeException | ExtensionFichierIncorrecteException ex) {
+            } catch (VersionNonSupporteeException ex) {
+                o.println(ex.getLocalizedMessage());
+            } catch (ExtensionFichierIncorrecteException ex) {
                 o.println(ex.getLocalizedMessage());
             }
         } else {
@@ -1110,11 +1030,6 @@ public abstract class TestObjet implements Test, Runnable {
         }
     }
 
-    public void writeOnPictureAfterZ(BufferedImage bi) {
-    }
-
-    public void writeOnPictureBeforeZ(BufferedImage bi) {
-    }
 
     public String getFolder() {
         return dir.getAbsolutePath();
@@ -1147,37 +1062,25 @@ public abstract class TestObjet implements Test, Runnable {
         throw new ClassNotFoundException("Impossible to initialize class");
     }
 
-    public Resolution getDimension() {
-        return dimension;
-    }
-
     public void setDimension(Resolution dimension) {
         this.resx = dimension.x();
         this.resy = dimension.y();
         this.dimension = dimension;
     }
 
+    public Resolution getDimension() {
+        return dimension;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public Color v2main() {
-        return null;
+    public Boolean getPublish() {
+        return publish;
     }
 
-    public File getWrittenFile() {
-        return file0;
-    }
-
-    public int getFps() {
-        return fps;
-    }
-
-    public void setFps(int fps) {
-        this.fps = fps;
-    }
-
-    public void setZ(ZBufferImpl z) {
-        this.z = z;
+    public void setPublish(boolean publish) {
+        this.publish = publish;
     }
 }
