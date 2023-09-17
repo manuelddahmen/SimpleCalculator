@@ -58,6 +58,8 @@ import androidx.annotation.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import one.empty3.library.core.raytracer.tree.VectorTreeNodeType;
+
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
@@ -247,9 +249,11 @@ public class AlgebricTree extends Tree {
     }
 
 
-    public boolean addVector(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+    public boolean addVector(TreeNode src, String values) throws AlgebraicFormulaSyntaxException {
         int countTerms = 0;
 
+
+        int currentCord = -1;
         TreeNode t2;
         int i = 0;
         boolean firstExpFound = false;
@@ -260,6 +264,7 @@ public class AlgebricTree extends Tree {
         char newExp = '^';
         double newExpSign = 1;
         double oldExpSign = 1;
+        VectorTreeNode tnVec = null;
         while (i < values.length()) {
 
             if (values.charAt(i) == ',' && /*9(i < values.length() - 1 || values.charAt(i + 1) != '*') &&*/ count == 0) {
@@ -268,6 +273,7 @@ public class AlgebricTree extends Tree {
                 isNewExp = true;
                 firstExpFound = true;
                 newExpSign = 1;
+                currentCord ++;
             }
             if (i == values.length() - 1 && firstExpFound) {
                 isNewExp = true;
@@ -288,25 +294,34 @@ public class AlgebricTree extends Tree {
                 String subsubstring = values.substring(oldExpPos, newExpPos);
 
 
+
                 if (subsubstring.length() > 0) {
-                    t2 = new TreeNode(t, new Object[]{subsubstring}, new PowerTreeNodeType(oldExpSign));
+                    if(currentCord==0) {
+                        tnVec = new VectorTreeNode(src, new Object[]{subsubstring},
+                                new VectorTreeNodeType());
+                    }
+
+                    t2 = new TreeNode(src, new Object[]{subsubstring}, new PowerTreeNodeType(oldExpSign));
                     if (subsubstring.charAt(0) == '-') {
                         subsubstring = subsubstring.substring(1);
                         SignTreeNodeType signTreeNodeType = new SignTreeNodeType(-1.0);
                         signTreeNodeType.instantiate(new Object[]{subsubstring});
 
-                        t2 = new TreeNode(t2, new Object[]{subsubstring}, signTreeNodeType);
+                        t2 = new VectorTreeNode(t2, new Object[]{subsubstring}, signTreeNodeType);
+
+                    }
+
+                    if(currentCord>=0 && tnVec!=null) {
+                        tnVec.getChildren().add(t2);
                     }
                     if (subsubstring.length() > 0 && !add(t2, subsubstring)) {
                         return false;
                     } else {
-                        t.getChildren().add(t2);
+                        t2.getChildren().add(tnVec);
+                        src.getChildren().add(t2);
                         countTerms++;
                     }
                 }
-
-//ab44md78
-//gen44md78
                 isNewExp = false;
                 newExpPos = i + 1;
                 oldExpPos = i + 1;
@@ -317,7 +332,7 @@ public class AlgebricTree extends Tree {
 
 
         }
-        return t.getChildren().size() > 0 && countTerms > 0;
+        return src.getChildren().size() > 0 && countTerms > 0;
     }
 
     public boolean addPower(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {

@@ -33,17 +33,18 @@
 package one.empty3.library.core.raytracer.tree;
 
 import one.empty3.library.*;
+import one.empty3.library1.tree.TreeNodeType;
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  */
-public class VectorTreeNodeType extends TreeNodeValue {
+public class VectorTreeNodeType extends TreeNodeType {
     private Point3D p;
 
-    public VectorTreeNodeType(TreeNode parent, Object[] values, VariableTreeNodeType type) {
-        super(parent, values);
-    }
+    public VectorTreeNodeType() {
+        super();
 
+    }
 
     @Override
     public Double eval() {
