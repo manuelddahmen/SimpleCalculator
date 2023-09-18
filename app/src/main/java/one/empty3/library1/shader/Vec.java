@@ -148,4 +148,8 @@ public class Vec {
     public int size() {
         return vecVal.getData1d().size();
     }
-} 
+
+    public void set(int i, Double eval) {
+        vecVal.setElem(eval, i);
+    }
+}

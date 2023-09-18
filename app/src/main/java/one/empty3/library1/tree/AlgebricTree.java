@@ -121,7 +121,7 @@ public class AlgebricTree extends Tree {
 
         int i = 2;
         boolean added = false;
-        int length = 11;
+        int length = 12;
         boolean exception = false;
         while (i <= length && !added) {
             src.getChildren().clear();
@@ -129,6 +129,10 @@ public class AlgebricTree extends Tree {
                 int caseChoice = -1;
                 int lastAdded = -1;
                 switch (i) {
+                    case 12:
+                        added = addVector(src, formula);
+                        if(added) caseChoice = 12;
+                        break;
                     case 2:
                         added = addTerms(src, subformula);
                         if (added) caseChoice = 2;
@@ -140,10 +144,6 @@ public class AlgebricTree extends Tree {
                     case 4:
                         added = addPower(src, subformula);
                         if (added) caseChoice = 4;
-                        break;
-                    case 5:
-                        added = addVector(src, formula);
-                        if(added) caseChoice = 5;
                         break;
                     case 6:
                         added = addFormulaSeparator(src, formula);
@@ -170,7 +170,7 @@ public class AlgebricTree extends Tree {
                         if (added) caseChoice = 11;
                         break;
                     default:
-                        return false;
+                        break;
                 }
                 if (added)
                     checkForSignTreeNode(src);

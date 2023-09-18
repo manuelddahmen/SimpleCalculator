@@ -57,7 +57,8 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 
 
-
+import one.empty3.library.core.raytracer.tree.VectorTreeNodeType;
+import one.empty3.library1.shader.Vec;
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
 import one.empty3.library1.tree.DoubleTreeNodeType;
 import one.empty3.library1.tree.EquationTreeNodeType;
@@ -170,16 +171,28 @@ public class TreeNode {
 
             return sum;
         } else if (cType instanceof TreeTreeNodeType) {
-            return ((TreeTreeNode) getChildren().get(0)).eval();
+            return (getChildren().get(0)).eval();
         } else if (cType instanceof SignTreeNodeType) {
             double s1 = ((SignTreeNodeType) cType).getSign();
             if (getChildren().size() > 0)
                 return s1 * (Double) getChildren().get(0).eval();
             else
                 return s1;
+        } else if(cType instanceof VectorTreeNodeType) {
+            Vec vec = new Vec(getChildren().size());
+            for (int i = 0; i < getChildren().size(); i++) {
+                Double eval = getChildren().get(i).eval();
+                vec.set(i, eval);
+            }
+            return 0.0;
         }
-        Double eval = type.eval();
-        
+
+        Double eval = 0.0;
+
+        if(type!=null) {
+            eval = type.eval();
+        }
+
         return eval==null?0.0:eval;
 
     }
