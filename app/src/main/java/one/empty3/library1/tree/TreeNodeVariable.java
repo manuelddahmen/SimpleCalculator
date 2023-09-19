@@ -54,6 +54,7 @@ package one.empty3.library1.tree;
 
 import java.util.Map;
 
+import one.empty3.library.StructureMatrix;
 import one.empty3.library1.tree.TreeNode;
 import one.empty3.library1.tree.VariableTreeNodeType;
 
@@ -68,7 +69,8 @@ public class TreeNodeVariable extends TreeNode {
     }
 
     @Override
-    public Double eval() {
-        return (Double) ((Map) objects[1]).get(objects[0]);
+    public StructureMatrix<Double> eval() {
+        StructureMatrix<Double> res = new StructureMatrix<>(0, Double.class);
+        return res.setElem((Double) ((Map) objects[1]).get(objects[0]));
     }
 }

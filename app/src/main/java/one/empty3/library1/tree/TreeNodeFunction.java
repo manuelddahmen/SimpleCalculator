@@ -52,9 +52,7 @@
 
 package one.empty3.library1.tree;
 
-import one.empty3.library1.tree.TreeNode;
-import one.empty3.library1.tree.TreeNodeValue;
-import one.empty3.library1.tree.VariableTreeNodeType;
+import one.empty3.library.StructureMatrix;
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
@@ -66,7 +64,7 @@ public class TreeNodeFunction extends TreeNodeValue {
     }
 
     @Override
-    public Double eval() {
+    public StructureMatrix<Double> eval() {
         return null;
     }
 }

@@ -159,7 +159,7 @@ public class ListInstructions {
 
                     tree.construct();
 
-                    result = tree.eval();
+                    result = tree.eval().getElem();
                 }
                 if(key!=null && value!=null && result!=null) {
                     currentParamsValues.put(key, result);

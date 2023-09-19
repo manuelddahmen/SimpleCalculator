@@ -68,7 +68,7 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
         this.classType = classType;
     }
 
-    public void setElem(@NotNull T value) {
+    public StructureMatrix<T> setElem(@NotNull T value) {
         dim = 0;
         if(value instanceof Point3D) {
 
@@ -77,6 +77,7 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
         if(value!=null)
             this.classType = value.getClass();
         listenersPropertyChanged(null, value, 0, 0, 0);
+        return this;
     }
 
     public void setElem(T elem, int i) {

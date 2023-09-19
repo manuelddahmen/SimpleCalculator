@@ -41,13 +41,14 @@ import one.empty3.library1.tree.TreeNodeType;
 public class VectorTreeNodeType extends TreeNodeType {
     private Point3D p;
 
-    public VectorTreeNodeType() {
-        super();
-
+    public VectorTreeNodeType(double sign1) {
+        super(sign1);
     }
+
 
     @Override
     public Double eval() {
-        return null;//TODO
+        return null;
+
     }
 }

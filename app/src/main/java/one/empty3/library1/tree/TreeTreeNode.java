@@ -24,6 +24,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import one.empty3.library.StructureMatrix;
+
 public class TreeTreeNode extends TreeNode {
     private final AlgebricTree tree;
     private Method method = null;
@@ -44,9 +46,10 @@ public class TreeTreeNode extends TreeNode {
     }
 
     @Override
-    public Double eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
+    public StructureMatrix<Double> eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
+        StructureMatrix<Double> res = new StructureMatrix<>(0, Double.class);
         double r = 0.0;
-        r = tree.eval();
+        r = tree.eval().getElem();
         if (method != null) {
             try {
                 r = (Double) method.invoke(Math.class, r);
@@ -56,7 +59,7 @@ public class TreeTreeNode extends TreeNode {
                 e.printStackTrace();
             }
         }
-        return r;
+        return res.setElem(r);
 
     }
 }

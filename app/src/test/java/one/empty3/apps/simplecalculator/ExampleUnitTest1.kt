@@ -80,9 +80,10 @@ class ExampleUnitTest1() {
             algebricTree = AlgebricTree(expr)
             algebricTree.parametersValues = map
             algebricTree.construct()
+            //println(algebricTree.toString())
             if (echo) println(algebricTree)
             try {
-                val result: Double = algebricTree.eval()
+                val result: Double = algebricTree.eval().getElem()
                 if (echo) println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
                 Assert.assertTrue(
@@ -115,7 +116,7 @@ class ExampleUnitTest1() {
             if (echo) println(algebricTree)
             try {
                 val result: Double
-                result = algebricTree.eval()
+                result = algebricTree.eval().getElem()
                 if (echo) println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
                 Assert.assertTrue(
@@ -172,6 +173,10 @@ class ExampleUnitTest1() {
     @Test
     fun testSimpleEquation1() {
         testResult("1", 1.0, false)
+    }
+    @Test
+    fun testSimpleEquation0() {
+        testResult("0", 0.0, false)
     }
 
     @Test
@@ -460,5 +465,12 @@ class ExampleUnitTest1() {
         val vars = HashMap<String, Double>()
         vars["r"] = r
         testResultVariable("(0,1,0)", 0.0, vars, true)
+    }
+    @Test
+    fun testForVectorSimple1() {
+        val r = 12.0
+        val vars = HashMap<String, Double>()
+        vars["r"] = r
+        testResultVariable("(0+1+0)", 1.0, vars, true)
     }
 }

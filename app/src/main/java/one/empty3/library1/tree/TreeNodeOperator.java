@@ -52,10 +52,7 @@
 
 package one.empty3.library1.tree;
 
-import one.empty3.library1.tree.TreeNode;
-import one.empty3.library1.tree.TreeNodeEvalException;
-import one.empty3.library1.tree.TreeNodeValue;
-import one.empty3.library1.tree.VariableTreeNodeType;
+import one.empty3.library.StructureMatrix;
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
@@ -67,12 +64,13 @@ public class TreeNodeOperator extends TreeNodeValue {
     }
 
     @Override
-    public Double eval() throws TreeNodeEvalException {
+    public StructureMatrix<Double> eval() throws TreeNodeEvalException {
+        StructureMatrix<Double> res = new StructureMatrix<>(0, Double.class);
         final Object v1 = getChildren().get(0);
         final Object v2 = getChildren().get(1);
 
         if (v1 instanceof Double && v2 instanceof Double)
-            return Math.exp(Math.log((Double) v1) * (Double) v2);
+            return res.setElem(Math.exp(Math.log((Double) v1) * (Double) v2));
         else
             throw new TreeNodeEvalException("Not valid");
     }

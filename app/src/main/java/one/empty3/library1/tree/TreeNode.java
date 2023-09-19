@@ -57,7 +57,7 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 
 
-import one.empty3.library.core.raytracer.tree.VectorTreeNodeType;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library1.shader.Vec;
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
 import one.empty3.library1.tree.DoubleTreeNodeType;
@@ -115,28 +115,35 @@ public class TreeNode {
     }
 
 
-    public Double eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
+    public StructureMatrix<Double> eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
         /*if(this instanceof TreeNode) {
             return Double.parseDouble(((TreeNode) this).expressionString);
         }*/
-
         TreeNodeType cType = (getChildren().size() == 0) ? type : getChildren().get(0).type;
 
+        StructureMatrix<Double> evalRes = null;
+        if(cType instanceof VectorTreeNodeType) {
+            evalRes = new StructureMatrix<>(1, Double.class);
+        } else {
+            evalRes = new StructureMatrix<>(0, Double.class);
+        }
         if (cType instanceof IdentTreeNodeType) {
             System.out.println("cType Ident=" + getChildren().size());
             System.out.println("cType Ident=" + getChildren().get(0).eval());
             return getChildren().get(0).eval();
         } else if (cType instanceof EquationTreeNodeType) {
-            return (Double) getChildren().get(0).eval() - (Double) getChildren().get(1).eval() - 0;
+            evalRes.setElem(getChildren().get(0).eval().getElem(), 0);
+            evalRes.setElem(-(Double) getChildren().get(1).eval().getElem(), 1);
+            return evalRes;//TO REVIEW
         } else if (cType instanceof DoubleTreeNodeType) {
-            return cType.eval();
+            return evalRes.setElem(cType.eval());
         } else if (cType instanceof VariableTreeNodeType) {
-            return cType.eval();//cType.eval();
+            return evalRes.setElem(cType.eval());//cType.eval();
         } else if (cType instanceof PowerTreeNodeType) {
-            return Math.pow((Double) getChildren().get(0).eval(), (Double) getChildren().get(1).eval());
+            return evalRes.setElem(Math.pow((Double) getChildren().get(0).eval().getElem(), (Double) getChildren().get(1).eval().getElem()));
         } else if (cType instanceof FactorTreeNodeType) {
             if (getChildren().size() == 1) {
-                return ((Double) getChildren().get(0).eval()) * getChildren().get(0).type.getSign1();
+                return evalRes.setElem(((Double) getChildren().get(0).eval().getElem()) * getChildren().get(0).type.getSign1());
             }
             double dot = 1;
             for (int i = 0; i < getChildren().size(); i++) {
@@ -148,43 +155,42 @@ public class TreeNode {
                     if (op1 == 1)
 
 
-                        dot *= ((Double) treeNode.eval());
+                        dot *= ((Double) treeNode.eval().getElem());
                     else
 
-                        dot /= ((Double) (Double) treeNode.eval());///treeNode.type.getSign1()) *
+                        dot /= ((Double) (Double) treeNode.eval().getElem());///treeNode.type.getSign1()) *
                 }
             }
-            return dot;
+            return evalRes.setElem(dot);
 
 
         } else if (cType instanceof TermTreeNodeType) {
             if (getChildren().size() == 1) {
-                return ((Double) getChildren().get(0).eval()) * getChildren().get(0).type.getSign1();
+                return evalRes.setElem(((Double) getChildren().get(0).eval().getElem()) * getChildren().get(0).type.getSign1());
             }
             double sum = 0.0;
             for (int i = 0; i < getChildren().size(); i++) {
                 TreeNode treeNode = getChildren().get(i);
                 double op1 = treeNode.type.getSign1();
-                sum += op1 * (Double) treeNode.eval();
+                sum += op1 * (Double) treeNode.eval().getElem();
             }
 
 
-            return sum;
+            return evalRes.setElem(sum);
         } else if (cType instanceof TreeTreeNodeType) {
             return (getChildren().get(0)).eval();
         } else if (cType instanceof SignTreeNodeType) {
             double s1 = ((SignTreeNodeType) cType).getSign();
             if (getChildren().size() > 0)
-                return s1 * (Double) getChildren().get(0).eval();
+                return evalRes.setElem(s1 * (Double) getChildren().get(0).eval().getElem());
             else
-                return s1;
+                return evalRes.setElem(s1);
         } else if(cType instanceof VectorTreeNodeType) {
             Vec vec = new Vec(getChildren().size());
             for (int i = 0; i < getChildren().size(); i++) {
-                Double eval = getChildren().get(i).eval();
-                vec.set(i, eval);
+                evalRes.setElem(getChildren().get(i).eval().getElem(), i);
             }
-            return 0.0;
+            return evalRes;
         }
 
         Double eval = 0.0;
@@ -193,7 +199,7 @@ public class TreeNode {
             eval = type.eval();
         }
 
-        return eval==null?0.0:eval;
+        return eval==null?evalRes.setElem(0.0):evalRes.setElem(eval);
 
     }
 

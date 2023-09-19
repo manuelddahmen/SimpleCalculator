@@ -58,6 +58,7 @@ import androidx.annotation.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.raytracer.tree.VectorTreeNodeType;
 
 
@@ -119,19 +120,20 @@ public class AlgebricTree extends Tree {
         if (src == null || subformula == null || subformula.length() == 0)
             return false;
 
-        int i = 2;
+        int i = 1;
         boolean added = false;
-        int length = 12;
-        boolean exception = false;
-        while (i <= length && !added) {
+        int last = 11;
+        while (i <= last && !added) {
+            boolean exception = false;
             src.getChildren().clear();
             try {
                 int caseChoice = -1;
                 int lastAdded = -1;
                 switch (i) {
-                    case 12:
-                        added = addVector(src, formula);
-                        if(added) caseChoice = 12;
+
+                    case 1:
+                        added = addVector2(src, subformula);
+                        if (added) caseChoice = 1;
                         break;
                     case 2:
                         added = addTerms(src, subformula);
@@ -146,12 +148,12 @@ public class AlgebricTree extends Tree {
                         if (added) caseChoice = 4;
                         break;
                     case 6:
-                        added = addFormulaSeparator(src, formula);
-                        if(added) caseChoice = 6;
+                        added = addFormulaSeparator(src, subformula);
+                        if (added) caseChoice = 6;
                         break;
                     case 7: // Mettre - en 4??
                         added = addSingleSign(src, subformula);
-                        if(added) caseChoice = 7;
+                        if (added) caseChoice = 7;
                         break;
                     case 8:
                         added = addDouble(src, subformula);
@@ -178,12 +180,14 @@ public class AlgebricTree extends Tree {
             } catch (AlgebraicFormulaSyntaxException ex) {
                 exception = true;
             }
-            if (added) {
+            if (added && !exception) {
                 stackSize--;
                 return true;
             }
             i++;
 
+
+            System.out.println("formula = " + subformula);
         }
         throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
     }
@@ -246,93 +250,6 @@ public class AlgebricTree extends Tree {
         }
         return false;
 
-    }
-
-
-    public boolean addVector(TreeNode src, String values) throws AlgebraicFormulaSyntaxException {
-        int countTerms = 0;
-
-
-        int currentCord = -1;
-        TreeNode t2;
-        int i = 0;
-        boolean firstExpFound = false;
-        boolean isNewExp = false;
-        int count = 0;
-        int newExpPos = 0;
-        int oldExpPos = 0;
-        char newExp = '^';
-        double newExpSign = 1;
-        double oldExpSign = 1;
-        VectorTreeNode tnVec = null;
-        while (i < values.length()) {
-
-            if (values.charAt(i) == ',' && /*9(i < values.length() - 1 || values.charAt(i + 1) != '*') &&*/ count == 0) {
-                newExp = ',';
-                newExpPos = i;
-                isNewExp = true;
-                firstExpFound = true;
-                newExpSign = 1;
-                currentCord ++;
-            }
-            if (i == values.length() - 1 && firstExpFound) {
-                isNewExp = true;
-                newExpPos = i + 1;
-            }
-            if (values.charAt(i) == '(') {
-                count++;
-            } else if (values.charAt(i) == ')') {
-                count--;
-            }
-            if (values.charAt(values.length() - 1) == '*' || values.charAt(values.length() - 1) == '/')
-                return false;
-            if (values.charAt(values.length() - 1) == '^' || values.charAt(values.length() - 1) == '^')
-                return false;
-
-
-            if (isNewExp && count == 0) {
-                String subsubstring = values.substring(oldExpPos, newExpPos);
-
-
-
-                if (subsubstring.length() > 0) {
-                    if(currentCord==0) {
-                        tnVec = new VectorTreeNode(src, new Object[]{subsubstring},
-                                new VectorTreeNodeType());
-                    }
-
-                    t2 = new TreeNode(src, new Object[]{subsubstring}, new PowerTreeNodeType(oldExpSign));
-                    if (subsubstring.charAt(0) == '-') {
-                        subsubstring = subsubstring.substring(1);
-                        SignTreeNodeType signTreeNodeType = new SignTreeNodeType(-1.0);
-                        signTreeNodeType.instantiate(new Object[]{subsubstring});
-
-                        t2 = new VectorTreeNode(t2, new Object[]{subsubstring}, signTreeNodeType);
-
-                    }
-
-                    if(currentCord>=0 && tnVec!=null) {
-                        tnVec.getChildren().add(t2);
-                    }
-                    if (subsubstring.length() > 0 && !add(t2, subsubstring)) {
-                        return false;
-                    } else {
-                        t2.getChildren().add(tnVec);
-                        src.getChildren().add(t2);
-                        countTerms++;
-                    }
-                }
-                isNewExp = false;
-                newExpPos = i + 1;
-                oldExpPos = i + 1;
-                oldExpSign = newExpSign;
-            }
-
-            i++;
-
-
-        }
-        return src.getChildren().size() > 0 && countTerms > 0;
     }
 
     public boolean addPower(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
@@ -567,6 +484,86 @@ public class AlgebricTree extends Tree {
     }
 
 
+    public boolean addVector2(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
+        int countComponents = 0;
+
+        TreeNode t2;
+        int i = 0;
+        boolean firstTermFound = false;
+        boolean isNewFactor = false;
+        int count = 0;
+        int newFactorPos = 0;
+        int oldFactorPos = 0;
+        char newFactor = ',';
+        double newFactorSign = 1;
+        double oldFactorSign = 1;
+        while (i < values.length()) {
+            if (values.charAt(i) == ',' && count == 0 && i > 0/*&& (i < values.length() - 1 || values.charAt(i + 1) != '+')*/ && count == 0) {
+                newFactor = ',';
+                newFactorPos = i;
+                isNewFactor = true;
+                firstTermFound = true;
+                newFactorSign = 1;
+            } else if (values.charAt(i) == ',' && count == 0 && i > 0) {
+                newFactor = ',';
+                isNewFactor = true;
+                newFactorPos = i;
+                firstTermFound = true;
+                newFactorSign = -1;
+            }
+            if ((values.charAt(i) == ',') && i == 0) {
+            }
+
+            if (values.charAt(i) == '(') {
+                count++;
+            } else if (values.charAt(i) == ')') {
+                count--;
+            }
+            if (i == values.length() - 1 && firstTermFound) {
+                isNewFactor = true;
+                newFactorPos = i + 1;
+            }
+
+            if (values.charAt(values.length() - 1) == ',')
+                return false;
+
+
+            if (isNewFactor && count == 0) {
+                countComponents++;
+                isNewFactor = false;
+                char op = newFactor;
+
+
+                String subsubstring = values.substring(oldFactorPos, newFactorPos);
+
+
+                if (subsubstring.length() > 0) {
+                    t2 = new TreeNode(t, new Object[]{subsubstring}, new VectorTreeNodeType(oldFactorSign));
+                    if (!add(t2, subsubstring)) {
+                        return false;
+                    } else {
+                        t.getChildren().add(t2);
+                        countComponents++;
+                    }
+                } else
+                    return false;
+
+
+                isNewFactor = false;
+                newFactorPos = i + 1;
+                oldFactorPos = i + 1;
+                newFactor = 0;
+                oldFactorSign = newFactorSign;
+            }
+
+            i++;
+
+
+        }
+
+        return t.getChildren().size() > 0 && countComponents > 0;
+    }
+
     public boolean addFunction(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
         try {
             int i = 1;
@@ -697,7 +694,7 @@ public class AlgebricTree extends Tree {
                 TreeTreeNodeType mathFunctionTreeNodeType = new TreeTreeNodeType(
                         subsubstring, parametersValues
                 );
-                TreeNode t2 = new VectorTreeNode(src, new Object[]{subsubstring, parametersValues, ""}, mathFunctionTreeNodeType);
+                TreeNode t2 = new TreeNode(src, new Object[]{subsubstring, parametersValues, ""}, mathFunctionTreeNodeType);
                 if (!add(t2, subsubstring))
                     return false;
                 src.getChildren().add(t2);
@@ -711,7 +708,7 @@ public class AlgebricTree extends Tree {
         return src.getChildren().size() > 0;
     }
 
-    public Double eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
+    public StructureMatrix<Double> eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
 
         return root.eval();
     }
@@ -719,8 +716,8 @@ public class AlgebricTree extends Tree {
     @NonNull
     public String toString() {
         String s = "Arbre algébrique\n";
-        if(root!=null) {
-            s+="Racine: " + root.getClass() + root.toString();
+        if (root != null) {
+            s += "Racine: " + root.getClass() + root.toString();
         }
         return s;
     }

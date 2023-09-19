@@ -52,6 +52,7 @@
 
 package one.empty3.library1.tree;
 
+import one.empty3.library.StructureMatrix;
 import one.empty3.library1.tree.DoubleTreeNodeType;
 import one.empty3.library1.tree.TreeNode;
 
@@ -64,7 +65,8 @@ public class TreeNodeDouble extends TreeNode {
     }
 
     @Override
-    public Double eval() {
-        return (Double) objects[1];
+    public StructureMatrix<Double> eval() {
+        StructureMatrix<Double> res = new StructureMatrix<>(0, Double.class);
+        return res.setElem((Double) objects[1]);
     }
 }

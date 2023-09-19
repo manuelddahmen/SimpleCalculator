@@ -52,9 +52,7 @@
 
 package one.empty3.library1.tree;
 
-import one.empty3.library1.tree.TreeNode;
-import one.empty3.library1.tree.TreeNodeEvalException;
-import one.empty3.library1.tree.VariableTreeNodeType;
+import one.empty3.library.StructureMatrix;
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
@@ -70,6 +68,6 @@ public abstract class TreeNodeValue extends TreeNode {
         return null;
     }
 
-    public abstract Double eval() throws TreeNodeEvalException;
+    public abstract StructureMatrix<Double> eval() throws TreeNodeEvalException;
 
 }
