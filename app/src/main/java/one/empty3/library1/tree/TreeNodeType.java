@@ -52,6 +52,8 @@
 
 package one.empty3.library1.tree;
 
+import one.empty3.library.StructureMatrix;
+
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  */
@@ -73,7 +75,7 @@ public abstract class TreeNodeType {
         return sign1;
     }
 
-    public abstract Double eval();
+    public abstract StructureMatrix<Double> eval();
 
     public void setValues(Object[] values) {
         this.values = values;

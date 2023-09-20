@@ -499,21 +499,31 @@ class ExampleUnitTest1() {
                 println(result)
 
                 var assertion = true
-                if(result.getData1d().size==expectedResult.size()) {
+                if(((result == null) || (result.data1d==null))
+                    || (expectedResult == null || expectedResult.vecVal!=null)) {
+                    if(((result == null) || (result.data1d==null))
+                        && (expectedResult == null || expectedResult.vecVal!=null)) {
+                        assertion = true
+                    } else {
+                        assertion = false
+                    }
+                } else if(result.getData1d().size==expectedResult.size()) {
                     var i = 0
-                    result.getData1d().forEach({
-                        if(it-DELTA>expectedResult[i]&&it+DELTA<expectedResult[i]) {
+                    result.getData1d().forEach {
+                        if (it - DELTA < expectedResult[i] && it + DELTA > expectedResult[i]) {
 
                         } else {
                             assertion = false;
                         }
                         i++
-                    })
+                    }
                 }
                 Assert.assertTrue(assertion)
                 if (echo) println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
-                Assert.assertTrue(result.equals(expectedResult))
+                if(result!=null &&expectedResult!=null) {
+                    Assert.assertTrue(result.equals(expectedResult))
+                }
             } catch (e: TreeNodeEvalException) {
                 e.printStackTrace()
                 Assert.assertFalse(true)

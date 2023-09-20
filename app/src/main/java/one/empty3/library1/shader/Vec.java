@@ -27,10 +27,10 @@ import one.empty3.library.*;
 
 public class Vec {
     private int dims;
-    private StructureMatrix<Double> vecVal
+    private final StructureMatrix<Double> vecVal
             = new StructureMatrix(1, Double.class);
 
-    private StructureMatrix<Vec> vec
+    private final StructureMatrix<Vec> vec
             = new StructureMatrix(1, Vec.class);
 
     public Vec(Point3D p) {
@@ -168,5 +168,17 @@ public class Vec {
     @Override
     public int hashCode() {
         return Objects.hash(dims, vecVal, vec);
+    }
+
+    public void setDims(int dims) {
+        this.dims = dims;
+    }
+
+    public StructureMatrix<Double> getVecVal() {
+        return vecVal;
+    }
+
+    public StructureMatrix<Vec> getVec() {
+        return vec;
     }
 }

@@ -47,7 +47,7 @@ public class VectorTreeNodeType extends TreeNodeType {
 
 
     @Override
-    public Double eval() {
+    public StructureMatrix<Double> eval() {
         return null;
 
     }
