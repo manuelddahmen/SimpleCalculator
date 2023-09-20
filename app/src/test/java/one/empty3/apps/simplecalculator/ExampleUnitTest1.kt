@@ -96,10 +96,8 @@ class ExampleUnitTest1() {
                 result = algebricTree.eval().getElem()
                 if (echo) println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
-                Assert.assertTrue(
-                    ((result < expectedResult + DELTA(expectedResult)
-                            && result > expectedResult - DELTA(expectedResult)))
-                )
+                Assert.assertTrue(((result < expectedResult + DELTA(expectedResult)
+                            && result > expectedResult - DELTA(expectedResult))))
                 return true
             } catch (e: TreeNodeEvalException) {
                 e.printStackTrace()
