@@ -20,7 +20,7 @@
 
 package one.empty3.library1.tree;
 
-public class VectorTreeNode extends TreeNode{
+public class VectorTreeNode extends TreeNode {
     public VectorTreeNode(String expStr) {
         super(expStr);
     }

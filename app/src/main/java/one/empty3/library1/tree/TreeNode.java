@@ -81,9 +81,9 @@ public class TreeNode {
     protected Object[] objects;
     protected TreeNodeType type = null;
     private TreeNodeValue value;
-    private ArrayList<TreeNode> children = new ArrayList<TreeNode>();
-    private TreeNode parent;
-    private String expressionString;
+    protected ArrayList<TreeNode> children = new ArrayList<TreeNode>();
+    protected TreeNode parent;
+    protected String expressionString;
 
     public TreeNode(String expStr) {
         this.parent = null;
@@ -238,7 +238,7 @@ public class TreeNode {
         int i = 0;
         for (TreeNode t :
                 getChildren()) {
-            s += "Child (" + i++ + ") : " + t.toString();
+            s += "Child (" + i++ + ") : " + t.toString()+"\n";
         }
         return s;
     }

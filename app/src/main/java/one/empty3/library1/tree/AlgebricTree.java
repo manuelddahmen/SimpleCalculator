@@ -538,7 +538,7 @@ public class AlgebricTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    t2 = new TreeNode(t, new Object[]{subsubstring}, new VectorTreeNodeType(oldFactorSign));
+                    t2 = new VectorTreeNode(t, new Object[]{subsubstring}, new VectorTreeNodeType(oldFactorSign));
                     if (!add(t2, subsubstring)) {
                         return false;
                     } else {

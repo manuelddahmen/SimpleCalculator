@@ -19,6 +19,10 @@
 
 package one.empty3.library1.shader;
 
+import androidx.annotation.Nullable;
+
+import java.util.Objects;
+
 import one.empty3.library.*;
 
 public class Vec {
@@ -151,5 +155,18 @@ public class Vec {
 
     public void set(int i, Double eval) {
         vecVal.setElem(eval, i);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vec vec1 = (Vec) o;
+        return dims == vec1.dims && Objects.equals(vecVal, vec1.vecVal) && Objects.equals(vec, vec1.vec);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dims, vecVal, vec);
     }
 }

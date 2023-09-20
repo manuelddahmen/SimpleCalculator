@@ -19,6 +19,7 @@
  */
 package one.empty3.apps.simplecalculator
 
+import one.empty3.library.StructureMatrix
 import one.empty3.library1.shader.Vec
 import one.empty3.library1.tree.*
 import org.junit.After
@@ -466,6 +467,66 @@ class ExampleUnitTest1() {
         vars["r"] = r
         testResultVariable("(0,1,0)", 0.0, vars, true)
     }
+    @Test
+    fun testVectorVariable() {
+        val r = 12.0
+        val vars = HashMap<String, Double>()
+        val x =  1.0
+        val y =  2.1
+        val z = 50.0
+        vars["x"] = x
+        vars["y"] = y
+        vars["z"] = z
+        testResultVariableVec("(x,y,z)", Vec(x, y, z),  vars, true)
+    }
+
+    private fun testResultVariableVec(
+        expr: String,
+        expectedResult: Vec,
+        map: java.util.HashMap<String, Double>,
+        echo: Boolean
+    ) {
+        var algebricTree: AlgebricTree? = null
+        try {
+            println("Expression string : $expr")
+            algebricTree = AlgebricTree(expr)
+            algebricTree.parametersValues = map
+            algebricTree.construct()
+            if (echo) println(algebricTree)
+            try {
+                val result :StructureMatrix<Double> = algebricTree.eval()
+
+                println(result)
+
+                var assertion = true
+                if(result.getData1d().size==expectedResult.size()) {
+                    var i = 0
+                    result.getData1d().forEach({
+                        if(it-DELTA>expectedResult[i]&&it+DELTA<expectedResult[i]) {
+
+                        } else {
+                            assertion = false;
+                        }
+                        i++
+                    })
+                }
+                Assert.assertTrue(assertion)
+                if (echo) println("Result : $result")
+                if (echo) println("Expected : $expectedResult")
+                Assert.assertTrue(result.equals(expectedResult))
+            } catch (e: TreeNodeEvalException) {
+                e.printStackTrace()
+                Assert.assertFalse(true)
+            }
+        } catch (e: AlgebraicFormulaSyntaxException) {
+            e.printStackTrace()
+            Assert.assertFalse(true)
+        } catch (ex: NullPointerException) {
+            ex.printStackTrace()
+            Assert.assertFalse(true)
+        }
+    }
+
     @Test
     fun testForVectorSimple1() {
         val r = 12.0
