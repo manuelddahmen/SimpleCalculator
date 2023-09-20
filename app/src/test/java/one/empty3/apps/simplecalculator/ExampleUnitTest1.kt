@@ -34,40 +34,6 @@ import kotlin.jvm.Throws;
  * Updated by Manuel Dahmen on 10-11-23
  */
 class ExampleUnitTest1() {
-    @Before
-    @Throws(Exception::class)
-    fun setUp() {
-    }
-
-    @After
-    @Throws(Exception::class)
-    fun tearDown() {
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun add() {
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun addFactors() {
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun addTerms() {
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun addExponent() {
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun addFunction() {
-    }
 
     private fun testResultVariable(
         expr: String,
@@ -81,11 +47,13 @@ class ExampleUnitTest1() {
             algebricTree = AlgebricTree(expr)
             algebricTree.parametersValues = map
             algebricTree.construct()
-            //println(algebricTree.toString())
             if (echo) println(algebricTree)
             try {
                 var result: Double = 0.0
                 val eval = algebricTree.eval()
+                println("eval dims:" + eval.dim+" ")
+                if(eval.dim==1)
+                    println("eval vector size : " +eval.data1d.size)
                 if(eval.dim==1 && eval.data1d.size>0) {
                     result = algebricTree.eval().getElem(0)
                 } else if(eval.dim==0 || eval.data0d!=null) {
@@ -180,11 +148,11 @@ class ExampleUnitTest1() {
     }
 
     @Test
-    fun testSimpleEquation1() {
+    fun testSimpleNumber1() {
         testResult("1", 1.0, false)
     }
     @Test
-    fun testSimpleEquation0() {
+    fun testSimpleNumber0() {
         testResult("0", 0.0, false)
     }
 
