@@ -52,6 +52,7 @@
 
 package one.empty3.library1.tree;
 
+import one.empty3.library.StructureMatrix;
 import one.empty3.library1.tree.VariableTreeNodeType;
 
 /*__
@@ -63,8 +64,9 @@ public class DoubleTreeNodeType extends VariableTreeNodeType {
     }
 
     @Override
-    public Double eval() {
-        return (Double) values[1];
+    public StructureMatrix<Double> eval() {
+        StructureMatrix<Double> doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
+        return doubleStructureMatrix.setElem((Double) values[1]);
     }
 
 }
