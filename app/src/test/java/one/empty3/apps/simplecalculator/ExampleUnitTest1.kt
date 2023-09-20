@@ -84,7 +84,13 @@ class ExampleUnitTest1() {
             //println(algebricTree.toString())
             if (echo) println(algebricTree)
             try {
-                val result: Double = algebricTree.eval().getElem()
+                var result: Double = 0.0
+                val eval = algebricTree.eval()
+                if(eval.dim==1) {
+                    result = algebricTree.eval().getElem(0)
+                } else if(eval.dim==0) {
+                    result = algebricTree.eval().getElem()
+                }
                 if (echo) println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
                 Assert.assertTrue(
