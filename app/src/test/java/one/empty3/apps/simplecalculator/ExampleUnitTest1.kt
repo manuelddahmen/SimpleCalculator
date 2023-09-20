@@ -86,9 +86,9 @@ class ExampleUnitTest1() {
             try {
                 var result: Double = 0.0
                 val eval = algebricTree.eval()
-                if(eval.dim==1) {
+                if(eval.dim==1 && eval.data1d.size>0) {
                     result = algebricTree.eval().getElem(0)
-                } else if(eval.dim==0) {
+                } else if(eval.dim==0 || eval.data0d!=null) {
                     result = algebricTree.eval().getElem()
                 }
                 if (echo) println("Result : $result")
