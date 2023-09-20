@@ -52,7 +52,7 @@
 
 package one.empty3.apps.tree;
 
-import one.empty3.apps.tree.TreeNode;
+import one.empty3.apps.tree.TreeNode;;
 
 /*__
  * Created by manuel on 25-12-16.

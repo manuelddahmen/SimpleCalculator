@@ -58,21 +58,6 @@ import java.util.ArrayList;
 
 
 
-import one.empty3.apps.tree.AlgebraicFormulaSyntaxException;
-import one.empty3.apps.tree.DoubleTreeNodeType;
-import one.empty3.apps.tree.EquationTreeNodeType;
-import one.empty3.apps.tree.FactorTreeNodeType;
-import one.empty3.apps.tree.IdentTreeNodeType;
-import one.empty3.apps.tree.PowerTreeNodeType;
-import one.empty3.apps.tree.SignTreeNodeType;
-import one.empty3.apps.tree.TermTreeNodeType;
-import one.empty3.apps.tree.TreeNodeEvalException;
-import one.empty3.apps.tree.TreeNodeType;
-import one.empty3.apps.tree.TreeNodeValue;
-import one.empty3.apps.tree.TreeTreeNode;
-import one.empty3.apps.tree.TreeTreeNodeType;
-import one.empty3.apps.tree.VariableTreeNodeType;
-
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  */
@@ -210,16 +195,20 @@ public class TreeNode {
 
     @NonNull
     public String toString() {
-        String s = "TreeNode " + this.getClass().getSimpleName() +
+        String s = "\nTreeNode " + this.getClass().getSimpleName() +
                 "\nExpression string: " + expressionString +
                 (type == null ? "\nType null" :
                         "\nType: " + type.getClass() + "\n " + type.toString()) +
-                "\nChildren: " + getChildren().size() + "\n";
+                "\nChildren: " + getChildren().size() + "";
         int i = 0;
         for (TreeNode t :
                 getChildren()) {
-            s += "Child (" + i++ + ") : " + t.toString();
+            s += "\nChild (" + i++ + ") : " + t.toShortString(t);
         }
         return s;
+    }
+
+    private String toShortString(TreeNode t) {
+        return "\nTreeNode: "+t.expressionString+"Type"+t.type+" Children: "+t.children.size();
     }
 }

@@ -52,10 +52,6 @@
 
 package one.empty3.apps.tree;
 
-import one.empty3.apps.tree.TreeNode;
-import one.empty3.apps.tree.TreeNodeEvalException;
-import one.empty3.apps.tree.TreeNodeValue;
-import one.empty3.apps.tree.VariableTreeNodeType;
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.

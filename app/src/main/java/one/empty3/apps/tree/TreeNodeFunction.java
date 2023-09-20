@@ -52,7 +52,7 @@
 
 package one.empty3.apps.tree;
 
-import one.empty3.apps.tree.TreeNode;
+import one.empty3.apps.tree.TreeNode;;
 import one.empty3.apps.tree.TreeNodeValue;
 import one.empty3.apps.tree.VariableTreeNodeType;
 

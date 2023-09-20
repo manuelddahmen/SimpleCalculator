@@ -77,7 +77,7 @@ class ExampleUnitTest() {
         try {
             println("Expression string : $expr")
             algebricTree = AlgebricTree(expr)
-            algebricTree.setParametersValues(map)
+            algebricTree.parametersValues = map
             algebricTree.construct()
             if (echo) println(algebricTree)
             try {

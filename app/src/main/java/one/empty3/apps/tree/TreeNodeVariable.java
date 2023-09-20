@@ -54,13 +54,13 @@ package one.empty3.apps.tree;
 
 import java.util.Map;
 
-import one.empty3.apps.tree.TreeNode;
+import one.empty3.apps.tree.TreeNode;;
 import one.empty3.apps.tree.VariableTreeNodeType;
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  */
-public class TreeNodeVariable extends one.empty3.apps.tree.TreeNode {
+public class TreeNodeVariable extends TreeNode {
 
     public TreeNodeVariable(TreeNode src, Object[] objects, VariableTreeNodeType variableTreeNodeType) {
         super(src, objects, variableTreeNodeType);

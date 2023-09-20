@@ -24,7 +24,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-public class TreeTreeNode extends one.empty3.apps.tree.TreeNode {
+public class TreeTreeNode extends TreeNode {
     private final one.empty3.apps.tree.AlgebricTree tree;
     private Method method = null;
 
