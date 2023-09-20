@@ -52,6 +52,7 @@
 
 package one.empty3.library1.tree;
 
+import one.empty3.library.StructureMatrix;
 import one.empty3.library1.tree.TreeNodeType;
 
 /*__
@@ -70,7 +71,7 @@ public class EquationTreeNodeType extends TreeNodeType {
     }
 
     @Override
-    public Double eval() {
-        return null;
+    public StructureMatrix<Double> eval() {
+        return new StructureMatrix<>(0, Double.class);
     }
 }

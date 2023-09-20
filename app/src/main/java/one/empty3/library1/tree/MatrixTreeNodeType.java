@@ -70,7 +70,7 @@ public class MatrixTreeNodeType extends TreeNode
 
 
     @Override
-    public Double eval() {
+    public StructureMatrix<Double> eval() {
         return m;
     }
 }

@@ -34,6 +34,6 @@ list = new StructureMatrix(1, t) ;
 list.add(1, o);
 } 
 @Override
-public Double eval(){return 0.0;}
+public StructureMatrix<Double> eval(){return 0.0;}
 } 
 */

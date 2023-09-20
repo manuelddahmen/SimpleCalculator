@@ -52,6 +52,7 @@
 
 package one.empty3.library1.tree;
 
+import one.empty3.library.StructureMatrix;
 import one.empty3.library1.tree.TreeNodeType;
 
 /*__
@@ -67,8 +68,8 @@ public class ExponentTreeNodeType extends TreeNodeType {
 
 
     @Override
-    public Double eval() {
-        return Math.pow(sign1, sign2);
+    public StructureMatrix<Double> eval() {
+        return new StructureMatrix<Double>(0, Double.class).setElem(Math.pow(sign1, sign2));
     }
 
     @Override

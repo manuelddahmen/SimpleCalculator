@@ -52,6 +52,7 @@ package one.empty3.library1.tree;
  */
 
 import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 import one.empty3.library1.tree.TreeNodeType;
 
 /*__
@@ -66,7 +67,7 @@ public class VectorTreeNodeType extends TreeNodeType {
 
 
     @Override
-    public Double eval() {
+    public StructureMatrix<Double> eval() {
         return null;
 
     }

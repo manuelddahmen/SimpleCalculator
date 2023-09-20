@@ -22,6 +22,7 @@ package one.empty3.library1.tree;
 
 import java.util.Map;
 
+import one.empty3.library.StructureMatrix;
 import one.empty3.library1.tree.TreeNodeType;
 
 
@@ -31,7 +32,7 @@ public class TreeTreeNodeType extends TreeNodeType {
     }
 
     @Override
-    public Double eval() {
+    public StructureMatrix<Double> eval() {
         return null;
     }
 }

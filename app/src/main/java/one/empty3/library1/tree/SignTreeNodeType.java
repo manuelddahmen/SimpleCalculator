@@ -54,6 +54,7 @@ package one.empty3.library1.tree;
 
 import androidx.annotation.NonNull;
 
+import one.empty3.library.StructureMatrix;
 import one.empty3.library1.tree.TreeNodeType;
 
 /*__
@@ -75,8 +76,8 @@ public class SignTreeNodeType extends TreeNodeType {
     }
 
     @Override
-    public Double eval() {
-        return sign;
+    public StructureMatrix<Double> eval() {
+        return new StructureMatrix<Double>(0, Double.class).setElem(sign);
     }
 
     @NonNull
