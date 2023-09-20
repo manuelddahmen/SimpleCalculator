@@ -125,7 +125,7 @@ public class TreeNode {
         if(cType instanceof VectorTreeNodeType) {
             evalRes = new StructureMatrix<>(1, Double.class);
         } else {
-            evalRes = new StructureMatrix<>(1, Double.class);
+            evalRes = new StructureMatrix<>(0, Double.class);
         }
         if (cType instanceof IdentTreeNodeType) {
             System.out.println("cType Ident=" + getChildren().size());

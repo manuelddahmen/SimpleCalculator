@@ -90,6 +90,8 @@ class ExampleUnitTest1() {
                     result = algebricTree.eval().getElem(0)
                 } else if(eval.dim==0 || eval.data0d!=null) {
                     result = algebricTree.eval().getElem()
+                } else {
+                    throw AlgebraicFormulaSyntaxException("Cannot evaluate")
                 }
                 if (echo) println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
