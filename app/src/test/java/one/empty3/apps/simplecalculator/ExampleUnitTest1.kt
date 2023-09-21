@@ -537,4 +537,19 @@ class ExampleUnitTest1() {
         testResultVariableVec("(2,1,2)+(2,2,3)", Vec(4.0,3.0,5.0), vars, true)
     }
 
+    @Test
+    fun testForVectorDot() {
+        val r = 12.0
+        val vars = HashMap<String, Double>()
+        vars["r"] = r
+        testResultVariableVec("(2,1,2)*(2,2,3)", Vec(4.0,2.0,6.0), vars, true)
+    }
+
+    @Test
+    fun testForVectorDotSum() {
+        val r = 12.0
+        val vars = HashMap<String, Double>()
+        vars["r"] = r
+        testResultVariableVec("(9,1,3)+(2,1,2)*(2,2,3)+(1,2,3)", Vec(14.0,5.0,12.0), vars, true)
+    }
 }
