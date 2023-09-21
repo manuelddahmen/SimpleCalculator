@@ -27,6 +27,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
@@ -252,16 +253,26 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
         }
     }
 
+    boolean equals1(StructureMatrix<T> that) {
+        if(data1d.size()==that.data1d.size()) {
+            for (int i = 0; i < data1d.size(); i++) {
+                if(!data1d.get(i).equals(that.data1d.get(i)))
+                    return false;
+            }
+        }
+        return true;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StructureMatrix<?> that = (StructureMatrix<?>) o;
+        StructureMatrix<T> that = (StructureMatrix<T>) o;
 
         if (dim != that.dim) return false;
         if (dim == 0 && !data0d.equals(that.data0d)) return false;
-        if (dim == 1 && !data1d.equals(that.data1d)) return false;
+        if ((dim == 1) && (data1d != null) && (that.data1d != null) &&
+                (!equals1(that))) return false;
         if (dim == 2 && !data2d.equals(that.data2d)) return false;
         return true;
     }

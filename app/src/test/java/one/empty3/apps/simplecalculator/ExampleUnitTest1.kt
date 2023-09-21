@@ -450,14 +450,11 @@ class ExampleUnitTest1() {
 
     @Test
     fun testVectorSimple1() {
-        val r = 12.0
         val vars = HashMap<String, Double>()
-        vars["r"] = r
-        testResultVariable("(0,1,0)", 0.0, vars, true)
+        testResultVariableVec("(0,1,0)", Vec(0.0, 1.0, 0.0), vars, true)
     }
     @Test
     fun testVectorVariable() {
-        val r = 12.0
         val vars = HashMap<String, Double>()
         val x =  1.0
         val y =  2.1
@@ -497,13 +494,12 @@ class ExampleUnitTest1() {
                     }
                 } else if(result.getData1d().size==expectedResult.size()) {
                     var i = 0
-                    result.getData1d().forEach {
-                        if (it - DELTA < expectedResult[i] && it + DELTA > expectedResult[i]) {
+                    for ((index, d) in result.getData1d().withIndex()) {
+                        if (d - DELTA < expectedResult[i] && d + DELTA > expectedResult[i]) {
 
                         } else {
                             assertion = false;
                         }
-                        i++
                     }
                 }
                 Assert.assertTrue(assertion)
