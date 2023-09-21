@@ -526,6 +526,15 @@ class ExampleUnitTest1() {
         val r = 12.0
         val vars = HashMap<String, Double>()
         vars["r"] = r
-        testResultVariable("(0+1+0)", 1.0, vars, true)
+        testResultVariableVec("(0,1,0)", Vec(0.0,1.0,0.0), vars, true)
     }
+
+    @Test
+    fun testForVectorSum() {
+        val r = 12.0
+        val vars = HashMap<String, Double>()
+        vars["r"] = r
+        testResultVariableVec("(2,1,2)+(2,2,3)", Vec(4.0,3.0,5.0), vars, true)
+    }
+
 }
