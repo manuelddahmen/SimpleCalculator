@@ -201,7 +201,8 @@ public class TreeNode {
                 return evalRes.setElem(((Double) getChildren().get(0).eval().getElem()) * getChildren().get(0).type.getSign1());
             }
             double sum = 0.0;
-            if(getChildren().get(0).eval().getDim()==0) {
+            int dimChild0 = getChildren().get(0).eval().getDim();
+            if(dimChild0==0) {
                 evalRes = new StructureMatrix<>(0, Double.class);
             } else {
                 evalRes = new StructureMatrix<>(1, Double.class);
@@ -210,7 +211,6 @@ public class TreeNode {
                 TreeNode treeNode1 = getChildren().get(i);
                 double op1 = treeNode1.type.getSign1();
                 StructureMatrix<Double> eval = treeNode1.eval();
-                sum = op1 * eval.getElem(i);
                 if (eval.getDim() == 1) {
                     for (int j = 0; j < eval.data1d.size(); j++) {
                         double e = 0.0;
@@ -220,8 +220,9 @@ public class TreeNode {
                         evalRes.setElem(e+eval.getElem(j), j);
                     }
                 } else if (eval.getDim() == 0) {
-                    sum = op1 * (Double) treeNode1.eval().getElem();
-                    evalRes.setElem(sum + (evalRes.getElem() == null ? 0.0 : evalRes.getElem()));
+                    sum = op1 * (Double) eval.getElem();
+                    double evalSum = evalRes.getElem() == null ? 0.0 : evalRes.getElem();
+                    evalRes.setElem(sum + evalSum);
                 }
             }
             return evalRes;
