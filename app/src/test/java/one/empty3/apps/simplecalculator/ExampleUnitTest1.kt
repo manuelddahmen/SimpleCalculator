@@ -483,6 +483,8 @@ class ExampleUnitTest1() {
 
                 println(result)
 
+                if (echo) println("Expected : $expectedResult")
+
                 var assertion = true
                 if(((result == null) || (result.data1d==null))
                     || (expectedResult == null || expectedResult.vecVal!=null)) {
@@ -493,9 +495,8 @@ class ExampleUnitTest1() {
                         assertion = false
                     }
                 } else if(result.getData1d().size==expectedResult.size()) {
-                    var i = 0
-                    for ((index, d) in result.getData1d().withIndex()) {
-                        if (d - DELTA < expectedResult[i] && d + DELTA > expectedResult[i]) {
+                    for ((index, d) in expectedResult.vecVal.data1d.withIndex()) {
+                        if (d - DELTA < result.data1d[index] && d + DELTA > result.data1d[index]) {
 
                         } else {
                             assertion = false;
@@ -503,8 +504,7 @@ class ExampleUnitTest1() {
                     }
                 }
                 Assert.assertTrue(assertion)
-                if (echo) println("Result : $result")
-                if (echo) println("Expected : $expectedResult")
+                if (echo) println("Result : "+(result.toString()));
                 if(result!=null &&expectedResult!=null) {
                     Assert.assertTrue(result.equals(expectedResult))
                 }
