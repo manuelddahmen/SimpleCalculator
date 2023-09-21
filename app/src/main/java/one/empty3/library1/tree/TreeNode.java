@@ -272,9 +272,11 @@ public class TreeNode {
             }
             return evalRes;
         } else if (cType instanceof VectorTreeNodeType) {
+            evalRes = new StructureMatrix<>(0, Double.class);
             for (int i = 0; i < getChildren().size(); i++) {
                 evalRes.setElem(getChildren().get(0).eval().getElem(), i);///!!!
             }
+            return evalRes;
         }
 
         StructureMatrix<Double> eval = new StructureMatrix<>(0, Double.class);
