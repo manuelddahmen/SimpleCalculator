@@ -206,10 +206,11 @@ public class TreeNode {
                 double op1 = treeNode1.type.getSign1();
                 StructureMatrix<Double> eval = treeNode1.eval();
                 if (eval.getDim() == 1) {
-                    sum = op1 * (Double) treeNode1.eval().getElem();
+                    evalRes = new StructureMatrix<>(1, Double.class);
+                    sum = op1 * eval.getElem(i);
                     for (int j = 0; j < eval.data1d.size(); j++) {
                         evalRes.setElem(sum +
-                                (evalRes.getElem(j) == null ? 0.0 : evalRes.getElem(j)), j);
+                                ((evalRes.data1d.size()<=j) ? 0.0 : evalRes.getElem(j)), j);
                         //sum += op1 * (Double) treeNode1.eval().getElem();
                     }
                 } else if (eval.getDim() == 0) {
