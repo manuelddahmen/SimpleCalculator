@@ -201,17 +201,23 @@ public class TreeNode {
                 return evalRes.setElem(((Double) getChildren().get(0).eval().getElem()) * getChildren().get(0).type.getSign1());
             }
             double sum = 0.0;
+            if(getChildren().get(0).eval().getDim()==0) {
+                evalRes = new StructureMatrix<>(0, Double.class);
+            } else {
+                evalRes = new StructureMatrix<>(1, Double.class);
+            }
             for (int i = 0; i < getChildren().size(); i++) {
                 TreeNode treeNode1 = getChildren().get(i);
                 double op1 = treeNode1.type.getSign1();
                 StructureMatrix<Double> eval = treeNode1.eval();
+                sum = op1 * eval.getElem(i);
                 if (eval.getDim() == 1) {
-                    evalRes = new StructureMatrix<>(1, Double.class);
-                    sum = op1 * eval.getElem(i);
                     for (int j = 0; j < eval.data1d.size(); j++) {
-                        evalRes.setElem(sum +
-                                ((evalRes.data1d.size()<=j) ? 0.0 : evalRes.getElem(j)), j);
-                        //sum += op1 * (Double) treeNode1.eval().getElem();
+                        double e = 0.0;
+                        if(evalRes.data1d!=null && j<evalRes.data1d.size()) {
+                            e = evalRes.getElem(j);
+                        }
+                        evalRes.setElem(e+eval.getElem(j), j);
                     }
                 } else if (eval.getDim() == 0) {
                     sum = op1 * (Double) treeNode1.eval().getElem();
