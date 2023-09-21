@@ -161,24 +161,25 @@ public class TreeNode {
         } else if (cType instanceof DoubleTreeNodeType) {
             return cType.eval();
         } else if (cType instanceof VariableTreeNodeType) {
-            return cType.eval();//cType.eval();
+            return getChildren().get(0).eval();//cType.eval();
         } else if (cType instanceof PowerTreeNodeType) {
             return evalRes.setElem(Math.pow((Double) getChildren().get(0).eval().getElem(), (Double) getChildren().get(1).eval().getElem()));
         } else if (cType instanceof FactorTreeNodeType) {
             if (getChildren().size() == 1) {
-                evalRes = getChildren().get(0).eval();
+                evalRes = getChildren().get(0).eval();///SIGN
                 if (evalRes.getDim() == 1) {
                     return evalRes;
                 } else if (evalRes.getDim() == 0) {
                     double v = ((Double) getChildren().get(0).eval().getElem()) * getChildren().get(0).type.getSign1();
-                    return evalRes;
+                    return evalRes.setElem(v);
                 }
                 return evalRes;
             } else if (getChildren().size() > 1) {
                 double dot = 1.0;
+                evalRes.setElem(1.0);
                 for (int i = 0; i < getChildren().size(); i++) {
                     TreeNode treeNode = getChildren().get(i);
-                    StructureMatrix<Double> treeNodeEval = getChildren().get(i).eval();
+                    StructureMatrix<Double> treeNodeEval = treeNode.eval();
                     double op1;
 
                     if (treeNodeEval.getDim() == 1) {
@@ -186,26 +187,23 @@ public class TreeNode {
                             if (treeNode.type instanceof FactorTreeNodeType) {
                                 op1 = ((FactorTreeNodeType) treeNode.type).getSignFactor();
                                 if (op1 == 1) {
-
-
-                                    dot *= ((Double) treeNode.eval().getElem());
+                                    dot = ((Double) treeNode.eval().getElem())*evalRes.getElem(j);
                                     evalRes.setElem(dot, j);
                                 } else {
 
-                                    dot /= ((Double) (Double) treeNode.eval().getElem());///treeNode.type.getSign1()) *
+                                    dot =1./ ((Double) (Double) treeNode.eval().getElem())*evalRes.getElem(j);///treeNode.type.getSign1()) *
                                     evalRes.setElem(dot, j);
                                 }
                             }
                     }
                     if (treeNodeEval.getDim() == 0) {
-                        int j = 0;
                         if (treeNode.type instanceof FactorTreeNodeType) {
                             op1 = ((FactorTreeNodeType) treeNode.type).getSignFactor();
                             if (op1 == 1) {
                                 dot = ((Double) treeNodeEval.getElem());
                                 evalRes.setElem(dot*evalRes.getElem());
                             } else {
-                                dot = 1./((Double) (Double) treeNodeEval.getElem());///treeNode.type.getSign1()) *
+                                dot = 1./((Double) treeNodeEval.getElem());///treeNode.type.getSign1()) *
                                 evalRes.setElem(dot*evalRes.getElem());
                             }
                         }
@@ -242,12 +240,11 @@ public class TreeNode {
                         evalRes.setElem(eval.getElem(i), i);
                     }
                 } else if (eval.getDim() == 0) {
-                    evalRes = eval;
+                    evalRes.setElem(eval.getElem());
                 }
                 return evalRes;
-            } else {
-                return (getChildren().get(0)).eval();
             }
+            return null;
         } else if (cType instanceof SignTreeNodeType) {
             double s1 = ((SignTreeNodeType) cType).getSign();
             StructureMatrix<Double> eval = getChildren().get(0).eval();
@@ -269,6 +266,8 @@ public class TreeNode {
 
         if (type != null) {
             eval = type.eval();
+        } else if(!getChildren().isEmpty()){
+            eval = getChildren().get(0).eval();
         }
 
         return eval == null ? evalRes.setElem(0.0) : eval;

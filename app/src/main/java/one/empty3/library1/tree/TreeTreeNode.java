@@ -35,7 +35,7 @@ public class TreeTreeNode extends TreeNode {
         tree = new AlgebricTree((String) objects[0], (Map<String, Double>) objects[1]);
         try {
             tree.construct();
-            if (objects[2] instanceof String && ((String) objects[2]).length() > 0) {
+            if (objects[2] instanceof String && !((String) objects[2]).isEmpty()) {
                 String call = (String) objects[2];
                 if (call.length() > 1)
                     method = Math.class.getMethod(call, double.class);
@@ -48,8 +48,9 @@ public class TreeTreeNode extends TreeNode {
     @Override
     public StructureMatrix<Double> eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
         StructureMatrix<Double> res = new StructureMatrix<>(0, Double.class);
-        double r = 0.0;
+        double r;
         r = tree.eval().getElem();
+
         if (method != null) {
             try {
                 r = (Double) method.invoke(Math.class, r);

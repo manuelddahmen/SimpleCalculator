@@ -219,11 +219,25 @@ class ExampleUnitTest1() {
         testResult("-10*-10", 100, false);
     }*/
     @Test
-    fun testVariable() {
+    fun testVariableAdd() {
         val vars = HashMap<String, Double>()
         vars["u"] = 4.0
         vars["v"] = 13.0
         testResultVariable("u+v", 4.0 + 13.0, vars, true)
+    }
+    @Test
+    fun testVariableSub() {
+        val vars = HashMap<String, Double>()
+        vars["u"] = 4.0
+        vars["v"] = 13.0
+        testResultVariable("u-v", 4.0 - 13.0, vars, true)
+    }
+    @Test
+    fun testVariableMul() {
+        val vars = HashMap<String, Double>()
+        vars["u"] = 4.0
+        vars["v"] = 13.0
+        testResultVariable("u*v", 4.0 * 13.0, vars, true)
     }
 
     @Test
