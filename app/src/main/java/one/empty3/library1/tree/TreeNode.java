@@ -235,6 +235,7 @@ public class TreeNode {
         } else if (cType instanceof TreeTreeNodeType) {
             if (!getChildren().isEmpty()) {
                 if (getChildren().get(0).type instanceof VectorTreeNodeType) {
+                    evalRes = new StructureMatrix<>(1, Double.class);
                     for (int i = 0; i < getChildren().get(0).getChildren().size(); i++) {
                         StructureMatrix<Double> eval = getChildren().get(0).getChildren().get(i).eval();
                         evalRes.setElem(eval.getElem(i), i);
@@ -272,7 +273,7 @@ public class TreeNode {
             }
             return evalRes;
         } else if (cType instanceof VectorTreeNodeType) {
-            evalRes = new StructureMatrix<>(0, Double.class);
+            evalRes = new StructureMatrix<>(1, Double.class);
             for (int i = 0; i < getChildren().size(); i++) {
                 evalRes.setElem(getChildren().get(0).eval().getElem(), i);///!!!
             }
