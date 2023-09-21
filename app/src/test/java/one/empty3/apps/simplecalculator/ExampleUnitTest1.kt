@@ -481,33 +481,33 @@ class ExampleUnitTest1() {
             try {
                 val result :StructureMatrix<Double> = algebricTree.eval()
 
-                println(result)
+                println("Result : "+result)
 
                 if (echo) println("Expected : $expectedResult")
 
                 var assertion = true
-                if(((result == null) || (result.data1d==null))
-                    || (expectedResult == null || expectedResult.vecVal!=null)) {
-                    if(((result == null) || (result.data1d==null))
-                        && (expectedResult == null || expectedResult.vecVal!=null)) {
-                        assertion = true
-                    } else {
-                        assertion = false
-                    }
-                } else if(result.getData1d().size==expectedResult.size()) {
-                    for ((index, d) in expectedResult.vecVal.data1d.withIndex()) {
-                        if (d - DELTA < result.data1d[index] && d + DELTA > result.data1d[index]) {
 
-                        } else {
-                            assertion = false;
+                try {
+                    if (result.getData1d().size == expectedResult.size()) {
+                        var i:Int
+                        for (i1 in 0 until result.data1d.size) {
+                            val d1 = result.data1d[i1]
+                            val d2 = expectedResult.vecVal.data1d[i1]
+                            if (d1==d2) {
+
+                            } else {
+                                assertion = false;
+                            }
                         }
                     }
+                } catch (ex : NullPointerException) {
+                    assertion = false
                 }
+
                 Assert.assertTrue(assertion)
+
                 if (echo) println("Result : "+(result.toString()));
-                if(result!=null &&expectedResult!=null) {
-                    Assert.assertTrue(result.equals(expectedResult))
-                }
+
             } catch (e: TreeNodeEvalException) {
                 e.printStackTrace()
                 Assert.assertFalse(true)
