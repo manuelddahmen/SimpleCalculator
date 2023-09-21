@@ -59,7 +59,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import one.empty3.library.StructureMatrix;
-import one.empty3.library.core.raytracer.tree.VectorTreeNodeType;
 
 
 /*__

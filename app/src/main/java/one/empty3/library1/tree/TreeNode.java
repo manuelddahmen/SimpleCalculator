@@ -58,21 +58,6 @@ import java.util.ArrayList;
 
 
 import one.empty3.library.StructureMatrix;
-import one.empty3.library1.shader.Vec;
-import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
-import one.empty3.library1.tree.DoubleTreeNodeType;
-import one.empty3.library1.tree.EquationTreeNodeType;
-import one.empty3.library1.tree.FactorTreeNodeType;
-import one.empty3.library1.tree.IdentTreeNodeType;
-import one.empty3.library1.tree.PowerTreeNodeType;
-import one.empty3.library1.tree.SignTreeNodeType;
-import one.empty3.library1.tree.TermTreeNodeType;
-import one.empty3.library1.tree.TreeNodeEvalException;
-import one.empty3.library1.tree.TreeNodeType;
-import one.empty3.library1.tree.TreeNodeValue;
-import one.empty3.library1.tree.TreeTreeNode;
-import one.empty3.library1.tree.TreeTreeNodeType;
-import one.empty3.library1.tree.VariableTreeNodeType;
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
@@ -234,11 +219,29 @@ public class TreeNode {
             return evalRes;
         } else if (cType instanceof TreeTreeNodeType) {
             if (!getChildren().isEmpty()) {
-                if (getChildren().get(0).type instanceof VectorTreeNodeType) {
+                if (!getChildren().get(0).getChildren().isEmpty() &&
+                        getChildren().get(0).getChildren().get(0).type instanceof VectorTreeNodeType) {
                     evalRes = new StructureMatrix<>(1, Double.class);
-                    for (int i = 0; i < getChildren().get(0).getChildren().size(); i++) {
-                        StructureMatrix<Double> eval = getChildren().get(0).getChildren().get(i).eval();
-                        evalRes.setElem(eval.getElem(i), i);
+                    switch (evalRes.getDim()) {
+                        case 0:
+                            for (int i = 0; i < getChildren().get(0).getChildren().size(); i++) {
+                                StructureMatrix<Double> eval = getChildren().get(0).getChildren().get(i).eval();
+                                evalRes.setElem(eval.getElem(i), i);
+                            }
+                            break;
+                        case 1:
+                            int k=0;
+                            for (int i = 0; i < getChildren().get(0).getChildren().size(); i++) {
+                                StructureMatrix<Double> eval = getChildren().get(0).getChildren().get(i).eval();
+                                if(eval.getDim()==1) {
+                                    for (int j = 0; j < eval.data1d.size(); j++) {
+                                        evalRes.setElem(eval.getElem(j), k++);
+                                    }
+                                } else if(eval.getDim()==0){
+                                    evalRes.setElem(eval.getElem(), k++);
+                                }
+                            }
+                        break;
                     }
                     return evalRes;
                 } else {
