@@ -57,6 +57,9 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 
 
+import javaAnd.awt.Point;
+import one.empty3.library.Point2D;
+import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
 
 /*__
@@ -148,7 +151,38 @@ public class TreeNode {
         } else if (cType instanceof VariableTreeNodeType) {
             return getChildren().get(0).eval();//cType.eval();
         } else if (cType instanceof PowerTreeNodeType) {
-            return evalRes.setElem(Math.pow((Double) getChildren().get(0).eval().getElem(), (Double) getChildren().get(1).eval().getElem()));
+            StructureMatrix<Double> eval1 = getChildren().get(0).eval();
+            StructureMatrix<Double> eval2 = getChildren().get(1).eval();
+            int dim1, dim2;
+            if (eval1.getDim() == 1) {
+                dim1 = eval1.data1d.size();
+                dim2 = eval2.data1d.size();
+                for(int i=0; i<getChildren().size(); i++) {
+                    if(dim1==dim2 && dim1==3) {
+                        Point3D point3D1 = new Point3D(eval1.data1d.get(0), eval1.data1d.get(1), eval1.data1d.get(2));
+                        Point3D point3D2 = new Point3D(eval2.data1d.get(0), eval2.data1d.get(1), eval2.data1d.get(2));
+                        Point3D point3Dres = point3D1.prodVect(point3D2);
+                        evalRes = new StructureMatrix<>(1, Double.class);
+                        evalRes.setElem(point3Dres.get(0), 0);
+                        evalRes.setElem(point3Dres.get(1), 1);
+                        evalRes.setElem(point3Dres.get(2), 2);
+
+                        return evalRes;
+                    } else if(dim1==dim2 && dim1==2) {
+                        Point2D point2D1 = new Point2D(eval1.data1d.get(0), eval1.data1d.get(1));
+                        Point2D point2D2 = new Point2D(eval2.data1d.get(0), eval2.data1d.get(1));
+                        Point2D point3Dres = new Point2D(eval1.data1d.get(0)*eval2.data1d.get(1), eval1.data1d.get(1)*eval2.data1d.get(0));
+                        evalRes = new StructureMatrix<>(1, Double.class);
+                        evalRes.setElem(point3Dres.get(0), 0);
+                        evalRes.setElem(point3Dres.get(1), 1);
+
+                        return evalRes;
+                    }
+
+                }
+            } else if (evalRes.getDim() == 0) {
+                return evalRes.setElem(Math.pow((Double) getChildren().get(0).eval().getElem(), (Double) getChildren().get(1).eval().getElem()));
+            }
         } else if (cType instanceof FactorTreeNodeType) {
             if (getChildren().size() == 1) {
                 evalRes = getChildren().get(0).eval();///SIGN

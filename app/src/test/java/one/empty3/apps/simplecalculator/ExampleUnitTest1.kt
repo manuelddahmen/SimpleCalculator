@@ -19,6 +19,8 @@
  */
 package one.empty3.apps.simplecalculator
 
+import one.empty3.library.Point2D
+import one.empty3.library.Point3D
 import one.empty3.library.StructureMatrix
 import one.empty3.library1.shader.Vec
 import one.empty3.library1.tree.*
@@ -543,6 +545,24 @@ class ExampleUnitTest1() {
         val vars = HashMap<String, Double>()
         vars["r"] = r
         testResultVariableVec("(2,1,2)*(2,2,3)", Vec(4.0,2.0,6.0), vars, true)
+    }
+    @Test
+    fun testForVectorMulVec() {
+        val vars = HashMap<String, Double>()
+        val a : Point3D = Point3D(2.0,1.0,2.0)
+        val b : Point3D = Point3D(2.0,2.0,3.0)
+        val r : Point3D = a.prodVect(b)
+        val s : Vec = Vec(r.x, r.y, r.z)
+        testResultVariableVec("(2,1,2)^(2,2,3)", s, vars, true)
+    }
+    @Test
+    fun testForVectorMulVecDim2() {
+        val vars = HashMap<String, Double>()
+        val a : Point2D = Point2D(2.0,1.0)
+        val b : Point2D = Point2D(2.0,2.0)
+        val r : Point2D = a.mult(b)
+        val s : Vec = Vec(r.x, r.y)
+        testResultVariableVec("(2,1,2)^(2,2,3)", s, vars, true)
     }
 
     @Test
