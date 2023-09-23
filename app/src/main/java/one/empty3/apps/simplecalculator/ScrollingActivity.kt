@@ -25,8 +25,8 @@ import android.widget.EditText
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import one.empty3.apps.simplecalculator.databinding.ActivityScrollingBinding
-import one.empty3.apps.tree.AlgebricTree
-import one.empty3.apps.tree.ListInstructions
+import one.empty3.library1.tree.AlgebricTree
+import one.empty3.library1.tree.ListInstructions
 import org.jetbrains.annotations.NotNull
 import java.lang.NullPointerException
 import java.lang.RuntimeException
