@@ -68,6 +68,8 @@ public class AlgebricTree extends Tree {
 
     private String formula = "0.0";
     Map<String, Double> parametersValues = new HashMap<>();
+    Map<String, String> parametersValuesVec = new HashMap<>();
+    private HashMap<String, StructureMatrix<Double>> parametersValuesVecComputed;
     private TreeNode root;
     private int stackSize = 0;
 
@@ -212,7 +214,7 @@ public class AlgebricTree extends Tree {
             }
 
             VariableTreeNodeType variableTreeNodeType = new VariableTreeNodeType();
-            variableTreeNodeType.setValues(new Object[]{subformula.substring(0, i), parametersValues});
+            variableTreeNodeType.setValues(new Object[]{subformula.substring(0, i), parametersValues, parametersValuesVec, parametersValuesVecComputed});
             src.getChildren().add(new TreeNodeVariable(src, new Object[]{subformula.substring(0, i), parametersValues}, variableTreeNodeType));
 
             if (subformula.length() > i)
@@ -724,8 +726,20 @@ public class AlgebricTree extends Tree {
     public void setParametersValues(Map<String, Double> parametersValues) {
         this.parametersValues = parametersValues;
     }
+    public void setParametersValuesVec(Map<String, String> parametersValuesVec) {
+        this.parametersValuesVec = parametersValuesVec;
+    }
 
     public Map<String, Double> getParametersValues() {
         return parametersValues;
+    }
+    public Map<String, String> getParametersValuesVec() {
+        return parametersValuesVec;
+    }
+    public void setParametersValuesVecComputed(HashMap<String, StructureMatrix<Double>> parametersValuesVecComputed) {
+        this.parametersValuesVecComputed = parametersValuesVecComputed;
+    }
+    public HashMap<String, StructureMatrix<Double>>  getParametersValuesVecComputed() {
+        return parametersValuesVecComputed;
     }
 }

@@ -52,9 +52,12 @@
 
 package one.empty3.library1.tree;
 
+import java.util.HashMap;
+
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  */
 public class Tree {
+
 
 }

@@ -36,7 +36,7 @@ kotlin {
 def compose_version = '1.4.3'
 */
 def kotlin_version = '1.8.22'
-def versionCode1000 = 402702934
+def versionCode1000 = 402802934
 def compose_version = '1.5.0'
 def compose_compiler_version = "1.4.8"
 android {

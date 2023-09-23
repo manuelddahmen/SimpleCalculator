@@ -33,6 +33,8 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import one.empty3.library.StructureMatrix;
+
 public class ListInstructions {
     public class Instruction {
         private int id;
@@ -146,24 +148,33 @@ public class ListInstructions {
         assignations.toArray(instructions);
 
         HashMap<String, Double> currentParamsValues = new HashMap<>();
+        HashMap<String, String> currentParamsValuesVec = new HashMap<>();
+        HashMap<String, StructureMatrix<Double>> currentParamsValuesVecComputed = new HashMap<>();
         int i=0;
         for(Instruction instruction : instructions) {
             String key = (String) instruction.getLeftHand();
             String value = (String) instruction.getExpression();
 
-            Double result = null;
+            StructureMatrix<Double> resultVec = null;
+            Double resultDouble = null;
             try {
                 if(value!=null) {
                     AlgebricTree tree = new AlgebricTree(value);
                     tree.setParametersValues(currentParamsValues);
-
+                    tree.setParametersValuesVec(currentParamsValuesVec);
+                    tree.setParametersValuesVecComputed(currentParamsValuesVecComputed);
                     tree.construct();
 
-                    result = tree.eval().getElem();
-                }
-                if(key!=null && value!=null && result!=null) {
-                    currentParamsValues.put(key, result);
-                } else if(key==null && value!=null && result!=null) {
+                    resultVec = tree.eval();
+
+                    if(resultVec != null) {
+                        if(resultVec.getDim()==0){
+                            currentParamsValuesVecComputed.put(key, resultVec);
+                            currentParamsValues.put(key, resultVec.getElem());
+                        } else if(resultVec.getDim()==1){
+                            currentParamsValuesVecComputed.put(key, resultVec);
+                        }
+                    }
                 }
             } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException e) {
                 System.err.println("Was null 133131");
@@ -171,7 +182,7 @@ public class ListInstructions {
                 System.err.println("Was null 133531");
             }
 
-            errors[i] = String.format(Locale.getDefault(), "# Result of line : (%d) <<< %f ", i, result);
+            errors[i] = String.format(Locale.getDefault(), "# Result of line : (%d) <<< %s ", i, resultVec.toString());
             i++;
         }
 

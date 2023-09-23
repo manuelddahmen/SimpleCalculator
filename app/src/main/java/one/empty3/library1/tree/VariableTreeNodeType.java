@@ -67,7 +67,17 @@ public class VariableTreeNodeType extends TreeNodeType {
     @Override
     public StructureMatrix<Double> eval() {
         StructureMatrix<Double> doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
-        doubleStructureMatrix.setElem((Double) ((Map) values[1]).get(values[0]));
+        try {
+            if(((Map) values[1]).get(values[0])!=null) {
+                Double o = (Double) ((Map) values[1]).get(values[0]);
+                doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
+                doubleStructureMatrix.setElem(o);
+            } else {
+                doubleStructureMatrix = new StructureMatrix<>(1, Double.class);
+                doubleStructureMatrix = ((Map<String, StructureMatrix<Double>>) values[3]).get(values[0]);
+            }
+        } catch (RuntimeException ex) {
+        }
         return doubleStructureMatrix;
     }
 }
