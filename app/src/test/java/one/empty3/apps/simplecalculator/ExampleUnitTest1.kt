@@ -19,6 +19,7 @@
  */
 package one.empty3.apps.simplecalculator
 
+import one.empty3.library.ColorTexture
 import one.empty3.library.Point2D
 import one.empty3.library.Point3D
 import one.empty3.library.StructureMatrix
@@ -28,6 +29,8 @@ import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
 import kotlin.jvm.Throws;
 
@@ -35,6 +38,7 @@ import kotlin.jvm.Throws;
  * Created by Manuel Dahmen on 15-12-16.
  * Updated by Manuel Dahmen on 10-11-23
  */
+@RunWith(JUnit4::class)
 class ExampleUnitTest1() {
 
     private fun testResultVariable(
@@ -473,15 +477,15 @@ class ExampleUnitTest1() {
         map: java.util.HashMap<String, Double>,
         echo: Boolean
     ) {
-        var algebricTree: AlgebricTree? = null
+        var algebraicTree: AlgebricTree? = null
         try {
             println("Expression string : $expr")
-            algebricTree = AlgebricTree(expr)
-            algebricTree.parametersValues = map
-            algebricTree.construct()
-            if (echo) println(algebricTree)
+            algebraicTree = AlgebricTree(expr)
+            algebraicTree.parametersValues = map
+            algebraicTree.construct()
+            if (echo) println(algebraicTree)
             try {
-                val result :StructureMatrix<Double> = algebricTree.eval()
+                val result :StructureMatrix<Double> = algebraicTree.eval()
 
                 println("Result : "+result)
 
@@ -491,7 +495,6 @@ class ExampleUnitTest1() {
 
                 try {
                     if (result.getData1d().size == expectedResult.size()) {
-                        var i:Int
                         for (i1 in 0 until result.data1d.size) {
                             val d1 = result.data1d[i1]
                             val d2 = expectedResult.vecVal.data1d[i1]
@@ -501,6 +504,8 @@ class ExampleUnitTest1() {
                                 assertion = false;
                             }
                         }
+                    } else {
+                        assertion = false
                     }
                 } catch (ex : NullPointerException) {
                     assertion = false
@@ -562,7 +567,7 @@ class ExampleUnitTest1() {
         val b : Point2D = Point2D(2.0,2.0)
         val r : Point2D = a.mult(b)
         val s : Vec = Vec(r.x, r.y)
-        testResultVariableVec("(2,1,2)^(2,2,3)", s, vars, true)
+        testResultVariableVec("(2,1)^(2,2)", s, vars, true)
     }
 
     @Test
@@ -571,5 +576,13 @@ class ExampleUnitTest1() {
         val vars = HashMap<String, Double>()
         vars["r"] = r
         testResultVariableVec("(9,1,3)+(2,1,2)*(2,2,3)+(1,2,3)", Vec(14.0,5.0,12.0), vars, true)
+    }
+
+    @Test
+    fun testForVectorOfVector() {
+        val r = 12.0
+        val vars = HashMap<String, Double>()
+        vars["r"] = r
+        testResultVariableVec("((2,1,2),(2,2,3),(1,2,3))", Vec(2.0,1.0,2.0,2.0,2.0,3.0,1.0,2.0,3.0), vars, true)
     }
 }

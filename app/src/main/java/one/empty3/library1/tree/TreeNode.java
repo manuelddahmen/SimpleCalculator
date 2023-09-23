@@ -154,7 +154,7 @@ public class TreeNode {
             StructureMatrix<Double> eval1 = getChildren().get(0).eval();
             StructureMatrix<Double> eval2 = getChildren().get(1).eval();
             int dim1, dim2;
-            if (eval1.getDim() == 1) {
+            if (eval1.getDim() == 1 && eval2.getDim() == 1) {
                 dim1 = eval1.data1d.size();
                 dim2 = eval2.data1d.size();
                 for(int i=0; i<getChildren().size(); i++) {
@@ -199,16 +199,27 @@ public class TreeNode {
                 int dim = treeNode1.eval().getDim();
                 if (dim == 1)
                     evalRes = new StructureMatrix<>(1, Double.class);
-                else {
+                else if(dim==0){
                     evalRes = new StructureMatrix<>(0, Double.class);
                     evalRes.setElem(1.0);
                 }
+                int dim0 = dim;
                 for (int i = 0; i < getChildren().size(); i++) {
                     TreeNode treeNode = getChildren().get(i);
                     StructureMatrix<Double> treeNodeEval = treeNode.eval();
+                    dim = treeNodeEval.getDim();
                     double op1;
-
+                    Double mult = 1.0;
                     if (treeNodeEval.getDim() == 1) {
+                        if(dim0==0 && dim==1) {
+                            mult = getChildren().get(0).eval().getElem();
+                            dim0 = -1;
+                        }
+                        if(evalRes.data1d.size()!=treeNodeEval.data1d.size()) {
+                            int leftOp = evalRes.data1d.size();
+                            int rightOp = treeNodeEval.data1d.size();
+
+                        }
                         for (int j = 0; j < treeNodeEval.data1d.size(); j++) {
                             if (treeNode.type instanceof FactorTreeNodeType) {
                                 double e = 1.0;
@@ -218,10 +229,10 @@ public class TreeNode {
                                 op1 = ((FactorTreeNodeType) treeNode.type).getSignFactor();
                                 if (op1 == 1) {
                                     dot = ((Double) treeNode.eval().getElem(j)) * e;
-                                    evalRes.setElem(dot, j);
+                                    evalRes.setElem(dot*mult, j);
                                 } else {
                                     dot = 1. / ((Double) (Double) treeNode.eval().getElem(j)) * e;///treeNode.type.getSign1()) *
-                                    evalRes.setElem(dot, j);
+                                    evalRes.setElem(dot*mult, j);
                                 }
                             }
                         }
@@ -237,6 +248,7 @@ public class TreeNode {
                             }
                         }
                     }
+                    dim0 = dim;
                 }
             }
             return evalRes;

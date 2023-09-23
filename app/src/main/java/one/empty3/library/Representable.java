@@ -43,6 +43,7 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javaAnd.awt.Color;
 import one.empty3.library.core.TemporalComputedObject3D;
 import one.empty3.library.core.lighting.Colors;
 import one.empty3.library.core.raytracer.RtIntersectInfo;
@@ -61,7 +62,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     public static final int SURFACE_DISPLAY_COL_TRI = 4;
     public static final int SURFACE_DISPLAY_LINES = 5;
     public static final int SURFACE_DISPLAY_POINTS = 6;
-    public static final ITexture DEFAULT_TEXTURE = new TextureCol(Colors.random());
+    public static final ITexture DEFAULT_TEXTURE = new TextureCol(Color.WHITE);
     private static final String[] displayTypes = {"All", "Textured Quad", "SURFACE_DISPLAY_TEXT_TRI", "SURFACE_DISPLAY_COL_QUADS", "SURFACE_DISPLAY_COL_TRI", "SURFACE_DISPLAY_LINES", "SURFACE_DISPLAY_POINTS"};
     public static Point3D SCALE1;
     protected static ArrayList<Painter> classPainters = new ArrayList<Painter>();
