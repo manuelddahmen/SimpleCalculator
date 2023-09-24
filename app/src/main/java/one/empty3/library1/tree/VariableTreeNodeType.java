@@ -83,10 +83,11 @@ public class VariableTreeNodeType extends TreeNodeType {
         try {
             if(parametersValueVec!=null && parametersValuesDouble!=null) {
                 if (parametersValueVec.get(varName) != null) {
+                    doubleStructureMatrix = new StructureMatrix<>(1, Double.class);
                     doubleStructureMatrix = parametersValueVec.get(varName);
+                    System.out.println(doubleStructureMatrix.toString());
                 } else if (parametersValuesDouble.get(varName) != null) {
                     Double d = parametersValuesDouble.get(varName);
-                    doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
                     doubleStructureMatrix.setElem(d);
                 } else {
                     throw new TreeNodeEvalException("Eval: Variable, not value for " + varName + " in VariableTreeNodeType - searched in parameterValues and parameterValuesComputed");

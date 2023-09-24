@@ -493,20 +493,6 @@ class ExampleUnitTest1() {
                 var assertion = true
 
                 try {
-                    /*
-                    if (result.getData1d().size == expectedResult.size()) {
-                        for (i1 in 0 until result.data1d.size) {
-                            val d1 = result.data1d[i1]
-                            val d2 = expectedResult.vecVal.data1d[i1]
-                            if (d1==d2) {
-
-                            } else {
-                                assertion = false;
-                            }
-                        }
-                    } else {
-                        assertion = false
-                    }*/
                     if(vecEqualsSM(result,  expectedResult)) {
                         assertion = true
                     } else {
@@ -518,7 +504,7 @@ class ExampleUnitTest1() {
 
                 Assert.assertTrue(assertion)
 
-                if (echo) println("Result : "+(result.toString()));
+                if (echo) println("Result : $result");
 
             } catch (e: TreeNodeEvalException) {
                 e.printStackTrace()
@@ -614,24 +600,32 @@ class ExampleUnitTest1() {
 
     private fun vecEqualsSM(get: StructureMatrix<Double>, vec: Vec): Boolean {
         if(get!=null && get.dim==0) {
-            if((get.data0d!=null && vec.vecVal.data0d!=null &&
-                        vec.vecVal.data0d.equals(get.data0d)))
+            if ((get.data0d != null && vec.vecVal.data0d != null &&
+                        vec.vecVal.data0d.equals(get.data0d))
+            ) {
                 return true
+            }else {
+                println("get : StructureMatrix<Double> : invalid StructureMatrix or Vec { $get, $vec }")
+                return false
+            }
         } else if(get!=null && get.dim==1){
             if((get.data1d!=null && vec.vecVal.data1d!=null)) {
                 for (i in 0 until get.data1d.size) {
                     println("computed vec : $get")
                     println("computed vec : $vec")
                     if(get.data1d[i]!=vec.vecVal.data1d[i]) {
+                        println("equals(StructureMatrix<Double>,Vec) : invalid for number $i")
                         return false
                     }
                 }
                 return true
             } else {
+                println("StructureMatrix<Double>,Vec one or two terms has 1-dim null error")
                 return false
             }
             return true
         } else {
+            println("StructureMatrix<Double>,Vec sm==null or sm.dim=invalid")
             return false
         }
         return false

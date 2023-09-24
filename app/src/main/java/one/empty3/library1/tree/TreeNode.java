@@ -149,7 +149,11 @@ public class TreeNode {
         } else if (cType instanceof DoubleTreeNodeType) {
             return cType.eval();
         } else if (cType instanceof VariableTreeNodeType) {
-            return getChildren().get(0).eval();//cType.eval();
+            try {
+                return cType.eval();
+            } catch (RuntimeException ex) {
+                return getChildren().get(0).eval();//cType.eval();
+            }
         } else if (cType instanceof PowerTreeNodeType) {
             StructureMatrix<Double> eval1 = getChildren().get(0).eval();
             StructureMatrix<Double> eval2 = getChildren().get(1).eval();
@@ -280,6 +284,7 @@ public class TreeNode {
                             }
                             evalRes.setElem(e + eval.getElem(j), j);
                         }
+                        System.err.println("In TreeNode.eval #TermTreeNodeType");
                     } else if (eval.getDim() == 0) {
                         sum = op1 * (Double) ((eval.getElem() == null) ? 0.0 : eval.getElem());
                         double evalSum = (evalRes.getElem() == null) ? 0.0 : evalRes.getElem();
