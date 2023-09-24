@@ -262,23 +262,29 @@ public class TreeNode {
                 evalRes = new StructureMatrix<>(0, Double.class);
             } else {
                 evalRes = new StructureMatrix<>(1, Double.class);
+                for(int j=0; j<evalRes.data1d.size(); j++)
+                    evalRes.setElem(0.0, j);
             }
             for (int i = 0; i < getChildren().size(); i++) {
                 TreeNode treeNode1 = getChildren().get(i);
                 double op1 = treeNode1.type.getSign1();
                 StructureMatrix<Double> eval = treeNode1.eval();
-                if (eval.getDim() == 1) {
-                    for (int j = 0; j < eval.data1d.size(); j++) {
-                        double e = 0.0;
-                        if (evalRes.data1d != null && j < evalRes.data1d.size()) {
-                            e = evalRes.getElem(j);
+                if(treeNode1.type instanceof TermTreeNodeType) {
+                    if (eval.getDim() == 1) {
+                        for (int j = 0; j < eval.data1d.size(); j++) {
+                            double e = 0.0;
+                            if (evalRes.data1d != null && j < evalRes.data1d.size()) {
+                                e = evalRes.getElem(j);
+                            } else {
+                                evalRes.setElem(e, j);
+                            }
+                            evalRes.setElem(e + eval.getElem(j), j);
                         }
-                        evalRes.setElem(e + eval.getElem(j), j);
+                    } else if (eval.getDim() == 0) {
+                        sum = op1 * (Double) ((eval.getElem() == null) ? 0.0 : eval.getElem());
+                        double evalSum = (evalRes.getElem() == null) ? 0.0 : evalRes.getElem();
+                        evalRes.setElem(sum + evalSum);
                     }
-                } else if (eval.getDim() == 0) {
-                    sum = op1 * (Double) eval.getElem();
-                    double evalSum = evalRes.getElem() == null ? 0.0 : evalRes.getElem();
-                    evalRes.setElem(sum + evalSum);
                 }
             }
             return evalRes;

@@ -36,6 +36,9 @@ import java.util.function.Consumer;
 import one.empty3.library.StructureMatrix;
 
 public class ListInstructions {
+    HashMap<String, Double> currentParamsValues = new HashMap<>();
+    HashMap<String, String> currentParamsValuesVec = new HashMap<>();
+    HashMap<String, StructureMatrix<Double>> currentParamsValuesVecComputed = new HashMap<>();
     public class Instruction {
         private int id;
         private String leftHand;
@@ -147,9 +150,9 @@ public class ListInstructions {
 
         assignations.toArray(instructions);
 
-        HashMap<String, Double> currentParamsValues = new HashMap<>();
-        HashMap<String, String> currentParamsValuesVec = new HashMap<>();
-        HashMap<String, StructureMatrix<Double>> currentParamsValuesVecComputed = new HashMap<>();
+        currentParamsValues = new HashMap<>();
+        currentParamsValuesVec = new HashMap<>();
+        currentParamsValuesVecComputed = new HashMap<>();
         int i=0;
         for(Instruction instruction : instructions) {
             String key = (String) instruction.getLeftHand();
@@ -161,31 +164,48 @@ public class ListInstructions {
                 if(value!=null) {
                     AlgebricTree tree = new AlgebricTree(value);
                     tree.setParametersValues(currentParamsValues);
-                    tree.setParametersValuesVec(currentParamsValuesVec);
                     tree.setParametersValuesVecComputed(currentParamsValuesVecComputed);
+
                     tree.construct();
 
                     resultVec = tree.eval();
 
                     if(resultVec != null) {
-                        if(resultVec.getDim()==0){
+                        if(resultVec.getDim()==1) {
                             currentParamsValuesVecComputed.put(key, resultVec);
-                            currentParamsValues.put(key, resultVec.getElem());
-                        } else if(resultVec.getDim()==1){
+                        } else if(resultVec.getDim()==0) {
                             currentParamsValuesVecComputed.put(key, resultVec);
                         }
+                    } else {
+                        throw new AlgebraicFormulaSyntaxException("Result was null");
                     }
+                    System.err.println("AlgebraicTree result : " + tree);
                 }
             } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException e) {
-                System.err.println("Was null 133131");
+                e.printStackTrace();
             } catch (NullPointerException ignored) {
-                System.err.println("Was null 133531");
+                ignored.printStackTrace();
             }
+            if(resultVec!=null) {
+                errors[i] = String.format(Locale.getDefault(), "# Result of line : (%d) <<< %s ", i, resultVec.toStringLine());
+            } else {
 
-            errors[i] = String.format(Locale.getDefault(), "# Result of line : (%d) <<< %s ", i, resultVec.toString());
+            }
             i++;
         }
 
         return errors;
+    }
+
+    public HashMap<String, Double> getCurrentParamsValues() {
+        return currentParamsValues;
+    }
+
+    public HashMap<String, String> getCurrentParamsValuesVec() {
+        return currentParamsValuesVec;
+    }
+
+    public HashMap<String, StructureMatrix<Double>> getCurrentParamsValuesVecComputed() {
+        return currentParamsValuesVecComputed;
     }
 }

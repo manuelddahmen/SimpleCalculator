@@ -134,7 +134,11 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
     public T getElem() {
 
         if (dim == 0)
-            return this.data0d;
+            if(data0d!=null) {
+                return this.data0d;
+            } else {
+                System.out.println("null structureMatrix elem dim=0");
+            }
         System.err.println("getElem dim= " + dim + "!=0");
         return null;
     }
@@ -340,6 +344,50 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
         return s.toString();
     }
 
+    public String toStringLine() {
+        StringBuilder s = new StringBuilder("structure(");
+        s.append("(dim:" + dim + ")");
+        switch (dim) {
+            case 0:
+                if(data0d !=null)
+                    s.append("(data : {" + data0d.toString() + "} )");
+                else
+                    s.append("null 0d-data");
+                break;
+            case 1:
+                s.append("(data : (");
+                data1d.forEach(new Consumer<T>() {
+                    @Override
+                    public void accept(T t) {
+                        s.append("(" + t.toString() + ")");
+                    }
+                });
+                break;
+            case 2:
+                s.append("(data : (");
+                data2d.forEach(new Consumer<List<T>>() {
+                    @Override
+                    public void accept(List<T> ts) {
+                        s.append("( ");
+
+                        ts.forEach(new Consumer<T>() {
+                            @Override
+                            public void accept(T t) {
+                                s.append("(" + t.toString() + ")");
+                            }
+                        });
+
+                        s.append(" )\n");
+
+                    }
+                });
+                s.append(")");
+                break;
+
+
+        }
+        return s.toString();
+    }
 
     public Class getClassType() {
         return classType;

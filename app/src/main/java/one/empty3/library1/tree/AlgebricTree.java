@@ -149,7 +149,7 @@ public class AlgebricTree extends Tree {
                         if (added) caseChoice = 4;
                         break;
                     case 6:
-                        added = addFormulaSeparator(src, subformula);
+                        //added = addFormulaSeparator(src, subformula);
                         if (added) caseChoice = 6;
                         break;
                     case 7: // Mettre - en 4??

@@ -61,23 +61,51 @@ import one.empty3.library1.tree.TreeNodeType;
  * Created by manuel on 16-12-16.
  */
 public class VariableTreeNodeType extends TreeNodeType {
+    String varName;
+    Map<String, StructureMatrix<Double>> parametersValueVec;
+    Map<String, Double> parametersValuesDouble;
     public VariableTreeNodeType() {
+    }
+
+    @Override
+    public void setValues(Object[] values) {
+        super.setValues(values);
+        varName = (String) values[0];
+        if(values.length>=4) {
+            parametersValueVec = (Map<String, StructureMatrix<Double>>) values[3];
+            parametersValuesDouble = ((Map<String, Double>) values[1]);
+        }
     }
 
     @Override
     public StructureMatrix<Double> eval() {
         StructureMatrix<Double> doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
         try {
-            if(((Map) values[1]).get(values[0])!=null) {
-                Double o = (Double) ((Map) values[1]).get(values[0]);
-                doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
-                doubleStructureMatrix.setElem(o);
+            if(parametersValueVec!=null && parametersValuesDouble!=null) {
+                if (parametersValueVec.get(varName) != null) {
+                    doubleStructureMatrix = parametersValueVec.get(varName);
+                } else if (parametersValuesDouble.get(varName) != null) {
+                    Double d = parametersValuesDouble.get(varName);
+                    doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
+                    doubleStructureMatrix.setElem(d);
+                } else {
+                    throw new TreeNodeEvalException("Eval: Variable, not value for " + varName + " in VariableTreeNodeType - searched in parameterValues and parameterValuesComputed");
+                }
             } else {
-                doubleStructureMatrix = new StructureMatrix<>(1, Double.class);
-                doubleStructureMatrix = ((Map<String, StructureMatrix<Double>>) values[3]).get(values[0]);
+                throw new TreeNodeEvalException("Eval: dictionary not attributed/initialized" );
             }
         } catch (RuntimeException ex) {
+            ex.printStackTrace();
+            return doubleStructureMatrix;
+        } catch (TreeNodeEvalException e) {
+            throw new RuntimeException(e);
         }
         return doubleStructureMatrix;
     }
 }
+/*
+x=(1,2,3)
+y=(5,6,7)
+z=x+y
+
+ */

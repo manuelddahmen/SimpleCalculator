@@ -487,13 +487,13 @@ class ExampleUnitTest1() {
             try {
                 val result :StructureMatrix<Double> = algebraicTree.eval()
 
-                println("Result : "+result)
-
+                println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
 
                 var assertion = true
 
                 try {
+                    /*
                     if (result.getData1d().size == expectedResult.size()) {
                         for (i1 in 0 until result.data1d.size) {
                             val d1 = result.data1d[i1]
@@ -504,6 +504,11 @@ class ExampleUnitTest1() {
                                 assertion = false;
                             }
                         }
+                    } else {
+                        assertion = false
+                    }*/
+                    if(vecEqualsSM(result,  expectedResult)) {
+                        assertion = true
                     } else {
                         assertion = false
                     }
@@ -585,4 +590,51 @@ class ExampleUnitTest1() {
         vars["r"] = r
         testResultVariableVec("((2,1,2),(2,2,3),(1,2,3))", Vec(2.0,1.0,2.0,2.0,2.0,3.0,1.0,2.0,3.0), vars, true)
     }
+
+    @Test
+    fun testTextCalculator3() {
+        val listInstructions: ListInstructions = ListInstructions()
+        listInstructions.run {
+            addInstructions("x=(1,2,3)\n"+ "y=(5,6,7)\n"+ "z=x+y\n")
+            runInstructions()
+        }
+        var assertion = false
+        try {
+            if (vecEqualsSM(
+                    listInstructions.currentParamsValuesVecComputed!!["z"]!!,
+                    Vec(1.0 + 5, 2.0 + 6, 3.0 + 7))
+            ) {
+                assertion = true
+            }
+        } catch (ex:RuntimeException) {
+            ex.printStackTrace()
+        }
+        Assert.assertTrue(assertion)
+    }
+
+    private fun vecEqualsSM(get: StructureMatrix<Double>, vec: Vec): Boolean {
+        if(get!=null && get.dim==0) {
+            if((get.data0d!=null && vec.vecVal.data0d!=null &&
+                        vec.vecVal.data0d.equals(get.data0d)))
+                return true
+        } else if(get!=null && get.dim==1){
+            if((get.data1d!=null && vec.vecVal.data1d!=null)) {
+                for (i in 0 until get.data1d.size) {
+                    println("computed vec : $get")
+                    println("computed vec : $vec")
+                    if(get.data1d[i]!=vec.vecVal.data1d[i]) {
+                        return false
+                    }
+                }
+                return true
+            } else {
+                return false
+            }
+            return true
+        } else {
+            return false
+        }
+        return false
+    }
+
 }
