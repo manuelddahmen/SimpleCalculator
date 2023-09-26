@@ -32,9 +32,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import one.empty3.apps.tree.AlgebraicFormulaSyntaxException
-import one.empty3.apps.tree.AlgebricTree
-import one.empty3.apps.tree.functions.ListMathDoubleFunction
+import one.empty3.library.StructureMatrix
+import one.empty3.library1.tree.AlgebraicFormulaSyntaxException
+import one.empty3.library1.tree.AlgebricTree
+import one.empty3.library1.tree.functions.ListMathDoubleFunction
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,9 +84,10 @@ class MainActivity : AppCompatActivity() {
 
                 try {
                     tree.construct()
-                    val d: Double = tree.eval()
-                    val labelAnswer: String = d.toString()
-                    textAnswer.text = labelAnswer
+                    val d: StructureMatrix<Double>? = tree.eval()
+
+
+                    textAnswer.text = stringFromEval(d)
                     Toast.makeText(applicationContext, "Valide V", Toast.LENGTH_LONG).show()
 
                 } catch (ex: AlgebraicFormulaSyntaxException) {
@@ -145,8 +147,8 @@ class MainActivity : AppCompatActivity() {
 
                 try {
                     tree.construct()
-                    val d: Double = tree.eval()
-                    val labelAnswer: String = d.toString()
+                    val d: StructureMatrix<Double>? = tree.eval()
+                    var labelAnswer: String = stringFromEval(d)
                     textAnswer.text = labelAnswer
                     Toast.makeText(applicationContext, "Valide V", Toast.LENGTH_LONG).show()
 
@@ -168,6 +170,22 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun stringFromEval(d: StructureMatrix<Double>?): String {
+        var labelAnswer: String = ""+ (d?.getElem() ?: 0.0)
+        if(d!=null && d.dim==0)
+            labelAnswer =""+ d.getElem()
+        else if(d!=null &&d.dim==1 && d.data1d!=null) {
+            labelAnswer = "("
+            for (i in 0 until d.data1d.size) {
+                labelAnswer+=d.data1d[i]
+                if(i<d.data1d.size-1)
+                    labelAnswer+=","
+            }
+            labelAnswer+=")"
+        }
+        return labelAnswer
     }
 
 

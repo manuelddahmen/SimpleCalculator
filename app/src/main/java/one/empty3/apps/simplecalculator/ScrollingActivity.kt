@@ -20,16 +20,17 @@
 
 package one.empty3.apps.simplecalculator
 
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.EditText
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import one.empty3.apps.simplecalculator.databinding.ActivityScrollingBinding
-import one.empty3.library1.tree.AlgebricTree
 import one.empty3.library1.tree.ListInstructions
-import org.jetbrains.annotations.NotNull
-import java.lang.NullPointerException
-import java.lang.RuntimeException
+
+
 /*
     c=1
     b=c+4
@@ -55,6 +56,28 @@ class ScrollingActivity : AppCompatActivity() {
         binding.fab.setOnClickListener { view ->
             parseText(text!!.text.toString())
         }
+
+        val prefs: SharedPreferences = PreferenceManager
+            .getDefaultSharedPreferences(this)
+
+        text!!.setText(prefs.getString("autoSave", "pi="+Math.PI))
+
+        text!!.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(
+                s: CharSequence, start: Int, before: Int,
+                count: Int
+            ) {
+                prefs.edit().putString("autoSave", s.toString()).apply()
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int, count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
     }
 
     private fun parseText(textIns: String) {

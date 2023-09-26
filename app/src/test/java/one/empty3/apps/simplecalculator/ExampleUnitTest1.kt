@@ -425,6 +425,14 @@ class ExampleUnitTest1() {
     fun testSimple12() {
         testResult("(-1+9)", (-1 + 9.0), true)
     }
+    @Test
+    fun testSimple13() {
+        testResult("6+6-(2*6)", 6.0+6-(2*6), true)
+    }
+    @Test
+    fun testSimple14() {
+        testResult("6+6-(6+6)", 6.0+6-(6+6), true)
+    }
 
     @Test
     fun testSimpleVarMultVar() {
