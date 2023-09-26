@@ -282,7 +282,7 @@ public class TreeNode {
                             } else {
                                 evalRes.setElem(e, j);
                             }
-                            evalRes.setElem(e + eval.getElem(j), j);
+                            evalRes.setElem(e + eval.getElem(j)*op1, j);
                         }
                         System.err.println("In TreeNode.eval #TermTreeNodeType");
                     } else if (eval.getDim() == 0) {
