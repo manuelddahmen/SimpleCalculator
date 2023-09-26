@@ -33,6 +33,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 import kotlin.jvm.Throws;
+import kotlin.math.exp
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
@@ -352,9 +353,17 @@ class ExampleUnitTest1() {
 
     @Test
     fun testSimple6() {
-        Assert.assertTrue(testResult("-5/-5*3.0", 3.0, false))
+        testResultVariable("-5/-5*3.0", -5/-5*3.0,HashMap<String, Double>(), true)
     }
 
+    @Test
+    fun testSimple6_1() {
+        testResultVariable("-5/(-5)*3.0", -5.0/(-5)*3.0, HashMap<String, Double>(),true)
+    }
+    @Test
+    fun testSimple6_2() {
+        testResultVariable("(-5)/(-5)*3.0", -5.0/(-5)*3.0, HashMap<String, Double>(),true)
+    }
     @Test
     fun testSimple7() {
         Assert.assertTrue(testResult("1-1/3*4/5*2", 1 - 1 / 3.0 * 4 / 5.0 * 2, false))

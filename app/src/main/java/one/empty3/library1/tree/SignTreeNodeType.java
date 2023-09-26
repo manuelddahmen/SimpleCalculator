@@ -61,10 +61,11 @@ import one.empty3.library1.tree.TreeNodeType;
  * Created by manuel on 16-12-16.
  */
 public class SignTreeNodeType extends TreeNodeType {
-    private double sign = 1;
+    protected double sign = 1;
 
-    public SignTreeNodeType(double i) {
-        sign = i;
+    public SignTreeNodeType(double d) {
+        sign = d;
+        sign1 = d;
     }
 
     public double getSign() {
@@ -73,6 +74,7 @@ public class SignTreeNodeType extends TreeNodeType {
 
     public void setSign(double sign) {
         this.sign = sign;
+        this.sign1 = sign;
     }
 
     @Override

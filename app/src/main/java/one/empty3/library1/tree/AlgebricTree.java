@@ -141,12 +141,16 @@ public class AlgebricTree extends Tree {
                         if (added) caseChoice = 2;
                         break;
                     case 3:
-                        added = addFactors(src, subformula);
+                        added = addSingleSign(src, subformula);
                         if (added) caseChoice = 3;
                         break;
                     case 4:
-                        added = addPower(src, subformula);
+                        added = addFactors(src, subformula);
                         if (added) caseChoice = 4;
+                        break;
+                    case 5:
+                        added = addPower(src, subformula);
+                        if (added) caseChoice = 5;
                         break;
                     case 6:
                         //added = addFormulaSeparator(src, subformula);

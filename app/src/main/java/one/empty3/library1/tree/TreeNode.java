@@ -244,10 +244,10 @@ public class TreeNode {
                         if (treeNode.type instanceof FactorTreeNodeType) {
                             op1 = ((FactorTreeNodeType) treeNode.type).getSignFactor();
                             if (op1 == 1) {
-                                dot = ((Double) treeNodeEval.getElem());
+                                dot = ((Double) treeNodeEval.getElem()*treeNode.type.getSign1());
                                 evalRes.setElem(dot * evalRes.getElem());
                             } else {
-                                dot = 1. / ((Double) treeNodeEval.getElem());///treeNode.type.getSign1()) *
+                                dot = 1. / ((Double) treeNodeEval.getElem()*treeNode.type.getSign1());///treeNode.type.getSign1()) *
                                 evalRes.setElem(dot * evalRes.getElem());
                             }
                         }
