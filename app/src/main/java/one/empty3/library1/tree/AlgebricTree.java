@@ -140,10 +140,10 @@ public class AlgebricTree extends Tree {
                         added = addTerms(src, subformula);
                         if (added) caseChoice = 2;
                         break;
-                    case 3:
-                        added = addSingleSign(src, subformula);
-                        if (added) caseChoice = 3;
-                        break;
+                    //case 3:
+                    //    added = addSingleSign(src, subformula);
+                    //    if (added) caseChoice = 3;
+                    //    break;
                     case 4:
                         added = addFactors(src, subformula);
                         if (added) caseChoice = 4;
@@ -153,12 +153,8 @@ public class AlgebricTree extends Tree {
                         if (added) caseChoice = 5;
                         break;
                     case 6:
-                        //added = addFormulaSeparator(src, subformula);
+                        added = addFormulaSeparator(src, subformula);
                         if (added) caseChoice = 6;
-                        break;
-                    case 7: // Mettre - en 4??
-                        added = addSingleSign(src, subformula);
-                        if (added) caseChoice = 7;
                         break;
                     case 8:
                         added = addDouble(src, subformula);
@@ -175,6 +171,10 @@ public class AlgebricTree extends Tree {
                     case 11:
                         added = addVariable(src, subformula);
                         if (added) caseChoice = 11;
+                        break;
+                    case 12: // Mettre - en 4??
+                        added = addSingleSign(src, subformula);
+                        if (added) caseChoice = 12;
                         break;
                     default:
                         break;

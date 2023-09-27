@@ -338,6 +338,9 @@ public class TreeNode {
             StructureMatrix<Double> eval;
             if (!getChildren().isEmpty()) {
                 eval = getChildren().get(0).eval();
+                if(!getChildren().get(0).getChildren().isEmpty()) {
+                    eval = getChildren().get(0).getChildren().get(0).eval();
+                }
             } else {
                 eval = evalRes.setElem(0.0);
             }
@@ -345,10 +348,8 @@ public class TreeNode {
                 for (int i = 0; i < eval.data1d.size(); i++) {
                     evalRes.setElem(eval.getElem(i) * s1, i);
                 }
-                return evalRes;
             } else if (eval.getDim() == 0) {
-                evalRes = evalRes.setElem(s1 * eval.getElem());
-                return evalRes;
+                evalRes.setElem(s1 * eval.getElem());
             }
             return evalRes;
         } else if (cType instanceof VectorTreeNodeType) {

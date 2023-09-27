@@ -353,7 +353,7 @@ class ExampleUnitTest1() {
 
     @Test
     fun testSimple6() {
-        testResultVariable("-5/-5*3.0", -5/-5*3.0,HashMap<String, Double>(), true)
+        testResultVariable("-5/-5*3.0", -5.0/-5*3.0,HashMap<String, Double>(), true)
     }
 
     @Test
@@ -377,6 +377,10 @@ class ExampleUnitTest1() {
     @Test
     fun testSimple9() {
         Assert.assertTrue(testResult("1/2/3/4/5/6", 1.0 / 2 / 3 / 4 / 5 / 6, false))
+    }
+    @Test
+    fun testSimple9_1() {
+        Assert.assertTrue(testResult("-1/2/3/4/5/6", -1.0 / 2 / 3 / 4 / 5 / 6, true))
     }
 
     @Test
