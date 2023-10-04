@@ -123,7 +123,7 @@ public class AlgebricTree extends Tree {
 
         int i = 1;
         boolean added = false;
-        int last = 11;
+        int last = 12;
         while (i <= last && !added) {
             boolean exception = false;
             src.getChildren().clear();

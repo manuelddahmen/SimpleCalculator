@@ -338,9 +338,6 @@ public class TreeNode {
             StructureMatrix<Double> eval;
             if (!getChildren().isEmpty()) {
                 eval = getChildren().get(0).eval();
-                if(!getChildren().get(0).getChildren().isEmpty()) {
-                    eval = getChildren().get(0).getChildren().get(0).eval();
-                }
             } else {
                 eval = evalRes.setElem(0.0);
             }
