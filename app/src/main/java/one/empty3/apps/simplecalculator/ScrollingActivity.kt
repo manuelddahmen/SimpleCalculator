@@ -86,10 +86,15 @@ class ScrollingActivity : AppCompatActivity() {
             variables.addInstructions(textIns)
             val errors = variables.runInstructions()
 
+            var strNewText : String = ""
+
             errors.forEach {
-                if(it!=null)
-                    text!!.text.append('\n').append(it).append("\n")
+                if(it!=null && !it.startsWith("##")) {
+                    strNewText+= ""+('\n')+it+"\n"
+                }
             }
+
+            text!!.setText(strNewText)
 
         } catch (ex : RuntimeException) {
             ex.printStackTrace()

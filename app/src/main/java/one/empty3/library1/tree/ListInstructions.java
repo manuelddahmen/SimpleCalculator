@@ -20,6 +20,7 @@
 
 package one.empty3.library1.tree;
 
+import androidx.annotation.NonNull;
 import androidx.core.util.ConsumerKt;
 
 import org.jetbrains.annotations.NotNull;
@@ -73,6 +74,12 @@ public class ListInstructions {
         public void setExpression(String expression) {
             this.expression = expression;
         }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return (leftHand==null?"":(leftHand+" = " ))+expression;
+        }
     }
     private ArrayList<Instruction> assignations;
 
@@ -100,6 +107,10 @@ public class ListInstructions {
             for (int i = 0; i < splitLines.length; i++) {
 
                 String line = splitLines[i];
+
+                if(line != null && line.startsWith("#")) {
+                    assignations.add(new Instruction(i, "", line));
+                }
 
                 String[] splitInstructionEquals = line.split("=");
 
@@ -158,6 +169,12 @@ public class ListInstructions {
             String key = (String) instruction.getLeftHand();
             String value = (String) instruction.getExpression();
 
+            if((key!=null && key.startsWith("#") && !key.startsWith("##"))
+                    || (value!=null && value.startsWith("#") && !value.startsWith("##"))) {
+               errors[i] = value!=null?value+"\n:":"\n";
+               i++;
+            }
+
             StructureMatrix<Double> resultVec = null;
             Double resultDouble = null;
             try {
@@ -186,11 +203,12 @@ public class ListInstructions {
                 e.printStackTrace();
             } catch (NullPointerException ignored) {
                 ignored.printStackTrace();
+                resultVec = null;
             }
             if(resultVec!=null) {
-                errors[i] = String.format(Locale.getDefault(), "# Result of line : (%d) <<< %s ", i, resultVec.toStringLine());
+                errors[i] = instruction.toString()+"\n"
+                        + String.format(Locale.getDefault(), "## Result of line : (%d) <<< %s ", i, resultVec.toStringLine());
             } else {
-
             }
             i++;
         }
