@@ -20,7 +20,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.1'
+        classpath 'com.android.tools.build:gradle:8.1.2'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.22'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
         classpath 'com.google.gms:google-services:4.4.0'
@@ -28,7 +28,7 @@ buildscript {
         classpath 'com.huawei.agconnect:agcp:1.5.2.300'
     }
 }
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
 
