@@ -33,7 +33,7 @@ kotlin {
 }
 
 
-def versionCode1000 = 403502934
+def versionCode1000 = 403902934
 def compose_version = '1.5.1'
 def compose_compiler_version = "1.4.8"
 def kotlin_version = '1.8.22'

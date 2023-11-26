@@ -90,7 +90,7 @@ class ScrollingActivity : AppCompatActivity() {
 
             errors.forEach {
                 if(it!=null && !it.startsWith("##")) {
-                    strNewText+= ""+('\n')+it+"\n"
+                    strNewText+= it+"\n"
                 }
             }
 

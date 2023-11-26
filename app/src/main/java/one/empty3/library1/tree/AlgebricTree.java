@@ -578,6 +578,7 @@ public class AlgebricTree extends Tree {
             int functionNameStart = 0;
             int countLetters = 0;
             boolean isName = true;
+            int countComa = 0;
             while (i < values.length()) {
                 if (isName && Character.isLetter(values.charAt(0)) && Character.isLetterOrDigit(values.charAt(i)) && count == 0) {
                     countLetters++;
@@ -588,8 +589,13 @@ public class AlgebricTree extends Tree {
                         argumentStart = i + 1;
                     }
                     count++;
-                } else if (values.charAt(i) == ')' && i > 1) {
+                } else if (values.charAt(i) == ')') {
                     count--;
+                    if (count == 0) {
+                        argumentEnd = i;
+                    }
+                } else if (values.charAt(i) == ',' && count == 0) {
+                    countComa--;
                     argumentEnd = i;
                 } else if (i < 2)
                     return false;
@@ -597,25 +603,27 @@ public class AlgebricTree extends Tree {
 
                 i++;
 
-            }
-            if (count == 0 && values.charAt(i - 1) == ')') {
+                if (count == 0 && (values.charAt(i - 1) == ')' || values.charAt(i-1) == ',')) {
 
 
-                String fName = values.substring(functionNameStart, argumentStart - 1);
-                String fParamString = values.substring(argumentStart, argumentEnd);
+                    String fName = values.substring(functionNameStart, argumentStart - 1);
+                    String fParamString = values.substring(argumentStart, argumentEnd);
 
 
-                TreeTreeNodeType mathFunctionTreeNodeType = new TreeTreeNodeType(
-                        fParamString, parametersValues
-                );
+                    TreeTreeNodeType mathFunctionTreeNodeType = new TreeTreeNodeType(
+                            fParamString, parametersValues
+                    );
 
-                TreeNode t2 = new TreeTreeNode(t, new Object[]{fParamString, parametersValues, fName},
-                        mathFunctionTreeNodeType);
-                if (!add(t2, fParamString))
-                    return false;
-                t.getChildren().add(t2);
+                    TreeNode t2 = new TreeTreeNode(t, new Object[]{fParamString, parametersValues, fName},
+                            mathFunctionTreeNodeType);
+                    if (!add(t2, fParamString))
+                        return false;
+                    t.getChildren().add(t2);
 
-
+                    if (values.charAt(i) == ',') {
+                        argumentStart = i;
+                    }
+                }
             }
         } catch (Exception ex) {
             return false;
@@ -730,6 +738,7 @@ public class AlgebricTree extends Tree {
     public void setParametersValues(Map<String, Double> parametersValues) {
         this.parametersValues = parametersValues;
     }
+
     public void setParametersValuesVec(Map<String, String> parametersValuesVec) {
         this.parametersValuesVec = parametersValuesVec;
     }
@@ -737,13 +746,16 @@ public class AlgebricTree extends Tree {
     public Map<String, Double> getParametersValues() {
         return parametersValues;
     }
+
     public Map<String, String> getParametersValuesVec() {
         return parametersValuesVec;
     }
+
     public void setParametersValuesVecComputed(HashMap<String, StructureMatrix<Double>> parametersValuesVecComputed) {
         this.parametersValuesVecComputed = parametersValuesVecComputed;
     }
-    public HashMap<String, StructureMatrix<Double>>  getParametersValuesVecComputed() {
+
+    public HashMap<String, StructureMatrix<Double>> getParametersValuesVecComputed() {
         return parametersValuesVecComputed;
     }
 }

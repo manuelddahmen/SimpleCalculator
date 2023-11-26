@@ -20,5 +20,5 @@
 
 <resources>
     <string name="instructions" />
-    <string name="text_calculator">Text calculator</string>
+    <string name="text_calculator">Text</string>
 </resources>
