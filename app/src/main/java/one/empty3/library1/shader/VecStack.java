@@ -18,8 +18,8 @@
  */
 
 package one.empty3.library1.shader;
-import one.empty3.library.core.raytracer.tree.*;
-import one.empty3.library.*;
+
+import one.empty3.library.StructureMatrix;
 /*__
 *  VecStack. 
 * fonctions vecteurs

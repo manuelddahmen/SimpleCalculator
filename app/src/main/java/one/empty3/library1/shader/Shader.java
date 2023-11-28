@@ -18,10 +18,16 @@
  */
 
 package one.empty3.library1.shader;
-import java.io.*;
-import java.nio.file.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javaAnd.awt.image.BufferedImage;
-import java.util.*;
 /***
  * vn(int n)
  * vn(vn...)

@@ -20,7 +20,6 @@
 
 package one.empty3.library1.tree;
 
-import androidx.annotation.NonNull;
 import androidx.core.util.ConsumerKt;
 
 import org.jetbrains.annotations.NotNull;
@@ -74,12 +73,6 @@ public class ListInstructions {
         public void setExpression(String expression) {
             this.expression = expression;
         }
-
-        @NonNull
-        @Override
-        public String toString() {
-            return (leftHand==null?"":(leftHand+" = " ))+expression;
-        }
     }
     private ArrayList<Instruction> assignations;
 
@@ -106,40 +99,35 @@ public class ListInstructions {
 
             for (int i = 0; i < splitLines.length; i++) {
 
-                boolean assigned = false;
                 String line = splitLines[i];
 
-                if(line != null && line.startsWith("#")) {
-                    assignations.add(new Instruction(i, "", line));
-                    assigned = true;
-                } else {
+                String[] splitInstructionEquals = line.split("=");
 
-                    String[] splitInstructionEquals = line.split("=");
+                String value = null;
+                String variable = null;
+                if(splitInstructionEquals.length==1) {
+                    variable = splitInstructionEquals[0].trim();
+                    value = splitInstructionEquals[0].trim();
+                }
+                if (splitInstructionEquals.length == 2) {
+                    variable = splitInstructionEquals[0].trim();
+                    value = splitInstructionEquals[1].trim();
+                }
+                boolean assigned = false;
+                if(splitInstructionEquals.length>=1) {
 
-                    String value = null;
-                    String variable = null;
-                    if (splitInstructionEquals.length == 1) {
-                        variable = splitInstructionEquals[0].trim();
-                        value = splitInstructionEquals[0].trim();
-                    }
-                    if (splitInstructionEquals.length == 2) {
-                        variable = splitInstructionEquals[0].trim();
-                        value = splitInstructionEquals[1].trim();
-                    }
-                    if (splitInstructionEquals.length >= 1) {
-
-                        if ((variable != null ? variable.length() : 0) > 0 && Character.isLetter(variable.toCharArray()[0])) {
-                            int j = 0;
-                            while (j < variable.length() && (Character.isLetterOrDigit(variable.toCharArray()[j])
-                                    || variable.toCharArray()[j] == '_')) {
-                                j++;
-                            }
-                            if (j == variable.length()) {
-                                assignations.add(new Instruction(i, variable, value));
-                                assigned = true;
-                            }
+                    if ((variable != null ? variable.length() : 0) >0 && Character.isLetter(variable.toCharArray()[0])) {
+                        int j = 0;
+                        while (j < variable.length() && (Character.isLetterOrDigit(variable.toCharArray()[j])
+                                || variable.toCharArray()[j] == '_')) {
+                            j++;
+                        }
+                        if (j == variable.length()) {
+                            assignations.add(new Instruction(i, variable, value));
+                            assigned = true;
                         }
                     }
+                }
                 if(!assigned) {
                     if(splitInstructionEquals.length==1) {
                         if(variable!=null && !variable.isEmpty()) {
@@ -152,7 +140,6 @@ public class ListInstructions {
                             }
                         }
                     }
-                }
                 }
             }
         }
@@ -167,8 +154,6 @@ public class ListInstructions {
         currentParamsValuesVec = new HashMap<>();
         currentParamsValuesVecComputed = new HashMap<>();
         int i=0;
-        int iInstruction=0;
-        boolean incr = false;
         for(Instruction instruction : instructions) {
             String key = (String) instruction.getLeftHand();
             String value = (String) instruction.getExpression();
@@ -197,18 +182,17 @@ public class ListInstructions {
                     }
                     System.err.println("AlgebraicTree result : " + tree);
                 }
-            } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException | RuntimeException e) {
-                resultVec = null;
+            } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException e) {
+                e.printStackTrace();
+            } catch (NullPointerException ignored) {
+                ignored.printStackTrace();
             }
             if(resultVec!=null) {
-                errors[i] = instruction.toString()+"\n"
-                        + String.format(Locale.getDefault(), "## Result of line : (%d) <<< %s ", iInstruction, resultVec.toStringLine());
-                i++;
-                iInstruction ++;
+                errors[i] = String.format(Locale.getDefault(), "# Result of line : (%d) <<< %s ", i, resultVec.toStringLine());
             } else {
-                errors[i] = instruction.getExpression()+"\n";
-                i++;
+
             }
+            i++;
         }
 
         return errors;

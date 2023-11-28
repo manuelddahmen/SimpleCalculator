@@ -18,7 +18,10 @@
  */
 
 package one.empty3.library1.shader;
-import one.empty3.library.core.raytracer.tree.*;
+
+import one.empty3.library.core.raytracer.tree.AlgebraicFormulaSyntaxException;
+import one.empty3.library.core.raytracer.tree.AlgebricTree;
+import one.empty3.library.core.raytracer.tree.TreeNodeEvalException;
 public class VecAlTree extends Vec {
     protected String formula;
     AlgebricTree tree;

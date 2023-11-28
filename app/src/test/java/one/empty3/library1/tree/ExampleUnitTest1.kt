@@ -17,55 +17,30 @@
  *
  *
  */
-package one.empty3.apps.simplecalculator
+package one.empty3.library1.tree
 
-import one.empty3.apps.tree.AlgebraicFormulaSyntaxException
-import one.empty3.apps.tree.AlgebricTree
-import one.empty3.apps.tree.TreeNodeEvalException
+import one.empty3.library.ColorTexture
+import one.empty3.library.Point2D
+import one.empty3.library.Point3D
+import one.empty3.library.StructureMatrix
+import one.empty3.library1.shader.Vec
+import one.empty3.library1.tree.*
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
+
+import kotlin.jvm.Throws;
+import kotlin.math.exp
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  * Updated by Manuel Dahmen on 10-11-23
  */
-class ExampleUnitTest() {
-    @Before
-    @Throws(Exception::class)
-    fun setUp() {
-    }
-
-    @After
-    @Throws(Exception::class)
-    fun tearDown() {
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun add() {
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun addFactors() {
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun addTerms() {
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun addExponent() {
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun addFunction() {
-    }
+@RunWith(JUnit4::class)
+class ExampleUnitTest1() {
 
     private fun testResultVariable(
         expr: String,
@@ -81,8 +56,18 @@ class ExampleUnitTest() {
             algebricTree.construct()
             if (echo) println(algebricTree)
             try {
-                val result: Double
-                result = algebricTree.eval()
+                var result: Double = 0.0
+                val eval = algebricTree.eval()
+                println("eval dims:" + eval.dim+" ")
+                if(eval.dim==1)
+                    println("eval vector size : " +eval.data1d.size)
+                if(eval.dim==1 && eval.data1d.size>0) {
+                    result = algebricTree.eval().getElem(0)
+                } else if(eval.dim==0 || eval.data0d!=null) {
+                    result = algebricTree.eval().getElem()
+                } else {
+                    throw AlgebraicFormulaSyntaxException("Cannot evaluate")
+                }
                 if (echo) println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
                 Assert.assertTrue(
@@ -115,13 +100,11 @@ class ExampleUnitTest() {
             if (echo) println(algebricTree)
             try {
                 val result: Double
-                result = algebricTree.eval()
+                result = algebricTree.eval().getElem()
                 if (echo) println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
-                Assert.assertTrue(
-                    ((result < expectedResult + DELTA(expectedResult)
-                            && result > expectedResult - DELTA(expectedResult)))
-                )
+                Assert.assertTrue(((result < expectedResult + DELTA(expectedResult)
+                            && result > expectedResult - DELTA(expectedResult))))
                 return true
             } catch (e: TreeNodeEvalException) {
                 e.printStackTrace()
@@ -170,8 +153,12 @@ class ExampleUnitTest() {
     }
 
     @Test
-    fun testSimpleEquation1() {
-        testResult("1", 1.0, false)
+    fun testSimpleNumber1() {
+        testResult("1", 1.0, true)
+    }
+    @Test
+    fun testSimpleNumber0() {
+        testResult("0", 0.0, false)
     }
 
     @Test
@@ -239,11 +226,25 @@ class ExampleUnitTest() {
         testResult("-10*-10", 100, false);
     }*/
     @Test
-    fun testVariable() {
+    fun testVariableAdd() {
         val vars = HashMap<String, Double>()
         vars["u"] = 4.0
         vars["v"] = 13.0
         testResultVariable("u+v", 4.0 + 13.0, vars, true)
+    }
+    @Test
+    fun testVariableSub() {
+        val vars = HashMap<String, Double>()
+        vars["u"] = 4.0
+        vars["v"] = 13.0
+        testResultVariable("u-v", 4.0 - 13.0, vars, true)
+    }
+    @Test
+    fun testVariableMul() {
+        val vars = HashMap<String, Double>()
+        vars["u"] = 4.0
+        vars["v"] = 13.0
+        testResultVariable("u*v", 4.0 * 13.0, vars, true)
     }
 
     @Test
@@ -352,9 +353,17 @@ class ExampleUnitTest() {
 
     @Test
     fun testSimple6() {
-        Assert.assertTrue(testResult("-5/-5*3.0", 3.0, false))
+        testResultVariable("-5/-5*3.0", -5/-5*3.0,HashMap<String, Double>(), true)
     }
 
+    @Test
+    fun testSimple6_1() {
+        testResultVariable("(-5)/(-5)*3.0", -5.0/(-5)*3.0, HashMap<String, Double>(),true)
+    }
+    @Test
+    fun testSimple6_2() {
+        testResultVariable("(-5)/(-5)*3.0", -5.0/(-5)*3.0, HashMap<String, Double>(),true)
+    }
     @Test
     fun testSimple7() {
         Assert.assertTrue(testResult("1-1/3*4/5*2", 1 - 1 / 3.0 * 4 / 5.0 * 2, false))
@@ -395,6 +404,10 @@ class ExampleUnitTest() {
     fun testSimple2() {
         Assert.assertTrue(testResult("1.5", 1.5, false))
     }
+    @Test
+    fun testSimple15() {
+        Assert.assertTrue(testResult("-1", -1.0, true))
+    }
 
     @Test
     fun testExp1() {
@@ -425,6 +438,14 @@ class ExampleUnitTest() {
     fun testSimple12() {
         testResult("(-1+9)", (-1 + 9.0), true)
     }
+    @Test
+    fun testSimple13() {
+        testResult("6+6-(2*6)", 6.0+6-(2*6), true)
+    }
+    @Test
+    fun testSimple14() {
+        testResult("6+6-(6+6)", 6.0+6-(6+6), true)
+    }
 
     @Test
     fun testSimpleVarMultVar() {
@@ -453,4 +474,189 @@ class ExampleUnitTest() {
     companion object {
         private val DELTA = Double.MIN_VALUE
     }
+
+    @Test
+    fun testVectorSimple1() {
+        val vars = HashMap<String, Double>()
+        testResultVariableVec("(0,1,0)", Vec(0.0, 1.0, 0.0), vars, true)
+    }
+    @Test
+    fun testVectorVariable() {
+        val vars = HashMap<String, Double>()
+        val x =  1.0
+        val y =  2.1
+        val z = 50.0
+        vars["x"] = x
+        vars["y"] = y
+        vars["z"] = z
+        testResultVariableVec("(x,y,z)", Vec(x, y, z),  vars, true)
+    }
+
+    private fun testResultVariableVec(
+        expr: String,
+        expectedResult: Vec,
+        map: java.util.HashMap<String, Double>,
+        echo: Boolean
+    ) {
+        var algebraicTree: AlgebricTree? = null
+        try {
+            println("Expression string : $expr")
+            algebraicTree = AlgebricTree(expr)
+            algebraicTree.parametersValues = map
+            algebraicTree.construct()
+            if (echo) println(algebraicTree)
+            try {
+                val result :StructureMatrix<Double> = algebraicTree.eval()
+
+                println("Result : $result")
+                if (echo) println("Expected : $expectedResult")
+
+                var assertion = true
+
+                try {
+                    if(vecEqualsSM(result,  expectedResult)) {
+                        assertion = true
+                    } else {
+                        assertion = false
+                    }
+                } catch (ex : NullPointerException) {
+                    assertion = false
+                }
+
+                Assert.assertTrue(assertion)
+
+                if (echo) println("Result : $result");
+
+            } catch (e: TreeNodeEvalException) {
+                e.printStackTrace()
+                Assert.assertFalse(true)
+            }
+        } catch (e: AlgebraicFormulaSyntaxException) {
+            e.printStackTrace()
+            Assert.assertFalse(true)
+        } catch (ex: NullPointerException) {
+            ex.printStackTrace()
+            Assert.assertFalse(true)
+        }
+    }
+
+    @Test
+    fun testForVectorSimple1() {
+        val r = 12.0
+        val vars = HashMap<String, Double>()
+        vars["r"] = r
+        testResultVariableVec("(0,1,0)", Vec(0.0,1.0,0.0), vars, true)
+    }
+
+    @Test
+    fun testForVectorSum() {
+        val r = 12.0
+        val vars = HashMap<String, Double>()
+        vars["r"] = r
+        testResultVariableVec("(2,1,2)+(2,2,3)", Vec(4.0,3.0,5.0), vars, true)
+    }
+    @Test
+    fun testForVectorSubstract() {
+        val r = 12.0
+        val vars = HashMap<String, Double>()
+        vars["r"] = r
+        testResultVariableVec("(2,1,2)-(2,2,3)", Vec(0.0,-1.0,-1.0), vars, true)
+    }
+
+    @Test
+    fun testForVectorDot() {
+        val r = 12.0
+        val vars = HashMap<String, Double>()
+        vars["r"] = r
+        testResultVariableVec("(2,1,2)*(2,2,3)", Vec(4.0,2.0,6.0), vars, true)
+    }
+    @Test
+    fun testForVectorMulVec() {
+        val vars = HashMap<String, Double>()
+        val a : Point3D = Point3D(2.0,1.0,2.0)
+        val b : Point3D = Point3D(2.0,2.0,3.0)
+        val r : Point3D = a.prodVect(b)
+        val s : Vec = Vec(r.x, r.y, r.z)
+        testResultVariableVec("(2,1,2)^(2,2,3)", s, vars, true)
+    }
+    @Test
+    fun testForVectorMulVecDim2() {
+        val vars = HashMap<String, Double>()
+        val a : Point2D = Point2D(2.0,1.0)
+        val b : Point2D = Point2D(2.0,2.0)
+        val r : Point2D = a.mult(b)
+        val s : Vec = Vec(r.x, r.y)
+        testResultVariableVec("(2,1)^(2,2)", s, vars, true)
+    }
+
+    @Test
+    fun testForVectorDotSum() {
+        val r = 12.0
+        val vars = HashMap<String, Double>()
+        vars["r"] = r
+        testResultVariableVec("(9,1,3)+(2,1,2)*(2,2,3)+(1,2,3)", Vec(14.0,5.0,12.0), vars, true)
+    }
+
+    @Test
+    fun testForVectorOfVector() {
+        val r = 12.0
+        val vars = HashMap<String, Double>()
+        vars["r"] = r
+        testResultVariableVec("((2,1,2),(2,2,3),(1,2,3))", Vec(2.0,1.0,2.0,2.0,2.0,3.0,1.0,2.0,3.0), vars, true)
+    }
+
+    @Test
+    fun testTextCalculator3() {
+        val listInstructions: ListInstructions = ListInstructions()
+        listInstructions.run {
+            addInstructions("x=(1,2,3)\n"+ "y=(5,6,7)\n"+ "z=x+y\n")
+            runInstructions()
+        }
+        var assertion = false
+        try {
+            if (vecEqualsSM(
+                    listInstructions.currentParamsValuesVecComputed!!["z"]!!,
+                    Vec(1.0 + 5, 2.0 + 6, 3.0 + 7))
+            ) {
+                assertion = true
+            }
+        } catch (ex:RuntimeException) {
+            ex.printStackTrace()
+        }
+        Assert.assertTrue(assertion)
+    }
+
+    private fun vecEqualsSM(get: StructureMatrix<Double>, vec: Vec): Boolean {
+        if(get!=null && get.dim==0) {
+            if ((get.data0d != null && vec.vecVal.data0d != null &&
+                        vec.vecVal.data0d.equals(get.data0d))
+            ) {
+                return true
+            }else {
+                println("get : StructureMatrix<Double> : invalid StructureMatrix or Vec { $get, $vec }")
+                return false
+            }
+        } else if(get!=null && get.dim==1){
+            if((get.data1d!=null && vec.vecVal.data1d!=null)) {
+                for (i in 0 until get.data1d.size) {
+                    println("computed vec : $get")
+                    println("computed vec : $vec")
+                    if(get.data1d[i]!=vec.vecVal.data1d[i]) {
+                        println("equals(StructureMatrix<Double>,Vec) : invalid for number $i")
+                        return false
+                    }
+                }
+                return true
+            } else {
+                println("StructureMatrix<Double>,Vec one or two terms has 1-dim null error")
+                return false
+            }
+            return true
+        } else {
+            println("StructureMatrix<Double>,Vec sm==null or sm.dim=invalid")
+            return false
+        }
+        return false
+    }
+
 }

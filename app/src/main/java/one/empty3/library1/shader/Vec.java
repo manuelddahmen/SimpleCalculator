@@ -19,11 +19,10 @@
 
 package one.empty3.library1.shader;
 
-import androidx.annotation.Nullable;
-
 import java.util.Objects;
 
-import one.empty3.library.*;
+import one.empty3.library.Point3D;
+import one.empty3.library.StructureMatrix;
 
 public class Vec {
     private int dims;

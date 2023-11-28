@@ -92,14 +92,18 @@ public class AlgebricTree extends Tree {
         add(root, formula);
         return this;
     }
-
-    /***
-     * Particularité
-     * @param src
-     */
-    private void checkForSignTreeNode(TreeNode src) {
-        //System.out.println("DEBUG TREE: current tree" +src);
-        if (src.getChildren().size() >= 2 && src.getChildren().get(1).type.getClass()
+    private boolean checkForSignTreeNode1(TreeNode src, String subformula) {
+        if (subformula.charAt(0) == '-') {
+            return false;
+            /*src.getChildren().add(new TreeNode(src, new Object[]{"" + -1},
+                    new SignTreeNodeType(-1)));
+            src.getChildren().get(0).getChildren().add(new TreeNode(src, new Object[]{subformula.substring(1)},
+                    new TreeTreeNodeType(null, null)));
+            //new TreeNode(src.getChildren().get(0) .getChildren().add(
+            //        new TreeNode(subformula.substring(1)));
+            return true;
+            //System.out.println("DEBUG TREE: current tree" +src);
+/*        if (src.getChildren().size() >= 2 && src.getChildren().get(1).type.getClass()
                 .equals(SignTreeNodeType.class)) {
             TreeNode sign = src.getChildren().remove(1);
             TreeNode son0 = src.getChildren().remove(0);
@@ -109,6 +113,37 @@ public class AlgebricTree extends Tree {
             TreeNode son1 = src.getChildren().get(0);
             son1.getChildren().add(son0);
         }
+*/
+        }
+        return false;
+    }
+
+    /***
+     *
+     * @param src
+     */
+    private boolean checkForSignTreeNode(TreeNode src, String subformula) {
+        if (subformula.charAt(0) == '-') {
+            return false;
+/*            src.getChildren().add(new TreeNode(src, new Object[]{"" + -1},
+                    new SignTreeNodeType(-1)));
+            src.getChildren().get(0).getChildren().add(
+                    new TreeNode(subformula.substring(1)));
+            return true;
+            //System.out.println("DEBUG TREE: current tree" +src);
+/*        if (src.getChildren().size() >= 2 && src.getChildren().get(1).type.getClass()
+                .equals(SignTreeNodeType.class)) {
+            TreeNode sign = src.getChildren().remove(1);
+            TreeNode son0 = src.getChildren().remove(0);
+            double sign1 = ((SignTreeNodeType) sign.type).getSign();
+            src.getChildren().add(new TreeNode(src, new Object[]{"" + sign1},
+                    new SignTreeNodeType(sign1)));
+            TreeNode son1 = src.getChildren().get(0);
+            son1.getChildren().add(son0);
+        }
+*/
+        }
+        return false;
     }
 
     public boolean add(TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
@@ -145,16 +180,20 @@ public class AlgebricTree extends Tree {
                     //    if (added) caseChoice = 3;
                     //    break;
                     case 4:
-                        added = addFactors(src, subformula);
+//                        added = checkForSignTreeNode(src, subformula);//addSingleSign(src, subformula);
                         if (added) caseChoice = 4;
                         break;
                     case 5:
-                        added = addPower(src, subformula);
+                        added = addFactors(src, subformula);
                         if (added) caseChoice = 5;
                         break;
                     case 6:
-                        added = addFormulaSeparator(src, subformula);
+                        added = addPower(src, subformula);
                         if (added) caseChoice = 6;
+                        break;
+                    case 7:
+                        added = addFormulaSeparator(src, subformula);
+                        if (added) caseChoice = 7;
                         break;
                     case 8:
                         added = addDouble(src, subformula);
@@ -180,7 +219,7 @@ public class AlgebricTree extends Tree {
                         break;
                 }
                 if (added)
-                    checkForSignTreeNode(src);
+                 ;//   checkForSignTreeNode(src, subformula);
 
             } catch (AlgebraicFormulaSyntaxException ex) {
                 exception = true;
@@ -190,10 +229,7 @@ public class AlgebricTree extends Tree {
                 return true;
             }
             i++;
-
-
-            System.out.println("formula = " + subformula);
-        }
+      }
         throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
     }
 
@@ -247,7 +283,6 @@ public class AlgebricTree extends Tree {
 
     private boolean addSingleSign(TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
         if (subformula.length() > 1 && subformula.charAt(0) == '-') {
-
             if (add(src, subformula.substring(1))) {
                 src.getChildren().add(new TreeNode(src, new Object[]{subformula.substring(1)}, new SignTreeNodeType(-1.0)));
                 return true;
@@ -578,7 +613,6 @@ public class AlgebricTree extends Tree {
             int functionNameStart = 0;
             int countLetters = 0;
             boolean isName = true;
-            int countComa = 0;
             while (i < values.length()) {
                 if (isName && Character.isLetter(values.charAt(0)) && Character.isLetterOrDigit(values.charAt(i)) && count == 0) {
                     countLetters++;
@@ -589,13 +623,8 @@ public class AlgebricTree extends Tree {
                         argumentStart = i + 1;
                     }
                     count++;
-                } else if (values.charAt(i) == ')') {
+                } else if (values.charAt(i) == ')' && i > 1) {
                     count--;
-                    if (count == 0) {
-                        argumentEnd = i;
-                    }
-                } else if (values.charAt(i) == ',' && count == 0) {
-                    countComa--;
                     argumentEnd = i;
                 } else if (i < 2)
                     return false;
@@ -603,27 +632,25 @@ public class AlgebricTree extends Tree {
 
                 i++;
 
-                if (count == 0 && (values.charAt(i - 1) == ')' || values.charAt(i-1) == ',')) {
+            }
+            if (count == 0 && values.charAt(i - 1) == ')') {
 
 
-                    String fName = values.substring(functionNameStart, argumentStart - 1);
-                    String fParamString = values.substring(argumentStart, argumentEnd);
+                String fName = values.substring(functionNameStart, argumentStart - 1);
+                String fParamString = values.substring(argumentStart, argumentEnd);
 
 
-                    TreeTreeNodeType mathFunctionTreeNodeType = new TreeTreeNodeType(
-                            fParamString, parametersValues
-                    );
+                TreeTreeNodeType mathFunctionTreeNodeType = new TreeTreeNodeType(
+                        fParamString, parametersValues
+                );
 
-                    TreeNode t2 = new TreeTreeNode(t, new Object[]{fParamString, parametersValues, fName},
-                            mathFunctionTreeNodeType);
-                    if (!add(t2, fParamString))
-                        return false;
-                    t.getChildren().add(t2);
+                TreeNode t2 = new TreeTreeNode(t, new Object[]{fParamString, parametersValues, fName},
+                        mathFunctionTreeNodeType);
+                if (!add(t2, fParamString))
+                    return false;
+                t.getChildren().add(t2);
 
-                    if (values.charAt(i) == ',') {
-                        argumentStart = i;
-                    }
-                }
+
             }
         } catch (Exception ex) {
             return false;
@@ -738,7 +765,6 @@ public class AlgebricTree extends Tree {
     public void setParametersValues(Map<String, Double> parametersValues) {
         this.parametersValues = parametersValues;
     }
-
     public void setParametersValuesVec(Map<String, String> parametersValuesVec) {
         this.parametersValuesVec = parametersValuesVec;
     }
@@ -746,16 +772,13 @@ public class AlgebricTree extends Tree {
     public Map<String, Double> getParametersValues() {
         return parametersValues;
     }
-
     public Map<String, String> getParametersValuesVec() {
         return parametersValuesVec;
     }
-
     public void setParametersValuesVecComputed(HashMap<String, StructureMatrix<Double>> parametersValuesVecComputed) {
         this.parametersValuesVecComputed = parametersValuesVecComputed;
     }
-
-    public HashMap<String, StructureMatrix<Double>> getParametersValuesVecComputed() {
+    public HashMap<String, StructureMatrix<Double>>  getParametersValuesVecComputed() {
         return parametersValuesVecComputed;
     }
 }

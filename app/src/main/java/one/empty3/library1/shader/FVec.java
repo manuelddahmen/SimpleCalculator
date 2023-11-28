@@ -18,7 +18,8 @@
  */
 
 package one.empty3.library1.shader;
-import one.empty3.library.*;
+
+import one.empty3.library.StructureMatrix;
 public class FVec {
    String oporf;
    StructureMatrix<VecStack> operands;
