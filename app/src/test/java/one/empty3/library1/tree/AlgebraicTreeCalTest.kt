@@ -19,28 +19,21 @@
  */
 package one.empty3.library1.tree
 
-import one.empty3.library.ColorTexture
 import one.empty3.library.Point2D
 import one.empty3.library.Point3D
 import one.empty3.library.StructureMatrix
 import one.empty3.library1.shader.Vec
-import one.empty3.library1.tree.*
-import org.junit.After
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-
-import kotlin.jvm.Throws;
-import kotlin.math.exp
 
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  * Updated by Manuel Dahmen on 10-11-23
  */
 @RunWith(JUnit4::class)
-class ExampleUnitTest1() {
+class AlgebraicTreeCalTest() {
 
     private fun testResultVariable(
         expr: String,
