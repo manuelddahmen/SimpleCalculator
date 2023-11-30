@@ -27,7 +27,8 @@ import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-
+import java.util.HashMap
+import java.util.Map
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  * Updated by Manuel Dahmen on 10-11-23
@@ -38,7 +39,7 @@ class AlgebraicTreeCalTest() {
     private fun testResultVariable(
         expr: String,
         expectedResult: Double,
-        map: Map<String, Double>,
+        map: HashMap<String, Double>,
         echo: Boolean
     ) {
         var algebricTree: AlgebricTree? = null
@@ -652,4 +653,30 @@ class AlgebraicTreeCalTest() {
         return false
     }
 
+    /***
+     * Next should permit StructureMatrix<Double> variable type.
+     */
+    @Test
+    public fun testSimpleInstruction() {
+        val hashMap = HashMap<String, Double>()
+        testResultVariable("a=0", 0.0, hashMap,true )
+    }
+    /***
+     * Next should permit StructureMatrix<Double> variable type.
+     */
+    @Test
+    public fun testSimpleInstruction2() {
+        val hashMap = HashMap<String, StructureMatrix<Double>>()
+        testResultVariableVec2("a=0", Vec(0.0), hashMap,true )
+    }
+
+    private fun testResultVariableVec2(
+        s: String,
+        vec: Vec,
+        hashMap2: HashMap<String, StructureMatrix<Double>>,
+        b: Boolean
+    ) {
+
+
+    }
 }
