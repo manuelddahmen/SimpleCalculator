@@ -176,6 +176,10 @@ public class AlgebricTree extends Tree {
                         added = addSingleSign(src, subformula);
                         if (added) caseChoice = 12;
                         break;
+                    case 13:
+                        added = addFunctionDefinition(src, subformula);
+                        if (added) caseChoice = 13;
+                        break;
                     default:
                         break;
                 }
@@ -247,9 +251,9 @@ public class AlgebricTree extends Tree {
 
     private boolean addSingleSign(TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
         if (subformula.length() > 1 && subformula.charAt(0) == '-') {
-
-            if (add(src, subformula.substring(1))) {
-                src.getChildren().add(new TreeNode(src, new Object[]{subformula.substring(1)}, new SignTreeNodeType(-1.0)));
+            TreeNode treeNode = new TreeNode(src, new Object[]{subformula.substring(1)}, new SignTreeNodeType(-1.0));
+            if (add(treeNode, subformula.substring(1))) {
+                src.getChildren().add(treeNode);
                 return true;
             }
         }
@@ -680,6 +684,70 @@ public class AlgebricTree extends Tree {
         }
 
         return t.getChildren().size() > 0;
+    }
+    public boolean addFunctionDefinition(TreeNode t, String values)
+            throws AlgebraicFormulaSyntaxException {
+        int i = 1;
+        boolean isNewFactor = false;
+        int count = 0;
+        int newFactorPos = 0;
+        int oldFactorPos = 0;
+        char newFactor = 0;
+        int countLetters = 0;
+        boolean fNameAdded = false;
+        int listInstructionDef = -1;
+        while (i < values.length()) {
+            if (Character.isLetter(values.charAt(0)) && Character.isLetterOrDigit(values.charAt(i)) && count == 0) {
+                countLetters++;
+            } else if (values.charAt(i) == '(') {
+                if (count == 0) {
+                    newFactorPos = i + 1;
+                }
+                count++;
+            } else if (values.charAt(i) == ')') {
+                count--;
+            } else if(values.charAt(i) == '{') {
+                if(count==0 && fNameAdded) {
+                    listInstructionDef = i + 1;
+                }
+            }
+            else if (i < 1)
+                return false;
+
+            TreeNode t2 = null;
+            if (count == 0 && values.charAt(i) == ')') {
+
+
+                String fName = values.substring(oldFactorPos, newFactorPos - 1);
+                String fParamString = values.substring(newFactorPos, i);
+
+
+                TreeTreeNodeType mathFunctionTreeNodeType = new TreeTreeNodeType(
+                        "", parametersValues
+                );
+
+                t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues, fParamString},
+                        mathFunctionTreeNodeType);
+                if (!add(t2, fParamString))
+                    return false;
+
+            } else if(values.charAt(i)=='{' && t2!=null && listInstructionDef>0) {
+                listInstructionDef = i+1;
+                if(addFunctionBody(t2, values.substring(listInstructionDef)))
+                    t.getChildren().add(t2);
+                else
+                    return false;
+            }
+
+
+            i++;
+
+        }
+        return false;
+    }
+
+    public boolean addFunctionBody(TreeNode t2, String substring) {
+        return false;
     }
 
     public boolean addBracedExpression(TreeNode src, String values) throws AlgebraicFormulaSyntaxException {
