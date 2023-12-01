@@ -314,7 +314,11 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
                 data1d.forEach(new Consumer<T>() {
                     @Override
                     public void accept(T t) {
-                        s.append("(" + t.toString() + ")");
+                        if(t!=null) {
+                            s.append("(" + t.toString() + ")");
+                        } else {
+                            s.append("+null+");
+                        }
                     }
                 });
                 break;
