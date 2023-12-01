@@ -161,9 +161,9 @@ public class ListInstructions {
 
                     if (resultVec != null) {
                         if (resultVec.getDim() == 1) {
-                            currentParamsValuesVecComputed.put(key, resultVec);
+                            //currentParamsValuesVecComputed.put(key, resultVec);
                         } else if (resultVec.getDim() == 0) {
-                            currentParamsValuesVecComputed.put(key, resultVec);
+                            //currentParamsValuesVecComputed.put(key, resultVec);
                         }
                     } else {
                         throw new AlgebraicFormulaSyntaxException("Result was null");

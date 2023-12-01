@@ -67,6 +67,7 @@ import one.empty3.library.StructureMatrix;
  * Created by Manuel Dahmen on 15-12-16.
  */
 public class TreeNode {
+    protected AlgebricTree algebricTree;
     protected Object[] objects;
     protected TreeNodeType type = null;
     private TreeNodeValue value;
@@ -74,7 +75,8 @@ public class TreeNode {
     protected TreeNode parent;
     protected String expressionString;
 
-    public TreeNode(String expStr) {
+    public TreeNode(AlgebricTree algebricTree, String expStr) {
+        this.algebricTree = algebricTree;
         this.parent = null;
         if (expStr.trim().isEmpty())
             expressionString = "0.0";
@@ -89,6 +91,7 @@ public class TreeNode {
      */
     public TreeNode(TreeNode src, Object[] objects, TreeNodeType clazz) {
         this.parent = src;
+        this.algebricTree = src.algebricTree;
         this.objects = objects;
         clazz.instantiate(objects);
         this.type = clazz;
@@ -159,10 +162,9 @@ public class TreeNode {
             for(int i=0; i<childrenValues.size(); i++) {
             if(getChildren().get(0).getChildren().get(i).type.getClass().equals(VariableTreeNodeType.class)) {
                 String varName = getChildren().get(0).getChildren().get(i).expressionString;
-                if (objects != null && objects.length >= 3
-                        && objects[2].getClass().equals(HashMap.class) && varName!=null) {
+                if(varName!=null) {
                     StructureMatrix<Double> put =
-                            ((HashMap<String, StructureMatrix<Double>>) objects[2]).put(varName, evalRes);
+                            algebricTree.getParametersValuesVecComputed().put(varName, evalRes);
                 }
                 }
             }

@@ -608,11 +608,16 @@ class AlgebraicTreeCalTest() {
         }
         var assertion = false
         try {
-            if (vecEqualsSM(
-                    listInstructions.currentParamsValuesVecComputed!!["z"]!!,
-                    Vec(1.0 + 5, 2.0 + 6, 3.0 + 7))
-            ) {
-                assertion = true
+            if(listInstructions.currentParamsValuesVecComputed!=null) {
+                if (vecEqualsSM(
+                        listInstructions.currentParamsValuesVecComputed!!["z"],
+                        Vec(1.0 + 5, 2.0 + 6, 3.0 + 7)
+                    )
+                ) {
+                    assertion = true
+                }
+            } else {
+                println("Error : listInstructions.currentParamsValuesVecComputed==null")
             }
         } catch (ex:RuntimeException) {
             ex.printStackTrace()
@@ -620,22 +625,26 @@ class AlgebraicTreeCalTest() {
         Assert.assertTrue(assertion)
     }
 
-    private fun vecEqualsSM(get: StructureMatrix<Double>, vec: Vec): Boolean {
+    private fun vecEqualsSM(get: StructureMatrix<Double>?, vec: Vec?): Boolean {
+        println(vec)
+        println(get)
         if(get!=null && get.dim==0) {
-            if ((get.data0d != null && (vec.vecVal.data0d != null&&(vec.vecVal.data0d.equals(get.data0d))) ||
-                        ( vec.vecVal.data1d.size==1 &&vec.vecVal.data1d.get(0).equals(get.data0d)))
+            val vec1 : Vec = vec!!
+            if ((get.data0d != null && (vec1.vecVal.data0d != null&&(vec1.vecVal.data0d.equals(get.data0d))) ||
+                        ( vec1.vecVal.data1d.size==1 &&vec1.vecVal.data1d.get(0).equals(get.data0d)))
             ) {
                 return true
             }else {
-                println("get : StructureMatrix<Double> : invalid StructureMatrix or Vec { $get, $vec }")
+                println("get : StructureMatrix<Double> : invalid StructureMatrix or Vec { $get, $vec1 }")
                 return false
             }
         } else if(get!=null && get.dim==1){
-            if((get.data1d!=null && vec.vecVal.data1d!=null)) {
+            val vec1 : Vec = vec!!
+            if((get.data1d!=null && vec1.vecVal.data1d!=null)) {
                 for (i in 0 until get.data1d.size) {
                     println("computed vec : $get")
-                    println("computed vec : $vec")
-                    if(get.data1d[i]!=vec.vecVal.data1d[i]) {
+                    println("computed vec : $vec1")
+                    if(get.data1d[i]!=vec1.vecVal.data1d[i]) {
                         println("equals(StructureMatrix<Double>,Vec) : invalid for number $i")
                         return false
                     }
