@@ -144,24 +144,13 @@ public class ListInstructions {
                     tree.construct();
 
                     resultVec = tree.eval();
-
-                    if (resultVec != null) {
-                        if (resultVec.getDim() == 1) {
-                            //currentParamsValuesVecComputed.put(key, resultVec);
-                        } else if (resultVec.getDim() == 0) {
-                            //currentParamsValuesVecComputed.put(key, resultVec);
-                        }
-                    } else {
-                        throw new AlgebraicFormulaSyntaxException("Result was null");
-                    }
-                    System.err.println("AlgebraicTree result : " + tree);
                 }
-            } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException e) {
+            } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException |
+                     NullPointerException e) {
                 e.printStackTrace();
-            } catch (NullPointerException ignored) {
-                ignored.printStackTrace();
             }
             if (resultVec != null) {
+                resultVec.setDim(1);
                 errors[i] = String.format(Locale.getDefault(), "# Result of line : (%d) <<< %s ", i, resultVec.toStringLine());
             } else {
 

@@ -71,7 +71,7 @@ public class AlgebricTree extends Tree {
     private String formula = "0.0";
     Map<String, Double> parametersValues = new HashMap<>();
     Map<String, String> parametersValuesVec = new HashMap<>();
-    private HashMap<String, StructureMatrix<Double>> parametersValuesVecComputed;
+    private HashMap<String, StructureMatrix<Double>> parametersValuesVecComputed = new HashMap<>();
     private TreeNode root;
     private int stackSize = 0;
 
