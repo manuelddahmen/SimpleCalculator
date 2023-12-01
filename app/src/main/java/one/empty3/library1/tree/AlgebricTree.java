@@ -53,6 +53,8 @@
 
 package one.empty3.library1.tree;
 
+import android.media.audiofx.DynamicsProcessing;
+
 import androidx.annotation.NonNull;
 
 import java.util.HashMap;
@@ -201,16 +203,52 @@ public class AlgebricTree extends Tree {
         throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
     }
 
+    /***
+     *
+     * @param src
+     * @param subformula
+     * @return
+     */
     private boolean addFormulaSeparator(TreeNode src, String subformula) {
-        String[] s;
-        s = subformula.split("=");
-        if (s.length > 1) {
-            EquationTreeNode tt = new EquationTreeNode(subformula);
-            tt.getChildren().add(new EquationTreeNode(s[0]));
-            tt.getChildren().add(new EquationTreeNode(s[1]));
-        } else
+        if(subformula==null || subformula.isEmpty())
             return false;
-        return true;
+
+        String[] s;
+        int i=0;
+        int count=0;
+        while(i<subformula.length()) {
+            char currentChar = subformula.charAt(i);
+            if(currentChar=='(')
+                count++;
+            if(currentChar==')')
+                count++;
+            if(currentChar=='=' && count==0) {
+                s = new String[2];
+                s[0] = subformula.substring(0, i);
+                s[1] = subformula.substring(i+1);
+                EquationTreeNode tt = new EquationTreeNode(src, new Object[]{
+                        subformula, parametersValues, parametersValuesVec, parametersValuesVecComputed},
+                        new EquationTreeNodeType(1.0));
+                tt.getChildren().add( new TreeNode(src, new Object[]{
+                        s[0], parametersValues, parametersValuesVec, parametersValuesVecComputed},
+                        new IdentTreeNodeType()));
+                tt.getChildren().add( new TreeNode(src, new Object[]{
+                        s[1], parametersValues, parametersValuesVec, parametersValuesVecComputed},
+                        new IdentTreeNodeType()));
+                try {
+                    if(add(tt.getChildren().get(0), s[0]) && add(tt.getChildren().get(1), s[1])) {
+                        src.getChildren().add(tt);
+                        return true;
+                    }
+                } catch (AlgebraicFormulaSyntaxException e) {
+                    throw new RuntimeException(e);
+                }
+                return true;
+
+            }
+            i++;
+        }
+        return false;
     }
 
     private boolean addVariable(TreeNode src, String subformula)

@@ -52,6 +52,7 @@
 
 package one.empty3.library1.tree;
 
+import one.empty3.library.StructureMatrix;
 import one.empty3.library1.tree.TreeNode;
 
 /*__
@@ -60,5 +61,15 @@ import one.empty3.library1.tree.TreeNode;
 public class EquationTreeNode extends TreeNode {
     public EquationTreeNode(String expStr) {
         super(expStr);
+    }
+
+    public EquationTreeNode(TreeNode src, Object[] objects, TreeNodeType clazz) {
+        super(src, objects, clazz);
+    }
+
+    @Override
+    public StructureMatrix<Double> eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
+        StructureMatrix<Double> eval = getChildren().get(1).eval();
+        return eval;
     }
 }

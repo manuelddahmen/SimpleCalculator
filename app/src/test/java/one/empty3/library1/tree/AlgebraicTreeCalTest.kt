@@ -622,8 +622,8 @@ class AlgebraicTreeCalTest() {
 
     private fun vecEqualsSM(get: StructureMatrix<Double>, vec: Vec): Boolean {
         if(get!=null && get.dim==0) {
-            if ((get.data0d != null && vec.vecVal.data0d != null &&
-                        vec.vecVal.data0d.equals(get.data0d))
+            if ((get.data0d != null && (vec.vecVal.data0d != null&&(vec.vecVal.data0d.equals(get.data0d))) ||
+                        ( vec.vecVal.data1d.size==1 &&vec.vecVal.data1d.get(0).equals(get.data0d)))
             ) {
                 return true
             }else {
@@ -666,17 +666,64 @@ class AlgebraicTreeCalTest() {
      */
     @Test
     public fun testSimpleInstruction2() {
-        val hashMap = HashMap<String, StructureMatrix<Double>>()
-        testResultVariableVec2("a=0", Vec(0.0), hashMap,true )
+        //val hashMap = HashMap<String, StructureMatrix<Double>>()
+        testResultVariableVec2("a=0", Vec(0.0), true )
+    }
+    @Test
+    public fun testSimpleInstructionPI() {
+        //val hashMap = HashMap<String, StructureMatrix<Double>>()
+        testResultVariableVec2("pi="+Math.PI, Vec(Math.PI), true )
+    }
+
+    @Test
+    public fun testSimpleInstructionVec1() {
+        //val hashMap = HashMap<String, StructureMatrix<Double>>()
+        testResultVariableVec2("b=("+Math.PI+", 0)", Vec(Math.PI, 0.0), true )
     }
 
     private fun testResultVariableVec2(
-        s: String,
-        vec: Vec,
-        hashMap2: HashMap<String, StructureMatrix<Double>>,
-        b: Boolean
+        expr: String,
+        expectedResult: Vec,
+        echo: Boolean
     ) {
+        var algebraicTree: AlgebricTree? = null
+        try {
+            println("Expression string : $expr")
+            algebraicTree = AlgebricTree(expr)
+            algebraicTree.construct()
+            if (echo) println(algebraicTree)
+            try {
+                val result :StructureMatrix<Double> = algebraicTree.eval()
 
+                println("Result : $result")
+                if (echo) println("Expected : $expectedResult")
 
+                var assertion = true
+
+                try {
+                    if(vecEqualsSM(result,  expectedResult)) {
+                        assertion = true
+                    } else {
+                        assertion = false
+                    }
+                } catch (ex : NullPointerException) {
+                    assertion = false
+                }
+
+                Assert.assertTrue(assertion)
+
+                if (echo) println("Result : $result");
+
+            } catch (e: TreeNodeEvalException) {
+                e.printStackTrace()
+                Assert.assertFalse(true)
+            }
+        } catch (e: AlgebraicFormulaSyntaxException) {
+            e.printStackTrace()
+            Assert.assertFalse(true)
+        } catch (ex: NullPointerException) {
+            ex.printStackTrace()
+            Assert.assertFalse(true)
+        }
     }
 }

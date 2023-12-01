@@ -61,7 +61,6 @@ import one.empty3.library1.tree.TreeNodeType;
 public class IdentTreeNodeType extends TreeNodeType {
     @Override
     public StructureMatrix<Double> eval() {
-
         return null;
     }
 }
