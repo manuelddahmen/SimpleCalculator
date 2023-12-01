@@ -221,7 +221,7 @@ public class AlgebricTree extends Tree {
             if(currentChar=='(')
                 count++;
             if(currentChar==')')
-                count++;
+                count--;
             if(currentChar=='=' && count==0) {
                 s = new String[2];
                 s[0] = subformula.substring(0, i);

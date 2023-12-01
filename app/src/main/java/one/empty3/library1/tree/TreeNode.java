@@ -124,13 +124,21 @@ public class TreeNode {
             System.out.println(getChildren().get(0));
             switch (getChildren().get(0).getChildren().get(0).eval().getDim()) {
                 case 0:
-                    evalRes.setElem(getChildren().get(0).getChildren().get(0).eval().getElem());
+                    evalRes = new StructureMatrix<>(0, Double.class);
+                    for (int i = 0; i < getChildren().get(0).getChildren().size(); i++) {
+                        evalRes.setElem(getChildren().get(0).getChildren().get(0).eval().getElem(i), i);
+                    }
                     break;
                 case 1:
-//                    evalRes = new StructureMatrix<>(1, Double.class);
-                    StructureMatrix<Double> eval = getChildren().get(0).getChildren().get(0).eval();
-                    for (int i = 0; i < eval.data1d.size(); i++)
-                        evalRes.setElem(eval.getElem(i), i);
+                    int sum = 0;
+                    evalRes = new StructureMatrix<>(1, Double.class);
+                    for (int j = 0; j < getChildren().get(0).getChildren().size(); j++) {
+                        StructureMatrix<Double> eval = getChildren().get(0).getChildren().get(j).eval();
+                        for (int i = 0; i < eval.data1d.size(); i++) {
+                            evalRes.setElem(eval.getElem(i), sum);
+                            sum++;
+                        }
+                    }
                     break;
                 default:
                     break;
