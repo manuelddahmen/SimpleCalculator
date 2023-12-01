@@ -125,9 +125,7 @@ public class TreeNode {
             switch (getChildren().get(0).getChildren().get(0).eval().getDim()) {
                 case 0:
                     evalRes = new StructureMatrix<>(0, Double.class);
-                    for (int i = 0; i < getChildren().get(0).getChildren().size(); i++) {
-                        evalRes.setElem(getChildren().get(0).getChildren().get(0).eval().getElem(), i);
-                    }
+                    evalRes.setElem(getChildren().get(0).getChildren().get(0).eval().getElem());
                     break;
                 case 1:
                     int sum = 0;
