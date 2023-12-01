@@ -42,13 +42,11 @@ public class ListInstructions {
 
     public class Instruction {
         private int id;
-        private String leftHand;
-        private String expression;
+        private String ins;
 
-        public Instruction(int id, String leftHand, String expression) {
+        public Instruction(int id, String ins) {
             this.id = id;
-            this.leftHand = leftHand;
-            this.expression = expression;
+            this.ins = ins;
         }
 
         public int getId() {
@@ -59,20 +57,12 @@ public class ListInstructions {
             this.id = id;
         }
 
-        public String getLeftHand() {
-            return leftHand;
+        public String getIns() {
+            return ins;
         }
 
-        public void setLeftHand(String leftHand) {
-            this.leftHand = leftHand;
-        }
-
-        public String getExpression() {
-            return expression;
-        }
-
-        public void setExpression(String expression) {
-            this.expression = expression;
+        public void setIns(String ins) {
+            this.ins = ins;
         }
     }
 
@@ -121,7 +111,7 @@ public class ListInstructions {
                 }
                 if (!assigned) {
                     if (!value.startsWith("#")) {
-                        assignations.add(new Instruction(i, "", value));
+                        assignations.add(new Instruction(i, value));
                     }
                 }
             }
@@ -141,16 +131,12 @@ public class ListInstructions {
         currentParamsValuesVecComputed = new HashMap<>();
         int i = 0;
         for (Instruction instruction : instructions) {
-            String key = (String) instruction.getLeftHand();
-            String value = (String) instruction.getExpression();
-            if(value==null)
-                value = key;
-
+            String ins = instruction.ins;
             StructureMatrix<Double> resultVec = null;
             Double resultDouble = null;
             try {
-                if (value != null) {
-                    AlgebricTree tree = new AlgebricTree(value);
+                if (ins != null) {
+                    AlgebricTree tree = new AlgebricTree(ins);
                     tree.setParametersValues(currentParamsValues);
                     tree.setParametersValuesVec(currentParamsValuesVec);
                     tree.setParametersValuesVecComputed(currentParamsValuesVecComputed);
