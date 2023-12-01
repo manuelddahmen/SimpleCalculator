@@ -158,13 +158,15 @@ public class TreeNode {
                 default:
                     break;
             }
+            ArrayList<TreeNode> childrenVars = getChildren().get(0).getChildren().get(0).getChildren();
             ArrayList<TreeNode> childrenValues = getChildren().get(0).getChildren().get(1).getChildren();
-            for (int i = 0; i < childrenValues.size(); i++) {
-                if (getChildren().get(0).getChildren().get(1).getChildren().get(i).type.getClass().equals(VariableTreeNodeType.class)) {
-                    String varName = getChildren().get(0).getChildren().get(0).getChildren().get(i).expressionString;
-                    if (varName != null) {
+            for(int i=0; i<childrenVars.size(); i++) {
+                if(childrenVars.get(i).type.getClass().equals(VariableTreeNodeType.class)) {
+                    String varName = childrenVars.get(i).expressionString;
+                    if(varName!=null) {
                         StructureMatrix<Double> put =
-                                algebricTree.getParametersValuesVecComputed().put(varName, getChildren().get(0).getChildren().get(1).getChildren().get(i).eval());
+                                algebricTree.getParametersValuesVecComputed()
+                                        .put(varName, childrenValues.get(i).eval());
                     }
                 }
             }
@@ -184,8 +186,8 @@ public class TreeNode {
             if (eval1.getDim() == 1 && eval2.getDim() == 1) {
                 dim1 = eval1.data1d.size();
                 dim2 = eval2.data1d.size();
-                for (int i = 0; i < getChildren().size(); i++) {
-                    if (dim1 == dim2 && dim1 == 3) {
+                for(int i=0; i<getChildren().size(); i++) {
+                    if(dim1==dim2 && dim1==3) {
                         Point3D point3D1 = new Point3D(eval1.data1d.get(0), eval1.data1d.get(1), eval1.data1d.get(2));
                         Point3D point3D2 = new Point3D(eval2.data1d.get(0), eval2.data1d.get(1), eval2.data1d.get(2));
                         Point3D point3Dres = point3D1.prodVect(point3D2);
@@ -195,10 +197,10 @@ public class TreeNode {
                         evalRes.setElem(point3Dres.get(2), 2);
 
                         return evalRes;
-                    } else if (dim1 == dim2 && dim1 == 2) {
+                    } else if(dim1==dim2 && dim1==2) {
                         Point2D point2D1 = new Point2D(eval1.data1d.get(0), eval1.data1d.get(1));
                         Point2D point2D2 = new Point2D(eval2.data1d.get(0), eval2.data1d.get(1));
-                        Point2D point3Dres = new Point2D(eval1.data1d.get(0) * eval2.data1d.get(1), eval1.data1d.get(1) * eval2.data1d.get(0));
+                        Point2D point3Dres = new Point2D(eval1.data1d.get(0)*eval2.data1d.get(1), eval1.data1d.get(1)*eval2.data1d.get(0));
                         evalRes = new StructureMatrix<>(1, Double.class);
                         evalRes.setElem(point3Dres.get(0), 0);
                         evalRes.setElem(point3Dres.get(1), 1);
@@ -226,7 +228,7 @@ public class TreeNode {
                 int dim = treeNode1.eval().getDim();
                 if (dim == 1)
                     evalRes = new StructureMatrix<>(1, Double.class);
-                else if (dim == 0) {
+                else if(dim==0){
                     evalRes = new StructureMatrix<>(0, Double.class);
                     evalRes.setElem(1.0);
                 }
@@ -238,11 +240,11 @@ public class TreeNode {
                     double op1;
                     Double mult = 1.0;
                     if (treeNodeEval.getDim() == 1) {
-                        if (dim0 == 0 && dim == 1) {
+                        if(dim0==0 && dim==1) {
                             mult = getChildren().get(0).eval().getElem();
                             dim0 = -1;
                         }
-                        if (evalRes.data1d.size() != treeNodeEval.data1d.size()) {
+                        if(evalRes.data1d.size()!=treeNodeEval.data1d.size()) {
                             int leftOp = evalRes.data1d.size();
                             int rightOp = treeNodeEval.data1d.size();
 
@@ -256,10 +258,10 @@ public class TreeNode {
                                 op1 = ((FactorTreeNodeType) treeNode.type).getSignFactor();
                                 if (op1 == 1) {
                                     dot = ((Double) treeNode.eval().getElem(j)) * e;
-                                    evalRes.setElem(dot * mult, j);
+                                    evalRes.setElem(dot*mult, j);
                                 } else {
                                     dot = 1. / ((Double) (Double) treeNode.eval().getElem(j)) * e;///treeNode.type.getSign1()) *
-                                    evalRes.setElem(dot * mult, j);
+                                    evalRes.setElem(dot*mult, j);
                                 }
                             }
                         }
@@ -267,10 +269,10 @@ public class TreeNode {
                         if (treeNode.type instanceof FactorTreeNodeType) {
                             op1 = ((FactorTreeNodeType) treeNode.type).getSignFactor();
                             if (op1 == 1) {
-                                dot = ((Double) treeNodeEval.getElem() * treeNode.type.getSign1());
+                                dot = ((Double) treeNodeEval.getElem()*treeNode.type.getSign1());
                                 evalRes.setElem(dot * evalRes.getElem());
                             } else {
-                                dot = 1. / ((Double) treeNodeEval.getElem() * treeNode.type.getSign1());///treeNode.type.getSign1()) *
+                                dot = 1. / ((Double) treeNodeEval.getElem()*treeNode.type.getSign1());///treeNode.type.getSign1()) *
                                 evalRes.setElem(dot * evalRes.getElem());
                             }
                         }
@@ -289,14 +291,14 @@ public class TreeNode {
                 evalRes = new StructureMatrix<>(0, Double.class);
             } else {
                 evalRes = new StructureMatrix<>(1, Double.class);
-                for (int j = 0; j < evalRes.data1d.size(); j++)
+                for(int j=0; j<evalRes.data1d.size(); j++)
                     evalRes.setElem(0.0, j);
             }
             for (int i = 0; i < getChildren().size(); i++) {
                 TreeNode treeNode1 = getChildren().get(i);
                 double op1 = treeNode1.type.getSign1();
                 StructureMatrix<Double> eval = treeNode1.eval();
-                if (treeNode1.type instanceof TermTreeNodeType) {
+                if(treeNode1.type instanceof TermTreeNodeType) {
                     if (eval.getDim() == 1) {
                         for (int j = 0; j < eval.data1d.size(); j++) {
                             double e = 0.0;
@@ -305,7 +307,7 @@ public class TreeNode {
                             } else {
                                 evalRes.setElem(e, j);
                             }
-                            evalRes.setElem(e + eval.getElem(j) * op1, j);
+                            evalRes.setElem(e + eval.getElem(j)*op1, j);
                         }
                         System.err.println("In TreeNode.eval #TermTreeNodeType");
                     } else if (eval.getDim() == 0) {

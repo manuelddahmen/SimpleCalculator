@@ -150,7 +150,6 @@ public class ListInstructions {
                 e.printStackTrace();
             }
             if (resultVec != null) {
-                resultVec.setDim(1);
                 errors[i] = String.format(Locale.getDefault(), "# Result of line : (%d) <<< %s ", i, resultVec.toStringLine());
             } else {
 

@@ -608,7 +608,8 @@ class AlgebraicTreeCalTest() {
         }
         var assertion = false
         try {
-            if(listInstructions.currentParamsValuesVecComputed!=null) {
+            if(listInstructions.currentParamsValuesVecComputed!=null &&
+                listInstructions.currentParamsValuesVecComputed.containsKey("z")) {
                 if (vecEqualsSM(
                         listInstructions.currentParamsValuesVecComputed!!["z"],
                         Vec(1.0 + 5, 2.0 + 6, 3.0 + 7)
@@ -617,7 +618,7 @@ class AlgebraicTreeCalTest() {
                     assertion = true
                 }
             } else {
-                println("Error : listInstructions.currentParamsValuesVecComputed==null")
+                println("Error : listInstructions.currentParamsValuesVecComputed==null or key not found")
             }
         } catch (ex:RuntimeException) {
             ex.printStackTrace()
