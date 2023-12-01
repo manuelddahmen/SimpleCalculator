@@ -149,10 +149,15 @@ public class TreeNode {
                 default:
                     break;
             }
-            if(getChildren().get(0).getChildren().get(0).type.getClass().equals(VariableTreeNodeType.class)) {
-                String varName = getChildren().get(0).getExpressionString();
-                if(objects!=null && objects.length>=3 && objects[2].getClass().equals(HashMap.class)) {
-                    ((HashMap<String, StructureMatrix<Double>>) objects[2]).put(varName, evalRes);
+            ArrayList<TreeNode> childrenValues = getChildren().get(0).getChildren();
+            for(int i=0; i<childrenValues.size(); i++) {
+            if(getChildren().get(0).getChildren().get(i).type.getClass().equals(VariableTreeNodeType.class)) {
+                String varName = getChildren().get(0).getChildren().get(i).expressionString;
+                if (objects != null && objects.length >= 3
+                        && objects[2].getClass().equals(HashMap.class) && varName!=null) {
+                    StructureMatrix<Double> put =
+                            ((HashMap<String, StructureMatrix<Double>>) objects[2]).put(varName, evalRes);
+                }
                 }
             }
             return evalRes;//TO REVIEW

@@ -680,6 +680,11 @@ class AlgebraicTreeCalTest() {
         //val hashMap = HashMap<String, StructureMatrix<Double>>()
         testResultVariableVec2("b=("+Math.PI+", 0)", Vec(Math.PI, 0.0), true )
     }
+    @Test
+    public fun testSimpleInstructionVec2size() {
+        //val hashMap = HashMap<String, StructureMatrix<Double>>()
+        testResultVariableVec2("(a,b)=("+Math.PI+", "+Math.E+")", Vec(Math.PI, Math.E), true )
+    }
 
     private fun testResultVariableVec2(
         expr: String,
