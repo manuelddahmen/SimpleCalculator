@@ -123,21 +123,35 @@ public class TreeNode {
         if (cType instanceof IdentTreeNodeType) {
             return getChildren().get(0).eval();
         } else if (cType instanceof EquationTreeNodeType) {
-            System.out.println(cType);
-            System.out.println(getChildren().get(0));
-            StructureMatrix<Double> evalVar0 = getChildren().get(0).getChildren().get(1).eval();
+            StructureMatrix<Double> evalVar0 = getChildren().get(0).getChildren().get(0).eval();
+            StructureMatrix<Double> evalResVar;
             switch (evalVar0.getDim()) {
                 case 0:
-                    evalRes = new StructureMatrix<>(1, Double.class);
-                    evalRes.setElem(evalVar0.getElem(), 0);
+                    evalResVar = new StructureMatrix<>(0, Double.class);
+                    evalResVar.setElem(evalVar0.getElem());
                     break;
                 case 1:
-                    int sum = 0;
-                    evalRes = new StructureMatrix<>(1, Double.class);
+                    evalResVar = new StructureMatrix<>(1, Double.class);
                     StructureMatrix<Double> eval00 = evalVar0;
                     for (int i = 0; i < eval00.data1d.size(); i++) {
-                        evalRes.setElem(eval00.getElem(i), i);
+                        evalResVar.setElem(eval00.getElem(i), i);
                     }
+                    break;
+                default:
+                    break;
+            }
+            StructureMatrix<Double> eval1 = getChildren().get(0).getChildren().get(1).eval();
+            StructureMatrix<Double> evalResValue = eval1;
+            switch (eval1.getDim()) {
+                case 0:
+                    evalResValue = new StructureMatrix<>(0, Double.class);
+                    evalResValue.setElem(eval1.getElem());
+                    break;
+                case 1:
+                    evalResValue = new StructureMatrix<>(1, Double.class);
+                    int size = eval1.data1d.size();
+                    for (int i = 0; i < eval1.data1d.size(); i++)
+                        evalRes.setElem(eval1.getElem(i), i);
                     break;
                 default:
                     break;
@@ -162,7 +176,7 @@ public class TreeNode {
                     }
                 }
             }
-            return evalRes;//TO REVIEW
+            return evalResValue;//TO REVIEW
         } else if (cType instanceof DoubleTreeNodeType) {
             return cType.eval();
         } else if (cType instanceof VariableTreeNodeType) {
