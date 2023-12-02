@@ -20,8 +20,6 @@
 
 package one.empty3.library1.tree;
 
-import android.util.Log;
-
 import androidx.core.util.ConsumerKt;
 
 import org.jetbrains.annotations.NotNull;
@@ -41,14 +39,15 @@ public class ListInstructions {
     HashMap<String, Double> currentParamsValues = new HashMap<>();
     HashMap<String, String> currentParamsValuesVec = new HashMap<>();
     HashMap<String, StructureMatrix<Double>> currentParamsValuesVecComputed = new HashMap<>();
-
     public class Instruction {
         private int id;
-        private String ins;
+        private String leftHand;
+        private String expression;
 
-        public Instruction(int id, String ins) {
+        public Instruction(int id, String leftHand, String expression) {
             this.id = id;
-            this.ins = ins;
+            this.leftHand = leftHand;
+            this.expression = expression;
         }
 
         public int getId() {
@@ -59,15 +58,22 @@ public class ListInstructions {
             this.id = id;
         }
 
-        public String getIns() {
-            return ins;
+        public String getLeftHand() {
+            return leftHand;
         }
 
-        public void setIns(String ins) {
-            this.ins = ins;
+        public void setLeftHand(String leftHand) {
+            this.leftHand = leftHand;
+        }
+
+        public String getExpression() {
+            return expression;
+        }
+
+        public void setExpression(String expression) {
+            this.expression = expression;
         }
     }
-
     private ArrayList<Instruction> assignations;
 
     public ListInstructions() {
@@ -84,46 +90,62 @@ public class ListInstructions {
 
     public void addInstructions(@NotNull String toString) {
 
-        if (toString != null && !toString.isEmpty()) {
+        if(toString!=null && !toString.isEmpty()) {
             assignations = new ArrayList<>();
 
             String text = toString;
 
-            String[] splitLines = text.split("\n");
+            String [] splitLines = text.split("\n");
 
             for (int i = 0; i < splitLines.length; i++) {
 
                 String line = splitLines[i];
 
-                String[] splitInstructionEquals = new String[1];//line.split("=");
-
-                splitInstructionEquals[0] = line;
+                String[] splitInstructionEquals = line.split("=");
 
                 String value = null;
-
-                if (splitInstructionEquals.length == 1) {
+                String variable = null;
+                if(splitInstructionEquals.length==1) {
+                    variable = splitInstructionEquals[0].trim();
                     value = splitInstructionEquals[0].trim();
                 }
                 if (splitInstructionEquals.length == 2) {
+                    variable = splitInstructionEquals[0].trim();
                     value = splitInstructionEquals[1].trim();
                 }
                 boolean assigned = false;
-                if (splitInstructionEquals.length >= 1) {
+                if(splitInstructionEquals.length>=1) {
 
+                    if ((variable != null ? variable.length() : 0) >0 && Character.isLetter(variable.toCharArray()[0])) {
+                        int j = 0;
+                        while (j < variable.length() && (Character.isLetterOrDigit(variable.toCharArray()[j])
+                                || variable.toCharArray()[j] == '_')) {
+                            j++;
+                        }
+                        if (j == variable.length()) {
+                            assignations.add(new Instruction(i, variable, value));
+                            assigned = true;
+                        }
+                    }
                 }
-                if (!assigned) {
-                    if (!value.startsWith("#")) {
-                        assignations.add(new Instruction(i, value));
+                if(!assigned) {
+                    if(splitInstructionEquals.length==1) {
+                        if(variable!=null && !variable.isEmpty()) {
+                            if(!variable.startsWith("#")) {
+                                assignations.add(new Instruction(i, "", variable));
+                            }
+                        } else if(value!=null && !value.isEmpty()) {
+                            if(!value.startsWith("#")) {
+                                assignations.add(new Instruction(i, "", value));
+                            }
+                        }
                     }
                 }
             }
-
-
         }
     }
-
     public String[] runInstructions() {
-        String[] errors = new String[assignations.size()];
+        String [] errors = new String[assignations.size()];
         Instruction[] instructions = new Instruction[assignations.size()];
 
         assignations.toArray(instructions);
@@ -131,29 +153,41 @@ public class ListInstructions {
         currentParamsValues = new HashMap<>();
         currentParamsValuesVec = new HashMap<>();
         currentParamsValuesVecComputed = new HashMap<>();
-        int i = 0;
-        for (Instruction instruction : instructions) {
-            String ins = instruction.ins;
+        int i=0;
+        for(Instruction instruction : instructions) {
+            String key = (String) instruction.getLeftHand();
+            String value = (String) instruction.getExpression();
+
             StructureMatrix<Double> resultVec = null;
             Double resultDouble = null;
             try {
-                if (ins != null) {
-                    AlgebricTree tree = new AlgebricTree(ins);
+                if(value!=null) {
+                    AlgebricTree tree = new AlgebricTree(value);
                     tree.setParametersValues(currentParamsValues);
                     tree.setParametersValuesVec(currentParamsValuesVec);
                     tree.setParametersValuesVecComputed(currentParamsValuesVecComputed);
 
                     tree.construct();
 
-                    System.out.println(tree.getFormula());
-
                     resultVec = tree.eval();
+
+                    if(resultVec != null) {
+                        if(resultVec.getDim()==1) {
+                            currentParamsValuesVecComputed.put(key, resultVec);
+                        } else if(resultVec.getDim()==0) {
+                            currentParamsValuesVecComputed.put(key, resultVec);
+                        }
+                    } else {
+                        throw new AlgebraicFormulaSyntaxException("Result was null");
+                    }
+                    System.err.println("AlgebraicTree result : " + tree);
                 }
-            } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException |
-                     NullPointerException e) {
+            } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException e) {
                 e.printStackTrace();
+            } catch (NullPointerException ignored) {
+                ignored.printStackTrace();
             }
-            if (resultVec != null) {
+            if(resultVec!=null) {
                 errors[i] = String.format(Locale.getDefault(), "# Result of line : (%d) <<< %s ", i, resultVec.toStringLine());
             } else {
 
