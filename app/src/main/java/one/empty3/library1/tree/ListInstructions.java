@@ -121,6 +121,7 @@ public class ListInstructions {
                         }
                     } else {
                         assignations.add(new Instruction(i, null, value));
+                        assigned = true;
                     }
                 }
                 if(!assigned) {
