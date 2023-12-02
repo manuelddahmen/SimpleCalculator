@@ -20,18 +20,12 @@
 
 package one.empty3.library1.tree;
 
-import androidx.core.util.ConsumerKt;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import one.empty3.library.StructureMatrix;
 
@@ -139,8 +133,8 @@ public class ListInstructions {
             }
         }
     }
-    public String[] runInstructions() {
-        String [] errors = new String[assignations.size()];
+    public List<String> runInstructions() {
+        List<String> returnedCode = new ArrayList<>();
         Instruction[] instructions = new Instruction[assignations.size()];
 
         assignations.toArray(instructions);
@@ -181,17 +175,20 @@ public class ListInstructions {
                      NullPointerException e) {
                 e.printStackTrace();
             }
-            if(value!=null && resultVec!=null && (!value.startsWith("# "))) {
-                errors[i] = String.format(Locale.getDefault(), "# Result of line : (%d) <<< %s ", i, resultVec.toStringLine());
-            } else {
+            String errors1 = "";
+            if(value!=null && resultVec!=null && (!value.startsWith("# ") && !value.isBlank() && !value.equals("null")) ) {
+                errors1 += String.format(Locale.getDefault(), "# Result of line : (%d) <<< %s ", i, resultVec.toStringLine());
             }
             if(value!=null && (!value.startsWith("# "))) {
-                errors[i] += "\n" + (key == null ? "" : (key + "=")) + value;
+                errors1 += "\n" + (key == null||key.isBlank() ? "" : (key + "=")) + value;
+            }
+            if(!(errors1.isBlank()||errors1.equals("null"))) {
+                returnedCode.add(errors1);
             }
             i++;
         }
 
-        return errors;
+        return returnedCode;
     }
 
     public HashMap<String, Double> getCurrentParamsValues() {
