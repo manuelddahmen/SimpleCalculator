@@ -106,7 +106,6 @@ public class ListInstructions {
                 String value = null;
                 String variable = null;
                 if(splitInstructionEquals.length==1) {
-                    variable = splitInstructionEquals[0].trim();
                     value = splitInstructionEquals[0].trim();
                 }
                 if (splitInstructionEquals.length == 2) {
@@ -126,6 +125,8 @@ public class ListInstructions {
                             assignations.add(new Instruction(i, variable, value));
                             assigned = true;
                         }
+                    } else {
+                        assignations.add(new Instruction(i, null, value));
                     }
                 }
                 if(!assigned) {
@@ -172,9 +173,9 @@ public class ListInstructions {
                     resultVec = tree.eval();
 
                     if(resultVec != null) {
-                        if(resultVec.getDim()==1) {
+                        if(resultVec.getDim()==1 && key!=null) {
                             currentParamsValuesVecComputed.put(key, resultVec);
-                        } else if(resultVec.getDim()==0) {
+                        } else if(resultVec.getDim()==0 && key!=null) {
                             currentParamsValuesVecComputed.put(key, resultVec);
                         }
                     } else {
@@ -182,15 +183,16 @@ public class ListInstructions {
                     }
                     System.err.println("AlgebraicTree result : " + tree);
                 }
-            } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException e) {
+            } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException |
+                     NullPointerException e) {
                 e.printStackTrace();
-            } catch (NullPointerException ignored) {
-                ignored.printStackTrace();
             }
-            if(resultVec!=null) {
+            if(value!=null && resultVec!=null && (!value.startsWith("# "))) {
                 errors[i] = String.format(Locale.getDefault(), "# Result of line : (%d) <<< %s ", i, resultVec.toStringLine());
             } else {
-
+            }
+            if(value!=null && (!value.startsWith("# "))) {
+                errors[i] += "\n" + (key == null ? "" : (key + "=")) + value;
             }
             i++;
         }
