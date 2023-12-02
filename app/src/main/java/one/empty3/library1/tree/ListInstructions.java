@@ -131,14 +131,8 @@ public class ListInstructions {
                 }
                 if(!assigned) {
                     if(splitInstructionEquals.length==1) {
-                        if(variable!=null && !variable.isEmpty()) {
-                            if(!variable.startsWith("#")) {
-                                assignations.add(new Instruction(i, "", variable));
-                            }
-                        } else if(value!=null && !value.isEmpty()) {
-                            if(!value.startsWith("#")) {
-                                assignations.add(new Instruction(i, "", value));
-                            }
+                        if(!value.startsWith("#")) {
+                            assignations.add(new Instruction(i, "", splitInstructionEquals[0]));
                         }
                     }
                 }
