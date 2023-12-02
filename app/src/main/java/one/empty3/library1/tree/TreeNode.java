@@ -141,7 +141,7 @@ public class TreeNode {
                     break;
             }
             StructureMatrix<Double> eval1 = getChildren().get(0).getChildren().get(1).eval();
-            StructureMatrix<Double> evalResValue = eval1;
+            StructureMatrix<Double> evalResValue = null;
             switch (eval1.getDim()) {
                 case 0:
                     evalResValue = new StructureMatrix<>(0, Double.class);
