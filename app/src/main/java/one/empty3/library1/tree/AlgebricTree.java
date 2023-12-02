@@ -259,7 +259,7 @@ public class AlgebricTree extends Tree {
                 i++;
             }
 
-            VariableTreeNodeType variableTreeNodeType = new VariableTreeNodeType();
+            VariableTreeNodeType variableTreeNodeType = new VariableTreeNodeType(this);
             variableTreeNodeType.setValues(new Object[]{subformula.substring(0, i), parametersValues, parametersValuesVec, parametersValuesVecComputed});
             src.getChildren().add(new TreeNodeVariable(src, new Object[]{subformula.substring(0, i), parametersValues}, variableTreeNodeType));
 
@@ -277,7 +277,7 @@ public class AlgebricTree extends Tree {
     private boolean addDouble(TreeNode src, String subformula) {
         try {
             Double d = Double.parseDouble(subformula);
-            DoubleTreeNodeType doubleTreeNodeType = new DoubleTreeNodeType();
+            DoubleTreeNodeType doubleTreeNodeType = new DoubleTreeNodeType(this);
             doubleTreeNodeType.setValues(new Object[]{subformula, d});
             src.getChildren().add(new TreeNodeDouble(src, new Object[]{subformula, d}, doubleTreeNodeType));
 
@@ -851,5 +851,9 @@ public class AlgebricTree extends Tree {
     }
     public HashMap<String, StructureMatrix<Double>>  getParametersValuesVecComputed() {
         return parametersValuesVecComputed;
+    }
+
+    public String getFormula() {
+        return formula;
     }
 }

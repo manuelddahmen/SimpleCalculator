@@ -20,6 +20,8 @@
 
 package one.empty3.library1.tree;
 
+import android.util.Log;
+
 import androidx.core.util.ConsumerKt;
 
 import org.jetbrains.annotations.NotNull;
@@ -142,6 +144,8 @@ public class ListInstructions {
                     tree.setParametersValuesVecComputed(currentParamsValuesVecComputed);
 
                     tree.construct();
+
+                    System.out.println(tree.getFormula());
 
                     resultVec = tree.eval();
                 }

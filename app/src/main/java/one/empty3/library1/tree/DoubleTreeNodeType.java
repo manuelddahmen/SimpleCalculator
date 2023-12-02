@@ -59,7 +59,8 @@ import one.empty3.library1.tree.VariableTreeNodeType;
  * Created by Manuel Dahmen on 15-12-16.
  */
 public class DoubleTreeNodeType extends VariableTreeNodeType {
-    public DoubleTreeNodeType() {
+    public DoubleTreeNodeType(AlgebricTree algebricTree) {
+        super(algebricTree);
 
     }
 

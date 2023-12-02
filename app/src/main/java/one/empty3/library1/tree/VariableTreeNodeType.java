@@ -52,6 +52,7 @@
 
 package one.empty3.library1.tree;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import one.empty3.library.StructureMatrix;
@@ -62,9 +63,12 @@ import one.empty3.library1.tree.TreeNodeType;
  */
 public class VariableTreeNodeType extends TreeNodeType {
     String varName;
-    Map<String, StructureMatrix<Double>> parametersValueVec;
+    Map<String, String> parametersValueVec;
     Map<String, Double> parametersValuesDouble;
-    public VariableTreeNodeType() {
+    private HashMap<String, StructureMatrix<Double>> parametersValuesComputed;
+
+    public VariableTreeNodeType(AlgebricTree tree) {
+        this.algebricTree = tree;
     }
 
     @Override
@@ -72,8 +76,9 @@ public class VariableTreeNodeType extends TreeNodeType {
         super.setValues(values);
         varName = (String) values[0];
         if(values.length>=4) {
-            parametersValueVec = (Map<String, StructureMatrix<Double>>) values[3];
-            parametersValuesDouble = ((Map<String, Double>) values[1]);
+            parametersValueVec = algebricTree.getParametersValuesVec();
+            parametersValuesDouble = algebricTree.getParametersValues();
+            parametersValuesComputed = algebricTree.getParametersValuesVecComputed();
         }
     }
 
@@ -81,16 +86,14 @@ public class VariableTreeNodeType extends TreeNodeType {
     public StructureMatrix<Double> eval() {
         StructureMatrix<Double> doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
         try {
-            if(parametersValueVec!=null && parametersValuesDouble!=null) {
+            if(parametersValueVec!=null && parametersValuesDouble!=null && parametersValuesComputed!=null) {
                 if (parametersValueVec.get(varName) != null) {
                     doubleStructureMatrix = new StructureMatrix<>(1, Double.class);
-                    doubleStructureMatrix = parametersValueVec.get(varName);
-                    System.out.println(doubleStructureMatrix.toString());
                 } else if (parametersValuesDouble.get(varName) != null) {
                     Double d = parametersValuesDouble.get(varName);
                     doubleStructureMatrix.setElem(d);
-                } else {
-                    throw new TreeNodeEvalException("Eval: Variable, not value for " + varName + " in VariableTreeNodeType - searched in parameterValues and parameterValuesComputed");
+                } else if(algebricTree.getParametersValuesVecComputed().containsKey(varName)) {
+                    doubleStructureMatrix = algebricTree.getParametersValuesVecComputed().get(varName);
                 }
             } else {
                 throw new TreeNodeEvalException("Eval: dictionary not attributed/initialized" );

@@ -65,7 +65,6 @@ public class EquationTreeNode extends TreeNode {
 
     @Override
     public StructureMatrix<Double> eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
-        StructureMatrix<Double> eval = getChildren().get(1).eval();
-        return eval;
+        return getChildren().get(1).eval();
     }
 }

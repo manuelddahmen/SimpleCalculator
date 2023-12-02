@@ -60,6 +60,7 @@ import one.empty3.library.StructureMatrix;
 public abstract class TreeNodeType {
     protected Object[] values;
     protected double sign1 = 1.0;
+    protected AlgebricTree algebricTree;
     private TreeNodeType d;
     private TreeNodeType tnt;
 
