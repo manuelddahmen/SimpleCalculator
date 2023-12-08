@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name">Calculatrice sci-prog</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">carré</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">Modifiez le texte ici ou en appuyant sur des numéros</string>
+      
+  <string name="result">Résultat</string>
+      
+  <string name="about_and_policies">À propos et politique de confidentialité</string>
+      
+  <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Données utilisateur personnelles et sensibles Dans l\'application image featuring, les seules données auxquelles l\'application accède sont les fichiers multimédia ouverts par le bouton prise de vue ou choisir un fichier. Ceux-ci sont traités par l\'application et éventuellement des copies de travail sont stockées dans le répertoire données de l\'application et figure donc sur le système dans un format ou l\'autre. Dans une future version il sera possible de partager vos résultats avec d\'autres utilisateurs, internautes. Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme privées et ne sont pas collectées, ni traitées par nos services.</string>
+      
+  <string name="title_activity_formula_store">FormuleStore</string>
+      
+  <string name="store_formula">Formule de magasin</string>
+      
+  <string name="add">Ajouter</string>
+      
+  <string name="DEL">&amp;Lt;&amp;Lt;&amp;Lt;</string>
+      
+  <string name="back">Dos</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">Accepter la politique de gestion des données utilisateur et la confidentialité</string>
+      
+  <string name="about_privacy">À propos de la confidentialité</string>
+      
+  <string name="dialog_message">Choisir une fonction</string>
+      
+  <string name="dialog_title">Fonctions prédéfinies</string>
+      
+  <string name="cancel_button">Annuler</string>
+      
+  <string name="ok_button">D\'ACCORD</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">D\'ACCORD</string>
+      
+  <string name="fragment_function_cancel">Annuler</string>
+      
+  <string name="function_string">Chaîne de fonction</string>
+      
+  <string name="title_activity_scrolling">Activité de défilement</string>
+      
+  <string name="large_text">Le matériau est la métaphore.\n\n Une métaphore matérielle est la théorie unificatrice d’un espace rationalisé et d’un système de mouvement. Le matériau est ancré dans la réalité tactile, inspiré de l’étude du papier et de l’encre, mais technologiquement avancé et ouvert à l’imagination et à la magie.\n Les surfaces et les bords du matériau fournissent des repères visuels ancrés dans la réalité. L\'utilisation d\'attributs tactiles familiers aide les utilisateurs à comprendre rapidement les possibilités. Pourtant, la flexibilité du matériau crée de nouvelles possibilités qui surpassent celles du monde physique, sans enfreindre les règles de la physique.\n Les principes fondamentaux de la lumière, de la surface et du mouvement sont essentiels pour expliquer comment les objets se déplacent, interagissent et existent dans l\'espace et les uns par rapport aux autres. Un éclairage réaliste montre les coutures, divise l\'espace et indique les pièces mobiles.\n\n Audacieux, graphique, intentionnel.\n\n Les éléments fondamentaux de la typographie de conception imprimée, des grilles, de l\'espace, de l\'échelle, de la couleur et de l\'utilisation de l\'imagerie guident les traitements visuels. Ces éléments font bien plus que plaire à l’œil. Ils créent une hiérarchie, un sens et une concentration. Des choix de couleurs délibérés, des images bord à bord, une typographie à grande échelle et des espaces blancs intentionnels créent une interface audacieuse et graphique qui plonge l\'utilisateur dans l\'expérience.\n L\'accent mis sur les actions de l\'utilisateur rend les fonctionnalités de base immédiatement apparentes et fournit des points de cheminement à l\'utilisateur.\n\n Le mouvement donne du sens.\n\n Motion respecte et renforce l’utilisateur en tant que moteur principal. Les principales actions de l\'utilisateur sont des points d\'inflexion qui initient le mouvement, transformant l\'ensemble de la conception.\n Toute action se déroule dans un seul environnement. Les objets sont présentés à l\'utilisateur sans rompre la continuité de l\'expérience même s\'ils se transforment et se réorganisent.\n Le mouvement est significatif et approprié, servant à concentrer l’attention et à maintenir la continuité.  Les commentaires sont subtils mais clairs. Les transitions sont efficaces mais cohérentes.\n\n Monde 3D.\n\n L\'environnement matériel est un espace 3D, ce qui signifie que tous les objets ont des dimensions x, y et z. L\'axe z est aligné perpendiculairement au plan de l\'écran, l\'axe z positif s\'étendant vers le spectateur. Chaque feuille de matériau occupe une position unique le long de l\'axe z et a une épaisseur standard de 1 dp.\n Sur le Web, l\'axe z est utilisé pour la superposition et non pour la perspective. Le monde 3D est émulé en manipulant l\'axe y.\n\n Lumière et ombre.\n\n Au sein de l’environnement matériel, des lumières virtuelles éclairent la scène. Les lumières principales créent des ombres directionnelles, tandis que la lumière ambiante crée des ombres douces sous tous les angles.\n Les ombres dans l’environnement matériel sont projetées par ces deux sources lumineuses. Dans le développement Android, des ombres se produisent lorsque les sources de lumière sont bloquées par des feuilles de matériau situées à différentes positions le long de l\'axe z. Sur le Web, les ombres sont représentées en manipulant uniquement l\'axe y. L\'exemple suivant montre la carte avec une hauteur de 6dp.\n\n Élévation de repos.\n\n Tous les objets matériels, quelle que soit leur taille, ont une élévation au repos ou une élévation par défaut qui ne change pas. Si un objet change d\'altitude, il doit revenir à son altitude de repos dès que possible.\n\n Élévations des composants.\n\n L\'élévation au repos d\'un type de composant est cohérente dans toutes les applications (par exemple, L\'élévation FAB ne varie pas de 6dp dans une application à 16dp dans une autre application).\n Les composants peuvent avoir différentes élévations de repos sur les plates-formes, en fonction de la profondeur de l\'environnement (par ex. La télévision a une plus grande profondeur que le mobile ou le bureau).\n\n Altitude réactive et décalages d\'élévation dynamiques.\n\n Certains types de composants ont une élévation réactive, ce qui signifie qu\'ils changent d\'élévation en réponse aux entrées de l\'utilisateur (par exemple, normal, focalisé et enfoncé) ou aux événements système. Ces changements d\'élévation sont systématiquement mis en œuvre à l\'aide de décalages d\'élévation dynamiques.\n Les décalages d\'élévation dynamiques correspondent à l\'élévation cible vers laquelle un composant se déplace, par rapport à l\'état de repos du composant. Ils garantissent que les changements d’élévation sont cohérents entre les actions et les types de composants. Par exemple, tous les composants qui se soulèvent lors de la presse ont le même changement d\'élévation par rapport à leur élévation au repos.\n Une fois l\'événement d\'entrée terminé ou annulé, le composant reviendra à son élévation de repos.\n\n Éviter les interférences d’élévation.\n\n Les composants dotés d\'élévations réactives peuvent rencontrer d\'autres composants lorsqu\'ils se déplacent entre leurs élévations de repos et leurs décalages d\'élévation dynamiques. Étant donné que le matériel ne peut pas traverser d\'autres matériaux, les composants évitent d\'interférer les uns avec les autres de plusieurs manières,  que ce soit individuellement ou en utilisant la présentation complète de l\'application.\n Au niveau des composants, les composants peuvent bouger ou être retirés avant de provoquer des interférences.  Par exemple, un bouton d\'action flottant (FAB) peut disparaître ou quitter l\'écran avant qu\'un utilisateur ne récupère une carte, ou il peut bouger si une barre de collations apparaît.\n Au niveau de la mise en page, concevez la mise en page de votre application pour minimiser les risques d\'interférence.  Par exemple, positionnez le FAB d\'un côté du flux d\'une carte afin qu\'il n\'interfère pas lorsqu\'un utilisateur essaie de récupérer l\'une des cartes.\n\n</string>
+      
+  <string name="action_settings">Paramètres</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">Calculatrice de texte</string>
+      
+  <string name="title_activity_settings">ParamètresActivité</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">messages</string>
+      
+  <string name="sync_header">Synchroniser</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">Votre signature</string>
+      
+  <string name="reply_title">Action de réponse par défaut</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">Synchroniser périodiquement les e-mails</string>
+      
+  <string name="attachment_title">Télécharger les pièces jointes entrantes</string>
+      
+  <string name="attachment_summary_on">Téléchargez automatiquement les pièces jointes des e-mails entrants</string>
+      
+  <string name="attachment_summary_off">Téléchargez les pièces jointes uniquement lorsque cela est demandé manuellement</string>
+  
+</resources>

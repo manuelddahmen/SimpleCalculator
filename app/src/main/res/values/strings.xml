@@ -19,7 +19,7 @@
   -->
 
 <resources>
-    <string name="app_name">Formula Calculator</string>
+    <string name="app_name">Sci-prog Calculator</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
     <string name="_3">3</string>

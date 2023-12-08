@@ -61,7 +61,8 @@ class MainActivity : AppCompatActivity() {
             R.id.expButton,
             R.id.delButton,
             R.id.buttonParenthesis,
-            R.id.buttonParenthesisA
+            R.id.buttonParenthesisA,
+            R.id.buttonComa
         )
 
         val textAnswer: TextView = findViewById<EditText>(R.id.answerText)

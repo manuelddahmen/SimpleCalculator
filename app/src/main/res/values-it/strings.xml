@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name">Calcolatrice semplice</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">mq</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">Modifica il testo qui o premendo i numeri</string>
+      
+  <string name="result">Risultato</string>
+      
+  <string name="about_and_policies">Informazioni e politica sulla privacy</string>
+      
+  <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Dati utente personali e sensibili Nell\'immagine dell\'applicazione che presenta, tutti i dati aggiunti all\'applicazione sono accessibili ai file multimediali aperti tramite il pulsante di visualizzazione o la scelta di un file. Ceux-ci sont traités par l\'application ed eventualmente copie di lavoro sont stockées dans le répertoire data de l\'application et figure donc sur le système dans un format ou l\'altro. In una versione futura il sera possibile de partager vos résultats avec d\'autres utilisateurs, internautes. Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme privées et ne sont pas Collectées, ni traitées par nos services.</string>
+      
+  <string name="title_activity_formula_store">FormulaStore</string>
+      
+  <string name="store_formula">Conservare la formula</string>
+      
+  <string name="add">Aggiungere</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">Indietro</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">Accetta la politica di gestione dei dati utente e la privacy</string>
+      
+  <string name="about_privacy">A proposito di privacy</string>
+      
+  <string name="dialog_message">Scegliere una funzione</string>
+      
+  <string name="dialog_title">Funzioni predefinite</string>
+      
+  <string name="cancel_button">Annulla</string>
+      
+  <string name="ok_button">OK</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">OK</string>
+      
+  <string name="fragment_function_cancel">Annulla</string>
+      
+  <string name="function_string">Stringa di funzione</string>
+      
+  <string name="title_activity_scrolling">Attività di scorrimento</string>
+      
+  <string name="large_text">La materia è la metafora.\n\n Una metafora materiale è la teoria unificante di uno spazio razionalizzato e di un sistema di movimento. Il materiale è radicato nella realtà tattile, ispirato allo studio di carta e inchiostro, ma tecnologicamente avanzato e aperto all\'immaginazione e alla magia.\n Le superfici e i bordi del materiale forniscono segnali visivi radicati nella realtà. L\'uso di attributi tattili familiari aiuta gli utenti a comprendere rapidamente le offerte. Eppure la flessibilità del materiale crea nuove opportunità che superano quelle del mondo fisico, senza infrangere le regole della fisica.\n I fondamenti di luce, superficie e movimento sono fondamentali per trasmettere il modo in cui gli oggetti si muovono, interagiscono ed esistono nello spazio e in relazione tra loro. L\'illuminazione realistica mostra le cuciture, divide lo spazio e indica le parti in movimento.\n\n Audace, grafico, intenzionale.\n\n Gli elementi fondamentali della tipografia del design basato sulla stampa, le griglie, lo spazio, la scala, il colore e l\'uso delle immagini guidano i trattamenti visivi. Questi elementi fanno molto più che soddisfare la vista. Creano gerarchia, significato e focus. Scelte di colore deliberate, immagini da bordo a bordo, tipografia su larga scala e spazio bianco intenzionale creano un\'interfaccia audace e grafica che immerge l\'utente nell\'esperienza.\n L\'enfasi sulle azioni dell\'utente rende immediatamente evidenti le funzionalità principali e fornisce indicazioni per l\'utente.\n\n Il movimento fornisce significato.\n\n Il movimento rispetta e rafforza l\'utente come motore principale. Le azioni primarie dell\'utente sono punti di svolta che avviano il movimento, trasformando l\'intero progetto.\n Tutta l\'azione si svolge in un unico ambiente. Gli oggetti vengono presentati all\'utente senza interrompere la continuità dell\'esperienza anche mentre si trasformano e si riorganizzano.\n Il movimento è significativo e appropriato e serve a focalizzare l\'attenzione e mantenere la continuità.  Il feedback è sottile ma chiaro. Le transizioni sono efficienti ma coerenti.\n\n Mondo 3D.\n\n L\'ambiente materiale è uno spazio 3D, il che significa che tutti gli oggetti hanno dimensioni x, y e z. L\'asse z è allineato perpendicolarmente al piano del display, con l\'asse z positivo che si estende verso lo spettatore. Ogni foglio di materiale occupa un\'unica posizione lungo l\'asse z e ha uno spessore standard di 1 dp.\n Sul web, l\'asse z viene utilizzato per la stratificazione e non per la prospettiva. Il mondo 3D viene emulato manipolando l\'asse y.\n\n Luce e ombra.\n\n All\'interno dell\'ambiente materiale, luci virtuali illuminano la scena. Le luci principali creano ombre direzionali, mentre la luce ambientale crea ombre morbide da tutte le angolazioni.\n Le ombre nell\'ambiente materiale sono proiettate da queste due fonti di luce. Nello sviluppo Android, le ombre si verificano quando le fonti di luce vengono bloccate da fogli di materiale in varie posizioni lungo l\'asse z. Sul web, le ombre vengono rappresentate manipolando solo l\'asse y. L\'esempio seguente mostra la carta con un\'altezza di 6 dp.\n\n Elevazione a riposo.\n\n Tutti gli oggetti materiali, indipendentemente dalle dimensioni, hanno una quota altimetrica a riposo o una quota altimetrica predefinita che non cambia. Se un oggetto cambia elevazione, dovrebbe tornare alla sua elevazione di riposo il prima possibile.\n\n Prospetti dei componenti.\n\n L\'elevazione a riposo per un tipo di componente è coerente tra le app (ad esempio, L\'elevazione FAB non varia da 6 dp in un\'app a 16 dp in un\'altra app).\n I componenti possono avere altezze di riposo diverse tra le piattaforme, a seconda della profondità dell\'ambiente (ad es. La TV ha una profondità maggiore rispetto al cellulare o al desktop).\n\n Elevazione reattiva e offset dell\'elevazione dinamici.\n\n Alcuni tipi di componenti hanno un\'elevazione reattiva, ovvero cambiano elevazione in risposta all\'input dell\'utente (ad esempio, normale, focalizzato e premuto) o agli eventi di sistema. Questi cambiamenti di elevazione vengono implementati in modo coerente utilizzando offset di elevazione dinamici.\n Gli offset di elevazione dinamica sono l\'elevazione dell\'obiettivo verso cui si muove un componente, rispetto allo stato di riposo del componente. Garantiscono che i cambiamenti di elevazione siano coerenti tra le azioni e i tipi di componenti. Ad esempio, tutti i componenti che si sollevano durante la pressa hanno lo stesso cambiamento di elevazione rispetto alla loro elevazione a riposo.\n Una volta completato o annullato l\'evento di input, il componente tornerà alla sua elevazione di riposo.\n\n Evitare interferenze di elevazione.\n\n I componenti con quote altimetriche reattive potrebbero incontrare altri componenti mentre si spostano tra le quote altimetriche a riposo e gli offset delle quote altimetriche dinamiche. Poiché il materiale non può passare attraverso altro materiale, i componenti evitano di interferire tra loro in molti modi,  sia in base al componente che utilizzando l\'intero layout dell\'app.\n A livello dei componenti, i componenti possono spostarsi o essere rimossi prima che causino interferenze.  Ad esempio, un pulsante di azione mobile (FAB) può scomparire o spostarsi fuori dallo schermo prima che un utente prenda una carta, oppure può spostarsi se viene visualizzato uno snackbar.\n A livello di layout, progetta il layout della tua app per ridurre al minimo le possibilità di interferenze.  Ad esempio, posiziona il FAB su un lato del flusso di una carta in modo che il FAB non interferisca quando un utente tenta di prendere una delle carte.\n\n</string>
+      
+  <string name="action_settings">Impostazioni</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">Calcolatore di testo</string>
+      
+  <string name="title_activity_settings">ImpostazioniAttività</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">Messaggi</string>
+      
+  <string name="sync_header">Sincronizza</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">La tua firma</string>
+      
+  <string name="reply_title">Azione di risposta predefinita</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">Sincronizza periodicamente la posta elettronica</string>
+      
+  <string name="attachment_title">Scarica gli allegati in arrivo</string>
+      
+  <string name="attachment_summary_on">Scarica automaticamente gli allegati per le e-mail in arrivo</string>
+      
+  <string name="attachment_summary_off">Scarica gli allegati solo se richiesto manualmente</string>
+  
+</resources>
