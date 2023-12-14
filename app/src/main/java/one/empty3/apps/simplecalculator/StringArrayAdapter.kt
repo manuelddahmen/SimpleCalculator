@@ -29,7 +29,6 @@ import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import androidx.compose.ui.res.stringArrayResource
 import androidx.recyclerview.widget.RecyclerView
 import one.empty3.apps.tree.functions.ListMathDoubleFunction
 

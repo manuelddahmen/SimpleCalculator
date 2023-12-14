@@ -349,48 +349,44 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
     }
 
     public String toStringLine() {
-        StringBuilder s = new StringBuilder("sm {");
-        s.append("dim:" + dim + ",");
+        StringBuilder s = new StringBuilder("StructureMatrix {");
+        s.append("\"dim\":" + dim + ",");
         switch (dim) {
             case 0:
                 if(data0d !=null)
-                    s.append("data0d : {" + data0d.toString() + "},");
+                    s.append("\"data0d\" : { ").append(data0d.toString()).append(" } ");
                 else
-                    s.append("null 0d-data: true,");
+                    s.append("\"data0d\" : { null }, ").append("\"null-0d-data\": true ");
                 break;
             case 1:
-                s.append("data : {");
-                data1d.forEach(new Consumer<T>() {
-                    @Override
-                    public void accept(T t) {
-                        s.append("" + t.toString() + "; ");
-                    }
-                });
-                break;
-            case 2:
-                s.append("data : {");
-                data2d.forEach(new Consumer<List<T>>() {
-                    @Override
-                    public void accept(List<T> ts) {
-                        s.append("{ ");
-
-                        ts.forEach(new Consumer<T>() {
-                            @Override
-                            public void accept(T t) {
-                                s.append("{" + t.toString() + "}");
-                            }
-                        });
-
-                        s.append(" }\n");
-
-                    }
+                s.append("\"data1d\" : { ");
+                final int[] i = {0};
+                data1d.forEach(t -> {
+                    if(i[0] >0) s.append(" , ");
+                    s.append(t.toString());
+                    i[0]++;
                 });
                 s.append("}");
                 break;
+            case 2:
+                s.append("\"data2d\" : { ");
+                data2d.forEach(ts -> {
+                    s.append(" { ");
 
+                    final int[] i1 = {0};
+                    ts.forEach(t -> {
+                        if (i1[0] > 0) s.append( ", ");
+                        s.append(t.toString());
+                        i1[0]++;
+                    });
 
+                    s.append(" } ");
+
+                });
+                s.append(" } ");
+                break;
         }
-        return s.toString();
+        return s.append(" } ").toString();
     }
 
     public Class getClassType() {

@@ -28,8 +28,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
+import javaAnd.awt.Color
 
 import one.empty3.apps.simplecalculator.placeholder.PlaceholderContent.PlaceholderItem
 import one.empty3.apps.simplecalculator.databinding.FragmentItemBinding
@@ -79,17 +78,17 @@ class MyStringRecyclerViewAdapter(private var values: Array<String> = ListMathDo
         holder.text = item
         holder.itemView.setOnClickListener {
             ListMathDoubleFunction.functionName = tv2.text as String
-            holder.itemView.setBackgroundColor(Color.Blue.toArgb())
+            holder.itemView.setBackgroundColor(android.graphics.Color.BLUE)
             Toast.makeText(rv.context, item, Toast.LENGTH_LONG).show()
         }
         tv1.setOnClickListener {
             ListMathDoubleFunction.functionName = tv2.text as String
-            tv1.setBackgroundColor(Color.Blue.toArgb())
+            tv1.setBackgroundColor(android.graphics.Color.BLUE)
             Toast.makeText(rv.context, item, Toast.LENGTH_LONG).show()
         }
         tv2.setOnClickListener {
             ListMathDoubleFunction.functionName = tv2.text as String
-            tv2.setBackgroundColor(Color.Blue.toArgb())
+            tv2.setBackgroundColor(android.graphics.Color.BLUE)
             Toast.makeText(rv.context, item, Toast.LENGTH_LONG).show()
         }
     }
