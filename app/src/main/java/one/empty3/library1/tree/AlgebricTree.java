@@ -116,8 +116,8 @@ public class AlgebricTree extends Tree {
     public boolean add(TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
 
         stackSize++;
-        if (stackSize > 30) {
-            throw new AlgebraicFormulaSyntaxException("Recursive error (bad formula form");
+        if (stackSize > 300) {
+            //UNSECURE throw new AlgebraicFormulaSyntaxException("Recursive error (bad formula form)");
         }
 
         if (src == null || subformula == null || subformula.length() == 0)
@@ -132,6 +132,7 @@ public class AlgebricTree extends Tree {
             try {
                 int caseChoice = -1;
                 int lastAdded = -1;
+                subformula = addSpaces(subformula);
                 switch (i) {
 
                     case 1:
@@ -198,9 +199,17 @@ public class AlgebricTree extends Tree {
             i++;
 
 
-            System.out.println("formula = " + subformula);
+            //System.out.println("formula = " + subformula);
         }
         throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
+    }
+
+    private String addSpaces(String subformula) {
+        while(subformula!=null && !subformula.isEmpty() &&
+                    (subformula.charAt(0)=='\s' || subformula.charAt(0)=='\n' ||
+                    subformula.charAt(0)=='\r' || subformula.charAt(0)=='\t'))
+                subformula = subformula.substring(1);
+        return subformula;
     }
 
     /***

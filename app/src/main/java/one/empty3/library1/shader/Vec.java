@@ -76,7 +76,7 @@ public class Vec {
     public int getDims() {
         int dims = 0;
         if (!vecVal.getData1d().isEmpty()) {
-            this.dims += vecVal.getData1d().size();
+            dims += vecVal.getData1d().size();
         }
         return dims;
 

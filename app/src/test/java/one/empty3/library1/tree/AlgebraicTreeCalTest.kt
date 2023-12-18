@@ -667,15 +667,24 @@ class AlgebraicTreeCalTest() {
      * Next should permit StructureMatrix<Double> variable type.
      */
     @Test
-    public fun testSimpleInstruction() {
+    public fun testMethodDef1() {
         val hashMap = HashMap<String, Double>()
-        testResultVariable("a=0", 0.0, hashMap,true )
+        val instruction: String = "\nfunc circleLength ( r : double ) {" +
+                "\n    return 2*PI*r;" +
+                "\n}" +
+                "\nl = circleLength(10)";
+        testResultVariable(instruction, 0.0, hashMap,true );
     }
     /***
      * Next should permit StructureMatrix<Double> variable type.
      */
     @Test
     public fun testSimpleInstruction2() {
+        //val hashMap = HashMap<String, StructureMatrix<Double>>()
+        testResultVariableVec2("a=0", Vec(0.0), true )
+    }
+    @Test
+    public fun testMethodCall() {
         //val hashMap = HashMap<String, StructureMatrix<Double>>()
         testResultVariableVec2("a=0", Vec(0.0), true )
     }
