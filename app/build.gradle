@@ -33,7 +33,7 @@ kotlin {
 }
 
 
-def versionCode1000 = 404802934
+def versionCode1000 = 405302934
 def kotlin_version = '1.9.21'
 android {
     namespace 'one.empty3.apps.simplecalculator'

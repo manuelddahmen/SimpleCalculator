@@ -75,14 +75,22 @@ public class AlgebricTree extends Tree {
     private TreeNode root;
     private int stackSize = 0;
 
-    public AlgebricTree(String formula) throws AlgebraicFormulaSyntaxException {
+
+    public AlgebricTree(String formula) {
         this.formula = formula;
+        removeSpaces();
     }
 
     public AlgebricTree(String formula, Map<String, Double> parametersValues) {
+        this(formula);
         this.formula = formula;
         this.parametersValues = parametersValues;
+        removeSpaces();
     }
+    public void removeSpaces() {
+        formula = formula.replace(" ", "").replace("\n", "").replace("\r", "").replace("\t","");
+    }
+
 
     public void setParameter(String s, Double d) {
         this.parametersValues.put(s, d);
@@ -116,8 +124,8 @@ public class AlgebricTree extends Tree {
     public boolean add(TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
 
         stackSize++;
-        if (stackSize > 300) {
-            //UNSECURE throw new AlgebraicFormulaSyntaxException("Recursive error (bad formula form)");
+        if (stackSize > 700) {
+            throw new AlgebraicFormulaSyntaxException("Recursive error (bad formula form)");
         }
 
         if (src == null || subformula == null || subformula.length() == 0)

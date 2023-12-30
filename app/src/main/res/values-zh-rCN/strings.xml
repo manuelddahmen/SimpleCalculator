@@ -44,7 +44,7 @@
       
   <string name="about_and_policies">关于和隐私政策</string>
       
-  <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
+  <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
       
   <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">如果用户使用人员和敏感人员在应用程序图像中使用图像，则应用程序将获得多媒体文件或文件中的按钮奖。该应用程序的特征是应用程序的全部数据和系统中的数据副本以及格式或作者的工作副本的事件。在未来版本中，可能会出现用户、用户之间的结果。DAHMEN Manuel 在 empty3.one 上提供私人服务，但不提供集体服务，不提供任何服务。</string>
       
@@ -115,5 +115,6 @@
   <string name="attachment_summary_on">自动下载传入电子邮件的附件</string>
       
   <string name="attachment_summary_off">仅在手动请求时下载附件</string>
-  
+  <string name="empty_string" />
+
 </resources>

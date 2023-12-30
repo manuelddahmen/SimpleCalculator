@@ -55,6 +55,11 @@ public class Vec {
             vecVal.add(1, d);
         }
     }
+    public Vec(double[] comps) {
+        for (Double d : comps) {
+            vecVal.add(1, d);
+        }
+    }
 
     public Vec(Vec... comps) {
         for (Vec comp : comps) {

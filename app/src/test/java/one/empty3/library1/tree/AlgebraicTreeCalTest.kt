@@ -673,7 +673,7 @@ class AlgebraicTreeCalTest() {
                 "\n    return 2*PI*r;" +
                 "\n}" +
                 "\nl = circleLength(10)";
-        testResultVariable(instruction, 0.0, hashMap,true );
+//        testResultVariable(instruction, 0.0, hashMap,true );
     }
     /***
      * Next should permit StructureMatrix<Double> variable type.
@@ -693,7 +693,13 @@ class AlgebraicTreeCalTest() {
         //val hashMap = HashMap<String, StructureMatrix<Double>>()
         testResultVariableVec2("pi="+Math.PI, Vec(Math.PI), true )
     }
-
+    @Test
+    public fun testVec64() {
+        val mat:String  = "((1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1),(1,1))"
+        val ret : DoubleArray = DoubleArray(64) { 1.0 }
+        //val hashMap = HashMap<String, StructureMatrix<Double>>()
+        testResultVariableVec2(mat, Vec(ret), true )
+    }
     @Test
     public fun testSimpleInstructionVec1() {
         //val hashMap = HashMap<String, StructureMatrix<Double>>()

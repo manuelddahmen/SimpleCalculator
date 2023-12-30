@@ -31,11 +31,7 @@ public class Script {
                   @NonNull String text) {
         this.tree = tree;
         if(tree==null) {
-            try {
-                tree = new AlgebricTree(text);
-            } catch (AlgebraicFormulaSyntaxException e) {
-                throw new RuntimeException(e);
-            }
+            tree = new AlgebricTree(text);
         }
         this.text = text;
         this.listInstructions = listInstructions!=null?listInstructions:new ListInstructions();

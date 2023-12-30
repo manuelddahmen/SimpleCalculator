@@ -44,7 +44,7 @@
       
   <string name="about_and_policies">Sobre e política de privacidade</string>
       
-  <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
+  <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
       
   <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Données utilisateur pessoalles et sensibles No aplicativo de imagem apresentando, os seus dados adicionais ao aplicativo acessam os arquivos multimídia abertos pelo botão de prêmio de vista ou escolhendo um arquivo. Ceux-ci são traços do aplicativo e, eventualmente, cópias de trabalho são armazenadas no repertório de dados do aplicativo e figura no sistema em um formato ou outro. Em uma versão futura, será possível compartilhar seus resultados com outros usuários, internautas. Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme privées et ne sont pas collectées, ni traitées par nos services.</string>
       
@@ -115,5 +115,6 @@
   <string name="attachment_summary_on">Baixe automaticamente anexos de e-mails recebidos</string>
       
   <string name="attachment_summary_off">Baixe anexos apenas quando solicitado manualmente</string>
-  
+    <string name="empty_string" />
+
 </resources>

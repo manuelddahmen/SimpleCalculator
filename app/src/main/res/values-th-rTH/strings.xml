@@ -44,7 +44,7 @@
       
   <string name="about_and_policies">เกี่ยวกับและนโยบายความเป็นส่วนตัว</string>
       
-  <string name="POLICY_URI">https://empty3.one/android/UserPolicyandFamilyPolicyforCalculetteSimplebyEmpty3.html</string>
+  <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
       
   <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Données utilisateur บุคลากรและความรู้สึก Dans l\'ภาพแอปพลิเคชันที่มี les seules données auxquelles l\'application accède sont les fichiers multimédia ouvert par le bouton Prize de vue ou choisir un fichier Ceux-ci sont Traités par l\'application et éventuellement des copy de travail sont stockées dans le répertoire data de l\'application et figure donc sur le système dans un format ou l\'autre. Dans une version อนาคต il sera possible de partager vos résultats avec d\'autres utilisateurs, internautes. Ces données sont considérées par nous, DAHMEN Manuel ที่ Empty3.one comme privées et ne sont pas collectées, ni Tratées par nos services</string>
       
@@ -115,5 +115,6 @@
   <string name="attachment_summary_on">ดาวน์โหลดไฟล์แนบสำหรับอีเมลขาเข้าโดยอัตโนมัติ</string>
       
   <string name="attachment_summary_off">ดาวน์โหลดไฟล์แนบเมื่อมีการร้องขอด้วยตนเองเท่านั้น</string>
-  
+    <string name="empty_string" />
+
 </resources>
