@@ -125,7 +125,7 @@ public class AlgebricTree extends Tree {
 
         stackSize++;
         if (stackSize > 700) {
-            throw new AlgebraicFormulaSyntaxException("Recursive error (bad formula form)");
+            return false;//throw new AlgebraicFormulaSyntaxException("Recursive error (bad formula form)");
         }
 
         if (src == null || subformula == null || subformula.length() == 0)
