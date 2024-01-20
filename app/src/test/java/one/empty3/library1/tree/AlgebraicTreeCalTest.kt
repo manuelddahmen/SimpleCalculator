@@ -130,8 +130,7 @@ class AlgebraicTreeCalTest() {
                 result = algebricTree.eval()
                 if (echo) println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
-                Assert.fail()
-                return false
+                Assert.assertTrue(!expectedResult.equals(result))
             } catch (e: TreeNodeEvalException) {
                 Assert.assertTrue(true)
                 if (echo) e.printStackTrace()

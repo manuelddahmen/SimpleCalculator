@@ -33,7 +33,7 @@ kotlin {
 }
 
 
-def versionCode1000 = 405702934
+def versionCode1000 = 406202934
 def kotlin_version = '1.9.21'
 android {
     namespace 'one.empty3.apps.simplecalculator'
@@ -96,8 +96,8 @@ android {
         JavaVersion.VERSION_20
         compileSdk 34
         targetSdk 34
-        minSdkVersion 29
-        versionName "6.0"
+        minSdkVersion 24
+        versionName "8.0"
         versionCode versionCode1000
         signingConfig signingConfigs.release
     }

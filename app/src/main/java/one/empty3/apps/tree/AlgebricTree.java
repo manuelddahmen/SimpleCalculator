@@ -185,7 +185,7 @@ public class AlgebricTree extends Tree {
             i++;
 
         }
-        throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
+        return false;
     }
 
     private boolean addComa(TreeNode src, String formula) {

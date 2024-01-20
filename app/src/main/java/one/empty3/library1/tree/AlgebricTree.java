@@ -209,7 +209,7 @@ public class AlgebricTree extends Tree {
 
             //System.out.println("formula = " + subformula);
         }
-        throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
+        return false;
     }
 
     private String addSpaces(String subformula) {
