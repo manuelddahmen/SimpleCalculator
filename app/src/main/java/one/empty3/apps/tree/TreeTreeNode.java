@@ -25,12 +25,12 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 public class TreeTreeNode extends TreeNode {
-    private final one.empty3.apps.tree.AlgebricTree tree;
+    private final one.empty3.apps.tree.AlgebraicTree tree;
     private Method method = null;
 
     public TreeTreeNode(TreeNode t, Object[] objects, TreeNodeType type) {
         super(t, objects, type);
-        tree = new AlgebricTree((String) objects[0], (Map<String, Double>) objects[1]);
+        tree = new AlgebraicTree((String) objects[0], (Map<String, Double>) objects[1]);
         try {
             tree.construct();
             if (objects[2] instanceof String && ((String) objects[2]).length() > 0) {

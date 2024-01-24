@@ -62,9 +62,9 @@ public class FunctionSurface extends ParametricSurface {
     private StructureMatrix<String> x = new StructureMatrix<>(0, String.class);
     private StructureMatrix<String> y = new StructureMatrix<>(0, String.class);
     private StructureMatrix<String> z = new StructureMatrix<>(0, String.class);
-    private AlgebricTree treeX;
-    private AlgebricTree treeY;
-    private AlgebricTree treeZ;
+    private AlgebraicTree treeX;
+    private AlgebraicTree treeY;
+    private AlgebraicTree treeZ;
     final HashMap<String, Double> hashMap = new HashMap<>(2);
     private boolean drawable;
 
@@ -86,13 +86,13 @@ public class FunctionSurface extends ParametricSurface {
         this.z.setElem(zEqFuv);
 
 
-        treeX = new AlgebricTree(xEqFuv);
+        treeX = new AlgebraicTree(xEqFuv);
         treeX.getParametersValues().putAll(hashMap);
         treeX.construct();
-        treeY = new AlgebricTree(yEqFuv);
+        treeY = new AlgebraicTree(yEqFuv);
         treeY.getParametersValues().putAll(hashMap);
         treeY.construct();
-        treeZ = new AlgebricTree(zEqFuv);
+        treeZ = new AlgebraicTree(zEqFuv);
         treeZ.getParametersValues().putAll(hashMap);
         treeZ.construct();
         setDrawable(true);
@@ -109,13 +109,13 @@ public class FunctionSurface extends ParametricSurface {
 
     private void recomputeTrees() {
         try {
-            treeX = new AlgebricTree(x.getElem());
+            treeX = new AlgebraicTree(x.getElem());
             treeX.setParametersValues(hashMap);
             treeX.construct();
-            treeY = new AlgebricTree(y.getElem());
+            treeY = new AlgebraicTree(y.getElem());
             treeY.setParametersValues(hashMap);
             treeY.construct();
-            treeZ = new AlgebricTree(z.getElem());
+            treeZ = new AlgebraicTree(z.getElem());
             treeZ.setParametersValues(hashMap);
             treeZ.construct();
             setDrawable(true);

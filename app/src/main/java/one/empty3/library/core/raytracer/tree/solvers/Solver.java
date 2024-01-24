@@ -32,7 +32,7 @@
 
 package one.empty3.library.core.raytracer.tree.solvers;
 
-import one.empty3.library.core.raytracer.tree.AlgebricTree;
+import one.empty3.library.core.raytracer.tree.AlgebraicTree;
 import one.empty3.library.core.raytracer.tree.Constraint;
 
 import java.util.ArrayList;
@@ -43,11 +43,11 @@ import one.empty3.library.StructureMatrix;
  * Created by manuel on 29-12-16.
  */
 public abstract class Solver {
-    protected ArrayList<AlgebricTree> equations = new ArrayList<>();
+    protected ArrayList<AlgebraicTree> equations = new ArrayList<>();
     protected ArrayList<Constraint> solution;
 
 
-    public Solver(ArrayList<AlgebricTree> equations, ArrayList<Constraint> solution) {
+    public Solver(ArrayList<AlgebraicTree> equations, ArrayList<Constraint> solution) {
         this.equations = equations;
         this.solution = solution;
     }

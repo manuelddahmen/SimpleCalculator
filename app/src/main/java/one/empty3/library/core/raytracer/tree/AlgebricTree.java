@@ -45,7 +45,7 @@ import one.empty3.library.lang.*;
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  */
-public class AlgebricTree extends Tree {
+public class AlgebraicTree extends Tree {
 
     private String formula = "0.0";
     Map<String, Double> parametersValues = new HashMap<>();
@@ -53,11 +53,11 @@ public class AlgebricTree extends Tree {
     private TreeNode root;
     private List<Objet> classes;
 
-    public AlgebricTree(String formula) throws AlgebraicFormulaSyntaxException {
+    public AlgebraicTree(String formula) throws AlgebraicFormulaSyntaxException {
         this.formula = formula;
     }
 
-    public AlgebricTree(String formula, Map<String, Double> parametersValues) {
+    public AlgebraicTree(String formula, Map<String, Double> parametersValues) {
         this.formula = formula;
         this.parametersValues = parametersValues;
     }
@@ -66,7 +66,7 @@ public class AlgebricTree extends Tree {
         this.parametersValues.put(s, d);
     }
 
-    public AlgebricTree construct() throws AlgebraicFormulaSyntaxException {
+    public AlgebraicTree construct() throws AlgebraicFormulaSyntaxException {
         root = new TreeNode(formula);
         add(root, formula);
         return this;

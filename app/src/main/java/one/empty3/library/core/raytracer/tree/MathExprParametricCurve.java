@@ -46,15 +46,15 @@ public class MathExprParametricCurve extends ParametricCurve {
      * t: parameter
      */
     private final String[] exprStringXyz;
-    AlgebricTree[] algebricTree;
+    AlgebraicTree[] AlgebraicTree;
 
     public MathExprParametricCurve(String[] exprStringXyz) {
         this.exprStringXyz = exprStringXyz;
-        algebricTree = new AlgebricTree[exprStringXyz.length];
+        AlgebraicTree = new AlgebraicTree[exprStringXyz.length];
         for (int i = 0; i < exprStringXyz.length; i++) {
             try {
-                algebricTree[i] = new AlgebricTree(exprStringXyz[i]);
-                algebricTree[i].construct();
+                AlgebraicTree[i] = new AlgebraicTree(exprStringXyz[i]);
+                AlgebraicTree[i].construct();
             } catch (AlgebraicFormulaSyntaxException e) {
                 e.printStackTrace();
             }
@@ -66,10 +66,10 @@ public class MathExprParametricCurve extends ParametricCurve {
         Point3D p = new Point3D();
         HashMap<String, Double> stringDoubleHashMap = new HashMap<>();
         stringDoubleHashMap.put("t", t);
-        for (int i = 0; i < algebricTree.length; i++) {
-            algebricTree[i].getParametersValues().putAll(stringDoubleHashMap);
+        for (int i = 0; i < AlgebraicTree.length; i++) {
+            AlgebraicTree[i].getParametersValues().putAll(stringDoubleHashMap);
             try {
-                p.set(i, (Double) algebricTree[i].eval());
+                p.set(i, (Double) AlgebraicTree[i].eval());
             } catch (TreeNodeEvalException e) {
                 e.printStackTrace();
             } catch (AlgebraicFormulaSyntaxException e) {

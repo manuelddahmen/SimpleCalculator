@@ -52,7 +52,7 @@
 
 package one.empty3.apps.tree;
 
-import one.empty3.apps.tree.AlgebricTree;
+import one.empty3.apps.tree.AlgebraicTree;
 import one.empty3.apps.tree.Tree;
 
 /*__
@@ -72,8 +72,8 @@ public class AlgebraicFormulaSyntaxException extends Throwable {
         System.err.println(algebraicTree);
     }
 
-    public AlgebraicFormulaSyntaxException(String s, AlgebricTree algebricTree) {
+    public AlgebraicFormulaSyntaxException(String s, AlgebraicTree AlgebraicTree) {
         this(s);
-        System.err.println(algebricTree);
+        System.err.println(AlgebraicTree);
     }
 }

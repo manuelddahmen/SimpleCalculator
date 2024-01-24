@@ -39,16 +39,16 @@ import java.lang.reflect.Method;
  * Created by manuel on 16-12-16.
  */
 public abstract class FunctionTreeNodeType extends TreeNodeType {
-    protected AlgebricTree algebricTree;
+    protected AlgebraicTree AlgebraicTree;
     private String fName;
     protected double[] objects;
 
-    public AlgebricTree getAlgebricTree() {
-        return algebricTree;
+    public AlgebraicTree getAlgebraicTree() {
+        return AlgebraicTree;
     }
 
-    public void setAlgebricTree(AlgebricTree algebricTree) {
-        this.algebricTree = algebricTree;
+    public void setAlgebraicTree(AlgebraicTree AlgebraicTree) {
+        this.AlgebraicTree = AlgebraicTree;
     }
 
     @Override

@@ -34,7 +34,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import one.empty3.library.StructureMatrix
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException
-import one.empty3.library1.tree.AlgebricTree
+import one.empty3.library1.tree.AlgebraicTree
 import one.empty3.library1.tree.functions.ListMathDoubleFunction
 
 class MainActivity : AppCompatActivity() {
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
                 editText.text = editText.text.append(findViewById.text)
-                val tree = AlgebricTree(editText.text.toString())
+                val tree = AlgebraicTree(editText.text.toString())
 
                 try {
                     tree.construct()
@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
 
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                val tree = AlgebricTree(editText.text.toString())
+                val tree = AlgebraicTree(editText.text.toString())
 
                 try {
                     tree.construct()

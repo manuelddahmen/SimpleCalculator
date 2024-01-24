@@ -60,18 +60,18 @@ import java.util.Map;
 /*__
  * Created by Manuel Dahmen on 15-12-16.
  */
-public class AlgebricTree extends Tree {
+public class AlgebraicTree extends Tree {
 
     private String formula = "0.0";
     Map<String, Double> parametersValues = new HashMap<>();
     private TreeNode root;
     private int stackSize = 0;
 
-    public AlgebricTree(String formula) throws AlgebraicFormulaSyntaxException {
+    public AlgebraicTree(String formula) throws AlgebraicFormulaSyntaxException {
         this.formula = formula;
     }
 
-    public AlgebricTree(String formula, Map<String, Double> parametersValues) {
+    public AlgebraicTree(String formula, Map<String, Double> parametersValues) {
         this.formula = formula;
         this.parametersValues = parametersValues;
     }
@@ -80,7 +80,7 @@ public class AlgebricTree extends Tree {
         this.parametersValues.put(s, d);
     }
 
-    public AlgebricTree construct() throws AlgebraicFormulaSyntaxException {
+    public AlgebraicTree construct() throws AlgebraicFormulaSyntaxException {
         root = new TreeNode(formula);
         stackSize = 0; // Restine sommaire//
         add(root, formula);

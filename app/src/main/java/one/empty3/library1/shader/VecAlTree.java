@@ -23,11 +23,11 @@
 package one.empty3.library1.shader;
 
 import one.empty3.library.core.raytracer.tree.AlgebraicFormulaSyntaxException;
-import one.empty3.library.core.raytracer.tree.AlgebricTree;
+import one.empty3.library.core.raytracer.tree.AlgebraicTree;
 import one.empty3.library.core.raytracer.tree.TreeNodeEvalException;
 public class VecAlTree extends Vec {
     protected String formula;
-    AlgebricTree tree;
+    AlgebraicTree tree;
 private boolean invalidTree = true;
     public VecAlTree(String formula, int dim) {
         super(dim);
@@ -37,7 +37,7 @@ private boolean invalidTree = true;
 this.formula = formula;
         
         try {
-tree=new AlgebricTree(formula) 
+tree=new AlgebraicTree(formula)
             ;
             tree.construct();
 invalidTree = false;
