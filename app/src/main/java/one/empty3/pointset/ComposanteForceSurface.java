@@ -54,9 +54,9 @@ package one.empty3.pointset;
 
 import java.util.HashMap;
 
-import one.empty3.apps.tree.AlgebraicFormulaSyntaxException;
-import one.empty3.apps.tree.AlgebraicTree;
-import one.empty3.apps.tree.TreeNodeEvalException;
+import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
+import one.empty3.library1.tree.AlgebraicTree;
+import one.empty3.library1.tree.TreeNodeEvalException;
 
 /*__
  * Created by manue on 16-07-19.
@@ -86,7 +86,13 @@ public class ComposanteForceSurface {
 
 
     public Double evSurface() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
-        return x.eval();
+        try {
+            return x.eval().getElem();
+        } catch (one.empty3.library1.tree.TreeNodeEvalException e) {
+            throw new RuntimeException(e);
+        } catch (one.empty3.library1.tree.AlgebraicFormulaSyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void declareVar(String var, Double value) {

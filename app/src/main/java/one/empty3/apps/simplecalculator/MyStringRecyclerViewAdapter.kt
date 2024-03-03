@@ -32,7 +32,7 @@ import javaAnd.awt.Color
 
 import one.empty3.apps.simplecalculator.placeholder.PlaceholderContent.PlaceholderItem
 import one.empty3.apps.simplecalculator.databinding.FragmentItemBinding
-import one.empty3.apps.tree.functions.ListMathDoubleFunction
+import one.empty3.library1.tree.functions.ListMathDoubleFunction
 
 
 class MyStringRecyclerViewAdapter(private var values: Array<String> = ListMathDoubleFunction.getList()) :

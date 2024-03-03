@@ -22,9 +22,10 @@
 
 package one.empty3.library1.shader;
 
-import one.empty3.library.core.raytracer.tree.AlgebraicFormulaSyntaxException;
-import one.empty3.library.core.raytracer.tree.AlgebraicTree;
-import one.empty3.library.core.raytracer.tree.TreeNodeEvalException;
+import one.empty3.library.StructureMatrix;
+import one.empty3.library1.tree.AlgebraicFormulaSyntaxException;
+import one.empty3.library1.tree.AlgebraicTree;
+import one.empty3.library1.tree.TreeNodeEvalException;
 public class VecAlTree extends Vec {
     protected String formula;
     AlgebraicTree tree;
@@ -37,7 +38,7 @@ private boolean invalidTree = true;
 this.formula = formula;
         
         try {
-tree=new AlgebraicTree(formula)
+tree=new AlgebraicTree(formula) 
             ;
             tree.construct();
 invalidTree = false;
@@ -51,8 +52,13 @@ invalidTree = false;
  }
     public Double [] getValue() {
 try {
-    return new Double [] {
-tree. eval() } ;
+    StructureMatrix<Double> eval = tree.eval();
+    Double d = 0.0;
+    if(eval.getDim()==0)
+        d = eval.getElem();
+    else if(eval.getDim()==1)
+        d = eval.getElem(0);
+    return new Double [] { d } ;
 } catch (TreeNodeEvalException ex) {
      ex.printStackTrace();
      return new Double[] {0.0};

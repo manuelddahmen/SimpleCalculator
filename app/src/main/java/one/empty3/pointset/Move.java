@@ -52,11 +52,13 @@
 
 package one.empty3.pointset;
 
+import android.os.Build;
+
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
 import one.empty3.library.TextureCol;
 import one.empty3.library.core.lighting.Colors;
-import one.empty3.apps.tree.*;
+import one.empty3.library1.tree.*;
 
 import java.util.HashMap;
 import java.util.function.Consumer;
@@ -129,11 +131,13 @@ public class Move {
                             composanteForceSurface.get(t1).map2.get("z")
                     )
             );
-            t1.texture(new TextureCol(Colors.random()));
-        } catch (TreeNodeEvalException e) {
-            e.printStackTrace();
-        } catch (AlgebraicFormulaSyntaxException e) {
-            e.printStackTrace();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                t1.texture(new TextureCol(Colors.random()));
+            }
+        } catch (one.empty3.library1.tree.TreeNodeEvalException e) {
+            throw new RuntimeException(e);
+        } catch (one.empty3.library1.tree.AlgebraicFormulaSyntaxException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -19,7 +19,7 @@
 
 package one.empty3;
 
-import one.empty3.library.core.raytracer.tree.*;
+import one.empty3.library1.tree.*;
 /***
 programme de calcul vectoriel matriciel ou en
 nombres réels

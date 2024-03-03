@@ -20,7 +20,7 @@
 
 package one.empty3.library;
 
-import one.empty3.apps.tree.*;
+import one.empty3.library1.tree.*;
 
 public class F {
     /*
@@ -88,11 +88,7 @@ public class F {
             dima = Integer.parseInt(splits[1]);
             dimb = Integer.parseInt(splits[2]);
         }
-        try {
-            treeF = new AlgebraicTree(formula);
-        } catch (AlgebraicFormulaSyntaxException ex) {
-            ex.printStackTrace();
-        }
+        treeF = new AlgebraicTree(formula);
 
     }
 

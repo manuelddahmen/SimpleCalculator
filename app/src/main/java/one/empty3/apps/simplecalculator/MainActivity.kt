@@ -21,6 +21,7 @@
 package one.empty3.apps.simplecalculator
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils.replace
@@ -78,28 +79,14 @@ class MainActivity : AppCompatActivity() {
                     } else if (toString.length == 1) {
                         editText.setText("")
                     }
+                    val tree = AlgebraicTree(editText.text.toString())
+                    compute(tree, textAnswer)
                     return@setOnClickListener
                 }
                 editText.text = editText.text.append(findViewById.text)
                 val tree = AlgebraicTree(editText.text.toString())
 
-                try {
-                    tree.construct()
-                    val d: StructureMatrix<Double>? = tree.eval()
-
-
-                    textAnswer.text = stringFromEval(d)
-                    Toast.makeText(applicationContext, "Valide V", Toast.LENGTH_LONG).show()
-
-                } catch (ex: AlgebraicFormulaSyntaxException) {
-                    //Toast.makeText(getApplicationContext(), "Syntaxe invalide", Toast.LENGTH_SHORT).show()
-                } catch (ex: IndexOutOfBoundsException) {
-                    //Toast.makeText(getApplicationContext(), "Erreur autre (array index)", Toast.LENGTH_SHORT).show()
-                    ex.printStackTrace()
-                } catch (ex: NullPointerException) {
-                    //Toast.makeText(getApplicationContext(), "Erreur : null", Toast.LENGTH_SHORT).show()
-                    ex.printStackTrace()
-                }
+                compute(tree, textAnswer)
             }
         }
         val buttonFunctionAdd: Button = findViewById(R.id.buttonFunction)
@@ -145,24 +132,7 @@ class MainActivity : AppCompatActivity() {
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val tree = AlgebraicTree(editText.text.toString())
-
-                try {
-                    tree.construct()
-                    val d: StructureMatrix<Double>? = tree.eval()
-                    var labelAnswer: String = stringFromEval(d)
-                    textAnswer.text = labelAnswer
-                    Toast.makeText(applicationContext, "Valide V", Toast.LENGTH_LONG).show()
-
-                } catch (ex: AlgebraicFormulaSyntaxException) {
-                    //Toast.makeText(getApplicationContext(), "Syntaxe invalide", Toast.LENGTH_SHORT).show()
-                } catch (ex: IndexOutOfBoundsException) {
-                    //Toast.makeText(getApplicationContext(), "Erreur autre (array index)", Toast.LENGTH_SHORT).show()
-                    ex.printStackTrace()
-                } catch (ex: NullPointerException) {
-                    //Toast.makeText(getApplicationContext(), "Erreur : null", Toast.LENGTH_SHORT).show()
-                    ex.printStackTrace()
-                }
-
+                compute(tree, textAnswer)
             }
             override fun beforeTextChanged(s:CharSequence, start:Int, count:Int, after:Int) {
 
@@ -171,6 +141,27 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun compute(
+        tree: AlgebraicTree,
+        textAnswer: TextView
+    ) {
+        try {
+            tree.construct()
+            val d: StructureMatrix<Double>? = tree.eval()
+            textAnswer.text = stringFromEval(d)
+            textAnswer.setTextColor(Color.BLACK)
+        } catch (ex: AlgebraicFormulaSyntaxException) {
+            textAnswer.setTextColor(Color.RED)
+            textAnswer.text = ""
+        } catch (ex: IndexOutOfBoundsException) {
+            textAnswer.setTextColor(Color.RED)
+            textAnswer.text = ""
+        } catch (ex: NullPointerException) {
+            textAnswer.setTextColor(Color.RED)
+            textAnswer.text = ""
+        }
     }
 
     private fun stringFromEval(d: StructureMatrix<Double>?): String {

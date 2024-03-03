@@ -20,7 +20,6 @@
 
 package one.empty3.apps.simplecalculator;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;

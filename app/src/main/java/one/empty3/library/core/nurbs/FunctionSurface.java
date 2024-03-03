@@ -54,7 +54,7 @@ package one.empty3.library.core.nurbs;
 
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
-import one.empty3.apps.tree.*;
+import one.empty3.library1.tree.*;
 
 import java.util.HashMap;
 
@@ -148,9 +148,9 @@ public class FunctionSurface extends ParametricSurface {
         try {
             hashMap.put("u", u);
             hashMap.put("v", v);
-            double evalX = treeX.eval();
-            double evalY = treeY.eval();
-            double evalZ = treeZ.eval();
+            double evalX = treeX.eval().getElem();
+            double evalY = treeY.eval().getElem();
+            double evalZ = treeZ.eval().getElem();
             return new Point3D(evalX, evalY, evalZ);
         } catch (TreeNodeEvalException | AlgebraicFormulaSyntaxException |
                  NullPointerException exceptione) {

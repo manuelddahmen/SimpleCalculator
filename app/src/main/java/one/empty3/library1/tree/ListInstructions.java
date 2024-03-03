@@ -40,7 +40,7 @@ public class ListInstructions {
         return "";
     }
 
-    public class Instruction {
+    public static class Instruction {
         private int id;
         private String leftHand;
         private String expression;
@@ -172,7 +172,7 @@ public class ListInstructions {
                 tree.construct();
 
                 resultVec = tree.eval();
-                
+
                 if (resultVec != null) {
                     System.out.println("key: " + key + " value: " + value + " computed: " + resultVec);
                     if (resultVec.getDim() == 1) {
