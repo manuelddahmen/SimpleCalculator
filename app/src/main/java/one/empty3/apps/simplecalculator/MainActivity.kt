@@ -24,19 +24,17 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils.replace
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
+import androidx.preference.PreferenceManager
 import one.empty3.library.StructureMatrix
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException
 import one.empty3.library1.tree.AlgebraicTree
-import one.empty3.library1.tree.functions.ListMathDoubleFunction
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,9 +63,14 @@ class MainActivity : AppCompatActivity() {
             R.id.buttonParenthesisA,
             R.id.buttonComa
         )
+        val prefs = PreferenceManager
+            .getDefaultSharedPreferences(this)
 
         val textAnswer: TextView = findViewById<EditText>(R.id.answerText)
         val editText = findViewById<EditText>(R.id.editTextCalculus)
+        var string: String? = prefs.getString("autoSaveEditText", "")
+        if(string!=null)
+            editText.setText(string)
 
         for (j: Int in buttonsNumbers) {
             val findViewById: Button = findViewById(j)
@@ -138,6 +141,10 @@ class MainActivity : AppCompatActivity() {
 
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                var toString = editText?.text?.toString()
+                if(toString==null)
+                    toString = ""
+                prefs.edit().putString("autoSaveEditText", toString).apply();
             }
 
         })

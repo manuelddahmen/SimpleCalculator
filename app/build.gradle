@@ -150,9 +150,8 @@ android {
 
 dependencies {
     // Import the Firebase BoM
-    implementation platform('com.google.firebase:firebase-bom:32.7.1')
+    implementation platform('com.google.firebase:firebase-bom:32.8.0')
     // Import the BoM for the Firebase platform
-    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
 
     // Add the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
@@ -162,7 +161,7 @@ dependencies {
 
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
-    implementation "com.google.gms.google-services:com.google.gms.google-services.gradle.plugin:4.4.0"
+    implementation "com.google.gms.google-services:com.google.gms.google-services.gradle.plugin:4.4.1"
     implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.9'
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

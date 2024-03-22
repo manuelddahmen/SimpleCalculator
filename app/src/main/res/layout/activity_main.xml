@@ -27,7 +27,7 @@
     android:layout_height="wrap_content"
     android:visibility="visible">
 
-    <TextView
+    <EditText
         android:id="@+id/answerText"
         android:layout_width="375dp"
         android:layout_height="152dp"
