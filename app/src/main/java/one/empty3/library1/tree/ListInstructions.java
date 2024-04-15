@@ -74,6 +74,11 @@ public class ListInstructions {
         public void setExpression(String expression) {
             this.expression = expression;
         }
+
+        @Override
+        public String toString() {
+            return (leftHand != null ? leftHand : "") + ((expression != null && leftHand != null) ? " = " + expression : (expression != null ? expression : ""));
+        }
     }
 
     private ArrayList<Instruction> assignations;
@@ -140,6 +145,8 @@ public class ListInstructions {
                     }
                 }
             }
+        } else {
+            assignations = new ArrayList<>();
         }
     }
 
