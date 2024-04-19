@@ -59,7 +59,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import one.empty3.gui.TranslateR;
 import one.empty3.library.StructureMatrix;
 import org.jetbrains.annotations.NotNull;
 

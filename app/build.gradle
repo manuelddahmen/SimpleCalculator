@@ -11,7 +11,6 @@ dependencies {
     // Add dependencies.
     implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
 }
-
 // Add the information to the bottom of the file.
 apply plugin: 'com.huawei.agconnect'
 
@@ -23,22 +22,27 @@ if (hasProperty('buildScan')) {
     }
 }
 
+
+def versionCode1000 = 406542942
+def kotlin_version = '1.9.20'
+
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(20)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 kotlin {
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of("20"))
+        languageVersion.set(JavaLanguageVersion.of("21"))
     }
 }
-
-
-def versionCode1000 = 406542937
-def kotlin_version = '1.9.21'
 android {
     namespace 'one.empty3.apps.simplecalculator'
+    packagingOptions {
+        resources {
+            excludes += ['/META-INF/{AL2.0,LGPL2.1}', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module', 'xsd/catalog.xml', 'META-INF/LICENSE.md', 'META-INF/NOTICE.md', 'META-INF/io.netty.versions.properties', 'META-INF/INDEX.LIST']
+        }
+    }
     signingConfigs {
         debug {
             storeFile file('C:\\Users\\manue\\keystore')
@@ -54,53 +58,58 @@ android {
         }
     }
     defaultConfig {
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        applicationId "one.empty3.apps.simplecalculator"
+
     }
     testOptions {
         unitTests.returnDefaultValues = true
     }
     buildFeatures {
-        compose false
         viewBinding true
+        dataBinding true
+//        compose true
     }
+
     buildTypes {
         release {
-            // Enables code shrinking, obfuscation, and optimization for only
-            // your project's release build type.
-            minifyEnabled true
-
-            // Enables resource shrinking, which is performed by the
-            // Android Gradle plugin.
             shrinkResources true
-
+            minifyEnabled true
+            debuggable false
             // Includes the default ProGuard rules files that are packaged with
             // the Android Gradle plugin. To learn more, go to the section about
             // R8 configuration files.
             proguardFiles getDefaultProguardFile(
                     'proguard-android-optimize.txt'),
                     'proguard-rules.pro'
-            signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            ndk {
+                debugSymbolLevel = 'full'
+            }
 
         }
+
         debug {
-            signingConfig signingConfigs.release
-            minifyEnabled true
+            debuggable true
+            //buildConfigField "Boolean", "DEBUG_MODE", "false"
+            ndk {
+                debugSymbolLevel 'FULL'
+            }
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_20
-        targetCompatibility JavaVersion.VERSION_20
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
     defaultConfig {
-        //resourceConfigurations += ['en']
-        JavaVersion.VERSION_20
-        compileSdk 34
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        applicationId "one.empty3.apps.simplecalculator"
+        applicationId "one.empty3.apps.simplecalculator"
+        testApplicationId = "one.empty3.library1.tree"
         targetSdk 34
-        minSdkVersion 24
-        versionName "8.0"
+        compileSdk 34
+        minSdk 26
+        JavaVersion.VERSION_21
         versionCode versionCode1000
+        versionName "8.0"
         signingConfig signingConfigs.release
     }
 
@@ -122,7 +131,7 @@ android {
         //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin-api'
         all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin'
         //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-build-common'
-        all {
+        configureEach {
             resolutionStrategy {
                 //force 'xpp3:xpp3:1.1.4c'
                 force 'jakarta.activation:jakarta.activation-api:1.2.1'
@@ -150,7 +159,7 @@ android {
 
 dependencies {
     // Import the Firebase BoM
-    implementation platform('com.google.firebase:firebase-bom:32.8.0')
+    implementation platform('com.google.firebase:firebase-bom:32.8.1')
     // Import the BoM for the Firebase platform
 
     // Add the dependencies for the Crashlytics and Analytics libraries
@@ -163,7 +172,7 @@ dependencies {
     // https://firebase.google.com/docs/android/setup#available-libraries
     implementation "com.google.gms.google-services:com.google.gms.google-services.gradle.plugin:4.4.1"
     implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.9'
-    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.core:core-ktx:1.13.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -216,7 +225,7 @@ publishing {
 
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_20
-    targetCompatibility = JavaVersion.VERSION_20
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 

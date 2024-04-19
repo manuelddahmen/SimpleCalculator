@@ -9,6 +9,7 @@ buildscript {
         repositories {
             // Add the Maven address.
             maven { url 'https://developer.huawei.com/repo/' }
+            mavenCentral()
         }
         dependencies {
             // Add dependencies.
