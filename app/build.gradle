@@ -4,15 +4,15 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
-//apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-kapt'
 
 // Add the information to the bottom of the file.
 dependencies {
     // Add dependencies.
-    implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
+    //implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
 }
 // Add the information to the bottom of the file.
-apply plugin: 'com.huawei.agconnect'
+//apply plugin: 'com.huawei.agconnect'
 
 
 if (hasProperty('buildScan')) {
@@ -23,7 +23,7 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406542942
+def versionCode1000 = 406542953
 def kotlin_version = '1.9.20'
 
 java {
@@ -38,6 +38,8 @@ kotlin {
 }
 android {
     namespace 'one.empty3.apps.simplecalculator'
+    testNamespace 'one.empty3.app.library1.tree'
+
     packagingOptions {
         resources {
             excludes += ['/META-INF/{AL2.0,LGPL2.1}', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module', 'xsd/catalog.xml', 'META-INF/LICENSE.md', 'META-INF/NOTICE.md', 'META-INF/io.netty.versions.properties', 'META-INF/INDEX.LIST']
@@ -57,16 +59,24 @@ android {
             keyPassword 'faeeagrzdsd'
         }
     }
-    defaultConfig {
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
 
+    dependenciesInfo {
+        // Disables dependency metadata when building APKs.
+        includeInApk = false
+        // Disables dependency metadata when building Android App Bundles.
+        includeInBundle = false
     }
-    testOptions {
-        unitTests.returnDefaultValues = true
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
-    buildFeatures {
-        viewBinding true
-        dataBinding true
-//        compose true
+
+    kotlinOptions {
+        jvmTarget = "21"
     }
 
     buildTypes {
@@ -99,19 +109,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_21
         targetCompatibility JavaVersion.VERSION_21
     }
-    defaultConfig {
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        applicationId "one.empty3.apps.simplecalculator"
-        applicationId "one.empty3.apps.simplecalculator"
-        testApplicationId = "one.empty3.library1.tree"
-        targetSdk 34
-        compileSdk 34
-        minSdk 26
-        JavaVersion.VERSION_21
-        versionCode versionCode1000
-        versionName "8.0"
-        signingConfig signingConfigs.release
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        main.kotlin.srcDirs += 'src/main/java'
     }
+
+    kotlinOptions {
+        jvmTarget = "21"
+    }
+
 
     packagingOptions {
         resources {
@@ -121,6 +127,8 @@ android {
     lint {
         baseline file('lint-baseline.xml')
     }
+
+
     configurations {
         all*.exclude group: 'xpp3', module: 'xpp3'
         all*.exclude group: 'xml-apis', module: 'xml-apis'
@@ -131,8 +139,10 @@ android {
         //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin-api'
         all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin'
         //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-build-common'
-        configureEach {
+        all {
             resolutionStrategy {
+                force("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.6.2")
+                force 'org.xerial:sqlite-jdbc:3.34.0'
                 //force 'xpp3:xpp3:1.1.4c'
                 force 'jakarta.activation:jakarta.activation-api:1.2.1'
                 //force 'org.jetbrains.kotlin:kotlin-compiler-embeddable:1.8.0'
@@ -144,11 +154,36 @@ android {
                 //force 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'
                 // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-reflect
                 //force group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: '1.8.0'
-                // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-reflect
+// https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-reflect
                 //force group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.8.0'
 
             }
         }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+//        compose true
+    }
+
+    defaultConfig {
+        applicationId "one.empty3.apps.simplecalculator"
+        testApplicationId = "one.empty3.library1.tree"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        targetSdk 34
+        compileSdk 34
+        compileSdkVersion 34
+        minSdk 22
+        JavaVersion.VERSION_21
+        versionCode versionCode1000
+        versionName "8.0"
+        signingConfig signingConfigs.release
     }
     testOptions {
         unitTests.returnDefaultValues = true

@@ -283,12 +283,12 @@
         android:orientation="horizontal">
 
         <EditText
+            android:autofillHints="Result here"
             android:id="@+id/answerText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="monospace"
             android:text="@string/result"
-            android:textFontWeight="30"
             android:textSize="34sp"
             android:theme="?android:attr/buttonBarButtonStyle"
             android:typeface="monospace" />

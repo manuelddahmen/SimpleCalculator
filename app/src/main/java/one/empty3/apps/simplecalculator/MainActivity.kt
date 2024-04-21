@@ -28,7 +28,6 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import one.empty3.library.StructureMatrix
@@ -66,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         val prefs = PreferenceManager
             .getDefaultSharedPreferences(this)
 
-        val textAnswer: TextView = findViewById<EditText>(R.id.answerText)
+        val textAnswer: EditText = findViewById<EditText>(R.id.answerText)
         val editText = findViewById<EditText>(R.id.editTextCalculus)
         var string: String? = prefs.getString("autoSaveEditText", "")
         if(string!=null)
@@ -152,22 +151,21 @@ class MainActivity : AppCompatActivity() {
 
     private fun compute(
         tree: AlgebraicTree,
-        textAnswer: TextView
-    ) {
-        try {
+        textAnswer: EditText) {
+            try {
             tree.construct()
             val d: StructureMatrix<Double>? = tree.eval()
-            textAnswer.text = stringFromEval(d)
-            textAnswer.setTextColor(Color.BLACK)
+            textAnswer.text.append(stringFromEval(d))
+                textAnswer.setTextColor(Color.BLACK)
         } catch (ex: AlgebraicFormulaSyntaxException) {
             textAnswer.setTextColor(Color.RED)
-            textAnswer.text = ""
+            textAnswer.text.append("")
         } catch (ex: IndexOutOfBoundsException) {
             textAnswer.setTextColor(Color.RED)
-            textAnswer.text = ""
+            textAnswer.text.append("")
         } catch (ex: NullPointerException) {
             textAnswer.setTextColor(Color.RED)
-            textAnswer.text = ""
+            textAnswer.text.append("")
         }
     }
 

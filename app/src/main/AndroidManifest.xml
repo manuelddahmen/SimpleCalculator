@@ -6,12 +6,20 @@
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <application
+        android:name=".SciProgCalculator"
         android:enableOnBackInvokedCallback="true"
-        android:icon="@drawable/mobile"
+        android:icon="@drawable/calcphotoshopexpress"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/mobile"
+        android:roundIcon="@drawable/calcphotoshopexpress_round"
         android:theme="@style/Theme.SimpleCalculator"
-        tools:targetApi="tiramisu">
+        android:allowBackup="true"
+        android:exported="true"
+        android:hardwareAccelerated="true"
+        android:installLocation="auto"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="tiramisu"
+>
         <activity
             android:name=".SettingsActivity"
             android:exported="true"
