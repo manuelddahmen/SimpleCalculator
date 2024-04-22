@@ -18,8 +18,9 @@
         android:installLocation="auto"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
+        tools:remove="android:appComponentFactory"
         tools:targetApi="tiramisu"
->
+        tools:ignore="UnusedAttribute">
         <activity
             android:name=".SettingsActivity"
             android:exported="true"

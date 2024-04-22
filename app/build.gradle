@@ -4,15 +4,13 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
-apply plugin: 'kotlin-kapt'
-
 // Add the information to the bottom of the file.
 dependencies {
     // Add dependencies.
-    //implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
+    implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
 }
 // Add the information to the bottom of the file.
-//apply plugin: 'com.huawei.agconnect'
+apply plugin: 'com.huawei.agconnect'
 
 
 if (hasProperty('buildScan')) {
@@ -23,7 +21,7 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406542953
+def versionCode1000 = 406549305
 def kotlin_version = '1.9.20'
 
 java {
@@ -65,9 +63,9 @@ android {
 
     dependenciesInfo {
         // Disables dependency metadata when building APKs.
-        includeInApk = false
+        includeInApk = true
         // Disables dependency metadata when building Android App Bundles.
-        includeInBundle = false
+        includeInBundle = true
     }
 
     compileOptions {
@@ -178,7 +176,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         targetSdk 34
         compileSdk 34
-        compileSdkVersion 34
         minSdk 22
         JavaVersion.VERSION_21
         versionCode versionCode1000
@@ -260,7 +257,6 @@ publishing {
 
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
-
