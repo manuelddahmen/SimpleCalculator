@@ -29,6 +29,7 @@
     tools:showIn="@layout/activity_scrolling">
 
     <EditText
+        android:labelFor="@string/textCalculatorTextMultiLine"
         android:id="@+id/textCalculator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -81,4 +81,7 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="empty_string" />
+    <string name="textCalculatorTextMultiLine">Multiline script</string>
+    <string name="com.crashlytics.android.build_id" translatable="false">1</string>
+    <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
 </resources>

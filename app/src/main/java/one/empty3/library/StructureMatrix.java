@@ -347,7 +347,47 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
         }
         return s.toString();
     }
+    public String toVectorString() {
+        StringBuilder s = new StringBuilder("");
+        s.append("\"dim\":" + dim + ",");
+        switch (dim) {
+            case 0:
+                if(data0d !=null)
+                    s.append("(").append(data0d.toString()).append(")");
+                else
+                    s.append("(null)");
+                break;
+            case 1:
+                s.append(" ( ");
+                final int[] i = {0};
+                data1d.forEach(t -> {
+                    if(i[0] >0 && i[0]<data1d.size()-1) s.append(" , ");
+                    s.append(t.toString());
+                    i[0]++;
+                });
+                s.append(" ) ");
+                break;
+            case 2:
+                s.append("\"data2d\" : { ");
+                data2d.forEach(ts -> {
+                    s.append(" { ");
 
+                    final int[] i1 = {0};
+                    ts.forEach(t -> {
+                        if (i1[0] > 0) s.append( ", ");
+                        s.append(t.toString());
+                        i1[0]++;
+                    });
+
+                    s.append(" } ");
+
+                });
+                s.append(" } ");
+                break;
+        }
+        return s.toString();
+
+    }
     public String toStringLine() {
         StringBuilder s = new StringBuilder("StructureMatrix {");
         s.append("\"dim\":" + dim + ",");

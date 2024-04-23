@@ -22,4 +22,5 @@
     <string name="instructions" />
     <string name="text_calculator">Text</string>
     <string name="empty_string" />
+    <string name="textCalculatorTextMultiLine">Multiline script</string>
 </resources>

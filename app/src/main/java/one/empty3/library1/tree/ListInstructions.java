@@ -199,7 +199,7 @@ public class ListInstructions {
             }
             String errors1 = "";
             if (value != null && resultVec != null && (!value.startsWith("# ") && !value.isBlank() && !value.equals("null"))) {
-                errors1 += String.format(Locale.getDefault(), "# Result of line : (%d) <<< %s ", i, resultVec.toStringLine());
+                errors1 += String.format(Locale.getDefault(), "#(%d) <<< %s ", i, resultVec.toVectorString());
             }
             if (value != null && (!value.startsWith("# "))) {
                 errors1 += "\n" + (key == null || key.isBlank() ? "" : (key + "=")) + value;
