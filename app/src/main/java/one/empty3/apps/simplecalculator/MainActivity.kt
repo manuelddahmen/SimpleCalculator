@@ -52,6 +52,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_layout_table)
 
 
+        val serviceAccount :FileInputStream = FileInputStream("C:\\Users\\manue\\AndroidStudioProjects\\SimpleCalculator\\app\\simplecalculator-8d9b3-firebase-adminsdk-e04tz-e538e983e2.json");
+        val options : FirebaseOptions = FirebaseOptions.Builder().setProjectId("simplecalculator-8d9b3").setApiKey("AIzaSyC7G9o1LEckCJ2jIC8gOc7sF2RZdd22avA")
+            .build()
+        FirebaseApp.initializeApp(applicationContext, options);
+
+
 
         val buttonsNumbers = arrayListOf(
             R.id.button0,
