@@ -35,6 +35,8 @@ import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.set
+import androidx.core.widget.addTextChangedListener
+import androidx.databinding.adapters.TextViewBindingAdapter
 import androidx.preference.PreferenceManager
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
@@ -46,18 +48,9 @@ import java.io.StringBufferInputStream
 
 
 class MainActivity : AppCompatActivity() {
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout_table)
-
-
-        val serviceAccount :FileInputStream = FileInputStream("C:\\Users\\manue\\AndroidStudioProjects\\SimpleCalculator\\app\\simplecalculator-8d9b3-firebase-adminsdk-e04tz-e538e983e2.json");
-        val options : FirebaseOptions = FirebaseOptions.Builder().setProjectId("simplecalculator-8d9b3").setApiKey("AIzaSyC7G9o1LEckCJ2jIC8gOc7sF2RZdd22avA")
-            .build()
-        FirebaseApp.initializeApp(applicationContext, options);
-
-
 
         val buttonsNumbers = arrayListOf(
             R.id.button0,
@@ -86,12 +79,12 @@ class MainActivity : AppCompatActivity() {
             .getDefaultSharedPreferences(this)
 
         val textAnswer: EditText = findViewById<EditText>(R.id.answerText)
-        val editText :EditText = findViewById<EditText>(R.id.editTextCalculus)
+        val editText: EditText = findViewById<EditText>(R.id.editTextCalculus)
         editText.setText("")
         var string: String? = prefs.getString("autoSaveEditText", "")
         if (string != null && string.isNotEmpty())
             editText.setText(string)
-        if(string!=null&&string.isNotEmpty()) {
+        if (string != null && string.isNotEmpty()) {
             val tree = AlgebraicTree(string)
             compute(tree, textAnswer)
         }
@@ -134,7 +127,7 @@ class MainActivity : AppCompatActivity() {
 
                     runOnUiThread {
                         val result: String = dialog.function_name
-                        if (result.isNotEmpty() && editText!=null) {
+                        if (result.isNotEmpty() && editText != null) {
                             editText.text = editText.text.append(result)
                         }
                     }
@@ -160,16 +153,13 @@ class MainActivity : AppCompatActivity() {
 
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if(s!=null&&s.toString().isNotEmpty()) {
-                    val toString = s.toString()
-                    val tree = AlgebraicTree(toString)
-                    Thread() {
-                    compute(tree, textAnswer)
-                    }.start()
-                } else if(textAnswer!=null) {
-                    runOnUiThread {
-                        textAnswer.setText("")
-                    }
+                var toString = editText.text.toString()
+                val tree = AlgebraicTree(toString)
+                compute(tree, textAnswer)
+                println("Characters changed = " + toString)
+                toString = editText.text.toString()
+                runOnUiThread {
+                    prefs.edit().putString("autoSaveEditText", toString).apply();
                 }
             }
 
@@ -178,18 +168,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                var toStringSeq = s
-                var toString = ""
-                if(s==null)
-                    toString = ""
-                else
-                    toString = s.toString()
-                if (toString == null)
-                    toString = ""
-                runOnUiThread {
-                    prefs.edit().putString("autoSaveEditText", toString).apply();
-                }
             }
+
 
         })
     }
@@ -198,47 +178,33 @@ class MainActivity : AppCompatActivity() {
         tree: AlgebraicTree,
         textAnswer: EditText
     ) {
-
-            runOnUiThread(Runnable() {
-            fun run() {
-                try {
-                    if (tree == null) {
-                        runOnUiThread {
-                            textAnswer.setText("")
-                        }
-                        return
-                    }
-                    tree.construct()
-                    val d: StructureMatrix<Double>? = tree.eval()
-                    val str = stringFromEval(d)
-                    if (str == null || str.equals("")) {
-                        runOnUiThread {
-                            textAnswer.setText("")
-                        }
-                        return
-                    }
-                    runOnUiThread {
-                        textAnswer.setText(str)
-                        textAnswer.setTextColor(Color.BLACK)
-                    }
-                    } catch (ex: AlgebraicFormulaSyntaxException) {
-                    runOnUiThread {
-                        textAnswer.setTextColor(Color.RED)
-                        textAnswer.setText("")
-                    }
-                } catch (ex: IndexOutOfBoundsException) {
-                    runOnUiThread {
-                           textAnswer.setTextColor(Color.RED)
-                        textAnswer.setText("")
-                    }
-                } catch (ex: NullPointerException) {
-                    runOnUiThread {
-                        textAnswer.setTextColor(Color.RED)
-                        textAnswer.setText("")
-                    }
-                }
+        try {
+            tree.construct()
+            val d: StructureMatrix<Double>? = tree.eval()
+            val str = stringFromEval(d)
+            textAnswer.setText(str)
+            textAnswer.setTextColor(Color.BLACK)
+            println("Calculus OK, displayed")
+        } catch (ex: AlgebraicFormulaSyntaxException) {
+            runOnUiThread {
+                textAnswer.setTextColor(Color.RED)
+                textAnswer.setText("")
             }
-        })
+            ex.printStackTrace()
+        } catch (ex: IndexOutOfBoundsException) {
+            runOnUiThread {
+                textAnswer.setTextColor(Color.RED)
+                textAnswer.setText("")
+            }
+            ex.printStackTrace()
+        } catch (ex: NullPointerException) {
+            runOnUiThread {
+                textAnswer.setTextColor(Color.RED)
+                textAnswer.setText("")
+            }
+            ex.printStackTrace()
+
+        }
     }
 
     private fun stringFromEval(d: StructureMatrix<Double>?): String {
@@ -258,8 +224,6 @@ class MainActivity : AppCompatActivity() {
         }
         return labelAnswer
     }
-
-
     private fun openUserData(view: View) {
         val intent: Intent = Intent(view.context, LicenceUserData::class.java).apply {
             putExtra("class", "")

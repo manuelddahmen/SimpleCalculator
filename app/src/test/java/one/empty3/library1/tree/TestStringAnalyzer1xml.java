@@ -22,13 +22,12 @@
 
 package one.empty3.library1.tree;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(JUnit4.class)
 

@@ -51,18 +51,18 @@ class ScrollingActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = title
 
-        text = findViewById<EditText>(R.id.textCalculator)
+        this.text = findViewById<EditText>(R.id.textCalculator)
 
         binding.fab.setOnClickListener { view ->
-            parseText(text!!.text.toString())
+            parseText(textIns = text!!.text.toString())
         }
 
         val prefs: SharedPreferences = PreferenceManager
             .getDefaultSharedPreferences(this)
 
-        text!!.setText(prefs.getString("autoSave", "pi="+Math.PI))
+        this.text!!.setText(prefs.getString("autoSave", "pi="+Math.PI))
 
-        text!!.addTextChangedListener(object : TextWatcher {
+        this.text!!.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
                 s: CharSequence, start: Int, before: Int,
                 count: Int

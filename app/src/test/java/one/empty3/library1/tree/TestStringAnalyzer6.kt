@@ -78,7 +78,7 @@ class TestStringAnalyzer6 {
         else
             Assert.assertTrue(succeed)
     }
-
+/*
     fun compareStrings(s1: String, s2: String, isEchoing: Boolean): Boolean {
         val formattedSource1: String = com.google.googlejavaformat.java.Formatter().formatSource(s1)
         val formattedSource2: String = com.google.googlejavaformat.java.Formatter().formatSource(s2)
@@ -91,7 +91,7 @@ class TestStringAnalyzer6 {
         return formattedSource1.equals(formattedSource2)
         //assertTrue(formattedSource1.equals(formattedSource2))
     }
-
+*/
     fun readString(file_path: String): String {
         try {
             val allLines = Files.readAllLines(Paths.get(file_path))

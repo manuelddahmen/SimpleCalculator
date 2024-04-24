@@ -84,4 +84,5 @@
     <string name="textCalculatorTextMultiLine">Multiline script</string>
     <string name="com.crashlytics.android.build_id" translatable="false">1</string>
     <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
+    <string name="numeric_calculus_script">Numeric calculus script</string>
 </resources>

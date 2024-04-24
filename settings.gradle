@@ -6,12 +6,6 @@ pluginManagement {
             url 'https://developer.huawei.com/repo/'
         }
         mavenCentral()
-        maven {
-            url "https://jitpack.io"
-        }
-        maven {
-            url "https://mvnrepository.com/"
-        }
         mavenLocal()
     }
 }
@@ -44,5 +38,5 @@ dependencyResolutionManagement {
         mavenLocal()
     }
 }
-rootProject.name = "Sci-prog Calculator"
+rootProject.name = "Calculator Sci-Prog"
 include ':app'

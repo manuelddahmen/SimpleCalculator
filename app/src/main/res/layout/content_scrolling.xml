@@ -29,9 +29,16 @@
     tools:showIn="@layout/activity_scrolling">
 
     <EditText
+        android:textAlignment="textStart"
+        android:elegantTextHeight="true"
+        android:autofillHints="@string/numeric_calculus_script"
+        android:hint="@string/numeric_calculus_script"
+        android:inputType="textMultiLine"
         android:labelFor="@string/textCalculatorTextMultiLine"
         android:id="@+id/textCalculator"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:minWidth="300dp"
+        android:minHeight="500dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:text="@string/instructions" />

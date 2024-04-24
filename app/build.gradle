@@ -1,10 +1,9 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'maven-publish'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
-
+apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-kapt'
+apply plugin: 'maven-publish'
 // Add the information to the bottom of the file.
 dependencies {
     // Add dependencies.
@@ -22,7 +21,7 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406549417
+def versionCode1000 = 406549427
 def kotlin_version = '1.9.23'
 
 java {
@@ -63,9 +62,9 @@ android {
 
     dependenciesInfo {
         // Disables dependency metadata when building APKs.
-        includeInApk = true
+        includeInApk = false
         // Disables dependency metadata when building Android App Bundles.
-        includeInBundle = true
+        includeInBundle = false
     }
 
     compileOptions {
@@ -91,7 +90,20 @@ android {
             ndk {
                 debugSymbolLevel = 'full'
             }
+            /* Add the firebaseCrashlytics extension (by default,
+            * it's disabled to improve build speeds) and set
+            * nativeSymbolUploadEnabled to true along with a pointer to native libs. */
 
+            // Add this extension
+            firebaseCrashlytics {
+                // Enable processing and uploading of native symbols to Firebase servers.
+                // By default, this is disabled to improve build speeds.
+                // This flag must be enabled to see properly-symbolicated native
+                // stack traces in the Crashlytics dashboard.
+                nativeSymbolUploadEnabled true
+                strippedNativeLibsDir 'build/intermediates/stripped_native_libs/release/out/lib'
+                unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
+            }
         }
 
         debug {
@@ -167,7 +179,7 @@ android {
     buildFeatures {
         viewBinding true
         dataBinding true
-//        compose true
+        compose false
     }
 
     defaultConfig {
