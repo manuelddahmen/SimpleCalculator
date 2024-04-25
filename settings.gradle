@@ -38,5 +38,5 @@ dependencyResolutionManagement {
         mavenLocal()
     }
 }
-rootProject.name = "Calculator Sci-Prog"
+rootProject.name = "Sci-prog Calculator"
 include ':app'

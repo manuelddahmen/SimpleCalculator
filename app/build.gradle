@@ -7,7 +7,6 @@ apply plugin: 'maven-publish'
 // Add the information to the bottom of the file.
 dependencies {
     // Add dependencies.
-    // Add dependencies.
     implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
 }
 // Add the information to the bottom of the file.
@@ -21,7 +20,7 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406549427
+def versionCode1000 = 406549438
 def kotlin_version = '1.9.23'
 
 java {

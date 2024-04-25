@@ -38,7 +38,7 @@ import one.empty3.library1.tree.ListInstructions
  */
 class ScrollingActivity : AppCompatActivity() {
 
-    private var text: EditText? = null
+    private lateinit var text: EditText
     private lateinit var binding: ActivityScrollingBinding
     private var variables = ListInstructions()
 
@@ -48,21 +48,30 @@ class ScrollingActivity : AppCompatActivity() {
         binding = ActivityScrollingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(findViewById(R.id.toolbar))
-        binding.toolbarLayout.title = title
-
+        //setSupportActionBar(toolbar)
         this.text = findViewById<EditText>(R.id.textCalculator)
-
-        binding.fab.setOnClickListener { view ->
-            parseText(textIns = text!!.text.toString())
+        binding.fab.setOnClickListener {
+            view -> runOnUiThread {
+                parseText(textIns = this.text.text.toString())
+            }
+        }
+        binding.fab.setOnClickListener {
+                view -> runOnUiThread {
+            parseText(textIns = this.text.text.toString())
+            }
+        }
+        binding.execute.setOnClickListener {
+                view -> runOnUiThread {
+            parseText(textIns = this.text.text.toString())
+            }
         }
 
         val prefs: SharedPreferences = PreferenceManager
             .getDefaultSharedPreferences(this)
 
-        this.text!!.setText(prefs.getString("autoSave", "pi="+Math.PI))
+        this.text.setText(prefs.getString("autoSave", "pi="+Math.PI))
 
-        this.text!!.addTextChangedListener(object : TextWatcher {
+        this.text.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
                 s: CharSequence, start: Int, before: Int,
                 count: Int
@@ -94,8 +103,7 @@ class ScrollingActivity : AppCompatActivity() {
                 }
             }
 
-            text!!.setText(strNewText)
-
+                text.setText(strNewText)
         } catch (ex : RuntimeException) {
             ex.printStackTrace()
         } catch (ex : NullPointerException) {

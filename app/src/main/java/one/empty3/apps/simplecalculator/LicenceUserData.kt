@@ -48,7 +48,9 @@ class LicenceUserData : AppCompatActivity() {
 
 
     fun openLink(view: View) {
-        val uri : Uri = Uri.parse(getString(R.string.POLICY_URI))
+        val uri : Uri = Uri.parse(getString(R.string.POLICY_URI_INT))
+
+        //val uri : Uri = Uri.parse(getString(R.string.POLICY_URI))
         val intent:Intent  = Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }

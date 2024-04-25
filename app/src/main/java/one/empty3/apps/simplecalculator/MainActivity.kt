@@ -20,31 +20,19 @@
 
 package one.empty3.apps.simplecalculator
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.set
-import androidx.core.widget.addTextChangedListener
-import androidx.databinding.adapters.TextViewBindingAdapter
 import androidx.preference.PreferenceManager
-import com.google.firebase.FirebaseApp
-import com.google.firebase.FirebaseOptions
 import one.empty3.library.StructureMatrix
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException
 import one.empty3.library1.tree.AlgebraicTree
-import java.io.FileInputStream
-import java.io.StringBufferInputStream
 
 
 class MainActivity : AppCompatActivity() {
@@ -146,8 +134,7 @@ class MainActivity : AppCompatActivity() {
             openUserData(it)
         }
         findViewById<Button>(R.id.textCalculatorButton).setOnClickListener(View.OnClickListener {
-            val intentText: Intent = Intent(Intent.ACTION_EDIT)
-            intentText.setClass(applicationContext, ScrollingActivity::class.java)
+            val intentText: Intent = Intent(applicationContext, ScrollingActivity::class.java)
             startActivity(intentText)
         })
 
@@ -182,28 +169,23 @@ class MainActivity : AppCompatActivity() {
             tree.construct()
             val d: StructureMatrix<Double>? = tree.eval()
             val str = stringFromEval(d)
-            textAnswer.setText(str)
-            textAnswer.setTextColor(Color.BLACK)
+            runOnUiThread {
+                textAnswer.setText(str)
+                textAnswer.setTextColor(Color.BLACK)
+            }
             println("Calculus OK, displayed")
         } catch (ex: AlgebraicFormulaSyntaxException) {
             runOnUiThread {
                 textAnswer.setTextColor(Color.RED)
-                textAnswer.setText("")
             }
-            ex.printStackTrace()
         } catch (ex: IndexOutOfBoundsException) {
-            runOnUiThread {
-                textAnswer.setTextColor(Color.RED)
-                textAnswer.setText("")
-            }
-            ex.printStackTrace()
+                runOnUiThread {
+                    textAnswer.setTextColor(Color.RED)
+                }
         } catch (ex: NullPointerException) {
-            runOnUiThread {
-                textAnswer.setTextColor(Color.RED)
-                textAnswer.setText("")
-            }
-            ex.printStackTrace()
-
+                runOnUiThread {
+                    textAnswer.setTextColor(Color.RED)
+                }
         }
     }
 

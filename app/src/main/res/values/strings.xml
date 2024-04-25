@@ -19,7 +19,7 @@
   -->
 
 <resources>
-    <string name="app_name">Sci-prog Calculator</string>
+    <string name="app_name" translatable="false">Sci-prog Calculator</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
     <string name="_3">3</string>
@@ -84,5 +84,7 @@
     <string name="textCalculatorTextMultiLine">Multiline script</string>
     <string name="com.crashlytics.android.build_id" translatable="false">1</string>
     <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
-    <string name="numeric_calculus_script">Numeric calculus script</string>
+    <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
+    <string name="execute_code">Execute code</string>
+    <string name="POLICY_URI_INT">https://empty3.one/privacy-policy-and-user-data-on-apps/</string>
 </resources>

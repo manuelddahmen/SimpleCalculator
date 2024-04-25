@@ -14,19 +14,19 @@
         />
     <application
         android:name=".SciProgCalculator"
-        android:enableOnBackInvokedCallback="true"
-        android:icon="@drawable/calcphotoshopexpress"
-        android:label="@string/app_name"
-        android:roundIcon="@drawable/calcphotoshopexpress_round"
-        android:theme="@style/Theme.SimpleCalculator"
         android:allowBackup="true"
+        android:enableOnBackInvokedCallback="true"
         android:exported="true"
         android:hardwareAccelerated="true"
+        android:icon="@drawable/calcphotoshopexpress"
         android:installLocation="auto"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/calcphotoshopexpress_round"
         android:supportsRtl="true"
+        android:theme="@style/Theme.SimpleCalculator"
         android:usesCleartextTraffic="true"
-        tools:targetApi="tiramisu"
-        >
+        tools:remove="android:appComponentFactory"
+        tools:targetApi="p">
         <!--
         tools:ignore="UnusedAttribute"
         tools:remove="android:appComponentFactory"
@@ -39,7 +39,7 @@
             android:name=".ScrollingActivity"
             android:exported="false"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/Theme.SimpleCalculator.NoActionBar" />
+            android:theme="@style/Theme.SimpleCalculator" />
         <activity
             android:name=".LicenceUserData"
             android:label="License text"
@@ -47,7 +47,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="Calculator Sci-Prog"
+            android:label="Sci-prog Calculator"
             android:theme="@style/Theme.SimpleCalculator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

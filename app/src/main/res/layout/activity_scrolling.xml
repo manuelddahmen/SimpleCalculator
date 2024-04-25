@@ -56,11 +56,17 @@
 
     <include layout="@layout/content_scrolling" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/execute_code"
+        android:id="@+id/execute" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/fab_margin"
+        android:contentDescription="@string/execute_code"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@android:drawable/dialog_holo_light_frame" />
