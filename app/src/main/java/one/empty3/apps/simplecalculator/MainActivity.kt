@@ -91,7 +91,14 @@ class MainActivity : AppCompatActivity() {
                     compute(tree, textAnswer)
                     return@setOnClickListener
                 }
-                editText.text = editText.text.append(findViewById.text)
+                val myEditText = editText
+                val textToInsert:String = findViewById.text.toString()
+                val start = Math.max(myEditText.getSelectionStart(), 0);
+                val end = Math.max(myEditText.getSelectionEnd(), 0);
+                myEditText.getText().replace(Math.min(start, end), Math.max(start, end),
+                    textToInsert, 0, textToInsert.length);
+                //editText.text = editText.text.append(findViewById.text)
+
                 val tree = AlgebraicTree(editText.text.toString())
 
                 compute(tree, textAnswer)
