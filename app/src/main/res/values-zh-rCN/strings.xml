@@ -116,6 +116,6 @@
   <string name="empty_string" />
     <string name="textCalculatorTextMultiLine">Multiline script</string>
     <string name="execute_code">Execute code</string>
-    <string name="POLICY_URI_INT">https://empty3.one/privacy-policy-and-user-data-on-apps/</string>
+    <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
 
 </resources>
