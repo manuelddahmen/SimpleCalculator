@@ -118,5 +118,6 @@
     <string name="textCalculatorTextMultiLine">Multiline script</string>
     <string name="execute_code">Execute code</string>
   <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+    <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Données utilisateur personnelles et sensibles Voir le lien pour plus d\'infos</string>
 
 </resources>

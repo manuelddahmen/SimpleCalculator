@@ -83,7 +83,23 @@ class MainActivity : AppCompatActivity() {
                 if (findViewById == findViewById<Button>(R.id.delButton)) {
                     val toString: String = editText.text.toString()
                     if (toString.length > 1) {
-                        editText.setText(editText.text.substring(0, toString.length - 1))
+                        val myEditText = editText
+                        val textToInsert:String = findViewById.text.toString()
+                        if(myEditText.getSelectionStart()==myEditText.getSelectionEnd()) {
+                            val end = Math.max(myEditText.getSelectionStart(), 0);
+                            val start = Math.max(myEditText.getSelectionStart()-1, 0);
+                            myEditText.getText().replace(start, end,
+                                "", 0, 0
+                            );
+
+                        } else {
+                            val start = Math.max(myEditText.getSelectionStart(), 0);
+                            val end = Math.max(myEditText.getSelectionEnd(), 0);
+                            myEditText.getText().replace(
+                                Math.min(start, end), Math.max(start, end),
+                                "", 0, 0
+                            );
+                        }
                     } else if (toString.length == 1) {
                         editText.setText("")
                     }
@@ -124,6 +140,12 @@ class MainActivity : AppCompatActivity() {
                         val result: String = dialog.function_name
                         if (result.isNotEmpty() && editText != null) {
                             editText.text = editText.text.append(result)
+                            val myEditText = editText
+                            val textToInsert:String = result
+                            val start = Math.max(myEditText.getSelectionStart(), 0);
+                            val end = Math.max(myEditText.getSelectionEnd(), 0);
+                            myEditText.getText().replace(Math.min(start, end), Math.max(start, end),
+                                textToInsert, 0, textToInsert.length);
                         }
                     }
                 }
@@ -191,6 +213,7 @@ class MainActivity : AppCompatActivity() {
                 }
         } catch (ex: NullPointerException) {
                 runOnUiThread {
+                    textAnswer.setTextColor(Color.RED)
                     textAnswer.setTextColor(Color.RED)
                 }
         }

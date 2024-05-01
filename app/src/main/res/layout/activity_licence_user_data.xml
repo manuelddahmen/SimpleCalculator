@@ -35,14 +35,11 @@
     <TextView
         android:id="@+id/textViewUserData1"
         android:layout_width="354dp"
-        android:layout_height="291dp"
+        android:layout_height="40dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="6dp"
-        android:text="Données utilisateur personnelles et sensibles
-Dans l'application image featuring, les seules données auxquelles l'application accède sont les fichiers multimédia ouvert par le bouton prise de vue ou choisir un fichier. Ceux-ci sont traités par l'application et éventuellement des copies de travail sont stockées dans le répertoire data de l'application et figure donc sur le système dans un format ou l'autre.
-Dans une future version il sera possible de partager vos résultats avec d'autres utilisateurs, internautes.
-Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme privées et ne sont pas collectées, ni traitées  par nos services. "
+        android:text="@string/donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos"
         app:barrierAllowsGoneWidgets="false"
         app:chainUseRtl="false"
         app:layout_constrainedHeight="false"
@@ -61,38 +58,49 @@ Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme priv
         android:layout_marginLeft="24dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="24dp"
-        android:text="Privacy policy and Families policy for Apps by DaTheWolf -- one.empty3
-Calculator (calculette simple) [Application]
-Image Featuring [Application]
-
-
-Privacy policy
-Calculator (calculette simple) [Application] is a calculus application designed for adults, children and all family.
-
-Application is not designed especially to children.
-
+        android:text="Privacy policy and Family Policy for Image Featuring Editor and Image Feature Empty3 and Sci-prog Calculator Apps by DaTheWolf -- one.empty3
+Sci-prog Calculator [Application]
+Image Featuring Editor [Application]
+Image Featuring Empty3 [Application]
 
 
 Families Policy
+Calculator (Sci-prog Calculator) [Application] is a calculus application
+
+Image Feature Empty3 [Application] is a image manipulation app (first version)
+
+Image Featuring (FeatureApp) [Application] is a image manipulation app
+
+The Applications aren't exclusively for children or teenagers.
+
+Privacy policy
 
 
-Application doesn’t share user-provided information with third parties; and
+Image Featuring Editor [ Application ]collects the following User Data:
 
-Application doesn’t share the user’s physical location with other users.
+- Username and password
 
-Application doesn’t display Ads
+Applications doesn’t share the user’s location with other users.
 
-Application doesn’t disclose the collection of any personal and sensitive information from children.
+Applications doesn't display Ads
+
+Applications doesn’t disclose the collection of any personal and sensitive information from children nor other users.
 
 
 
-User Data is collected as anonymous data on Google Store. Application is not collecting supplementary data.
+Application Other User Data are collected as anonymous data on Google Firebase for statistics purpose and crashlytics data. Application is not collecting supplementary data.
 
-App name: Calculator (calculette simple)
+[Sci-prog Calculator]
 
-Contact: DAHMEN Manuel (dathewolf@gmail.com>)
+[Image Featuring Editor]
 
-[Street Address]"
+[Image Feature Empty3]
+
+Contact: DAHMEN Manuel (dathewolf@gmail.com)
+
+[Street Address]
+
+When using these application you agree to the present terms and the Apache License 2.0 for source sharing."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
