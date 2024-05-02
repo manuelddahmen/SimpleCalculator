@@ -20,7 +20,7 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406549445
+def versionCode1000 = 406994949
 def kotlin_version = '1.9.21'
 
 java {
@@ -188,7 +188,7 @@ android {
         compileSdkVersion 34
         targetSdk 34
         minSdkVersion 24
-        versionName "9.1"
+        versionName "9.2"
         versionCode versionCode1000
         signingConfig signingConfigs.release
     }
