@@ -314,17 +314,15 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
                 int [] i = new int[1];
                 i[0] = 0;
                 if(!data1d.isEmpty()) {
-                    data1d.forEach(t -> {
-                        if (t == null) {
-                            s.append("null");
-                        } else {
-                            s.append(t);
-                        }
-                        if (i[0]<data1d.size()-1) {
+                    for (int i1 = 0; i1 < data1d.size(); i1++) {
+                        double t = (double) getElem(i1);
+                        s.append(t);
+                        if (i1 < data1d.size() - 1) {
                             s.append(", ");
                         }
                         i[0]++;
-                    });
+                    }
+
                 } else {
                     if(data0d!=null)
                         s.append(data0d).append(" <-- Error");
