@@ -307,24 +307,27 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
                 if(data0d !=null)
                     s.append(" data : ").append(data0d.toString());
                 else
-                    s.append(" null-0d-data");
+                    s.append("");
                 break;
             case 1:
                 s.append(" data : ( ");
+                int [] i = new int[1];
+                i[0] = 0;
                 if(!data1d.isEmpty()) {
                     data1d.forEach(t -> {
                         if (t == null) {
                             s.append("null");
-                            return;
                         } else {
-                            if (!t.equals(data1d.get(0))) {
-                                s.append(", ");
-                            }
                             s.append(t);
                         }
+                        if (i[0]<data1d.size()-1) {
+                            s.append(", ");
+                        }
+                        i[0]++;
                     });
                 } else {
-                    s.append("null-1d-data1d");
+                    if(data0d!=null)
+                        s.append(data0d).append(" <-- Error");
                 }
                 s.append(" )");
                 break;
@@ -353,7 +356,7 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
         switch (dim) {
             case 0:
                 if(data0d !=null)
-                    s.append("(").append(data0d.toString()).append(")");
+                    s.append("(").append((double)data0d).append(")");
                 else
                     s.append("(null)");
                 break;
@@ -362,7 +365,7 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
                 final int[] i = {0};
                 data1d.forEach(t -> {
                     if(i[0] >0 && i[0]<data1d.size()-1) s.append(" , ");
-                    s.append(t.toString());
+                    s.append((double)data1d.get(i[0]));
                     i[0]++;
                 });
                 s.append(" ) ");
