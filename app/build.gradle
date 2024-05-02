@@ -20,7 +20,7 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406994949
+def versionCode1000 = 40699451
 def kotlin_version = '1.9.21'
 
 java {
