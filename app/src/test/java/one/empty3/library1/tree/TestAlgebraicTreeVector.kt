@@ -541,6 +541,7 @@ class TestAlgebraicTreeVector() {
         echo: Boolean
     ) {
         var algebraicTree: AlgebraicTree?
+        var assertion: Boolean
         try {
             println("Expression string : $expr")
             algebraicTree = AlgebraicTree(expr)
@@ -553,7 +554,6 @@ class TestAlgebraicTreeVector() {
                 println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
 
-                var assertion: Boolean
 
                 try {
                     if (vecEqualsSM(result, expectedResult)) {
@@ -571,15 +571,17 @@ class TestAlgebraicTreeVector() {
 
             } catch (e: TreeNodeEvalException) {
                 e.printStackTrace()
-                Assert.assertFalse(true)
+                assertion = false
             }
         } catch (e: AlgebraicFormulaSyntaxException) {
             e.printStackTrace()
-            Assert.assertFalse(true)
+            assertion = false
         } catch (ex: NullPointerException) {
             ex.printStackTrace()
-            Assert.assertFalse(true)
+            assertion = false
         }
+
+        assertTrue(assertion)
     }
 
     @Test

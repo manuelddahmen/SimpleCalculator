@@ -313,7 +313,7 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
                 s.append(" data : ( ");
                 int [] i = new int[1];
                 i[0] = 0;
-                if(!data1d.isEmpty()) {
+                if(data1d!=null && !data1d.isEmpty()) {
                     for (int i1 = 0; i1 < data1d.size(); i1++) {
                         double t = (double) getElem(i1);
                         s.append(t);
@@ -390,44 +390,7 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
 
     }
     public String toStringLine() {
-        StringBuilder s = new StringBuilder("StructureMatrix {");
-        s.append("\"dim\":" + dim + ",");
-        switch (dim) {
-            case 0:
-                if(data0d !=null)
-                    s.append("\"data0d\" : { ").append(data0d.toString()).append(" } ");
-                else
-                    s.append("\"data0d\" : { null }, ").append("\"null-0d-data\": true ");
-                break;
-            case 1:
-                s.append("\"data1d\" : { ");
-                final int[] i = {0};
-                data1d.forEach(t -> {
-                    if(i[0] >0) s.append(" , ");
-                    s.append(t.toString());
-                    i[0]++;
-                });
-                s.append("}");
-                break;
-            case 2:
-                s.append("\"data2d\" : { ");
-                data2d.forEach(ts -> {
-                    s.append(" { ");
-
-                    final int[] i1 = {0};
-                    ts.forEach(t -> {
-                        if (i1[0] > 0) s.append( ", ");
-                        s.append(t.toString());
-                        i1[0]++;
-                    });
-
-                    s.append(" } ");
-
-                });
-                s.append(" } ");
-                break;
-        }
-        return s.append(" } ").toString();
+        return toString();
     }
 
     public Class getClassType() {
