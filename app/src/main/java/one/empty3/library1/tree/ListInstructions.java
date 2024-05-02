@@ -164,9 +164,17 @@ public class ListInstructions {
             currentParamsValuesVecComputed = new HashMap<>();
         int i = 0;
         for (Instruction instruction : instructions) {
-            String key = (String) instruction.getLeftHand().trim();
-            String value = (String) instruction.getExpression().trim();
+            if(instruction==null) {
+                continue;
+            }
+            String key =  (instruction.getLeftHand());
+            String value =  (instruction.getExpression());
 
+            key = key==null?null:key.trim();
+            value = value==null?null:value.trim();
+
+            if(key==null||key.trim().startsWith("#") || value==null||value.trim().startsWith("#"))
+                continue;
 
             StructureMatrix<Double> resultVec = null;
             Double resultDouble = null;
@@ -181,7 +189,7 @@ public class ListInstructions {
                 resultVec = tree.eval();
 
                 if (resultVec != null) {
-                    System.out.println("key: " + key + " value: " + value + " computed: " + resultVec);
+                    //System.out.println("key: " + key + " value: " + value + " computed: " + resultVec.toString());
                     if (resultVec.getDim() == 1) {
                         currentParamsValuesVecComputed.put(key, resultVec);
                         currentParamsValuesVec.put(key, value);
@@ -198,11 +206,10 @@ public class ListInstructions {
                 e.printStackTrace();
             }
             String errors1 = "";
-            if (value != null && resultVec != null && (!value.startsWith("# ") && !value.isBlank() && !value.equals("null"))) {
-                errors1 += String.format(Locale.getDefault(), "#(%d) <<< %s ", i, resultVec.toVectorString());
-            }
-            if (value != null && (!value.startsWith("# "))) {
-                errors1 += "\n" + (key == null || key.isBlank() ? "" : (key + "=")) + value;
+            if (resultVec != null && !value.startsWith("# ") && !value.isBlank() && !value.equals("null")) {
+                errors1 += instruction.toString()+"\n# "+resultVec.toString()+"\n";
+            } else if (!value.startsWith("# ")) {
+                errors1 += instruction.toString()+"\n#"+resultVec.toString()+"\n";
             }
             if (!(errors1.isBlank() || errors1.equals("null"))) {
                 returnedCode.add(errors1);

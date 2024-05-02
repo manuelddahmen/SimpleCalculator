@@ -20,8 +20,8 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406549444
-def kotlin_version = '1.9.23'
+def versionCode1000 = 406549445
+def kotlin_version = '1.9.21'
 
 java {
     toolchain {
@@ -253,9 +253,9 @@ try {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = "one.empty3"
+            groupId = "one.empty3.apps"
             artifactId = "simplecalculator"
-            version = "1.1"
+            version = "9.1"
         }
     }
     repositories {
@@ -271,6 +271,6 @@ publishing {
 
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }

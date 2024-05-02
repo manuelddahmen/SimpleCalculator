@@ -300,45 +300,45 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder("structure(\n");
-        s.append("(dim:" + dim + ")");
+        StringBuilder s = new StringBuilder("");
+        s.append("num(dim:").append(dim).append(")");
         switch (dim) {
             case 0:
                 if(data0d !=null)
-                    s.append("(data : {" + data0d.toString() + "} )");
+                    s.append(" data : ").append(data0d.toString());
                 else
-                    s.append("null 0d-data");
+                    s.append(" null-0d-data");
                 break;
             case 1:
-                s.append("(data : (");
-                data1d.forEach(new Consumer<T>() {
-                    @Override
-                    public void accept(T t) {
-                        if(t!=null) {
-                            s.append("(" + t.toString() + ")");
+                s.append(" data : ( ");
+                if(!data1d.isEmpty()) {
+                    data1d.forEach(t -> {
+                        if (t == null) {
+                            s.append("null");
+                            return;
                         } else {
-                            s.append("+null+");
+                            if (!t.equals(data1d.get(0))) {
+                                s.append(", ");
+                            }
+                            s.append(t);
                         }
-                    }
-                });
+                    });
+                } else {
+                    s.append("null-1d-data1d");
+                }
+                s.append(" )");
                 break;
             case 2:
-                s.append("(data : (");
-                data2d.forEach(new Consumer<List<T>>() {
-                    @Override
-                    public void accept(List<T> ts) {
-                        s.append("( ");
-
-                        ts.forEach(new Consumer<T>() {
-                            @Override
-                            public void accept(T t) {
-                                s.append("(" + t.toString() + ")");
+                s.append(" data : ( ");
+                data2d.forEach(ts -> {
+                    s.append(" ( ");
+                    if(ts!=null)
+                        ts.forEach(t -> {
+                            if(t!=null) {
+                                s.append("(").append(t.toString()).append(")");
                             }
                         });
-
-                        s.append(" )\n");
-
-                    }
+                    s.append(" )\n");
                 });
                 s.append("\n)\n");
                 break;
