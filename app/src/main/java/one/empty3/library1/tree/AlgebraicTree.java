@@ -60,6 +60,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import one.empty3.library.StructureMatrix;
+
 import org.jetbrains.annotations.NotNull;
 
 
@@ -175,9 +176,10 @@ public class AlgebraicTree extends Tree {
         if (src == null || subformula == null || subformula.length() == 0)
             return false;
 
-        int i = 2;
+        int i = 1;
         boolean added = false;
         int last = 13;
+        subformula = addSkipComments(subformula);
         while (i <= last && !added) {
             boolean exception = false;
             src.getChildren().clear();
@@ -186,9 +188,6 @@ public class AlgebraicTree extends Tree {
                 int lastAdded = -1;
                 subformula = addSpaces(subformula);
                 switch (i) {
-                    case -2:
-                        added = addSkipComments(src, formula);
-                        if(added) caseChoice = -2;
                     case -1:
                         added = addLogicalNumericOperator(src, subformula);
                         if (added) caseChoice = -1;
@@ -264,25 +263,20 @@ public class AlgebraicTree extends Tree {
 
             //System.out.println("formula = " + subformula);
         }
-        if(formula==null || formula.isBlank())
+        if (formula == null || formula.isBlank())
             return true;
-        throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root."+formula, this);
+        throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root." + formula, this);
     }
 
-    private boolean addSkipComments(TreeNode src, String formula) {
-        if(formula.startsWith("#")) {
-            int i=0;
-            StringBuilder formulaRepaced = new StringBuilder();
-
-            for (String s : formula.split("\n")) {
-                if(i>0)
-                    formulaRepaced.append(s);
-                i++;
+    private String addSkipComments(String formula) {
+        StringBuilder formulaReplaced = new StringBuilder();
+        for (String s : formula.split("\n")) {
+            if (!s.startsWith("#")) {
+                formulaReplaced.append(s);
             }
-            this.formula = formulaRepaced.toString();
-            return true;
+            formula = formulaReplaced.toString();
         }
-        return false;
+        return formula;
 
     }
 

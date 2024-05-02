@@ -133,12 +133,14 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
 
     public T getElem() {
 
-        if (dim == 0)
-            if(data0d!=null) {
+        if (dim == 0) {
+            if (data0d != null) {
                 return this.data0d;
             } else {
                 System.out.println("null structureMatrix elem dim=0");
+                return data0d;
             }
+        }
         System.err.println("getElem dim= " + dim + "!=0");
         return null;
     }
