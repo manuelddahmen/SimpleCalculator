@@ -26,7 +26,7 @@
         android:theme="@style/Theme.SimpleCalculator"
         android:usesCleartextTraffic="true"
         tools:remove="android:appComponentFactory"
-        tools:targetApi="p">
+        tools:targetApi="tiramisu">
         <!--
         tools:ignore="UnusedAttribute"
         tools:remove="android:appComponentFactory"

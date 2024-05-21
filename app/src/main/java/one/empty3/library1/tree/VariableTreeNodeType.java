@@ -79,7 +79,7 @@ public class VariableTreeNodeType extends TreeNodeType {
         super.setValues(values);
         varName = (String) values[0];
         if (values.length >= 4) {
-            parametersValueVec= algebraicTree.getParametersValuesVec();
+            parametersValueVec = algebraicTree.getParametersValuesVec();
             parametersValues = algebraicTree.getParametersValues();
             parametersValuesVecComputed = algebraicTree.getParametersValuesVecComputed();
         }
@@ -98,21 +98,16 @@ public class VariableTreeNodeType extends TreeNodeType {
                     doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
                     StructureMatrix<Double> finalDoubleStructureMatrix = doubleStructureMatrix;
                     switch (parametersValuesVecComputed.get(varName).getDim()) {
-                        case 0-> {
-                            double d =parametersValuesVecComputed.get(varName).getElem();
+                        case 0 -> {
+                            double d = parametersValuesVecComputed.get(varName).getElem();
                             doubleStructureMatrix = new StructureMatrix<>(0, Double.class);
                             doubleStructureMatrix.setElem(d, 0);
                         }
-                        case 1-> {
+                        case 1 -> {
                             doubleStructureMatrix = new StructureMatrix<>(1, Double.class);
-                            int i[] = new int[] {0};
-                            Objects.requireNonNull(parametersValuesVecComputed.get(varName)).data1d.forEach(new Consumer<Double>() {
-                                @Override
-                                public void accept(Double aDouble) {
-                                    finalDoubleStructureMatrix.setElem(aDouble, i[0]++);
-                                }
-                            });
-                            doubleStructureMatrix = finalDoubleStructureMatrix;
+                            for (int i = 0; i < parametersValuesVecComputed.get(varName).data1d.size(); i++) {
+                                doubleStructureMatrix.setElem(parametersValuesVecComputed.get(varName).data1d.get(i), i);
+                            }
                         }
                     }
                     return doubleStructureMatrix;

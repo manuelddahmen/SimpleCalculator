@@ -50,16 +50,7 @@ class ScrollingActivity : AppCompatActivity() {
 
         //setSupportActionBar(toolbar)
         this.text = findViewById<EditText>(R.id.textCalculator)
-        binding.fab.setOnClickListener {
-            view -> runOnUiThread {
-                parseText(textIns = this.text.text.toString())
-            }
-        }
-        binding.fab.setOnClickListener {
-                view -> runOnUiThread {
-            parseText(textIns = this.text.text.toString())
-            }
-        }
+
         binding.execute.setOnClickListener {
                 view -> runOnUiThread {
             parseText(textIns = this.text.text.toString())
@@ -93,12 +84,12 @@ class ScrollingActivity : AppCompatActivity() {
         try {
             variables = ListInstructions()
             variables.addInstructions(textIns)
-            val errors = variables.runInstructions()
+            val ins = variables.runInstructions()
 
             var strNewText : String = ""
 
-            errors.forEach {
-                if(it!=null && !it.startsWith("##")) {
+            ins.forEach {
+                if(it!=null) {
                     strNewText+= it+"\n"
                 }
             }

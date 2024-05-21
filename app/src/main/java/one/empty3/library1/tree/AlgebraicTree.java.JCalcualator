@@ -60,7 +60,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import one.empty3.library.StructureMatrix;
-
 import org.jetbrains.annotations.NotNull;
 
 
@@ -176,10 +175,9 @@ public class AlgebraicTree extends Tree {
         if (src == null || subformula == null || subformula.length() == 0)
             return false;
 
-        int i = 1;
+        int i = -1;
         boolean added = false;
         int last = 13;
-        subformula = addSkipComments(subformula);
         while (i <= last && !added) {
             boolean exception = false;
             src.getChildren().clear();
@@ -190,7 +188,7 @@ public class AlgebraicTree extends Tree {
                 switch (i) {
                     case -1:
                         added = addLogicalNumericOperator(src, subformula);
-                        if (added) caseChoice = -1;
+                        if (added) caseChoice = 0;
                         break;
 
                     case 0:
@@ -263,21 +261,7 @@ public class AlgebraicTree extends Tree {
 
             //System.out.println("formula = " + subformula);
         }
-        if (formula == null || formula.isBlank())
-            return true;
-        throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root." + formula, this);
-    }
-
-    private String addSkipComments(String formula) {
-        StringBuilder formulaReplaced = new StringBuilder();
-        for (String s : formula.split("\n")) {
-            if (!s.startsWith("#")) {
-                formulaReplaced.append(s);
-            }
-            formula = formulaReplaced.toString();
-        }
-        return formula;
-
+        throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root.", this);
     }
 
     private boolean addLogicalNumericOperator(TreeNode t, String values) {
@@ -554,7 +538,7 @@ public class AlgebraicTree extends Tree {
 
     private boolean addVariable(TreeNode src, String subformula)
             throws AlgebraicFormulaSyntaxException {
-        if (subformula.length()>0&&Character.isLetter(subformula.charAt(0))) {
+        if (Character.isLetter(subformula.charAt(0))) {
             int i = 1;
             while (i < subformula.length() && Character.isLetterOrDigit(subformula.charAt(i))) {
                 i++;

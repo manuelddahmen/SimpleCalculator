@@ -351,12 +351,11 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
         return s.toString();
     }
     public String toVectorString() {
-        StringBuilder s = new StringBuilder("");
-        s.append("\"dim\":" + dim + ",");
+        StringBuilder s = new StringBuilder();
         switch (dim) {
             case 0:
                 if(data0d !=null)
-                    s.append("(").append((double)data0d).append(")");
+                    s.append((double)data0d);
                 else
                     s.append("(null)");
                 break;
@@ -371,10 +370,9 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
                 s.append(" ) ");
                 break;
             case 2:
-                s.append("\"data2d\" : { ");
+                s.append("(");
                 data2d.forEach(ts -> {
-                    s.append(" { ");
-
+                    s.append("(");
                     final int[] i1 = {0};
                     ts.forEach(t -> {
                         if (i1[0] > 0) s.append( ", ");
@@ -382,10 +380,10 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
                         i1[0]++;
                     });
 
-                    s.append(" } ");
+                    s.append(")");
 
                 });
-                s.append(" } ");
+                s.append(")");
                 break;
         }
         return s.toString();
