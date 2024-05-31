@@ -30,6 +30,8 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import com.google.firebase.Firebase
+import com.google.firebase.vertexai.vertexAI
 import one.empty3.library.StructureMatrix
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException
 import one.empty3.library1.tree.AlgebraicTree
@@ -40,6 +42,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout_table)
 
+
+        // Initialize the Vertex AI service and the generative model
+// Specify a model that supports your use case
+// Gemini 1.5 Pro is versatile and can accept both text-only and multimodal prompt inputs
+        val generativeModel = Firebase.vertexAI.generativeModel("gemini-1.5-pro-preview-0409")
         val buttonsNumbers = arrayListOf(
             R.id.button0,
             R.id.button1,
