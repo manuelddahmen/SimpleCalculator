@@ -30,6 +30,10 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.BillingClientStateListener
+import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.PurchasesUpdatedListener
 import com.google.firebase.Firebase
 import com.google.firebase.vertexai.vertexAI
 import one.empty3.library.StructureMatrix
@@ -38,11 +42,35 @@ import one.empty3.library1.tree.AlgebraicTree
 
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var purchasesUpdatedListener:PurchasesUpdatedListener
+    private lateinit var billingClient:BillingClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout_table)
 
+        purchasesUpdatedListener =
+            PurchasesUpdatedListener { billingResult, purchases ->
+                // To be implemented in a later section.
+            }
 
+        billingClient = BillingClient.newBuilder(applicationContext)
+            .setListener(purchasesUpdatedListener)
+            // Configure other settings.
+            .enablePendingPurchases()
+            .build()
+        billingClient.startConnection(object : BillingClientStateListener {
+            override fun onBillingSetupFinished(billingResult: BillingResult) {
+                if (billingResult.responseCode ==  BillingClient.BillingResponseCode.OK) {
+                    // The BillingClient is ready. You can query purchases here.
+                }
+            }
+            override fun onBillingServiceDisconnected() {
+                // Try to restart the connection on the next request to
+                // Google Play by calling the startConnection() method.
+            }
+        })
         // Initialize the Vertex AI service and the generative model
 // Specify a model that supports your use case
 // Gemini 1.5 Pro is versatile and can accept both text-only and multimodal prompt inputs
