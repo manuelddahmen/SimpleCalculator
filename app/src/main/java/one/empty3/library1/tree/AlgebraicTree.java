@@ -145,7 +145,7 @@ public class AlgebraicTree extends Tree {
      * @param src
      */
     private void checkForSignTreeNode(TreeNode src) {
-        //System.out.println("DEBUG TREE: current tree" +src);
+        //Logger.getAnonymousLogger().log(Level.INFO, "DEBUG TREE: current tree" +src);
         if (src.getChildren().size() >= 2 && src.getChildren().get(1).type.getClass()
                 .equals(SignTreeNodeType.class)) {
             TreeNode sign = src.getChildren().remove(1);
@@ -261,7 +261,7 @@ public class AlgebraicTree extends Tree {
             i++;
 
 
-            //System.out.println("formula = " + subformula);
+            //Logger.getAnonymousLogger().log(Level.INFO, "formula = " + subformula);
         }
         if (formula == null || formula.isBlank())
             return true;
@@ -554,7 +554,7 @@ public class AlgebraicTree extends Tree {
 
     private boolean addVariable(TreeNode src, String subformula)
             throws AlgebraicFormulaSyntaxException {
-        if (subformula.length()>0&&Character.isLetter(subformula.charAt(0))) {
+        if (Character.isLetter(subformula.charAt(0))) {
             int i = 1;
             while (i < subformula.length() && Character.isLetterOrDigit(subformula.charAt(i))) {
                 i++;

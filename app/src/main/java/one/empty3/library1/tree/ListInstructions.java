@@ -22,14 +22,13 @@
 
 package one.empty3.library1.tree;
 
+import one.empty3.library.StructureMatrix;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-
-import one.empty3.library.StructureMatrix;
 
 public class ListInstructions {
     private HashMap<String, Double> currentParamsValues = new HashMap<>();
@@ -44,11 +43,12 @@ public class ListInstructions {
         private int id;
         private String leftHand;
         private String expression;
+        StringAnalyzerJava1.TokenExpression2 tokenExpression2;
 
         public Instruction(int id, String leftHand, String expression) {
             this.id = id;
             this.leftHand = leftHand;
-            this.expression = expression;
+            setExpression(expression);
         }
 
         public int getId() {
@@ -68,11 +68,41 @@ public class ListInstructions {
         }
 
         public String getExpression() {
+
+            return tokenExpression2.toString();
+        }
+        public String getExpressionAlgebraicTree() {
+
             return expression;
         }
 
         public void setExpression(String expression) {
-            this.expression = expression;
+            if (expression != null) {
+                this.expression = expression;
+                StringAnalyzerJava1 stringAnalyzerJava1 = new StringAnalyzerJava1();
+                tokenExpression2 = stringAnalyzerJava1.new TokenExpression2();
+                tokenExpression2.parse(expression, 0);
+            }
+        }
+
+        public StringAnalyzerJava1.TokenExpression2 getExpressionTokenString() {
+            return tokenExpression2;
+        }
+
+        public void setTokenExpression2(StringAnalyzerJava1.TokenExpression2 expression) {
+            this.tokenExpression2 = expression;
+        }
+
+        @Override
+        public String toString() {
+            if (tokenExpression2 != null && tokenExpression2.isSuccessful()) {
+                return tokenExpression2.toString();
+            } else {
+                return expression;
+            }
+        }
+        public String toStringAlgebraicTree() {
+                return expression;
         }
     }
 
@@ -91,13 +121,16 @@ public class ListInstructions {
     }
 
     public void addInstructions(@NotNull String toString) {
-        assignations = new ArrayList<>();
+        if (assignations == null)
+            assignations = new ArrayList<>();
 
 
         if (toString != null && !toString.isEmpty()) {
             assignations = new ArrayList<>();
 
-            String[] splitLines = toString.split("\n");
+            String text = toString;
+
+            String[] splitLines = text.split("\n");
 
             for (int i = 0; i < splitLines.length; i++) {
 
@@ -114,26 +147,31 @@ public class ListInstructions {
                     variable = splitInstructionEquals[0].trim();
                     value = splitInstructionEquals[1].trim();
                 }
-                if(splitInstructionEquals.length!=0) {
-                    boolean assigned = false;
-                    if (splitInstructionEquals.length >= 1 && !value.startsWith("#") && (variable==null||!variable.startsWith("#"))) {
+                boolean assigned = false;
+                if (splitInstructionEquals.length >= 1) {
 
-                        if ((variable != null ? variable.length() : 0) > 0 && Character.isLetter(variable.toCharArray()[0])) {
-                            int j = 0;
-                            while (j < variable.length() && (Character.isLetterOrDigit(variable.toCharArray()[j])
-                                    || variable.toCharArray()[j] == '_')) {
-                                j++;
-                            }
-                            if (j == variable.length()) {
-                                assignations.add(new Instruction(i, variable, value));
-                                assigned = true;
-                            }
-                        } else {
-                            assignations.add(new Instruction(i, null, value));
+                    if ((variable != null ? variable.length() : 0) > 0 && Character.isLetter(variable.toCharArray()[0])) {
+                        int j = 0;
+                        while (j < variable.length() && (Character.isLetterOrDigit(variable.toCharArray()[j])
+                                || variable.toCharArray()[j] == '_')) {
+                            j++;
+                        }
+                        if (j == variable.length()) {
+                            assignations.add(new Instruction(i, variable, value));
                             assigned = true;
                         }
+                    } else {
+                        assignations.add(new Instruction(i, null, value));
+                        assigned = true;
                     }
                 }
+                /*if (!assigned) {
+                    if (splitInstructionEquals.length == 1) {
+                        if (!value.startsWith("#")) {
+                            assignations.add(new Instruction(i, "", splitInstructionEquals[0]));
+                        }
+                    }
+                }*/
             }
         }
     }
@@ -150,11 +188,11 @@ public class ListInstructions {
             currentParamsValuesVec = new HashMap<>();
         if (currentParamsValuesVecComputed == null)
             currentParamsValuesVecComputed = new HashMap<>();
+        int i = 0;
         int countInstructions = 0;
-        for (int j = 0; j < instructions.length; j++) {
-            Instruction instruction = instructions[j];
+        for (Instruction instruction : instructions) {
             String key = instruction.getLeftHand();
-            String value = instruction.getExpression();
+            String value = instruction.getExpressionAlgebraicTree();
 
             if (key != null)
                 key = key.trim();
@@ -163,87 +201,61 @@ public class ListInstructions {
 
             StructureMatrix<Double> resultVec = null;
             Double resultDouble = null;
-            String errors1 = "";
-            if (key != null && value != null) {
+
+            if (key != null) {
                 try {
-                    errors1 = "";
-                    if (!(key.startsWith("##") || key.isBlank() || key.equals("null")
-                            &&
-                            !(value.startsWith("##") || value.isBlank() || value.equals("null")))) {
-                        AlgebraicTree tree = new AlgebraicTree(value);
-                        tree.setParametersValues(currentParamsValues);
-                        tree.setParametersValuesVec(currentParamsValuesVec);
-                        tree.setParametersValuesVecComputed(currentParamsValuesVecComputed);
-
-
-                        tree.construct();
-
-                        resultVec = tree.eval();
-
-                        if (resultVec != null) {
-                            if (resultVec.getDim() == 1) {
-                                currentParamsValuesVecComputed.put(key, resultVec);
-                                currentParamsValuesVec.put(key, value);
-                            } else if (resultVec.getDim() == 0) {
-                                currentParamsValuesVecComputed.put(key, resultVec);
-                                currentParamsValuesVec.put(key, value);
-                                currentParamsValues.put(key, resultVec.getElem());
-                            }
-                        } else {
-                            if (getCurrentParamsValuesVecComputed().get(key) != null)
-                                resultVec = getCurrentParamsValuesVecComputed().get(key);
-                            else
-                                throw new AlgebraicFormulaSyntaxException("Result was null");
-                        }
-                        errors1 = "";
-                        if (!(key.startsWith("##") || value.startsWith("##"))) {
-                            errors1 += "\n" + key + "=" + value;
-                            countInstructions++;
-                            if (resultVec != null && !value.startsWith("##") && !key.startsWith("#") && !value.isBlank()) {
-                                errors1 += String.format(Locale.getDefault(), "\n##line(%d):%s=%s ", countInstructions, key, resultVec.toVectorString());
-                            }
-                            returnedCode.add(errors1);
-                        }
+                    if (value.startsWith("#") ) {
+                        i++;
+                        continue;
                     }
+                    AlgebraicTree tree = new AlgebraicTree(value);
+                    tree.setParametersValues(currentParamsValues);
+                    tree.setParametersValuesVec(currentParamsValuesVec);
+                    tree.setParametersValuesVecComputed(currentParamsValuesVecComputed);
+
+
+                    tree.construct();
+
+                    resultVec = tree.eval();
+
+                    if (resultVec != null) {
+                        //Logger.getAnonymousLogger().log(Level.INFO, "key: " + key + " value: " + value + " computed: " + resultVec);
+                        if (resultVec.getDim() == 1) {
+                            currentParamsValuesVecComputed.put(key, resultVec);
+                            currentParamsValuesVec.put(key, value);
+                        } else if (resultVec.getDim() == 0) {
+                            currentParamsValuesVecComputed.put(key, resultVec);
+                            currentParamsValuesVec.put(key, value);
+                            currentParamsValues.put(key, resultVec.getElem());
+                        }
+                    } else {
+                        if (getCurrentParamsValuesVecComputed().get(key) != null)
+                            resultVec = getCurrentParamsValuesVecComputed().get(key);
+                        else
+                            ;//throw new AlgebraicFormulaSyntaxException("Result was null");
+                    }
+                    //System.err.println("AlgebraicTree result : " + tree);
                 } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException |
                          NullPointerException e) {
+                    //e.printStackTrace();
+                    //i++;
+                    //continue;
                 }
-            } else if (key != null || value != null) {
-                String expression = null;
-                if (key == null)
-                    expression = value;
-                else if (value == null)
-                    expression = key;
-
-                try {
-                    if (!(expression.startsWith("##") || expression.isBlank() || expression.equals("null"))) {
-                        AlgebraicTree tree = new AlgebraicTree(expression);
-                        tree.setParametersValues(currentParamsValues);
-                        tree.setParametersValuesVec(currentParamsValuesVec);
-                        tree.setParametersValuesVecComputed(currentParamsValuesVecComputed);
-
-
-                        tree.construct();
-
-                        resultVec = tree.eval();
-
-                        if (resultVec != null) {
-                            System.out.println("value: " + value + " computed: " + resultVec);
-                        }
-                        errors1 = "";
-                        if (!expression.startsWith("##")) {
-                            errors1 += "\n" + expression;
-                            countInstructions++;
-                            if (resultVec != null && !expression.startsWith("#")) {
-                                errors1 += String.format(Locale.getDefault(), "\n##line : (%d)_=%s ", countInstructions, resultVec.toVectorString());
-                            }
-                        }
-                        returnedCode.add(errors1);
-                    }
-                } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException |
-                         NullPointerException e) {
+                String errors1 = "";
+                boolean b = !value.startsWith("##") && !key.startsWith("##");
+                if (b) {
+                    errors1 += "\n" + (key.isBlank() ? "" : key + "=") + value;
+                    countInstructions++;
+                }
+                if (resultVec != null && b && !value.isBlank() && !value.equals("null")) {
+                    errors1 += String.format(Locale.getDefault(),
+                            "\n#line : (%d)%s=%s ", countInstructions, value, resultVec.toStringLine());
+                }
+                if (!(errors1.isBlank() || errors1.equals("null"))) {
+                    returnedCode.add(errors1);
                 }
             }
+            i++;
         }
 
         return returnedCode;

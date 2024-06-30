@@ -172,9 +172,38 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     runOnUiThread {
-                        val result: String = dialog.function_name
-                        if (result.isNotEmpty() && editText != null) {
-                            editText.text = editText.text.append(result)
+                        val result: String = dialog.functionName
+                        if (result.isNotEmpty()) {
+                            val myEditText = editText
+                            val textToInsert:String = result
+                            val start = Math.max(myEditText.getSelectionStart(), 0);
+                            val end = Math.max(myEditText.getSelectionEnd(), 0);
+                            myEditText.getText().replace(Math.min(start, end), Math.max(start, end),
+                                textToInsert, 0, textToInsert.length);
+                        }
+                    }
+                }
+            }.start()
+        }
+        val buttonFunctionMultiple: Button = findViewById(R.id.buttonFunctionMultiple)
+        buttonFunctionMultiple.setOnClickListener {
+//            val stringFragment : StringFragment= StringFragment()
+//                val ft: FragmentTransaction = supportFragmentManager.beginTransaction();
+//                ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+            val dialog = ChooseFxDialogFragment()
+            dialog.show(
+                supportFragmentManager,
+                "one.empty3.apps.simplecalculator.ChooseFxDialogFragment"
+            )
+            Thread {
+                run {
+                    while (!dialog.isExited) {
+                        Thread.sleep(100)
+                    }
+
+                    runOnUiThread {
+                        val result: String = dialog.functionName
+                        if (result.isNotEmpty()) {
                             val myEditText = editText
                             val textToInsert:String = result
                             val start = Math.max(myEditText.getSelectionStart(), 0);

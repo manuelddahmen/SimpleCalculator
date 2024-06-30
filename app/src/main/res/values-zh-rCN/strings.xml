@@ -129,5 +129,6 @@
   <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
       
   <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">个人信息及使用信息查看链接以获取更多信息</string>
-  
+    <string name="fx">fx(</string>
+
 </resources>

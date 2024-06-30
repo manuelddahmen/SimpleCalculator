@@ -235,6 +235,14 @@
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:text="@string/DEL" />
+        <Button
+            android:id="@+id/buttonFunctionMultiple"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:width="128dp"
+            android:text="@string/fx" />
 
     </LinearLayout>
 

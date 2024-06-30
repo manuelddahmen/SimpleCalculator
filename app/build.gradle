@@ -20,17 +20,20 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406999474
-def kotlin_version = '1.9.21'
+def versionCode1000 = 406999478
+def kotlin_version = '1.9.23'
+def javaVersionEnum = JavaVersion.VERSION_21
+def javaVersion = "21"
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion.set(JavaLanguageVersion.of(javaVersion))
     }
 }
 kotlin {
+    version javaVersionEnum
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of("21"))
+        languageVersion.set(JavaLanguageVersion.of(javaVersion))
     }
 }
 android {
@@ -67,12 +70,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = javaVersionEnum
+        targetCompatibility = javaVersionEnum
     }
 
     kotlinOptions {
-        jvmTarget = "21"
+        jvmTarget = javaVersionEnum
     }
 
     buildTypes {
@@ -100,8 +103,8 @@ android {
                 // This flag must be enabled to see properly-symbolicated native
                 // stack traces in the Crashlytics dashboard.
                 nativeSymbolUploadEnabled true
-                strippedNativeLibsDir 'build/intermediates/stripped_native_libs/release/out/lib'
-                unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
+                //strippedNativeLibsDir 'build/intermediates/stripped_native_libs/release/out/lib'
+                //unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
             }
         }
 
@@ -115,8 +118,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_21
-        targetCompatibility JavaVersion.VERSION_21
+        sourceCompatibility javaVersionEnum
+        targetCompatibility javaVersionEnum
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -124,7 +127,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "21"
+        jvmTarget = javaVersion
     }
 
 
@@ -183,7 +186,7 @@ android {
 
     defaultConfig {
         //resourceConfigurations += ['en']
-        JavaVersion.VERSION_21
+        javaVersionEnum
         compileSdk 34
         compileSdkVersion 34
         targetSdk 34
@@ -236,7 +239,7 @@ dependencies {
     // add the dependency for the Vertex AI SDK for Android
     implementation("com.google.firebase:firebase-vertexai:16.0.0-beta02")
 
-    def billingVersion = "6.0.0"
+    def billingVersion = "7.0.0"
 
     implementation "com.android.billingclient:billing:$billingVersion"
 
@@ -276,6 +279,6 @@ publishing {
 
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = javaVersionEnum
+    targetCompatibility = javaVersionEnum
 }

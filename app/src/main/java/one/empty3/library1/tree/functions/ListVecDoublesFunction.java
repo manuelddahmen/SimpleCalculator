@@ -20,14 +20,35 @@
  *
  */
 
-package one.empty3.library1.tree;
+package one.empty3.library1.tree.functions;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+
+
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+public class ListVecDoublesFunction {
+    public static String functionName = "";
+    public boolean isExited;
 
-public record DataExpressionList() {
-    static List<DataExpression> expressions = new ArrayList<DataExpression>();
+    public static String[] getList() {
+        List<String> sequences = new ArrayList<String>();
+
+        sequences.add("sum");
+        sequences.add("mul");
+        sequences.add("avg");
+
+        String[] cs = new String[sequences.size()];
+
+        return sequences.toArray(cs);
+
+    }
 }
+
