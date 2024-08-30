@@ -318,7 +318,7 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
                 if(data1d!=null && !data1d.isEmpty()) {
                     for (int i1 = 0; i1 < data1d.size(); i1++) {
                         double t = (double) getElem(i1);
-                        s.append(t);
+                        s.append(String.format("%f", t));
                         if (i1 < data1d.size() - 1) {
                             s.append(", ");
                         }
@@ -327,7 +327,7 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
 
                 } else {
                     if(data0d!=null)
-                        s.append(data0d).append(" <-- Error");
+                        s.append(String.format("%f", data0d)).append(" <-- Error");
                 }
                 s.append(" )");
                 break;
@@ -338,7 +338,7 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
                     if(ts!=null)
                         ts.forEach(t -> {
                             if(t!=null) {
-                                s.append("(").append(t.toString()).append(")");
+                                s.append("(").append(String.format("%f",t)).append(")");
                             }
                         });
                     s.append(" )\n");
@@ -363,23 +363,25 @@ public class StructureMatrix<T> implements Serializable, Serialisable {
                 s.append(" ( ");
                 final int[] i = {0};
                 data1d.forEach(t -> {
-                    if(i[0] >0 && i[0]<data1d.size()-1) s.append(" , ");
+                    if(i[0] >0)  s.append(" , ");
                     s.append((double)data1d.get(i[0]));
                     i[0]++;
                 });
                 s.append(" ) ");
                 break;
             case 2:
+                final int[] i1 = {0, 0};
                 s.append("(");
+
                 data2d.forEach(ts -> {
+                    if(i1[1]>0) s.append(",");
                     s.append("(");
-                    final int[] i1 = {0};
                     ts.forEach(t -> {
                         if (i1[0] > 0) s.append( ", ");
                         s.append(t.toString());
                         i1[0]++;
                     });
-
+                    i1[1] ++;
                     s.append(")");
 
                 });

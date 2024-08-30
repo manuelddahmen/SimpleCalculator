@@ -97,15 +97,11 @@ public class Vec {
         StringBuilder s = new StringBuilder("vec (" + getDims() + ") " +
                 "(");
         if (!vecVal.getData1d().isEmpty())
-            for (int i = 0; i < vecVal.getData1d().size();
-                 i++)
-                s.append(vecVal.
-                        getElem(i)).append(", ");
+            for (int i = 0; i < vecVal.getData1d().size(); i++)
+                s.append(String.format("%f", vecVal.getElem(i))).append(", ");
         else
-            for (int i = 0; i < vec.getData1d().size();
-                 i++)
-                s.append(vec.
-                        getElem(i).toString()).append(", ");
+            for (int i = 0; i < vec.getData1d().size(); i++)
+                s.append(vec.getElem(i).toString()).append(", ");
         s.append(")");
         return s.toString();
     }
@@ -130,7 +126,7 @@ public class Vec {
 
     /*
     public Double value() {
-        
+
         Double [] da;
         if(vecVal.getData1d().size()>0) {
             da = new Double[getDims() ];
@@ -139,7 +135,7 @@ public class Vec {
                 Double a = vecVal.getElem(i);
                 da[i] = a;
                 i++;
-            } 
+            }
 
         } else {
             da = new Double[getDims()];
@@ -152,12 +148,12 @@ public class Vec {
                 for(Double a : d) {
                     da[j] = a;
                     j++;
-                } 
+                }
 
-            } 
-        } 
+            }
+        }
     return da;
-    } 
+    }
     */
     public int size() {
         return vecVal.getData1d().size();

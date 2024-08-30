@@ -60,19 +60,42 @@ public class TreeTreeNode extends TreeNode {
     public StructureMatrix<Double> eval() throws TreeNodeEvalException, AlgebraicFormulaSyntaxException {
         StructureMatrix<Double> res = new StructureMatrix<>(0, Double.class);
         double r;
-        r = tree.eval().getElem();
+        StructureMatrix<Double> eval = tree.eval();
+        if (eval.getDim() == 0) {
+            r = tree.eval().getElem();
 
-        if (method != null) {
-            try {
-                r = (Double) method.invoke(Math.class, r);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+            if (method != null) {
+                try {
+                    r = (Double) method.invoke(Math.class, r);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+            return res.setElem(r);
+
+        } else if (eval.getDim() == 1) {
+            res = new StructureMatrix<>(1, Double.class);
+            if (method != null) {
+                try {
+                    for (int i = 0; i < eval.getData1d().size(); i++) {
+                        r = (Double) method.invoke(Math.class, eval.getElem(i));
+                        res.setElem(r, i);
+                    }
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+                return res;
+            }
+            for (int i = 0; i < eval.getData1d().size(); i++) {
+                r = eval.getElem(i);
+                res.setElem(r, i);
             }
         }
-        return res.setElem(r);
-
+        return res;
     }
 
     public String getFunctionName() {

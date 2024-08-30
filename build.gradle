@@ -3,7 +3,7 @@ buildscript {
     dependencies {
         // Add dependencies.
         classpath 'com.google.gms:google-services:4.4.2'
-        classpath 'com.android.tools.build:gradle:8.3.2'
+        classpath 'com.android.tools.build:gradle:8.5.2'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.21'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.2'
         classpath 'com.huawei.agconnect:agconnect-core:1.5.2.300'
@@ -21,7 +21,7 @@ plugins {
     // Add the dependency for the Crashlytics Gradle plugin
     id 'com.google.firebase.crashlytics' version '3.0.2' apply false
 }
-def kotlin_version = '1.9.23'
+def kotlin_version = '2.0.0'
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 tasks.register('clean', Delete) {
     delete rootProject.buildDir

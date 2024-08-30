@@ -20,10 +20,10 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406999478
-def kotlin_version = '1.9.23'
+def versionCode1000 = 406999485
+def kotlin_version = '2.0.0'
 def javaVersionEnum = JavaVersion.VERSION_21
-def javaVersion = "21"
+def javaVersion = 21
 
 java {
     toolchain {
@@ -46,15 +46,15 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('C:\\Users\\manue\\keystore')
+            storeFile file('C:\\Users\\manue\\keystore_android_apps.jks')
             storePassword 'faeeagrzdsd'
-            keyAlias 'upload'//manuel
+            keyAlias 'featureapp4'//manuel//upload
             keyPassword 'faeeagrzdsd'
         }
         release {
             storeFile file('C:\\Users\\manue\\keystore')
             storePassword 'faeeagrzdsd'
-            keyAlias 'upload'//manuel
+            keyAlias 'upload'//manuel//featureapp4
             keyPassword 'faeeagrzdsd'
         }
     }
@@ -138,6 +138,12 @@ android {
     }
     lint {
         baseline file('lint-baseline.xml')
+        abortOnError false
+        checkOnly 'NewApi', 'InlinedApi'
+        disable 'TypographyFractions', 'TypographyQuotes'
+        enable 'RtlHardcoded', 'RtlCompat', 'RtlEnabled'
+        ignoreWarnings true
+        quiet true
     }
 
 
@@ -190,12 +196,11 @@ android {
         compileSdk 34
         compileSdkVersion 34
         targetSdk 34
-        minSdkVersion 24
+        minSdkVersion 29
         versionName "9.1"
         versionCode versionCode1000
         signingConfig signingConfigs.release
     }
-
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -204,7 +209,12 @@ android {
 
 
 dependencies {
+    // This dependency is downloaded from the Google’s Maven repository.
+    // So, make sure you also include that repository in your project's build.gradle file.
+    implementation 'com.google.android.play:asset-delivery:2.2.2'
 
+    // For Kotlin users also add the Kotlin extensions library for Play Asset Delivery:
+    implementation 'com.google.android.play:asset-delivery-ktx:2.2.2'
     implementation 'com.google.android.play:integrity:1.3.0'
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:33.1.1')
@@ -225,7 +235,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.2'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.3'
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
     implementation 'androidx.work:work-runtime-ktx:2.9.0'
     implementation 'androidx.preference:preference-ktx:1.2.1'

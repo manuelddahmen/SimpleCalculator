@@ -101,7 +101,7 @@ public class Action3 {
     }
 
     public void revertTokenVersionFirst() {
-        StringAnalyzer3.Construct first = token.clones().get(token.clones().size()-1);
+        StringAnalyzer3.Construct first = token.clones().get(0);
         token.clones().clear();
         token.setConstruct(first);
     }

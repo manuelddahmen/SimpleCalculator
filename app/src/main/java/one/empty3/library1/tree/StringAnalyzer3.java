@@ -24,8 +24,6 @@ package one.empty3.library1.tree;
 
 import android.os.Build;
 
-import androidx.annotation.RequiresApi;
-
 import one.empty3.library.StructureMatrix;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +37,6 @@ import java.util.function.Consumer;
  *
  * @see AlgebraicTree
  */
-@RequiresApi(api = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 public class StringAnalyzer3 {
     protected HashMap<Integer, Token> definitions = new HashMap<>();
     protected int mPosition;
@@ -298,7 +295,9 @@ public class StringAnalyzer3 {
 
         public MultiTokenExclusiveXor(Token... mandatory) {
             super();
-            this.choices = Arrays.stream(mandatory).toList();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                this.choices = Arrays.stream(mandatory).toList();
+            }
         }
 
         public MultiTokenExclusiveXor(ArrayList<Token> objects) {
@@ -356,7 +355,9 @@ public class StringAnalyzer3 {
 
         public SingleTokenInclusiveXor(Token... mandatory) {
             super();
-            this.choices = Arrays.stream(mandatory).toList();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                this.choices = Arrays.stream(mandatory).toList();
+            }
         }
 
         @Override
@@ -399,7 +400,9 @@ public class StringAnalyzer3 {
     class SingleTokenExclusiveXor extends MultiToken {
         public SingleTokenExclusiveXor(Token... mandatory) {
             super();
-            this.choices = Arrays.stream(mandatory).toList();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                this.choices = Arrays.stream(mandatory).toList();
+            }
         }
 
         @Override
@@ -537,7 +540,9 @@ public class StringAnalyzer3 {
     public class MultiTokenInclusiveXor extends MultiToken {
         public MultiTokenInclusiveXor(Token... choices) {
             super();
-            this.choices = Arrays.stream(choices).toList();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                this.choices = Arrays.stream(choices).toList();
+            }
         }
 
         @Override
@@ -594,7 +599,9 @@ public class StringAnalyzer3 {
         public MultiTokenInclusiveXorAndOne(Token or, Token... choices) {
             super();
             this.or = or;
-            this.choices = Arrays.stream(choices).toList();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                this.choices = Arrays.stream(choices).toList();
+            }
         }
 
         @Override
@@ -652,7 +659,9 @@ public class StringAnalyzer3 {
     class TokenChoiceInclusive extends MultiToken {
         public TokenChoiceInclusive(Token... choices) {
             super();
-            this.choices = Arrays.stream(choices).toList();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                this.choices = Arrays.stream(choices).toList();
+            }
         }
 
         @Override
@@ -697,7 +706,9 @@ public class StringAnalyzer3 {
     class TokenChoiceExclusive extends MultiToken {
         public TokenChoiceExclusive(Token... choices) {
             super();
-            this.choices.addAll(Arrays.stream(choices).toList());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                this.choices.addAll(Arrays.stream(choices).toList());
+            }
         }
 
         @Override
@@ -895,7 +906,9 @@ public class StringAnalyzer3 {
 
         public MultiTokenOptional(Token... choices) {
             super();
-            this.choices.addAll(Arrays.stream(choices).toList());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                this.choices.addAll(Arrays.stream(choices).toList());
+            }
         }
 
         @Override
@@ -1012,7 +1025,9 @@ public class StringAnalyzer3 {
 
         public MultiTokenMandatory(Token... mandatory) {
             super();
-            this.choices = Arrays.stream(mandatory).toList();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                this.choices = Arrays.stream(mandatory).toList();
+            }
         }
 
         @Override
@@ -1092,7 +1107,9 @@ public class StringAnalyzer3 {
 
         public SingleTokenMandatory(Token... mandatory) {
             super();
-            this.choices = Arrays.stream(mandatory).toList();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                this.choices = Arrays.stream(mandatory).toList();
+            }
         }
 
         @Override
@@ -1225,6 +1242,69 @@ public class StringAnalyzer3 {
         }
     }
 
+    /**
+     * Represents a token that identifies a name in a parsing process.
+     */
+    class TokenType extends Token {
+        protected String name;
+
+        public TokenType() {
+            super();
+        }
+
+        @Override
+        public int parse(String input, int position) {
+            if (position >= input.length() || input.substring(position).trim().isEmpty()) {
+                //mPosition = position;
+                setSuccessful(false);
+                return position;
+                //throw new RuntimeException(getClass() + " : position>=input.length()");
+            }
+            int position1 = super.skipBlanks(input, position);
+            int i = position1;
+            boolean passed = false;
+            while (i < input.length() && (Character.isLetterOrDigit(input.charAt(i)) || input.charAt(i) == '_' || input.charAt(i) == '.')
+            ) {
+                i++;
+                passed = true;
+            }
+            if (passed && i - position1 > 0 && containsNoKeyword(input.substring(position1, i))) {
+                this.setName(input.substring(position1, i));
+                return processNext(input, i);
+            } else if (i >= input.length()) {
+                setSuccessful(true);
+                return input.length();
+            } else {
+                setSuccessful(false);
+                return position1;
+            }
+
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+
+        @Override
+        public Token copy(Token token) {
+
+            TokenName tokenName = new TokenName();
+            tokenName.name = name;
+            return tokenName;
+        }
+
+        public String toString() {
+            return name;
+        }
+    }
+
+    class TokenName1 extends TokenQualifiedName {
+    }
 
     class TokenVariableMemberDefinitionClassName extends TokenName {
         public TokenVariableMemberDefinitionClassName() {

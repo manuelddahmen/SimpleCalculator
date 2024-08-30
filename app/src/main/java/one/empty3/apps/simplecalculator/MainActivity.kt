@@ -115,6 +115,7 @@ class MainActivity : AppCompatActivity() {
         for (j: Int in buttonsNumbers) {
             val findViewById: Button = findViewById(j)
             findViewById.setOnClickListener {
+                editText.requestFocus()
                 if (findViewById == findViewById<Button>(R.id.delButton)) {
                     val toString: String = editText.text.toString()
                     if (toString.length > 1) {

@@ -38,7 +38,7 @@ public class Instruction extends InstructionBlock {
 
     public Instruction() {
         super();
-        this.expression = new ListInstructions.Instruction(0, null, null);
+        this.expression = new ListInstructions.Instruction(0, null, null, "");
     }
 
     public void setName(String name) {

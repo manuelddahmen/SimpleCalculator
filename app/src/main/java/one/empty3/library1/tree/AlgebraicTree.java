@@ -55,13 +55,12 @@
 
 package one.empty3.library1.tree;
 
+import one.empty3.library.StructureMatrix;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
-import one.empty3.library.StructureMatrix;
-
-import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -178,7 +177,7 @@ public class AlgebraicTree extends Tree {
 
         int i = 1;
         boolean added = false;
-        int last = 13;
+        int last = 15;
         subformula = addSkipComments(subformula);
         while (i <= last && !added) {
             boolean exception = false;
@@ -226,24 +225,32 @@ public class AlgebraicTree extends Tree {
                         if (added) caseChoice = 8;
                         break;
                     case 9:
-                        added = addFunction(src, subformula);
+                        added = addVectorFunction(src, subformula);
                         if (added) caseChoice = 9;
                         break;
                     case 10:
-                        added = addBracedExpression(src, subformula);
+                        added = addFunction(src, subformula);
                         if (added) caseChoice = 10;
                         break;
                     case 11:
-                        added = addVariable(src, subformula);
-                        if (added) caseChoice = 11;
+                        //added = false;//addUserFunction(src, subformula);
+                        //if (added) caseChoice = 11;
                         break;
-                    case 12: // Mettre - en 4??
-                        added = addSingleSign(src, subformula);
+                    case 12:
+                        added = addBracedExpression(src, subformula);
                         if (added) caseChoice = 12;
                         break;
                     case 13:
-                        added = addFunctionDefinition(src, subformula);
+                        added = addVariable(src, subformula);
                         if (added) caseChoice = 13;
+                        break;
+                    case 14: // Mettre - en 4??
+                        added = addSingleSign(src, subformula);
+                        if (added) caseChoice = 14;
+                        break;
+                    case 15:
+                        added = addFunctionDefinition(src, subformula);
+                        if (added) caseChoice = 15;
                         break;
                     default:
                         break;
@@ -266,6 +273,74 @@ public class AlgebraicTree extends Tree {
         if (formula == null || formula.isBlank())
             return true;
         throw new AlgebraicFormulaSyntaxException("Cannot add to treeNode or root." + formula, this);
+    }
+
+    private boolean addUserFunction(TreeNode src, String subformula) {
+
+        return false;
+    }
+
+    private boolean addVectorFunction(TreeNode t, String values) {
+        try {
+            int i = 1;
+            int count = 0;
+            int argumentStart = 0;
+            int argumentEnd = 0;
+            int functionNameStart = 0;
+            int countLetters = 0;
+            boolean isName = true;
+            while (i < values.length()) {
+                values = addSpaces(values, i);
+                if (i >= values.length())
+                    break;
+                if (isName && Character.isLetter(values.charAt(0)) && Character.isLetterOrDigit(values.charAt(i)) && count == 0) {
+                    countLetters++;
+                    isName = true;
+                } else if (values.charAt(i) == '(' && i > 0) {
+                    isName = false;
+                    if (count == 0) {
+                        argumentStart = i + 1;
+                    }
+                    count++;
+                } else if (values.charAt(i) == ')' && i > 1) {
+                    count--;
+                    argumentEnd = i;
+                } else if (i < 2)
+                    return false;
+
+
+                i++;
+
+            }
+            if (count == 0 && values.charAt(i - 1) == ',') {
+
+            }
+            if (count == 0 && values.charAt(i - 1) == ')') {
+
+
+                String fName = values.substring(functionNameStart, argumentStart - 1);
+                String fParamString = values.substring(argumentStart, argumentEnd);
+
+                if (!Functions.getListOfFunctions().contains(fName)) {
+                    return false;
+                }
+
+                TreeTreeNodeTypeVector mathFunctionTreeNodeType = new TreeTreeNodeTypeVector(
+                        fParamString, parametersValues
+                );
+
+                TreeNode t2 = new TreeTreeNodeVector(t, new Object[]{fParamString, parametersValues, fName},
+                        mathFunctionTreeNodeType);
+                if (!add(t2, fParamString))
+                    return false;
+                t.getChildren().add(t2);
+
+
+            }
+        } catch (Exception | AlgebraicFormulaSyntaxException ex) {
+            return false;
+        }
+        return t.getChildren().size() > 0;
     }
 
     private String addSkipComments(String formula) {
@@ -982,6 +1057,9 @@ public class AlgebraicTree extends Tree {
                 String fName = values.substring(functionNameStart, argumentStart - 1);
                 String fParamString = values.substring(argumentStart, argumentEnd);
 
+                if (Math.class.getMethod(fName, new java.lang.Class<?>[]{double.class}) == null) {
+                    return false;
+                }
 
                 TreeTreeNodeType mathFunctionTreeNodeType = new TreeTreeNodeType(
                         fParamString, parametersValues
@@ -1011,7 +1089,7 @@ public class AlgebraicTree extends Tree {
      */
 
     public boolean addMethodCall(TreeNode t, String values) throws AlgebraicFormulaSyntaxException {
-        int i = 1;
+        int i = 0;
         boolean isNewFactor = false;
         int count = 0;
         int newFactorPos = 0;
@@ -1065,7 +1143,7 @@ public class AlgebraicTree extends Tree {
 
     public boolean addFunctionDefinition(TreeNode t, String values)
             throws AlgebraicFormulaSyntaxException {
-        int i = 1;
+        int i = 0;
         boolean isNewFactor = false;
         int count = 0;
         int newFactorPos = 0;
