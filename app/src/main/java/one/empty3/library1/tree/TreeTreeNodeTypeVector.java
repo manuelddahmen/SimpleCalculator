@@ -20,32 +20,21 @@
  *
  */
 
-package one.empty3.library1.tree.functions;
+package one.empty3.library1.tree;
 
-import android.os.Build;
+import java.util.Map;
 
-import androidx.annotation.RequiresApi;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.util.ArrayList;
+import one.empty3.library.StructureMatrix;
+import one.empty3.library1.tree.TreeNodeType;
 
 
-import java.util.List;
+public class TreeTreeNodeTypeVector extends TreeNodeType {
+    public TreeTreeNodeTypeVector(String fParamString, Map<String, Double> parametersValues) {
+        super();
+    }
 
-import one.empty3.library1.tree.Functions;
-
-public class ListVecDoublesFunction {
-    public static String functionName = "";
-    public boolean isExited;
-
-    public static String[] getList() {
-        List<String> sequences = Functions.getListOfFunctions();
-        String[] cs = new String[sequences.size()];
-
-        return sequences.toArray(cs);
-
+    @Override
+    public StructureMatrix<Double> eval() {
+        return null;
     }
 }
-

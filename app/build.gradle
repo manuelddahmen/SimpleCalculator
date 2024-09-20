@@ -20,7 +20,7 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406999485
+def versionCode1000 = 406999493
 def kotlin_version = '2.0.0'
 def javaVersionEnum = JavaVersion.VERSION_21
 def javaVersion = 21
@@ -46,9 +46,9 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('C:\\Users\\manue\\keystore_android_apps.jks')
+            storeFile file('C:\\Users\\manue\\keystore')
             storePassword 'faeeagrzdsd'
-            keyAlias 'featureapp4'//manuel//upload
+            keyAlias 'upload'//manuel//featureapp4
             keyPassword 'faeeagrzdsd'
         }
         release {
@@ -193,9 +193,8 @@ android {
     defaultConfig {
         //resourceConfigurations += ['en']
         javaVersionEnum
-        compileSdk 34
-        compileSdkVersion 34
-        targetSdk 34
+        compileSdk 35
+        targetSdk 35
         minSdkVersion 29
         versionName "9.1"
         versionCode versionCode1000

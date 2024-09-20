@@ -448,7 +448,6 @@ public class TreeNode {
                         }
                         evalRes.setElem(e + eval.getElem(j) * op1, j);
                     }
-                    System.err.println("In TreeNode.eval #TermTreeNodeType");
                 } else if (eval.getDim() == 0) {
                     double current = op1 * (Double) ((eval.getElem() == null) ? 0.0 : eval.getElem());
                     double evalSum = (evalRes.getElem() == null) ? 0.0 : evalRes.getElem();
