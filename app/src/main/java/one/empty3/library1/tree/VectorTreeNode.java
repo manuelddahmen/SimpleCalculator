@@ -24,7 +24,7 @@ package one.empty3.library1.tree;
 
 public class VectorTreeNode extends TreeNode {
 
-    public VectorTreeNode(TreeNode src, Object[] objects, TreeNodeType clazz) {
-        super(src, objects, clazz);
+    public VectorTreeNode(AlgebraicTree tree, TreeNode src, Object[] objects, TreeNodeType clazz) {
+        super(tree, src, objects, clazz);
     }
 }

@@ -61,8 +61,8 @@ import one.empty3.library.StructureMatrix;
  */
 public class TreeNodeOperator extends TreeNodeValue {
 
-    public TreeNodeOperator(TreeNode parent, Object[] values, VariableTreeNodeType type) {
-        super(parent, values);
+    public TreeNodeOperator(AlgebraicTree tree, TreeNode parent, Object[] values, VariableTreeNodeType type) {
+        super(tree, parent, values);
     }
 
     @Override

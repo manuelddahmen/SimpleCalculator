@@ -62,8 +62,8 @@ import one.empty3.library1.tree.TreeNode;
  * Created by manue on 01-07-19.
  */
 public class TreeNodeDouble extends TreeNode {
-    public TreeNodeDouble(TreeNode src, Object[] objects, DoubleTreeNodeType doubleTreeNodeType) {
-        super(src, objects, doubleTreeNodeType);
+    public TreeNodeDouble(AlgebraicTree tree, TreeNode src, Object[] objects, DoubleTreeNodeType doubleTreeNodeType) {
+        super(tree, src, objects, doubleTreeNodeType);
     }
 
     @Override

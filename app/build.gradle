@@ -20,7 +20,7 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406999493
+def versionCode1000 = 406999499
 def kotlin_version = '2.0.0'
 def javaVersionEnum = JavaVersion.VERSION_21
 def javaVersion = 21
@@ -146,7 +146,7 @@ android {
         quiet true
     }
 
-
+/*
     configurations {
         all*.exclude group: 'xpp3', module: 'xpp3'
         all*.exclude group: 'xml-apis', module: 'xml-apis'
@@ -178,7 +178,7 @@ android {
             }
         }
     }
-
+*/
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -195,7 +195,7 @@ android {
         javaVersionEnum
         compileSdk 35
         targetSdk 35
-        minSdkVersion 29
+        minSdkVersion 21
         versionName "9.1"
         versionCode versionCode1000
         signingConfig signingConfigs.release

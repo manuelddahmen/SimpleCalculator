@@ -150,7 +150,7 @@ public class AlgebraicTree extends Tree {
             TreeNode sign = src.getChildren().remove(1);
             TreeNode son0 = src.getChildren().remove(0);
             double sign1 = ((SignTreeNodeType) sign.type).getSign();
-            src.getChildren().add(new TreeNode(src, new Object[]{"" + sign1},
+            src.getChildren().add(new TreeNode(this, src, new Object[]{"" + sign1},
                     new SignTreeNodeType(sign1)));
             TreeNode son1 = src.getChildren().get(0);
             son1.getChildren().add(son0);
@@ -326,10 +326,10 @@ public class AlgebraicTree extends Tree {
                 }
 
                 TreeTreeNodeTypeVector mathFunctionTreeNodeType = new TreeTreeNodeTypeVector(
-                        fParamString, parametersValues
+                        fParamString, parametersValues, fName
                 );
 
-                TreeNode t2 = new TreeTreeNodeVector(t, new Object[]{fParamString, parametersValues, fName},
+                TreeNode t2 = new TreeTreeNodeVector(this.createWithSameParameters(fParamString), t, new Object[]{fParamString, parametersValues, fName},
                         mathFunctionTreeNodeType);
                 if (!add(t2, fParamString))
                     return false;
@@ -411,7 +411,7 @@ public class AlgebraicTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    t2 = new TreeNode(t, new Object[]{subsubstring, newFactor}, new LogicalNumericTreeNodeType(oldFactorSign));
+                    t2 = new TreeNode(this, t, new Object[]{subsubstring, newFactor}, new LogicalNumericTreeNodeType(oldFactorSign));
                     try {
                         if (!add(t2, subsubstring)) {
                             return false;
@@ -506,7 +506,7 @@ public class AlgebraicTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    t2 = new TreeNode(t, new Object[]{subsubstring, newFactor}, new LogicalLogicalTreeNodeType(oldFactorSign));
+                    t2 = new TreeNode(this, t, new Object[]{subsubstring, newFactor}, new LogicalLogicalTreeNodeType(oldFactorSign));
                     try {
                         if (!add(t2, subsubstring)) {
                             return false;
@@ -600,13 +600,13 @@ public class AlgebraicTree extends Tree {
                 s[1] = subformula.substring(i + 1);
                 s[0] = s[0].trim();
                 s[1] = s[1].trim();
-                EquationTreeNode tt = new EquationTreeNode(src, new Object[]{
+                EquationTreeNode tt = new EquationTreeNode(this, src, new Object[]{
                         subformula, parametersValues, parametersValuesVec, parametersValuesVecComputed},
                         new EquationTreeNodeType(1.0));
-                tt.getChildren().add(new TreeNode(src, new Object[]{
+                tt.getChildren().add(new TreeNode(this, src, new Object[]{
                         s[0], parametersValues, parametersValuesVec, parametersValuesVecComputed},
                         new IdentTreeNodeType()));
-                tt.getChildren().add(new TreeNode(src, new Object[]{
+                tt.getChildren().add(new TreeNode(this, src, new Object[]{
                         s[1], parametersValues, parametersValuesVec, parametersValuesVecComputed},
                         new IdentTreeNodeType()));
                 try {
@@ -637,7 +637,7 @@ public class AlgebraicTree extends Tree {
 
             VariableTreeNodeType variableTreeNodeType = new VariableTreeNodeType(this);
             variableTreeNodeType.setValues(new Object[]{subformula.substring(0, i), parametersValues, parametersValuesVec, parametersValuesVecComputed});
-            src.getChildren().add(new TreeNodeVariable(src, new Object[]{subformula.substring(0, i), parametersValues}, variableTreeNodeType));
+            src.getChildren().add(new TreeNodeVariable(this, src, new Object[]{subformula.substring(0, i), parametersValues}, variableTreeNodeType));
 
             if (subformula.length() > i)
                 throw new AlgebraicFormulaSyntaxException("var tree node test failed. error in formula+ \n" +
@@ -646,7 +646,7 @@ public class AlgebraicTree extends Tree {
 
 
         }
-        return src.getChildren().size() > 0;
+        return !src.getChildren().isEmpty();
     }
 
 
@@ -655,7 +655,7 @@ public class AlgebraicTree extends Tree {
             double d = Double.parseDouble(subformula);
             DoubleTreeNodeType doubleTreeNodeType = new DoubleTreeNodeType(this);
             doubleTreeNodeType.setValues(new Object[]{subformula, d});
-            src.getChildren().add(new TreeNodeDouble(src, new Object[]{subformula, d}, doubleTreeNodeType));
+            src.getChildren().add(new TreeNodeDouble(this, src, new Object[]{subformula, d}, doubleTreeNodeType));
 
             return true;
         } catch (NumberFormatException ex) {
@@ -665,7 +665,7 @@ public class AlgebraicTree extends Tree {
 
     private boolean addSingleSign(TreeNode src, String subformula) throws AlgebraicFormulaSyntaxException {
         if (subformula.length() > 1 && subformula.charAt(0) == '-') {
-            TreeNode treeNode = new TreeNode(src, new Object[]{subformula.substring(1)}, new SignTreeNodeType(-1));
+            TreeNode treeNode = new TreeNode(this, src, new Object[]{subformula.substring(1)}, new SignTreeNodeType(-1));
             if (add(treeNode, subformula.substring(1))) {
                 src.getChildren().add(treeNode);
                 return true;
@@ -723,13 +723,13 @@ public class AlgebraicTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    t2 = new TreeNode(t, new Object[]{subsubstring}, new PowerTreeNodeType(oldExpSign));
+                    t2 = new TreeNode(this, t, new Object[]{subsubstring}, new PowerTreeNodeType(oldExpSign));
                     if (subsubstring.charAt(0) == '-') {
                         subsubstring = subsubstring.substring(1);
                         SignTreeNodeType signTreeNodeType = new SignTreeNodeType(-1.0);
                         signTreeNodeType.instantiate(new Object[]{subsubstring});
 
-                        t2 = new TreeNode(t2, new Object[]{subsubstring}, signTreeNodeType);
+                        t2 = new TreeNode(this, t2, new Object[]{subsubstring}, signTreeNodeType);
                     }
                     /*if (subsubstring.length() > 0 && !add(t2, subsubstring)) {
                         return false;
@@ -808,13 +808,13 @@ public class AlgebraicTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    t2 = new TreeNode(t, new Object[]{subsubstring}, new FactorTreeNodeType(oldFactorSign));
+                    t2 = new TreeNode(this, t, new Object[]{subsubstring}, new FactorTreeNodeType(oldFactorSign));
                     if (subsubstring.charAt(0) == '-') {
                         subsubstring = subsubstring.substring(1);
                         SignTreeNodeType signTreeNodeType = new SignTreeNodeType(-1.0);
                         signTreeNodeType.instantiate(new Object[]{subsubstring});
 
-                        t2 = new TreeNode(t2, new Object[]{subsubstring}, signTreeNodeType);
+                        t2 = new TreeNode(this, t2, new Object[]{subsubstring}, signTreeNodeType);
                     }
                     if (!add(t2, subsubstring)) {
                         return false;
@@ -897,8 +897,8 @@ public class AlgebraicTree extends Tree {
 
                 if (subsubstring.length() > 0) {
                     if (firstSign != 0 && subsubstring.length() > 1) {
-                        t2 = new TreeNode(t, new Object[]{subsubstring}, new TermTreeNodeType(oldFactorSign));
-                        TreeNode tFirstSign = new TreeNode(t2, new Object[]{subsubstring.substring(1)},
+                        t2 = new TreeNode(this, t, new Object[]{subsubstring}, new TermTreeNodeType(oldFactorSign));
+                        TreeNode tFirstSign = new TreeNode(this, t2, new Object[]{subsubstring.substring(1)},
                                 new SignTreeNodeType(firstSign == '+' ? 1 : (firstSign == '-' ? -1 : 1)));
                         t2.getChildren().add(tFirstSign);
                         if (!add(tFirstSign, subsubstring.substring(1))) {
@@ -908,7 +908,7 @@ public class AlgebraicTree extends Tree {
                             countTerms++;
                         }
                     } else {
-                        t2 = new TreeNode(t, new Object[]{subsubstring}, new TermTreeNodeType(oldFactorSign));
+                        t2 = new TreeNode(this, t, new Object[]{subsubstring}, new TermTreeNodeType(oldFactorSign));
                         if (!add(t2, subsubstring)) {
                             return false;
                         } else {
@@ -993,7 +993,7 @@ public class AlgebraicTree extends Tree {
 
 
                 if (subsubstring.length() > 0) {
-                    t2 = new VectorTreeNode(t, new Object[]{subsubstring}, new VectorTreeNodeType(oldFactorSign));
+                    t2 = new VectorTreeNode(this, t, new Object[]{subsubstring}, new VectorTreeNodeType(oldFactorSign));
                     if (!add(t2, subsubstring)) {
                         return false;
                     } else {
@@ -1065,7 +1065,7 @@ public class AlgebraicTree extends Tree {
                         fParamString, parametersValues
                 );
 
-                TreeNode t2 = new TreeTreeNode(t, new Object[]{fParamString, parametersValues, fName},
+                TreeNode t2 = new TreeTreeNode(this.createWithSameParameters(fParamString), t, new Object[]{fParamString, parametersValues, fName},
                         mathFunctionTreeNodeType);
                 if (!add(t2, fParamString))
                     return false;
@@ -1125,7 +1125,7 @@ public class AlgebraicTree extends Tree {
                         "", parametersValues
                 );
 
-                TreeNode t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues, fParamString},
+                TreeNode t2 = new TreeTreeNode(this.createWithSameParameters(fName), t, new Object[]{fName, parametersValues, fParamString},
                         mathFunctionTreeNodeType);
                 if (!add(t2, fParamString))
                     return false;
@@ -1184,7 +1184,7 @@ public class AlgebraicTree extends Tree {
                         fName, parametersValues
                 );
 
-                t2 = new TreeTreeNode(t, new Object[]{fName, parametersValues, fParamString, false},
+                t2 = new TreeTreeNode(this.createWithSameParameters(fName), t, new Object[]{fName, parametersValues, fParamString, false},
                         mathFunctionTreeNodeType);
                 if (!add(t2, fParamString))
                     return false;
@@ -1225,7 +1225,7 @@ public class AlgebraicTree extends Tree {
                 TreeTreeNodeType mathFunctionTreeNodeType = new TreeTreeNodeType(
                         subsubstring, parametersValues
                 );
-                TreeNode t2 = new TreeNode(src, new Object[]{subsubstring, parametersValues, ""}, mathFunctionTreeNodeType);
+                TreeNode t2 = new TreeNode(this, src, new Object[]{subsubstring, parametersValues, ""}, mathFunctionTreeNodeType);
                 try {
                     if (!add(t2, subsubstring))
                         return false;
@@ -1261,7 +1261,7 @@ public class AlgebraicTree extends Tree {
                 TreeTreeNodeType mathFunctionTreeNodeType = new TreeTreeNodeType(
                         subsubstring, parametersValues
                 );
-                TreeNode t2 = new TreeNode(src, new Object[]{subsubstring, parametersValues, ""}, mathFunctionTreeNodeType);
+                TreeNode t2 = new TreeNode(this, src, new Object[]{subsubstring, parametersValues, ""}, mathFunctionTreeNodeType);
                 if (!add(t2, subsubstring))
                     return false;
                 src.getChildren().add(t2);
@@ -1315,5 +1315,14 @@ public class AlgebraicTree extends Tree {
 
     public String getFormula() {
         return formula;
+    }
+
+
+    public AlgebraicTree createWithSameParameters(String formula) {
+        AlgebraicTree algebraicTree = new AlgebraicTree(formula);
+        algebraicTree.setParametersValues(this.parametersValues);
+        algebraicTree.setParametersValuesVec(this.parametersValuesVec);
+        algebraicTree.setParametersValuesVecComputed(this.parametersValuesVecComputed);
+        return algebraicTree;
     }
 }

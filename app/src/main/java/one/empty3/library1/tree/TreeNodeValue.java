@@ -61,8 +61,8 @@ import one.empty3.library.StructureMatrix;
  */
 public abstract class TreeNodeValue extends TreeNode {
 
-    public TreeNodeValue(TreeNode parent, Object[] values) {
-        super(parent, values, new VariableTreeNodeType(null));
+    public TreeNodeValue(AlgebraicTree tree, TreeNode parent, Object[] values) {
+        super(tree, parent, values, new VariableTreeNodeType(null));
     }
 
 

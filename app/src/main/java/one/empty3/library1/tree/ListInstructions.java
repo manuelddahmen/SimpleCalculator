@@ -48,11 +48,11 @@ public class ListInstructions {
         StringAnalyzerJava1.TokenExpression2 tokenExpression2;
         private String originalString;
 
-        public Instruction(int id, String leftHand, String expression, String originalString) {
+        public Instruction(int id, String leftHand, String expression, @NotNull String originalString) {
             this.id = id;
             this.leftHand = leftHand;
             setExpression(expression);
-            this.originalString = originalString;
+            setOriginalString(originalString);
         }
 
         public int getId() {
@@ -95,6 +95,7 @@ public class ListInstructions {
         }
 
         public void setTokenExpression2(StringAnalyzerJava1.TokenExpression2 expression) {
+            //setExpression(expression.parse(expression., 0));
             this.tokenExpression2 = expression;
         }
 
@@ -103,16 +104,21 @@ public class ListInstructions {
         }
 
         public void setOriginalString(String originalString) {
-            this.originalString = originalString;
+
+            this.originalString = originalString != null ? originalString.trim() : "";
         }
 
         @Override
         public String toString() {
             if (tokenExpression2 != null && tokenExpression2.isSuccessful()) {
-                return tokenExpression2.toString();
+                expression = tokenExpression2.toString();
+                if (expression.startsWith("."))
+                    expression = expression.substring(1);
             } else {
-                return expression;
+                if (expression.startsWith("."))
+                    expression = expression.substring(1);
             }
+            return expression;
         }
 
         public String toStringAlgebraicTree() {
@@ -148,13 +154,14 @@ public class ListInstructions {
 
             for (int i = 0; i < splitLines.length; i++) {
 
-                String line = splitLines[i];
+                final String line = splitLines[i];
 
                 String[] splitInstructionEquals = line.split("=");
 
                 String value = null;
                 String variable = null;
                 if (splitInstructionEquals.length == 1) {
+                    variable = splitInstructionEquals[0].trim();
                     value = splitInstructionEquals[0].trim();
                 }
                 if (splitInstructionEquals.length == 2) {
@@ -183,11 +190,11 @@ public class ListInstructions {
                     }
                 }
                 if (!assigned) {
-                    if (splitInstructionEquals.length == 1) {
-                        if (!value.startsWith("#")) {
-                            assignations.add(new Instruction(i, null, splitInstructionEquals[0], line));
-                        }
-                    }
+//                    if (splitInstructionEquals.length == 1) {
+//                                                                if (!value.startsWith("#")) {
+                    assignations.add(new Instruction(i, variable, value, line));
+//                        }
+//                    }
                 }
             }
         }
@@ -208,37 +215,40 @@ public class ListInstructions {
             currentParamsValuesVecComputed = new HashMap<>();
         int countInstructions = 0;
         for (Instruction instruction : instructions) {
+            countInstructions++;
             String key = instruction.getLeftHand();
             String value = instruction.getExpressionAlgebraicTree();
 
 
             if (key != null)
                 key = key.trim();
-            if (value != null)
+            if (value != null) {
                 value = value.trim();
 
+
+            }
             StructureMatrix<Double> resultVec = null;
             Double resultDouble = null;
 
-            System.err.println("key=" + key + ", value=" + value);
+            if ((key != null || value != null) && !instruction.originalString.startsWith("##")) {
 
-            if (key != null || value != null && !instruction.originalString.startsWith("##")) {
                 try {
                     /*/if (value.startsWith("#")) {
                         i++;
                         continue;
                     }*/
+                    System.err.println("Value passed as formula: " + value);
                     AlgebraicTree tree = new AlgebraicTree(value);
                     tree.setParametersValues(currentParamsValues);
                     tree.setParametersValuesVec(currentParamsValuesVec);
                     tree.setParametersValuesVecComputed(currentParamsValuesVecComputed);
-
                     try {
                         tree.construct();
                     } catch (AlgebraicFormulaSyntaxException | RuntimeException ex) {
-                        //String errors1 = String.format(Locale.getDefault(),
+                        //String errors1 = String.format(
                         //        "\n##Error: can't execute");
                         //returnedCode.add(instruction.originalString + errors1);
+                        returnedCode.add(instruction.originalString);
                         continue;
                     }
                     resultVec = tree.eval();
@@ -250,9 +260,8 @@ public class ListInstructions {
                                 currentParamsValuesVecComputed.put(key, resultVec);
                                 currentParamsValuesVec.put(key, value);
 
-                                String errors1 = String.format(Locale.getDefault(),
-                                        "\n##line : (%d)%s=%s ", countInstructions, value, resultVec.toStringLine());
-                                returnedCode.add(instruction.originalString + errors1);
+                                String errors1 = String.format("\n##line : (%d)%s=%s ", countInstructions, value, resultVec.toStringLine());
+                                returnedCode.add(key + "=" + value + errors1);
 
 
                             } else if (resultVec.getDim() == 0) {
@@ -261,15 +270,13 @@ public class ListInstructions {
                                 currentParamsValues.put(key, resultVec.getElem());
 
 
-                                String errors1 = String.format(Locale.getDefault(),
-                                        "\n##line : (%d)%s=%s ", countInstructions, value, resultVec.toStringLine());
+                                String errors1 = String.format("\n##line : (%d)%s=%s ", countInstructions, value, resultVec.toStringLine());
                                 returnedCode.add(instruction.originalString + errors1);
 
                             }
                         } else if (instruction.originalString.startsWith("##")) {
                         } else {
-                            String errors1 = String.format(Locale.getDefault(),
-                                    "\n##line : (%d)%s=%s ", countInstructions, value, resultVec.toStringLine());
+                            String errors1 = String.format("\n##line : (%d)%s=%s ", countInstructions, value, resultVec.toStringLine());
                             returnedCode.add(instruction.originalString + errors1);
 
                         }
@@ -277,11 +284,11 @@ public class ListInstructions {
                     } else if (!instruction.originalString.startsWith("##") &&
                             instruction.originalString.startsWith("#")) {
                         returnedCode.add(instruction.originalString);
-                    } else if (getCurrentParamsValuesVecComputed().get(key) != null) {
-                        String errors1 = String.format(Locale.getDefault(),
+                    }/* else if (getCurrentParamsValuesVecComputed().get(key) != null) {
+                        String errors1 = String.format(
                                 "\n##line : (%d)%s=%s ", countInstructions, value, resultVec.toStringLine());
                         returnedCode.add(instruction.originalString + errors1);
-                    } else {
+                    }*/ else {
                         returnedCode.add(instruction.originalString);
                     }
                 } catch (AlgebraicFormulaSyntaxException | TreeNodeEvalException |

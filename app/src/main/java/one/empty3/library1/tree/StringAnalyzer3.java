@@ -22,8 +22,6 @@
 
 package one.empty3.library1.tree;
 
-import android.os.Build;
-
 import one.empty3.library.StructureMatrix;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,7 +56,7 @@ public class StringAnalyzer3 {
     @NotNull
     protected Construct getConstruct() {
         if (construct == null && !constructs.isEmpty())
-            construct = constructs.get(constructs.size()-1);
+            construct = constructs.getLast();
         if (construct == null)
             construct = new Construct();
         return construct;
@@ -100,7 +98,7 @@ public class StringAnalyzer3 {
 
         private Token nextToken() {
             if (!nextTokens.getData1d().isEmpty()) {
-                return nextTokens.getData1d().get(0);
+                return nextTokens.getData1d().getFirst();
             }
             return null;
         }
@@ -255,7 +253,7 @@ public class StringAnalyzer3 {
         }
 
         public Construct getFirstConstructVersion() {
-            return clones().get(0);
+            return clones().getFirst();
         }
     }
 
@@ -295,9 +293,7 @@ public class StringAnalyzer3 {
 
         public MultiTokenExclusiveXor(Token... mandatory) {
             super();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                this.choices = Arrays.stream(mandatory).toList();
-            }
+            this.choices = Arrays.stream(mandatory).toList();
         }
 
         public MultiTokenExclusiveXor(ArrayList<Token> objects) {
@@ -355,9 +351,7 @@ public class StringAnalyzer3 {
 
         public SingleTokenInclusiveXor(Token... mandatory) {
             super();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                this.choices = Arrays.stream(mandatory).toList();
-            }
+            this.choices = Arrays.stream(mandatory).toList();
         }
 
         @Override
@@ -400,9 +394,7 @@ public class StringAnalyzer3 {
     class SingleTokenExclusiveXor extends MultiToken {
         public SingleTokenExclusiveXor(Token... mandatory) {
             super();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                this.choices = Arrays.stream(mandatory).toList();
-            }
+            this.choices = Arrays.stream(mandatory).toList();
         }
 
         @Override
@@ -540,9 +532,7 @@ public class StringAnalyzer3 {
     public class MultiTokenInclusiveXor extends MultiToken {
         public MultiTokenInclusiveXor(Token... choices) {
             super();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                this.choices = Arrays.stream(choices).toList();
-            }
+            this.choices = Arrays.stream(choices).toList();
         }
 
         @Override
@@ -599,9 +589,7 @@ public class StringAnalyzer3 {
         public MultiTokenInclusiveXorAndOne(Token or, Token... choices) {
             super();
             this.or = or;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                this.choices = Arrays.stream(choices).toList();
-            }
+            this.choices = Arrays.stream(choices).toList();
         }
 
         @Override
@@ -659,9 +647,7 @@ public class StringAnalyzer3 {
     class TokenChoiceInclusive extends MultiToken {
         public TokenChoiceInclusive(Token... choices) {
             super();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                this.choices = Arrays.stream(choices).toList();
-            }
+            this.choices = Arrays.stream(choices).toList();
         }
 
         @Override
@@ -706,9 +692,7 @@ public class StringAnalyzer3 {
     class TokenChoiceExclusive extends MultiToken {
         public TokenChoiceExclusive(Token... choices) {
             super();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                this.choices.addAll(Arrays.stream(choices).toList());
-            }
+            this.choices.addAll(Arrays.stream(choices).toList());
         }
 
         @Override
@@ -906,9 +890,7 @@ public class StringAnalyzer3 {
 
         public MultiTokenOptional(Token... choices) {
             super();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                this.choices.addAll(Arrays.stream(choices).toList());
-            }
+            this.choices.addAll(Arrays.stream(choices).toList());
         }
 
         @Override
@@ -1025,9 +1007,7 @@ public class StringAnalyzer3 {
 
         public MultiTokenMandatory(Token... mandatory) {
             super();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                this.choices = Arrays.stream(mandatory).toList();
-            }
+            this.choices = Arrays.stream(mandatory).toList();
         }
 
         @Override
@@ -1107,9 +1087,7 @@ public class StringAnalyzer3 {
 
         public SingleTokenMandatory(Token... mandatory) {
             super();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                this.choices = Arrays.stream(mandatory).toList();
-            }
+            this.choices = Arrays.stream(mandatory).toList();
         }
 
         @Override
@@ -1629,10 +1607,10 @@ public class StringAnalyzer3 {
                 currentInstructions = new ArrayList<>();
                 currentInstructions.add(new InstructionBlock());
             }
-            if (currentInstructions.isEmpty() || currentInstructions.get(currentInstructions.size()-1) == null) {
+            if (currentInstructions.isEmpty() || currentInstructions.getLast() == null) {
                 currentInstructions.add(new InstructionBlock());
             }
-            return currentInstructions.get(currentInstructions.size()-1);
+            return currentInstructions.getLast();
         }
 
         public void setCurrentInstructions(InstructionBlock instructionBlock) {

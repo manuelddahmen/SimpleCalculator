@@ -61,8 +61,8 @@ import one.empty3.library1.tree.TreeNode;
  * Created by manuel on 25-12-16.
  */
 public class EquationTreeNode extends TreeNode {
-    public EquationTreeNode(TreeNode src, Object[] objects, TreeNodeType clazz) {
-        super(src, objects, clazz);
+    public EquationTreeNode(AlgebraicTree tree, TreeNode src, Object[] objects, TreeNodeType clazz) {
+        super(tree, src, objects, clazz);
     }
 
     @Override

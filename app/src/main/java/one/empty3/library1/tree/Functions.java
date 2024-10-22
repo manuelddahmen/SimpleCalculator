@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Functions {
-    private static final List<String> listOfFunctions = new ArrayList<>();
+    private static List<String> listOfFunctions = new ArrayList<>();
     private static boolean isInitialized = false;
-
+    public static String functionName;
     public static void init() {
         listOfFunctions.add("sum");
         listOfFunctions.add("product");
         listOfFunctions.add("avg");
         listOfFunctions.add("median");
+        listOfFunctions.add("count");
     }
 
 
@@ -33,6 +34,7 @@ public class Functions {
             case "product" -> product(vec);
             case "avg" -> avg(vec);
             case "median" -> median(vec);
+            case "count" -> count(vec);
             default -> 0;
         };
     }
@@ -73,5 +75,9 @@ public class Functions {
             count++;
         }
         return sum;
+    }
+    public static double count(Double... args) {
+        int count = args.length;
+        return count;
     }
 }

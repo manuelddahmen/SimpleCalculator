@@ -65,8 +65,8 @@ import one.empty3.library1.tree.VariableTreeNodeType;
  */
 public class TreeNodeVariable extends TreeNode {
 
-    public TreeNodeVariable(TreeNode src, Object[] objects, VariableTreeNodeType variableTreeNodeType) {
-        super(src, objects, variableTreeNodeType);
+    public TreeNodeVariable(AlgebraicTree tree, TreeNode src, Object[] objects, VariableTreeNodeType variableTreeNodeType) {
+        super(tree, src, objects, variableTreeNodeType);
 
     }
 

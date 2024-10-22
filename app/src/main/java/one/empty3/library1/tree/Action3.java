@@ -88,16 +88,16 @@ public class Action3 {
 
     public void commitTokenVersion() {
         try {
-            token.setConstruct((StringAnalyzer3.Construct) token.clones().get(token.clones().size()-1).clone());
+            token.setConstruct((StringAnalyzer3.Construct) token.clones().get(token.clones().size() - 1).clone());
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void revertOneVersionAhead() {
-        StringAnalyzer3.Construct last = token.clones().get(token.clones().size()-1);
+        StringAnalyzer3.Construct last = token.clones().get(token.clones().size() - 1);
         token.clones().remove(last);
-        token.setConstruct(token.clones().get(token.clones().size()-1));
+        token.setConstruct(token.clones().get(token.clones().size() - 1));
     }
 
     public void revertTokenVersionFirst() {
@@ -108,7 +108,7 @@ public class Action3 {
 
     public void cloneTokenVersion() {
         try {
-            token.clones().add((StringAnalyzer3.Construct) token.clones().get(token.clones().size()-1).clone());
+            token.clones().add((StringAnalyzer3.Construct) token.clones().get(token.clones().size() - 1).clone());
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }

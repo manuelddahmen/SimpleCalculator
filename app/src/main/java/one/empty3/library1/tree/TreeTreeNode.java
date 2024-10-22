@@ -29,14 +29,13 @@ import java.util.Map;
 import one.empty3.library.StructureMatrix;
 
 public class TreeTreeNode extends TreeNode {
-    private AlgebraicTree tree;
     private String functionName;
     private Method method = null;
     private boolean mathType = true;
 
-    public TreeTreeNode(TreeNode t, Object[] objects, TreeNodeType type) {
-        super(t, objects, type);
-        tree = new AlgebraicTree((String) objects[0], (Map<String, Double>) objects[1]);
+    public TreeTreeNode(AlgebraicTree tree, TreeNode t, Object[] objects, TreeNodeType type) {
+        super(tree, t, objects, type);
+        //tree = new AlgebraicTree((String) objects[0], (Map<String, Double>) objects[1]);
         try {
             tree.construct();
             if (objects[2] instanceof String && !((String) objects[2]).isEmpty()) {
@@ -76,12 +75,22 @@ public class TreeTreeNode extends TreeNode {
             return res.setElem(r);
 
         } else if (eval.getDim() == 1) {
-            res = new StructureMatrix<>(1, Double.class);
+
+            int size = eval.getData1d().size();
+            Double[] args = new Double[size];
+            for (int i = 0; i < size; i++) {
+                args[i] = eval.getData1d().get(i);
+            }
+            res = new StructureMatrix<>(0, Double.class);
             if (method != null) {
                 try {
+                    int k = 0;
                     for (int i = 0; i < eval.getData1d().size(); i++) {
-                        r = (Double) method.invoke(Math.class, eval.getElem(i));
-                        res.setElem(r, i);
+                        if (args[i] != null) {
+                            r = (Double) method.invoke(Math.class, args[i]);
+                            res.setElem(r, i);
+                            k++;
+                        }
                     }
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();

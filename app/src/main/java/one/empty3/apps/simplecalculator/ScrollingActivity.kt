@@ -49,7 +49,10 @@ class ScrollingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //setSupportActionBar(toolbar)
-        this.text = findViewById<EditText>(R.id.textCalculator)
+        var t0 : EditText? = findViewById<EditText>(R.id.textCalculator)
+        if(t0!=null) {
+            text = t0
+        } else return
 
         binding.execute.setOnClickListener {
                 view -> runOnUiThread {

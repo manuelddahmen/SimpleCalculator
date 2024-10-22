@@ -24,18 +24,17 @@ package one.empty3.library1.tree;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Map;
 
 import one.empty3.library.StructureMatrix;
-
 
 public class TreeTreeNodeVector extends TreeNode {
     private AlgebraicTree tree;
     private String functionName;
 
-    public TreeTreeNodeVector(TreeNode t, Object[] objects, TreeNodeType type) {
-        super(t, objects, type);
-        tree = new AlgebraicTree((String) objects[0], (Map<String, Double>) objects[1]);
+    public TreeTreeNodeVector(AlgebraicTree tree, TreeNode t, Object[] objects, TreeNodeType type) {
+        super(tree, t, objects, type);
         try {
             tree.construct();
             if (objects[2] instanceof String && !((String) objects[2]).isEmpty()) {
@@ -58,7 +57,11 @@ public class TreeTreeNodeVector extends TreeNode {
         //System.err.println("TreeTreeNodeVector:eval()");
         StructureMatrix<Double> eval = tree.eval();
         if (eval.getDim() == 1) {
-            Double[] array = eval.getData1d().toArray(new Double[]{0.0});
+            List<Double> data1d = eval.getData1d();
+            Double[] array = new Double[data1d.size()];
+            for (int i = 0; i < data1d.size(); i++) {
+                array[i] = (Double) data1d.get(i);
+            }
             r = Functions.search(functionName, array);
         } else if (eval.getDim() == 0) {
             r = eval.getElem();

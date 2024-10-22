@@ -29,12 +29,25 @@ import one.empty3.library1.tree.TreeNodeType;
 
 
 public class TreeTreeNodeTypeVector extends TreeNodeType {
-    public TreeTreeNodeTypeVector(String fParamString, Map<String, Double> parametersValues) {
+    private final String fName;
+    private final String paramsString;
+
+    public TreeTreeNodeTypeVector(String fParamString, Map<String, Double> parametersValues, String fName) {
         super();
+        this.paramsString = fParamString;
+        this.fName = fName;
     }
 
     @Override
     public StructureMatrix<Double> eval() {
         return null;
+    }
+
+    public String getfName() {
+        return fName;
+    }
+
+    public String getParamsString() {
+        return paramsString;
     }
 }
