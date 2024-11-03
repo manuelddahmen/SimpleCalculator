@@ -48,7 +48,7 @@ class ChooseFxDialogFragment : DialogFragment() {
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val ret =  activity?.let {
+        val ret = activity?.let {
             val mathList : Array<String> = main2022.toTypedArray()
 
             val builder = AlertDialog.Builder(it)
@@ -62,9 +62,7 @@ class ChooseFxDialogFragment : DialogFragment() {
                 // Add action buttons
                 .setPositiveButton(R.string.fragment_function_ok,
                     DialogInterface.OnClickListener { dialog, id ->
-                        if(Functions.functionName!=null) {
-                            this.functionName =  Functions.functionName
-                        }
+                        this.functionName = id.toString()
                         isExited = true;
 
                     })

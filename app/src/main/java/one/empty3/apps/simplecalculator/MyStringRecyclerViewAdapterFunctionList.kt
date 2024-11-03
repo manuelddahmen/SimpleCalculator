@@ -24,17 +24,15 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import javaAnd.awt.Color
 
-import one.empty3.apps.simplecalculator.placeholder.PlaceholderContent.PlaceholderItem
 import one.empty3.apps.simplecalculator.databinding.FragmentItemBinding
+import one.empty3.apps.simplecalculator.Functions
 import one.empty3.library1.tree.Functions
 
-class MyStringRecyclerViewAdapterFunctionList(private var values: Array<String> = Functions.getListOfFunctions().toTypedArray()) :
+class MyStringRecyclerViewAdapterFunctionList(private var values: Array<String> = one.empty3.library1.tree.Functions.getListOfFunctions().toTypedArray()) :
             RecyclerView.Adapter<MyStringRecyclerViewAdapterFunctionList.ViewHolder>(),
     Parcelable {
 

@@ -146,15 +146,17 @@ android {
         quiet true
     }
 
-/*
+
     configurations {
+        all*.exclude group: 'com.formdev', module: 'flatlaf'
+    }/*
         all*.exclude group: 'xpp3', module: 'xpp3'
         all*.exclude group: 'xml-apis', module: 'xml-apis'
         all*.exclude group: 'net.sf.kxml', module: 'kxml2'
         all*.exclude group: 'xmlpull', module: 'xmlpull'
         all*.exclude group: 'com.sun.activation', module: 'javax.activation'
         //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-compiler-embeddable'
-        //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin-api'
+  -      //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin-api'
         all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin'
         //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-build-common'
         all {
@@ -252,6 +254,8 @@ dependencies {
 
     implementation "com.android.billingclient:billing:$billingVersion"
 
+   //implementation "one.empty3:empty3-library-mp:2024.11.3-1"
+   files('../empty3-library-mp/build/libs/empty3-library-mp.jar')
 }
 
 Properties properties = new Properties()
