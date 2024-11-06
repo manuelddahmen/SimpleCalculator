@@ -20,6 +20,8 @@
 
 package one.empty3.feature20220726.violajonesclassifier;
 
+import static one.empty3.feature20220726.WriteFile.shouldOverwrite;
+
 import one.empty3.feature20220726.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point2D;
@@ -30,7 +32,6 @@ import javaAnd.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
 
 import java.util.List;
 

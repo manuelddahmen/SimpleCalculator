@@ -21,11 +21,12 @@
 package one.empty3.feature20220726;
 
 
+import static one.empty3.feature20220726.WriteFile.shouldOverwrite;
+
 import java.io.File;
 
-import one.empty3.library.Point3D;
-import one.empty3.library.StructureMatrix;
 import one.empty3.io.ProcessFile;
+import one.empty3.library.Point3D;
 
 
 import javaAnd.awt.image.imageio.ImageIO;

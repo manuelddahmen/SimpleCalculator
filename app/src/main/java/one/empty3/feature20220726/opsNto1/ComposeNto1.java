@@ -20,20 +20,23 @@
 
 package one.empty3.feature20220726.opsNto1;
 
+import static one.empty3.feature20220726.MBitmap.maxRes;
+import static one.empty3.feature20220726.WriteFile.shouldOverwrite;
+
+import one.empty3.feature.ProcessFiles;
 import one.empty3.feature20220726.PixM;
-import one.empty3.io.ProcessFile;
 
 import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.io.ProcessFile;
 
 import java.io.File;
 import java.io.IOException;
 
-public class ComposeNto1 extends ProcessFile {
+public class ComposeNto1 extends ProcessFiles {
     public boolean addEntry(Composer composer, ProcessFile... processFiles) {
         return false;
     }
 
-    @Override
     public boolean process(File in, File out) {
         try {
             boolean success = false;

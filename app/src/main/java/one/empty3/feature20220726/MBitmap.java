@@ -72,7 +72,7 @@ public class MBitmap /*implements InterfaceMatrix*/ {
                 int rgb = bitmap.getPixel(
                         (int) (1.0 * i / bitmap.getWidth() * columns),
                         (int) (1.0 * j / bitmap.getHeight() * lines));
-                Lumiere.getDoubles(rgb, colorComponents);
+                colorComponents = Lumiere.getDoubles(rgb);
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
                     set(i, j, colorComponents[com]);
@@ -222,10 +222,10 @@ public class MBitmap /*implements InterfaceMatrix*/ {
         });
     }
 
-    final double [] tmpColor = new double[compCount];
+    double [] tmpColor = new double[compCount];
     public void setValues(int i, int j, int color) {
 
-        Lumiere.getDoubles(color, tmpColor);
+        tmpColor = Lumiere.getDoubles(color);
         IntStream.range(0, getCompCount()).forEach(c -> {
             setCompNo(c);
             set(i, j, tmpColor[c]);

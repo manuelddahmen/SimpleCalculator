@@ -20,14 +20,15 @@
 
 package one.empty3.feature20220726;
 
-import android.graphics.Color;
+import static one.empty3.feature20220726.WriteFile.shouldOverwrite;
 
-import one.empty3.io.ProcessFile;
+import android.graphics.Color;
 
 import java.io.File;
 
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.io.ProcessFile;
 
 public class IsleProcess extends ProcessFile {
     public boolean process(File in, File out) {

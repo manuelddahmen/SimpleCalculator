@@ -20,9 +20,9 @@
 
 package one.empty3.feature20220726;
 
-import one.empty3.io.ProcessFile;
-
 import java.io.File;
+
+import one.empty3.io.ProcessFile;
 
 public class LocalExtremaProcess extends ProcessFile {
     ExtremaProcess extremaProcess = new ExtremaProcess();

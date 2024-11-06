@@ -29,7 +29,6 @@ import android.widget.TextView
 import android.widget.Toast
 
 import one.empty3.apps.simplecalculator.databinding.FragmentItemBinding
-import one.empty3.apps.simplecalculator.Functions
 import one.empty3.library1.tree.Functions
 
 class MyStringRecyclerViewAdapterFunctionList(private var values: Array<String> = one.empty3.library1.tree.Functions.getListOfFunctions().toTypedArray()) :
@@ -74,17 +73,17 @@ class MyStringRecyclerViewAdapterFunctionList(private var values: Array<String> 
                     (tv2).text = item
             holder.text = item
             holder.itemView.setOnClickListener {
-                Functions.functionName = tv2.text as String
+                Main.functionName = tv2.text as String
                 holder.itemView.setBackgroundColor(android.graphics.Color.BLUE)
                 Toast.makeText(rvVec.context, item, Toast.LENGTH_LONG).show()
             }
             tv1.setOnClickListener {
-                Functions.functionName = tv2.text as String
+                Main.functionName = tv2.text as String
                 tv1.setBackgroundColor(android.graphics.Color.BLUE)
                 Toast.makeText(rvVec.context, item, Toast.LENGTH_LONG).show()
             }
             tv2.setOnClickListener {
-                Functions.functionName = tv2.text as String
+                Main.functionName = tv2.text as String
                 tv2.setBackgroundColor(android.graphics.Color.BLUE)
                 Toast.makeText(rvVec.context, item, Toast.LENGTH_LONG).show()
             }

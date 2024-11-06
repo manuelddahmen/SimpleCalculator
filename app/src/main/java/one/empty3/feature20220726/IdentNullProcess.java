@@ -20,12 +20,10 @@
 
 package one.empty3.feature20220726;
 
+import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.io.ProcessFile;
 
-import javaAnd.awt.image.imageio.ImageIO;
-
 import java.io.File;
-import java.io.IOException;
 import java.util.Objects;
 
 public class IdentNullProcess extends ProcessFile {

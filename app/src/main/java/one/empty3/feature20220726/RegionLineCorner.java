@@ -20,9 +20,9 @@
 
 package one.empty3.feature20220726;
 
-import android.graphics.Color;
+import static one.empty3.feature20220726.WriteFile.shouldOverwrite;
 
-import one.empty3.io.ProcessFile;
+import android.graphics.Color;
 
 import javaAnd.awt.image.imageio.ImageIO;
 import javaAnd.awt.image.BufferedImage;
@@ -30,10 +30,10 @@ import javaAnd.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
 
 import java.util.List;
 
+import one.empty3.io.ProcessFile;
 import one.empty3.library.core.lighting.Colors;
 
 /*
@@ -321,7 +321,7 @@ public class RegionLineCorner extends ProcessFile {
                 // grouper les points par similarites et distances
                 List<List<Circle>> circles = group(pointsOfInterest);
                 for (List<Circle> lc : circles) {
-                    Color color = Colors.random();
+                    Color color = Color.valueOf((float) Math.random(), (float) Math.random(), (float) Math.random());
                     for (Circle c : lc) {
 
                         img4.setRGB((int) (c.x), (int) (c.y), color.toArgb());

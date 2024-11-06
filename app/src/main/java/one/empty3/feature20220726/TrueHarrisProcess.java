@@ -21,13 +21,14 @@
 package one.empty3.feature20220726;
 
 
-import javaAnd.awt.image.imageio.ImageIO;
+import static one.empty3.feature20220726.WriteFile.shouldOverwrite;
 
-import one.empty3.io.ProcessFile;
+import javaAnd.awt.image.imageio.ImageIO;
 
 import java.io.File;
 
 import javaAnd.awt.image.BufferedImage;
+import one.empty3.io.ProcessFile;
 
 public class TrueHarrisProcess extends ProcessFile {
 

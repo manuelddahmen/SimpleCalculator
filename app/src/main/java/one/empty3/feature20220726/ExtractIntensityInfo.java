@@ -25,7 +25,6 @@ import android.graphics.Color;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.library.core.lighting.Colors;
 import one.empty3.io.ProcessFile;
-
 import javaAnd.awt.image.BufferedImage;
 
 import java.io.File;
@@ -132,7 +131,7 @@ public class ExtractIntensityInfo extends
 
         try {
             ImageIO.write(pix.getImage(),
-                    "JPEG", out, shouldOverwrite);
+                    "JPEG", out, WriteFile.shouldOverwrite);
         } catch (Exception ex) {
         }
 

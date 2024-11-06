@@ -64,7 +64,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getPixel(i, j);
-                Lumiere.getDoubles(rgb, colorComponents);
+               colorComponents = Lumiere.getDoubles(rgb);
                 for (int com = 0; com < 3; com++) {
                     setCompNo(com);
                     set(i, j, colorComponents[com]);
@@ -79,7 +79,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 int rgb = image.getPixel(i, j);
-                Lumiere.getDoubles(rgb, colorComponents);
+               colorComponents = Lumiere.getDoubles(rgb);
                 for (int com = 0; com < getCompCount(); com++) {
                     setCompNo(com);
                     set(i, j, colorComponents[com]);
@@ -175,7 +175,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
                 int rgb = image.getPixel(
                         (int) (1.0 * i / columns2 * image.getWidth()), (int) (1.0 * j / lines2 * image.getHeight()));
                 double[] colorComponents = new double[3];
-                Lumiere.getDoubles(rgb, colorComponents);
+               colorComponents = Lumiere.getDoubles(rgb);
                 for (int com = 0; com < pixM.getCompCount(); com++) {
                     pixM.setCompNo(com);
                     pixM.set(i, j, colorComponents[com]);
@@ -627,7 +627,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
         double[] rgba = new double[getCompCount()];
         double t;
         for (t = curve.getStartU(); t < curve.getEndU(); t += curve.getIncrU().getElem()) {
-            Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
+            rgba = Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb());
             double t1;
             for (t1 = t; t1 < t+curve.getIncrU().getElem(); t1+= 0.001) {
                 Point3D p = curve.calculerPoint3D(t1);
@@ -636,14 +636,14 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
                     set((int) (double) p.getX(), (int) (double) p.getY(), rgba[c]);
                 }
             }
-            Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
+            rgba = Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb());
             Point3D p = curve.calculerPoint3D(t+curve.getIncrU().getElem());
             for (int c = 0; c < 3; c++) {
                 setCompNo(c);
                 set((int) (double) p.getX(), (int) (double) p.getY(), rgba[c]);
             }
         }
-        Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
+        rgba = Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb());
         Point3D p = curve.calculerPoint3D(curve.getEndU());
         for (int c = 0; c < 3; c++) {
             setCompNo(c);
@@ -657,7 +657,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
         double[] rgba = new double[getCompCount()];
         for (double t = 0; t < 1.0; t += 0.001) {
             for (int c = 0; c < 3; c++) {
-                Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb(), rgba);
+                rgba = Lumiere.getDoubles(Color.valueOf(curve.texture().getColorAt(t, 0.)).toArgb());
                 Point3D p = curve.calculerPoint3D(t);
                 setCompNo(c);
                 set((int) (double) p.getX(), (int) (double) p.getY(), rgba[c]);
@@ -845,7 +845,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
     private double[] tmpColor2 = new double[3];
     public void paintIfNot(int x, int y, int width, int height, @Nullable Bitmap bitmaToDraw, int colorTransparent) {
         double[] tmpColor3 = new double[3];
-        Lumiere.getDoubles(colorTransparent, tmpColor3);
+        tmpColor3 = Lumiere.getDoubles(colorTransparent);
         for (int i = x; i < width; i++) {
             for (int j = y; j < height; j++) {
                 assert bitmaToDraw != null;
@@ -853,7 +853,7 @@ public class PixM extends MBitmap implements Parcelable, Serializable, Serialisa
                 double yOrig = Math.min(1.0 * (j - y) / height * bitmaToDraw.getHeight(), bitmaToDraw.getHeight() - 1);
 
                 int pixel = bitmaToDraw.getPixel((int) xOrig, (int) yOrig);
-                Lumiere.getDoubles(pixel, tmpColor2);
+                tmpColor2 = Lumiere.getDoubles(pixel);
                 if (!equalsArrays(tmpColor2, tmpColor3, 0.01)) {
                     setValues(i, j, tmpColor2);
                 }

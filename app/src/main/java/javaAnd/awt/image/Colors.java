@@ -18,21 +18,14 @@
  *
  */
 
-package one.empty3.feature20220726;
+package javaAnd.awt.image;
 
-import one.empty3.io.ProcessFile;
-import one.empty3.library.Point3D;
+import android.graphics.Color;
 
-import java.io.File;
+import one.empty3.library.Lumiere;
 
-public class DiffDensity extends ProcessFile {
-    private PixM densities;
-    private Point3D[] colors;
-
-    @Override
-    public boolean process(File in, File out) {
-        //
-
-        return false;
+public class Colors {
+    public Color random() {
+        return Color.valueOf(Lumiere.getInt(Math.random(), Math.random(), Math.random()));
     }
 }

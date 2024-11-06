@@ -26,12 +26,10 @@ import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.kmeans.MakeDataset;
 import one.empty3.feature20220726.kmeans.ReadDataset;
 import one.empty3.io.ProcessFile;
-import one.empty3.library.core.lighting.Colors;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
 
 import java.util.Iterator;
 import java.util.List;
@@ -134,13 +132,14 @@ public class DBScan extends ProcessFile {
             cluster();
 
             for (Cluster cluster : clusters) {
-                Color colorCluster = (Color) Colors.random();
+                Color colorCluster = Color.valueOf((float)Math.random(), (float)Math.random(), (float)Math.random());
                 for (int i = 0; i < cluster.getPoints().size(); i++) {
                     DataPoint centroid = cluster.getPoints().get(i);
                     p.setValues(centroid.getX(), centroid.getY(), colorCluster.red(),
                             colorCluster.green(), colorCluster.blue());
                 }
             }
+            boolean shouldOverwrite = false;
             ImageIO.write(p.getImage(), "jpg", out, shouldOverwrite);
 
         } catch (IOException e) {

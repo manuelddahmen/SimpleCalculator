@@ -24,7 +24,6 @@ import one.empty3.io.ProcessFile;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.LineSegment;
 import one.empty3.library.Point3D;
-import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 
 import javaAnd.awt.image.imageio.ImageIO;
@@ -34,7 +33,6 @@ import javaAnd.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
 
 import java.util.Arrays;
 import java.util.List;
@@ -349,7 +347,7 @@ public class Lines5colors extends ProcessFile {
                     });
                 });
                 if (extremes[0][0] != null && extremes[0][1] != null && isInBound(extremes[0][0]) && isInBound(extremes[0][1])) {
-                    lines.add(new LineSegment(extremes[0][0], extremes[0][1], new ColorTexture(r)));
+                    lines.add(new LineSegment(extremes[0][0], extremes[0][1], new ColorTexture(r.toArgb())));
                 }
                 // Calculer le segment AB qui approxime un maximum de points dans l'ensemble
                 /*b = (yB − yA)/(xB − xA); a = (yA − bxA). :?yA = yMoyen, xA = xMoyen*/

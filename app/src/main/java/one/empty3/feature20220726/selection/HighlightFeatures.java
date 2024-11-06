@@ -20,12 +20,13 @@
 
 package one.empty3.feature20220726.selection;
 
+import static one.empty3.feature20220726.WriteFile.shouldOverwrite;
+
 import one.empty3.feature20220726.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.ITexture;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
-import one.empty3.library.StructureMatrix;
 import one.empty3.library.Scene;
 import one.empty3.library.core.nurbs.ParametricCurve;
 

@@ -25,6 +25,8 @@ de lumierrs filtrers.
 
 package one.empty3.feature20220726.pio;
 
+import static one.empty3.feature20220726.WriteFile.shouldOverwrite;
+
 import javaAnd.awt.Color;
 import one.empty3.feature20220726.PixM;
 import one.empty3.io.ProcessFile;

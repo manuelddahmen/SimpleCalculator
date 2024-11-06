@@ -20,14 +20,15 @@
 
 package one.empty3.feature20220726;
 
-import one.empty3.io.ProcessFile;
-
 import javaAnd.awt.image.imageio.ImageIO;
 import javaAnd.awt.image.BufferedImage;
+import one.empty3.io.ProcessFile;
 
 import java.io.File;
 
 public class HarrisProcess extends ProcessFile {
+    private boolean shouldOverwrite;
+
     public boolean process(File in, File out) {
         try {
             BufferedImage img = ImageIO.read(in);

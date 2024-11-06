@@ -24,6 +24,8 @@ package one.empty3.feature20220726.kmeans;
  * Class for Kmeans Clustering implemetation
  */
 
+import android.graphics.Color;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,9 +37,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import javaAnd.awt.image.Colors;
 import javaAnd.awt.image.imageio.ImageIO;
 import one.empty3.feature20220726.PixM;
-import one.empty3.library.core.lighting.Colors;
 
 public class K_Clusterer /*extends ReadDataset*/ {
     public List<double[]> features;
@@ -183,9 +185,9 @@ public class K_Clusterer /*extends ReadDataset*/ {
                 ex++;
             } while (ex < 1);
 
-            android.graphics.Color[] colors = new android.graphics.Color[K];
+            final Color[] colors = new Color[K];
             for (int i = 0; i < K; i++)
-                colors[i] = Colors.random();
+                colors[i] = Color.valueOf((float) Math.random(), (float) Math.random(), (float) Math.random());
             clustersPrint = clusters;
 
 
@@ -212,8 +214,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
             centroids.forEach((i, doubles) -> {
                 clustersPrint.forEach((d1, i2) -> {
                     if(random) {
-                        pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]),
-                        colors[i2].red(), colors[i2].green(), colors[i2].blue());
+                        pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]), colors[i2].toArgb());
                     } else {
                         pix2.setValues((int) (float) (d1[0]), (int) (float) (d1[1]),
                                 realValues[i2][2], realValues[i2][3], realValues[i2][4]);

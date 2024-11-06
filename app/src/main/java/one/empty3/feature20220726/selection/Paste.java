@@ -29,7 +29,6 @@ import javaAnd.awt.image.imageio.ImageIO;
 import javaAnd.awt.image.BufferedImage;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.function.Consumer;
 

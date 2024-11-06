@@ -20,15 +20,16 @@
 
 package one.empty3.feature20220726;
 
-import one.empty3.io.ProcessFile;
-
 import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.io.ProcessFile;
 
 import java.io.File;
 import java.io.IOException;
 
 public class DericheFilterProcess extends ProcessFile {
 
+
+    private boolean shouldOverwrite;
 
     @Override
     public boolean process(File in, File out) {

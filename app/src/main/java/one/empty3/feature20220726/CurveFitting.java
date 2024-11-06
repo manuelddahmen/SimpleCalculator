@@ -27,7 +27,6 @@ import one.empty3.library.Axe;
 import one.empty3.library.Circle;
 import one.empty3.library.ColorTexture;
 import one.empty3.library.Point3D;
-import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 
 import javaAnd.awt.image.imageio.ImageIO;
@@ -36,13 +35,13 @@ import javaAnd.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import one.empty3.library.StructureMatrix;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 public class CurveFitting extends ProcessFile {
+    boolean shouldOverwrite = false;
     CourbeN11 curvePoints;
     /*
      *
@@ -293,9 +292,9 @@ public class CurveFitting extends ProcessFile {
             //        pix.getLines()/2, 0)), Point3D.Z.mult(-1)), (imgX2-imgX1)/3.*2);
 
             inPix.paintAll(new double[]{0, 0, 0});
-            inPix.fillIn(curveInitial, new ColorTexture(Color.valueOf(Color.WHITE)), new ColorTexture(Color.color(Color.RED)));
+            inPix.fillIn(curveInitial, new ColorTexture(Color.WHITE), new ColorTexture(Color.RED));
             outPix.paintAll(new double[]{1, 1, 1});
-            outPix.fillIn(curveInitial, new ColorTexture(Color.color(Color.BLACK)), new ColorTexture(Color.color(Color.RED)));
+            outPix.fillIn(curveInitial, new ColorTexture(Color.BLACK), new ColorTexture(Color.RED));
 
             curvePoints = approx();
 
@@ -303,8 +302,8 @@ public class CurveFitting extends ProcessFile {
             //double[][] distances = distances();
             //inPix.paintAll(new double[]{0, 0, 0});
             //outPix.paintAll(new double[]{1, 1, 1});
-            inPix.fillIn(curvePoints, new ColorTexture(Color.color((Color.WHITE))), new ColorTexture(Color.color(Color.WHITE)));
-            outPix.fillIn(curvePoints, new ColorTexture(Color.color(Color.BLACK)), new ColorTexture(Color.color(Color.BLACK)));
+            inPix.fillIn(curvePoints, new ColorTexture((Color.WHITE)), new ColorTexture(Color.WHITE));
+            outPix.fillIn(curvePoints, new ColorTexture(Color.BLACK), new ColorTexture(Color.BLACK));
 
             double e = E();
             //curveResult = modify();
@@ -314,9 +313,9 @@ public class CurveFitting extends ProcessFile {
             curvePoints.setIncrU(1. / maxRes / curvePoints.getCoefficients().data1d.size());
 
             System.out.println("Courbe 4/5");
-            p.plotCurve(curvePoints, new ColorTexture(Color.color(Color.WHITE)));
+            p.plotCurve(curvePoints, new ColorTexture(Color.WHITE));
             System.out.println("Courbe 5/5");
-            p.plotCurve(circle, new ColorTexture(Color.color(Color.BLUE)));
+            p.plotCurve(circle, new ColorTexture(Color.BLUE));
             for (Point3D c : curvePoints.getCoefficients().getData1d()) {
                 Rectangle rectangle = new Rectangle(c.getX() - 3, c.getY() - 3, 6, 6);
                 rectangle.setIncrU(0.1);

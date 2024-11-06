@@ -151,13 +151,15 @@ public class ResolutionCharacter0 implements Runnable {
     public void chanfrein(PixM input, PixM output, Color traceColor) {
         for (int i = 0; i < input.getColumns(); i++)
             for (int j = 0; j < input.getLines(); j++) {
-                if (Arrays.equals(input.getValues(i, j), (Lumiere.getRgb(traceColor)))) {
+                double[] values1 = input.getValues(i, j);
+                android.graphics.Color color = Color.valueOf((float) values1[0], (float) values1[1], (float) values1[2]);
+                if (color.toArgb()== traceColor.toArgb()) {
                     output.setValues(i, j, traceColor.red(), traceColor.green(), traceColor.blue());
 
                 } else {
                     int neighbors = 0;
                     boolean cont = true;
-                    double[] cl = Lumiere.getRgb(traceColor);
+                    double[] cl = Lumiere.getDoubles(traceColor.toArgb());
                     double distMax = (Math.max(input.getColumns(), input.getLines()));
                     for (int n = 1; n < distMax && cont; n++) {
                         for (int ii = 0; ii < n && cont; ii++)

@@ -20,10 +20,8 @@
 
 package one.empty3.feature20220726;
 
-import one.empty3.io.ProcessFile;
-
 import javaAnd.awt.image.imageio.ImageIO;
-import javaAnd.awt.image.BufferedImage;
+import one.empty3.io.ProcessFile;
 
 import java.io.*;
 import java.util.Objects;

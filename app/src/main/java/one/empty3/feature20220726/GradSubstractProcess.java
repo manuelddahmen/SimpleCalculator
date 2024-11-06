@@ -21,6 +21,8 @@
 package one.empty3.feature20220726;
 
 
+import static one.empty3.feature20220726.WriteFile.shouldOverwrite;
+
 import java.io.File;
 
 import javaAnd.awt.image.imageio.ImageIO;
