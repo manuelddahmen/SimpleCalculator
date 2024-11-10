@@ -8,6 +8,8 @@ buildscript {
         classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.2'
         classpath 'com.huawei.agconnect:agconnect-core:1.5.2.300'
         classpath 'com.huawei.agconnect:agcp:1.5.2.300'
+        classpath "one.empty3:empty3-library-mp:2024.11.8-1"
+        classpath "one.empty3.libs:partial-android:0.0.5"
         //classpath 'com.huawei.agconnect:agcp:1.5.2.300'
     }
 }
