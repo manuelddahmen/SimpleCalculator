@@ -55,3 +55,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Sci-prog Calculator"
 include ':app'
+include ':lib'

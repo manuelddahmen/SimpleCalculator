@@ -7,7 +7,8 @@
 -keep class org.ksoap2.** { *; }
 -keep class org.kxml2.** { *; }
 -keep class org.xmlpull.** { *; }
-
+-keep class one.empty3.libs.Color
+-keep class one.empty3.libs.Image
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
 -dontoptimize

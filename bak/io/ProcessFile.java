@@ -25,8 +25,8 @@ import java.util.List;
 
 import javaAnd.awt.image.BufferedImage;
 import javaAnd.awt.image.imageio.ImageIO;
-import one.empty3.feature20220726.PixM;
-import one.empty3.feature20220726.ProcessBean;
+import one.empty3.feature.PixM;
+import one.empty3.feature.ProcessBean;
 
 public abstract class ProcessFile extends ProcessNFiles {
     public ProcessBean bean;

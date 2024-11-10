@@ -32,4 +32,5 @@
 -keep class com.huawei.hianalytics.**{*;}
 -keep class com.huawei.updatesdk.**{*;}
 -keep class com.huawei.hms.**{*;}
-
+-keep class one.empty3.libs.Color
+-keep class one.empty3.libs.Image

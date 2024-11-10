@@ -20,9 +20,7 @@
 
 package javaAnd.awt;
 
-import one.empty3.library.Lumiere;
-
-public class Color extends android.graphics.Color/*android.graphics.Color*/ {
+public class Color /*android.graphics.Color*/ {
 
     public static final int TRANSLUCENT = 0;
 
@@ -36,7 +34,7 @@ public class Color extends android.graphics.Color/*android.graphics.Color*/ {
     }
 
     public static android.graphics.Color color(double v, double v1, double v2) {
-        return Color.valueOf((float) v, (float) v1, (float) v2);
+        return android.graphics.Color.valueOf((float) v, (float) v1, (float) v2);
 
     }
 
@@ -46,12 +44,12 @@ public class Color extends android.graphics.Color/*android.graphics.Color*/ {
     }
 
     public static android.graphics.Color color(float r, float r1, float r2) {
-        return Color.valueOf(r, r1, r2);
+        return android.graphics.Color.valueOf(r, r1, r2);
     }
 
     public static android.graphics.Color color(int r, int g, int b) {
 
-        return Color.valueOf(r, g, b);
+        return android.graphics.Color.valueOf(r, g, b);
     }
 
 
@@ -65,7 +63,7 @@ public class Color extends android.graphics.Color/*android.graphics.Color*/ {
     }
 
     public static float[] intConvToFloatArray(int color) {
-        android.graphics.Color color1 = Color.valueOf(color);
+        android.graphics.Color color1 = android.graphics.Color.valueOf(color);
         return new float[]{color1.red(), color1.green(), color1.blue()};
     }
 
@@ -74,18 +72,7 @@ public class Color extends android.graphics.Color/*android.graphics.Color*/ {
     }
 
     public android.graphics.Color Color(int rgb) {
-        return Color.valueOf(rgb);
+        return android.graphics.Color.valueOf(rgb);
     }
 
-    public int getRgb() {
-        return super.toArgb();
-    }
-
-    public int getRGB() {
-        return super.toArgb();
-    }
-
-    public double getAlpha() {
-        return 0;
-    }
 }

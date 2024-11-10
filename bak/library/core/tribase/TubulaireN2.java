@@ -34,7 +34,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javaAnd.awt.Color;
+import one.empty3.libs.Color;
 import one.empty3.library.PObjet;
 import one.empty3.library.Point3D;
 import one.empty3.library.Representable;
