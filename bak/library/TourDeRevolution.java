@@ -68,7 +68,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Objects;
 
-import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.ImageIO;
 
 public class TourDeRevolution extends Representable {
 

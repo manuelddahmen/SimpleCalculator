@@ -21,7 +21,7 @@ package one.empty3.library;
 
 import android.graphics.Bitmap;
 
-import javaAnd.awt.image.BufferedImage;
+import one.empty3.libs.Image;
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.tribase.Plan3D;
 
@@ -41,7 +41,7 @@ public abstract class HeightMapSurface extends ParametricSurface {
         surface.setElem(new Plan3D());
     }
 
-    public HeightMapSurface(ParametricSurface ps, BufferedImage image) {
+    public HeightMapSurface(ParametricSurface ps, Image image) {
         this.image.setElem(new ImageContainer(image.getBitmap()));
         this.surface.setElem(ps);
     }

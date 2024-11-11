@@ -50,7 +50,7 @@ import org.monte.media.avi.AVIWriter;
 import org.monte.media.math.Rational;
 import org.monte.media.mp3.MP3AudioInputStream;
 
-import javaAnd.awt.image.imageio.ImageIO;import javax.sound.sampled.AudioFormat;
+import one.empty3.ImageIO;import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -320,7 +320,7 @@ public abstract class TestObjet implements Test, Runnable {
             System.exit(1);
         }
 
-        Graphics g = ((BufferedImage) ri).getGraphics();
+        Graphics g = ((Image) ri).getGraphics();
         g.setColor(Color.black);
         g.drawString(description, 0, 1100);
 
@@ -696,7 +696,7 @@ public abstract class TestObjet implements Test, Runnable {
             }
 
             RenderedImage i = ImageIO.read(is);
-            BufferedImage bi = (BufferedImage) i;
+            Image bi = (Image) i;
 
             ECBufferedImage eci = new ECBufferedImage(bi);
             biic.setImage(eci);
@@ -723,7 +723,7 @@ public abstract class TestObjet implements Test, Runnable {
             }
 
             RenderedImage i = ImageIO.read(is);
-            BufferedImage bi = (BufferedImage) i;
+            Image bi = (Image) i;
 
             ECBufferedImage eci = new ECBufferedImage(bi);
             biic.setImage(eci);
@@ -1111,10 +1111,10 @@ public abstract class TestObjet implements Test, Runnable {
         }
     }
 
-    public void writeOnPictureAfterZ(BufferedImage bi) {
+    public void writeOnPictureAfterZ(Image bi) {
     }
 
-    public void writeOnPictureBeforeZ(BufferedImage bi) {
+    public void writeOnPictureBeforeZ(Image bi) {
     }
 
     public String getFolder() {

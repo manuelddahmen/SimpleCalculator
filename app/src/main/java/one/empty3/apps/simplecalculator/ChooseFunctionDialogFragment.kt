@@ -42,6 +42,7 @@ class ChooseFunctionDialogFragment : DialogFragment() {
 
     public fun setMainAnd(main2022 : ListMathDoubleFunction, rv: RecyclerView) {
         this.main2022 = main2022
+        Main.functionName = ""
         ListMathDoubleFunction.functionName = ""
         this.rv = rv
     }
@@ -62,7 +63,7 @@ class ChooseFunctionDialogFragment : DialogFragment() {
                 // Add action buttons
                 .setPositiveButton(R.string.fragment_function_ok,
                     DialogInterface.OnClickListener { dialog, id ->
-                        this.functionName =  ListMathDoubleFunction.functionName
+                        this.functionName = Main.functionName
                         isExited = true;
 
                     })
@@ -78,7 +79,7 @@ class ChooseFunctionDialogFragment : DialogFragment() {
             val  rv:RecyclerView=  inflate.findViewById(R.id.list)
 
             val myStringRecyclerViewAdapter =
-                MyStringRecyclerViewAdapter(mathList)
+                MyStringRecyclerViewAdapterFunctionList(mathList)
             rv.adapter = myStringRecyclerViewAdapter
             myStringRecyclerViewAdapter.setMainAnd(mathList, rv)
 

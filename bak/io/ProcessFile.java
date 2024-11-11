@@ -23,8 +23,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javaAnd.awt.image.BufferedImage;
-import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.libs.Image;
+import one.empty3.ImageIO;
 import one.empty3.feature.PixM;
 import one.empty3.feature.ProcessBean;
 
@@ -40,7 +40,7 @@ public abstract class ProcessFile extends ProcessNFiles {
         if( in != null && (in.getAbsolutePath().toLowerCase().endsWith(".jpg")
                 || in.getAbsolutePath().toLowerCase().endsWith(".png")))
             return true;
-        BufferedImage read = ImageIO.read(in);
+        Image read = ImageIO.read(in);
         if(read!=null) return true;
         return false;
     }

@@ -67,7 +67,7 @@ import one.empty3.library.StructureMatrix;
 import one.empty3.library.TextureImg;
 import one.empty3.library.core.tribase.TRISphere;
 
-import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.ImageIO;
 
 import java.io.File;
 import java.io.IOException;

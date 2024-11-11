@@ -20,7 +20,7 @@
 
 package one.empty3.library;
 
-import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.ImageIO;
 import android.graphics.Bitmap;
 import android.os.Build;
 

@@ -62,7 +62,7 @@ import one.empty3.library.ITexture;
 import one.empty3.library.TextureCol;
 import one.empty3.library.TextureImg;
 
-import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.ImageIO;
 
 import java.io.File;
 import java.io.IOException;

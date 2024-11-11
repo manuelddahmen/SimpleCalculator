@@ -24,8 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import javaAnd.awt.image.BufferedImage;
-import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.libs.Image;
+import one.empty3.ImageIO;
 import one.empty3.feature.PixM;
 import one.empty3.feature.ProcessBean;
 import one.empty3.feature.process.InProcessCode;
@@ -70,7 +70,7 @@ public class ProcessNFiles  {
             Properties p = getProperty();
             String property = p.getProperty(s);
             File file = new File(property);
-            BufferedImage read = null;
+            Image read = null;
             read = ImageIO.read(file);
             return (new PixM(read));
         } catch (Exception ex) {

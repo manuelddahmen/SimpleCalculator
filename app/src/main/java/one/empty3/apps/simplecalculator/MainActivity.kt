@@ -156,6 +156,7 @@ class MainActivity : AppCompatActivity() {
                 compute(tree, textAnswer)
             }
         }
+
         val buttonFunctionAdd: Button = findViewById(R.id.buttonFunction)
         buttonFunctionAdd.setOnClickListener {
 //            val stringFragment : StringFragment= StringFragment()

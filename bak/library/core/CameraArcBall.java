@@ -22,7 +22,7 @@ package one.empty3.library.core;
 import javaAnd.awt.Point;
 import one.empty3.library.*;
 
-import javaAnd.awt.*;
+import one.empty3.libs.*;
 
 /*__
  * Created by manue on 23-11-19.

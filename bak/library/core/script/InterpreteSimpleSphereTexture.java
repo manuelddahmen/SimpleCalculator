@@ -66,7 +66,7 @@ import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
 import one.empty3.library.core.extra.SimpleSphereAvecTexture;
 
-import javaAnd.awt.image.imageio.ImageIO;
+import one.empty3.ImageIO;
 
 import java.io.File;
 import java.io.IOException;

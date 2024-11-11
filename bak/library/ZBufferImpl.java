@@ -566,7 +566,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     public Bitmap image2() {
         //return image2();
 
-//        BufferedImage bi = new BufferedImage(la, ha, BufferedImage.TYPE_INT_RGB);
+//        Image bi = new Image(la, ha, Image.TYPE_INT_RGB);
 //        bi.setRGB(0, 0, la, ha, getData(), 0, la);
 //        return new ECBufferedImage(bi);
         return image();
