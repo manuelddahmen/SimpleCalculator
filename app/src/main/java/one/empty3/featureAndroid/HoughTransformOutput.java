@@ -44,7 +44,7 @@ package one.empty3.featureAndroid;//package one.empty3.feature20220726;
 //                img.setRGB(i, j, new Color(Lumiere.getIntFromFloats(255, 255, 255, imgArray[i][j]).getRGB());
 //            }
 //        }
-//        ImageIO.write(img, "png", outFile);
+//       one.empty3.ImageIO.write(img, "png", outFile);
 //    }
 //
 //    public static void writeImage(double[][] imgArray, File outFile) throws Exception {
@@ -54,11 +54,11 @@ package one.empty3.featureAndroid;//package one.empty3.feature20220726;
 //                img.setRGB(i, j, (int) imgArray[i][j]);
 //            }
 //        }
-//        ImageIO.write(img, "png", outFile);
+//       one.empty3.ImageIO.write(img, "png", outFile);
 //    }
 //
 //    public static void writeImage(Image image, File outFile) throws Exception {
-//        ImageIO.write(image, "png", outFile);
+//       one.empty3.ImageIO.write(image, "png", outFile);
 //    }
 //
 //    public static void writeImage(double[][] sobelArray, File outFile, int threshold) throws Exception {
@@ -70,7 +70,7 @@ package one.empty3.featureAndroid;//package one.empty3.feature20220726;
 //                }
 //            }
 //        }
-//        ImageIO.write(img, "png", outFile);
+//       one.empty3.ImageIO.write(img, "png", outFile);
 //    }
 //
 //    public static void superimposeCircles(List<CircleHit> hits, javaAnd.awt.image.Image in, File out) {
@@ -89,7 +89,7 @@ package one.empty3.featureAndroid;//package one.empty3.feature20220726;
 //            }
 //        }
 //        try {
-//            ImageIO.write(in, "jpg", out);
+//           one.empty3.ImageIO.write(in, "jpg", out);
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
@@ -116,7 +116,7 @@ package one.empty3.featureAndroid;//package one.empty3.feature20220726;
 //            }
 //        }
 //
-//        ImageIO.write(totalCircles, "png", out);
+//       one.empty3.ImageIO.write(totalCircles, "png", out);
 //    }
 ///*/
 //    public static javaAnd.awt.image.Image scaledSobelResult(double[][] sobelTotal) {

@@ -12,7 +12,7 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406999502
+def versionCode1000 = 406999505
 def kotlin_version = '2.0.0'
 def javaVersionEnum = JavaVersion.VERSION_21
 def javaVersion = 21
@@ -128,6 +128,7 @@ android {
         resources {
             exclude('/META-INF/{AL2.0,LGPL2.1}')
         }
+        exclude('META-INF/LICENSE.md')
         exclude('mozilla/public-suffix-list.txt')
         exclude('META-INF/LICENSE-notice.md')
         exclude("META-INF/DEPENDENCIES")
@@ -139,6 +140,17 @@ android {
         exclude("META-INF/notice.txt")
         exclude("META-INF/ASL2.0")
         exclude("META-INF/*.kotlin_module")
+        exclude('META-INF/INDEX.LIST')
+        exclude('META-INF/spring.factories')
+        exclude('META-INF/spring/aot.factories')
+        exclude('META-INF/spring.schemas')
+        exclude('META-INF/spring.tooling')
+        exclude('META-INF/spring.handlers')
+        exclude('META-INF/spring-configuration-metadata.json')
+        exclude('META-INF/additional-spring-configuration-metadata.json')
+        dex {
+            useLegacyPackaging = false
+        }
     }
     lint {
         baseline file('lint-baseline.xml')
@@ -164,6 +176,8 @@ android {
         //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin-api'
         all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin'
         //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-build-common'
+        all*.exclude group: 'org.springframework', module: 'spring-jcl'
+        all*.exclude group: 'commons-logging', module: 'commons-logging'
         all {
             resolutionStrategy {
                 force("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.6.2")
@@ -204,7 +218,7 @@ android {
         compileSdk 35
         targetSdk 35
         minSdkVersion 29
-        versionName "9.1"
+        versionName "9.3"
         versionCode versionCode1000
         signingConfig signingConfigs.release
     }
@@ -230,8 +244,8 @@ configurations {
 
 dependencies {
     implementation(project(":partialandroid"))
-    implementation "one.empty3.libs:commons-mp:0.0.4"
-    implementation("one.empty3:empty3-library-mp:2024.11.30-2")
+    implementation "one.empty3.libs:commons-mp:0.0.6"
+    implementation("one.empty3:empty3-library-mp:2024.12.3")
     // This dependency is downloaded from the Google’s Maven repository.
     // So, make sure you also include that repository in your project's build.gradle file.
     implementation 'com.google.android.play:asset-delivery:2.2.2'

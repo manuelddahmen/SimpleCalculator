@@ -26,7 +26,6 @@ import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point2D;
 
-import one.empty3.ImageIO;
 import one.empty3.libs.Image;
 
 import java.io.File;
@@ -63,7 +62,7 @@ public class PartMatch extends ProcessFile {
                         double sign = Math.signum(prod2(pb.moins(pa), pb.moins(p)));
                         pixM.setValues(i, j, sign, sign, sign);
                     }
-                ImageIO.write(pixM.normalize(0, 1).getImage(), "jpg", new File("features/featureDesc_"
+               one.empty3.ImageIO.write(pixM.normalize(0, 1).getImage(), "jpg", new File("features/featureDesc_"
                         + n + "_angle_" + a + ".jpg"), shouldOverwrite);
 
                 featuresDescriptors.add(pixM);
@@ -110,7 +109,7 @@ public class PartMatch extends ProcessFile {
     public boolean process(File in, File out) {
         featuresDescriptors = new ArrayList<>();
 
-        PixM pix = PixM.getPixM(ImageIO.read(in), maxRes);
+        PixM pix = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
 
         Image outImg = pix.getImage();
 
@@ -140,7 +139,7 @@ public class PartMatch extends ProcessFile {
             }
         }
 
-        ImageIO.write(outImg, "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(outImg, "jpg", out, shouldOverwrite);
 
         return true;
     }

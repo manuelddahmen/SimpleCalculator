@@ -26,8 +26,6 @@ import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
 
-import one.empty3.ImageIO;
-
 import java.io.File;
 
 /*
@@ -147,7 +145,7 @@ public class Histogram1 extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
         PixM inP;
-        inP = PixM.getPixM(ImageIO.read(in), maxRes);
+        inP = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
         PixM outP = inP.copy();
         double maxR = Math.min(inP.getLines(), inP.getColumns()) * fractMax;
         for (int i = 0; i < inP.getColumns(); i++) {
@@ -177,7 +175,7 @@ public class Histogram1 extends ProcessFile {
 // Colorier en fonction des pixels voisins
 //        Circle c2 = getLevel(cc, inP, cc.r/2);
 
-        ImageIO.write(outP.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(outP.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
         return true;
 
     }

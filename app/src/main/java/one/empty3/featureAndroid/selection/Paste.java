@@ -25,7 +25,6 @@ import one.empty3.io.ProcessFile;
 import one.empty3.library.*;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
-import one.empty3.ImageIO;
 import one.empty3.libs.Image;
 
 import java.io.File;
@@ -93,7 +92,7 @@ public class Paste extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        Image read = ImageIO.read(in);
+        Image read =one.empty3.ImageIO.read(in);
         PixM pixM = PixM.getPixM(read, maxRes);
         return true;
     }

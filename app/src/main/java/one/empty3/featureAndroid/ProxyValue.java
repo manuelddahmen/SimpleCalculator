@@ -27,9 +27,6 @@ import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
 
-
-import one.empty3.ImageIO;
-
 public class ProxyValue extends ProcessFile {
 
     public boolean process(File in, File out) {
@@ -40,7 +37,7 @@ public class ProxyValue extends ProcessFile {
         one.empty3.matrix.PixM original = null;
 
         try {
-            original = PixM.getPixM(ImageIO.read(in), maxRes);
+            original = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -67,7 +64,7 @@ public class ProxyValue extends ProcessFile {
 
 
         try {
-            ImageIO.write(copy.getImage(), "jpg", out, shouldOverwrite);
+           one.empty3.ImageIO.write(copy.getImage(), "jpg", out, shouldOverwrite);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

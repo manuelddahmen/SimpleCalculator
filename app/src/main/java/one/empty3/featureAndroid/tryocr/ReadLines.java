@@ -22,7 +22,6 @@ package one.empty3.featureAndroid.tryocr;
 
 
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
@@ -33,7 +32,7 @@ public class ReadLines extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        PixM pixM = new PixM(ImageIO.read(in));
+        PixM pixM = new PixM(one.empty3.ImageIO.read(in));
 
         PixM pixM2 = new PixM(pixM.getColumns(), pixM.getLines());
 
@@ -87,8 +86,8 @@ public class ReadLines extends ProcessFile {
                         sum = (countNotEmpty[s][i][j] / maxSize);
                 pixOut1.setValues(i, j, sum, sum, sum);
             }
-        ImageIO.write(pixOut1.getImage(), "jpg", out2, shouldOverwrite);
-        ImageIO.write(pixM2.getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(pixOut1.getImage(), "jpg", out2, shouldOverwrite);
+       one.empty3.ImageIO.write(pixM2.getImage(), "jpg", out, shouldOverwrite);
         return true;
     }
 

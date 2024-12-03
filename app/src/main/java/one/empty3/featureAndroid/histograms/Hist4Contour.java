@@ -24,7 +24,6 @@ package one.empty3.featureAndroid.histograms;
 import java.io.File;
 import java.util.Objects;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
@@ -154,7 +153,7 @@ public class Hist4Contour extends ProcessFile {
         // Colorier en fonction des pixels voisins
         //        Circle c2 = getLevel(cc, inP, cc.r/2);
         //ImageIO.write(outP.normalize(0, 1).getImage(), "jpg", out);
-        ImageIO.write(outP.getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(outP.getImage(), "jpg", out, shouldOverwrite);
         //ImageIO.write(outP0.normalize(0, 1).getImage(), "jpg", out);
         return true;
 
@@ -163,9 +162,9 @@ public class Hist4Contour extends ProcessFile {
     private PixM loadIn(File in) {
         PixM inP = null;
         if (maxRes == 0) {
-            inP = new PixM(Objects.requireNonNull(ImageIO.read(in)));
+            inP = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)));
         } else {
-            inP = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), maxRes);
+            inP = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
         }
         return inP;
     }

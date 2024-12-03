@@ -73,7 +73,7 @@ public class Main2 {
 
     public void exec() {
 
-        Arrays.stream(ImageIO.getWriterFormatNames()).forEach(s1 ->
+        Arrays.stream(one.empty3.ImageIO.getWriterFormatNames()).forEach(s1 ->
                 System.out.println("Format name : \"" + s1 + "\""));
         directory = new File("outputFiles/_" + "__" +
 
@@ -83,14 +83,14 @@ public class Main2 {
         for (String s : Objects.requireNonNull(new File("resources").list())) {
             String s0 = s.substring(s.lastIndexOf(".") + 1);
             String ext = s0.equals("jpg") || s0.equals("jpg") ? "jpg" : s0;
-            if (Arrays.asList(ImageIO.getWriterFormatNames()).contains(ext)) {
+            if (Arrays.asList(one.empty3.ImageIO.getWriterFormatNames()).contains(ext)) {
                 try {
 
                     if (directory.mkdirs())
                         System.out.println("Directory created" + directory.getAbsolutePath());
                     System.out.println("format name image " + ext + " found");
 
-                    Image image = ImageIO.read(new File("resources/" + s));
+                    Image image =one.empty3.ImageIO.read(new File("resources/" + s));
 
                     GradientFilter gradientMask = new GradientFilter(image.getWidth(), image.getHeight());
                     PixM pixMOriginal = PixM.getPixM(image, 300);

@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Random;
 
 import javaAnd.awt.Point;
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.LineSegment;
@@ -92,7 +91,7 @@ public class Lines7luckyLinesOutline extends ProcessFile {
         listTmpY = new ArrayList<>();
         listTmpZ = new ArrayList<>();
         pixM = null;
-        pixM = new PixM(ImageIO.read(in));
+        pixM = new PixM(one.empty3.ImageIO.read(in));
         ArrayList<List<Point3D>> lists = new ArrayList<>();
         lists.add(new ArrayList<>());
         one.empty3.matrix.PixM o = new PixM(pixM.getColumns(), pixM.getLines());
@@ -328,7 +327,7 @@ public class Lines7luckyLinesOutline extends ProcessFile {
                 }
             }
 */
-        ImageIO.write(img3.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(img3.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
 
         return true;
 

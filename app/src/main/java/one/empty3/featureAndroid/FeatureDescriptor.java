@@ -56,7 +56,7 @@ public class FeatureDescriptor extends PixM {
 
         for (File file : set) {
             try {
-                PixM pm = new PixM(ImageIO.read(file));
+                PixM pm = new PixM(one.empty3.ImageIO.read(file));
                 for (FeatureDescriptor f : fd) {
                     f.setPixM(pm);
                     for (int i = 0; i < poi.size(); i++) {

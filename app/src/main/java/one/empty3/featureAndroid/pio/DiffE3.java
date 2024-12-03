@@ -25,14 +25,13 @@ de lumierrs filtrers.
 
 package one.empty3.featureAndroid.pio;
 
+import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.*;
 import one.empty3.libs.*;
 
 import java.io.File;
-
-import one.empty3.ImageIO;
 
 class Circle {
 
@@ -212,7 +211,7 @@ private int sizeElement = 20, elementSize=20;
 
             if (!in.getName().endsWith(".jpg"))
                 return false;
-            PixM pi = new PixM(ImageIO.read(in));
+            PixM pi = new PixM(one.empty3.ImageIO.read(in));
             moutA = pi;
             moutB = pi;
             // work on featutes
@@ -229,8 +228,8 @@ private int sizeElement = 20, elementSize=20;
 
                             }
             //ImageIO.write(pi.getImage(), "JPEG", out);
-            ImageIO.write(moutA.normalize(0., 1.).getImage(), "JPEG", new File(out.getParent() + "a" + "jpg"), shouldOverwrite);
-            ImageIO.write(moutB.normalize(0., 1.).getImage(), "JPEG", new File(out.getParent() + "b" + "jpg"), shouldOverwrite);
+           one.empty3.ImageIO.write(moutA.normalize(0., 1.).getImage(), "JPEG", new File(out.getParent() + "a" + "jpg"), shouldOverwrite);
+           one.empty3.ImageIO.write(moutB.normalize(0., 1.).getImage(), "JPEG", new File(out.getParent() + "b" + "jpg"), shouldOverwrite);
 
             //ImageIO.write(m2g, "JPEG", new File(out.getParent()+5+"jpg"));
             return true;

@@ -26,7 +26,6 @@ import java.io.File;
 
 import one.empty3.matrix.PixM;
 import one.empty3.libs.Image;
-import one.empty3.ImageIO;
 import one.empty3.io.ProcessFile;
 
 public class IsleProcess extends ProcessFile {
@@ -42,7 +41,7 @@ public class IsleProcess extends ProcessFile {
         PixM pix = null;
         Image img = null;
         try {
-            img = ImageIO.read(file);
+            img =one.empty3.ImageIO.read(file);
             pix = PixM.getPixM(img, -10.0);
 
         } catch (Exception ex) {
@@ -62,7 +61,7 @@ public class IsleProcess extends ProcessFile {
         il.filter();
         try {
 
-            ImageIO.write(pix.getImage(), "JPEG", out, shouldOverwrite);
+           one.empty3.ImageIO.write(pix.getImage(), "JPEG", out, shouldOverwrite);
 
         } catch (Exception ex) {
 

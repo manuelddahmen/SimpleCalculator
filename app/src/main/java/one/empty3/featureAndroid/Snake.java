@@ -30,8 +30,6 @@ import one.empty3.io.ProcessFile;
 import one.empty3.library.*;
 import one.empty3.library.core.nurbs.*;
 
-import one.empty3.ImageIO;
-
 /*
  1 prendre les points entre t=0.0 et t=1.0
  extraire un polygone interieur et exterieur,
@@ -129,7 +127,7 @@ public class Snake extends ProcessFile {
 
     public boolean process(File in, File out) {
         try {
-            pix = PixM.getPixM(ImageIO.read(in), 500);
+            pix = PixM.getPixM(one.empty3.ImageIO.read(in), 500);
             pix3 = new one.empty3.matrix.PixM(pix.getColumns(), pix.getLines());
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -139,7 +137,7 @@ public class Snake extends ProcessFile {
         classification();
 
         try {
-            ImageIO.write(pix3.normalize(0., 1.).getImage(),
+           one.empty3.ImageIO.write(pix3.normalize(0., 1.).getImage(),
                     "jpg", out, shouldOverwrite);
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -101,7 +101,7 @@ public class K_Clusterer /*extends ReadDataset*/ {
 
         PixM pix;
         try {
-            pix = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), res);
+            pix = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), res);
             PixM pix2 = new PixM(pix.getColumns(), pix.getLines());
 
             System.out.println("size out : " + pix2.getColumns() + ", " + pix2.getLines());

@@ -30,7 +30,6 @@ import java.util.Random;
 
 import one.empty3.matrix.PixM;
 import one.empty3.libs.Image;
-import one.empty3.ImageIO;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Lumiere;
 
@@ -65,9 +64,9 @@ public class Classification extends ProcessFile {
             return false;
         PixM selectPointColorMassAglo = null;
         Image read = null;
-        read = new Image(Objects.requireNonNull(ImageIO.read(in)).getBitmap());
+        read = new Image(Objects.requireNonNull(one.empty3.ImageIO.read(in)).getBitmap());
         selectPointColorMassAglo = one.empty3.matrix.PixM.getPixM(read, maxRes);
-        imageOut = ImageIO.read(in);
+        imageOut =one.empty3.ImageIO.read(in);
         SelectPointColorMassAglo selectPointColorMassAglo1 = new SelectPointColorMassAglo(read);
         int color = Color.WHITE;
         for (int i = 0; i < imageOut.getWidth(); i += 1)
@@ -85,7 +84,7 @@ public class Classification extends ProcessFile {
                 }
             }
 
-        ImageIO.write(imageOut, "jpg", out, false);
+       one.empty3.ImageIO.write(imageOut, "jpg", out, false);
         return true;
     }
 

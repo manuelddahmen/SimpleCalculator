@@ -24,7 +24,6 @@ import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
 
-import one.empty3.ImageIO;
 import one.empty3.libs.Image;
 
 import java.io.File;
@@ -58,7 +57,7 @@ public class Voronoi extends ProcessFile {
     public boolean process(File in, File out) {
         try {
             List<Point3D> points = new ArrayList<>();
-            Image read = ImageIO.read(in);
+            Image read =one.empty3.ImageIO.read(in);
             one.empty3.matrix.PixM pixM = one.empty3.matrix.PixM.getPixM(read, maxRes);
             PixM pixMOut = pixM.copy();
             for (int i = 0; i < pixM.getColumns(); i++) {
@@ -83,7 +82,7 @@ public class Voronoi extends ProcessFile {
             }
 
 
-            ImageIO.write(pixMOut.getImage(), "jpg", out, shouldOverwrite);
+           one.empty3.ImageIO.write(pixMOut.getImage(), "jpg", out, shouldOverwrite);
 
             return true;
 

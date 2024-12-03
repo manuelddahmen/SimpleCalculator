@@ -33,7 +33,6 @@ import java.util.function.Consumer;
 import one.empty3.libs.*;
 
 import one.empty3.libs.Image;
-import one.empty3.ImageIO;
 import one.empty3.featureAndroid.Linear;
 import one.empty3.matrix.PixM;
 import one.empty3.featureAndroid.shape.Rectangle;
@@ -91,7 +90,7 @@ public class ResolutionCharacter0 implements Runnable {
         if (dir.exists() && dir.isDirectory()) {
             for (File file : Objects.requireNonNull(dir.listFiles())) {
                 if (!file.isDirectory() && file.isFile() && file.getName().toLowerCase(Locale.ROOT).endsWith(".jpg")) {
-                    Image read = ImageIO.read(file);
+                    Image read =one.empty3.ImageIO.read(file);
 
                     String name = file.getName();
 

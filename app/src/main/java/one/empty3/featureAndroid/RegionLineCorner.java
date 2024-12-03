@@ -22,7 +22,6 @@ package one.empty3.featureAndroid;
 
 import android.graphics.Color;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.libs.Image;
 
@@ -267,7 +266,7 @@ public class RegionLineCorner extends ProcessFile {
 
     public boolean process(File in, File out) {
         File directory = new File(out.getParent());
-        PixM imageCoutours = PixM.getPixM(ImageIO.read(in), 500.0);
+        PixM imageCoutours = PixM.getPixM(one.empty3.ImageIO.read(in), 500.0);
         this.m = imageCoutours;
         Image file = m.getImage();
 
@@ -330,11 +329,11 @@ public class RegionLineCorner extends ProcessFile {
             File fileToWrite3 = new File(directory.getAbsolutePath()
                     + "level" + finalI + "_NEW_RGB.jpg");
             //fileToWrite.mkdirs();
-            ImageIO.write(img4, "JPEG", out, shouldOverwrite);
+           one.empty3.ImageIO.write(img4, "JPEG", out, shouldOverwrite);
             /*
-            ImageIO.write(img, "JPEG", fileToWrite);
-            ImageIO.write(img, "JPEG", fileToWrite2);
-            ImageIO.write(img, "JPEG", fileToWrite3);
+           one.empty3.ImageIO.write(img, "JPEG", fileToWrite);
+           one.empty3.ImageIO.write(img, "JPEG", fileToWrite2);
+           one.empty3.ImageIO.write(img, "JPEG", fileToWrite3);
 */
         }
 

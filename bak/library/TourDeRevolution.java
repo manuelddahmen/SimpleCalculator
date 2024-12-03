@@ -79,7 +79,7 @@ public class TourDeRevolution extends Representable {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public TourDeRevolution(File image, Axe axe) {
-        this.courbe = new CourbeDeImage(Objects.requireNonNull(ImageIO.read(image)).bitmap);
+        this.courbe = new CourbeDeImage(Objects.requireNonNull(one.empty3.ImageIO.read(image)).bitmap);
         courbe.anayliserImage();
 
     }
@@ -99,7 +99,7 @@ public class TourDeRevolution extends Representable {
         s.add(tr);
         z.scene(s);
         z.draw();
-        ImageIO.write(z.image(), "jpg",
+       one.empty3.ImageIO.write(z.image(), "jpg",
                 (new File("result2TR.jpg")));
     }
 

@@ -20,7 +20,6 @@
 
 package one.empty3.featureAndroid;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
@@ -30,7 +29,7 @@ public class TransformColor extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
 
-        PixM pix = one.empty3.matrix.PixM.getPixM(ImageIO.read(in), maxRes);
+        PixM pix = one.empty3.matrix.PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
 
         for (int i = 0; i < pix.getColumns(); i++) {
             for (int j = 0; j < pix.getLines(); j++) {
@@ -41,7 +40,7 @@ public class TransformColor extends ProcessFile {
             }
         }
 
-        ImageIO.write(pix.normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(pix.normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
 
         return true;
     }

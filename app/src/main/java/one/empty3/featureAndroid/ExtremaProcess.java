@@ -20,7 +20,6 @@
 
 package one.empty3.featureAndroid;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.M3;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
@@ -44,7 +43,7 @@ public class ExtremaProcess extends ProcessFile {
             return false;
 
         try {
-            pix = new one.empty3.matrix.PixM(ImageIO.read(in));
+            pix = new one.empty3.matrix.PixM(one.empty3.ImageIO.read(in));
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -60,7 +59,7 @@ public class ExtremaProcess extends ProcessFile {
         PixM m = le.filter(new M3(pix, 1, 1)).getImagesMatrix()[0][0];
 
         try {
-            ImageIO.write(m.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
+           one.empty3.ImageIO.write(m.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();

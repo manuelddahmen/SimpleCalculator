@@ -20,7 +20,6 @@
 
 package one.empty3.featureAndroid;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.libs.Image;
 import one.empty3.io.ProcessFile;
@@ -32,13 +31,13 @@ public class HarrisProcess extends ProcessFile {
 
     public boolean process(File in, File out) {
         try {
-            Image img = ImageIO.read(in);
+            Image img =one.empty3.ImageIO.read(in);
             one.empty3.matrix.PixM m2 = PixM.getPixM(img, maxRes);
             HarrisToPointInterest h = new HarrisToPointInterest(2, 2);
 
             m2.applyFilter(h);
 
-            ImageIO.write(m2.normalize(0.0, 1.0).getImage(), "JPEG", out, shouldOverwrite);
+           one.empty3.ImageIO.write(m2.normalize(0.0, 1.0).getImage(), "JPEG", out, shouldOverwrite);
 
             return true;
         } catch (Exception ex) {

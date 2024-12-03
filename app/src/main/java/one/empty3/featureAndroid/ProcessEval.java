@@ -20,7 +20,6 @@
 
 package one.empty3.featureAndroid;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 
 import java.io.File;
@@ -74,7 +73,7 @@ public abstract class ProcessEval {
     }
 
     public double value(File file) {
-        PixM pixM = new PixM(Objects.requireNonNull(ImageIO.read(file)));
+        PixM pixM = new PixM(Objects.requireNonNull(one.empty3.ImageIO.read(file)));
         x = pixM.x;
         y = add(dotOuter(x, w), b);
         return Double.NaN;

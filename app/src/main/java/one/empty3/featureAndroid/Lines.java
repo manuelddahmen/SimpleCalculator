@@ -26,7 +26,6 @@ import one.empty3.library.Lumiere;
 import one.empty3.library.Point;
 import one.empty3.library.Point3D;
 
-import one.empty3.ImageIO;
 import one.empty3.libs.*;
 
 import java.io.File;
@@ -149,7 +148,7 @@ public class Lines extends ProcessFile {
         listTmpX = new ArrayList<Double>();
         listTmpY = new ArrayList<Double>();
         listTmpZ = new ArrayList<Double>();
-        pixM = new one.empty3.matrix.PixM(ImageIO.read(in));
+        pixM = new one.empty3.matrix.PixM(one.empty3.ImageIO.read(in));
         one.empty3.matrix.PixM o = new PixM(pixM.getColumns(), pixM.getLines());
 
         p = new int[pixM.getColumns()][pixM.getLines()];
@@ -229,7 +228,7 @@ public class Lines extends ProcessFile {
             Color r = new Color(Lumiere.getIntFromFloats((float) r(), (float) r(), (float) r()));
             p3s.forEach(point3D -> o.setValues((int) (double) (point3D.getX()), (int) (double) (point3D.getY()), r.red() / 255., r.green() / 255., r.blue() / 255.));
         });
-        ImageIO.write(o.normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(o.normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
         return true;
     }
 

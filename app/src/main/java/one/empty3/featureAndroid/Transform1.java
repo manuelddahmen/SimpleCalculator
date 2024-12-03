@@ -20,7 +20,6 @@
 
 package one.empty3.featureAndroid;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.M3;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
@@ -47,7 +46,7 @@ public class Transform1 extends ProcessFile {
         File file = in;
         PixM pixMOriginal = null;
         try {
-            pixMOriginal = PixM.getPixM(ImageIO.read(file), 500.0);
+            pixMOriginal = PixM.getPixM(one.empty3.ImageIO.read(file), 500.0);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -136,7 +135,7 @@ public class Transform1 extends ProcessFile {
      WriteFile.writeNext("radial grad"+file.getName(), rad.normalize(0.,1.).getImage());
      */
         try {
-            ImageIO.write(plext3.getImage(), "jpg", out, shouldOverwrite);
+           one.empty3.ImageIO.write(plext3.getImage(), "jpg", out, shouldOverwrite);
         } catch (Exception ex) {
             return false;
         }

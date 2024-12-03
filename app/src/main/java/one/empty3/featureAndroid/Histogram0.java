@@ -24,8 +24,6 @@ import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
 
-import one.empty3.ImageIO;
-
 import java.io.File;
 
 /*
@@ -101,7 +99,7 @@ public class Histogram0 extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
         one.empty3.matrix.PixM inP;
-        inP = one.empty3.matrix.PixM.getPixM(ImageIO.read(in), maxRes);
+        inP = one.empty3.matrix.PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
         PixM outP = inP.copy();
         double maxR = Math.min(inP.getLines(), inP.getColumns());
         for (int i = 0; i < inP.getColumns(); i++) {
@@ -122,7 +120,7 @@ public class Histogram0 extends ProcessFile {
         }
 
 
-        ImageIO.write(outP.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(outP.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
         return true;
 
     }

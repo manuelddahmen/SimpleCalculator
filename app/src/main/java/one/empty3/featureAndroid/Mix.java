@@ -24,7 +24,6 @@ import java.io.File;
 
 import one.empty3.matrix.PixM;
 import one.empty3.libs.Image;
-import one.empty3.ImageIO;
 import one.empty3.io.ProcessNFiles;
 
 public class Mix extends ProcessNFiles {
@@ -46,8 +45,8 @@ public class Mix extends ProcessNFiles {
         double ratio = 1.0 * progress / MAX_PROGRESS;
 
         if (ins.length > 1 && ins[0] != null && isImage(ins[0]) && ins[1] != null && isImage(ins[1])) {
-            Image read1 = ImageIO.read(ins[0]);
-            Image read2 = ImageIO.read(ins[1]);
+            Image read1 =one.empty3.ImageIO.read(ins[0]);
+            Image read2 =one.empty3.ImageIO.read(ins[1]);
             one.empty3.matrix.PixM pixMin1 = new one.empty3.matrix.PixM(read1);
             one.empty3.matrix.PixM pixMin2 = new one.empty3.matrix.PixM(read2);
             PixM outPixM = new PixM(pixMin1.getColumns(), pixMin1.getLines());
@@ -63,7 +62,7 @@ public class Mix extends ProcessNFiles {
                     }
                 }
             }
-            ImageIO.write(outPixM.getBitmap(), "jpg", out);
+           one.empty3.ImageIO.write(outPixM.getBitmap(), "jpg", out);
         }
         return false;
     }

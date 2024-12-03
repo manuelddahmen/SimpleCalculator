@@ -28,7 +28,6 @@ import java.util.function.BiConsumer;
 
 import one.empty3.matrix.PixM;
 import one.empty3.libs.Image;
-import one.empty3.ImageIO;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
 
@@ -43,7 +42,7 @@ public class ClassificationAvgColors extends ProcessFile {
         classification.process(in, out);
         // Processed by "classification
         // Non filtered image
-        Image original = ImageIO.read(in);
+        Image original =one.empty3.ImageIO.read(in);
         PixM pixMOriginal = new one.empty3.matrix.PixM(Objects.requireNonNull(original));
         one.empty3.matrix.PixM toProcess = new PixM(original);
         Map<Integer, double[]> c = classification.kclusterer.centroids;
@@ -84,6 +83,6 @@ public class ClassificationAvgColors extends ProcessFile {
         });
 
 
-        return ImageIO.write(toProcess.getImage(), "jpg", out, false);
+        return one.empty3.ImageIO.write(toProcess.getImage(), "jpg", out, false);
     }
 }

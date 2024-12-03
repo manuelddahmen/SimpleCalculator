@@ -20,7 +20,6 @@
 
 package one.empty3.featureAndroid;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
@@ -76,7 +75,7 @@ public class SobelDerivative extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        one.empty3.matrix.PixM p = PixM.getPixM(Objects.requireNonNull(ImageIO.read(in)), maxRes);
+        one.empty3.matrix.PixM p = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
         PixM pOut = p.copy();
         for (int j = 0; j < p.getLines(); j++) {
             for (int i = 0; i < p.getColumns(); i++) {
@@ -88,7 +87,7 @@ public class SobelDerivative extends ProcessFile {
                 }
             }
         }
-        ImageIO.write(pOut.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(pOut.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
         return true;
     }
 }

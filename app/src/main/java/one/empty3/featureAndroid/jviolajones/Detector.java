@@ -112,7 +112,7 @@ package one.empty3.featureAndroid.jviolajones;//package one.empty3.feature202207
 //    }
 //
 //    public List<java.awt.Rectangle> getFaces(InputStream input, float baseScale, float scale_inc, float increment, int min_neighbors, boolean doCannyPruning) throws java.io.FileNotFoundException, java.io.IOException {
-//        return getFaces(ImageIO.read(input), baseScale, scale_inc, increment, min_neighbors, doCannyPruning);
+//        return getFaces(one.empty3.ImageIO.read(input), baseScale, scale_inc, increment, min_neighbors, doCannyPruning);
 //    }
 //
 //    /*

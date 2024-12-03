@@ -71,7 +71,7 @@ public class ProcessNFiles  {
             String property = p.getProperty(s);
             File file = new File(property);
             Image read = null;
-            read = ImageIO.read(file);
+            read =one.empty3.ImageIO.read(file);
             return (new PixM(read));
         } catch (Exception ex) {
         }

@@ -76,7 +76,7 @@ import one.empty3.library.StructureMatrix;
 //
 //            for (File file : Objects.requireNonNull(dir.listFiles())) {
 //                if (!file.isDirectory() && file.isFile() && file.getName().toLowerCase(Locale.ROOT).endsWith(".jpg")) {
-//                    Image read = ImageIO.read(file);
+//                    Image read =one.empty3.ImageIO.read(file);
 //
 //                    String name = file.getName();
 //
@@ -110,9 +110,9 @@ import one.empty3.library.StructureMatrix;
 //        output.plotCurve(new Rectangle(10, 10, output.getColumns() - 20, output.getLines() - 20), texture);
 //
 //        try {
-//            ImageIO.write(input.getImage(), "jpg",
+//           one.empty3.ImageIO.write(input.getImage(), "jpg",
 //                    new File(dirOut + File.separator + name.replace(' ', '_').replace(".jpg", "INPUT.jpg")));
-//            ImageIO.write(output.getImage(), "jpg",
+//           one.empty3.ImageIO.write(output.getImage(), "jpg",
 //                    new File(dirOut + File.separator + name.replace(' ', '_').replace(".jpg", "OUTPUT.jpg")));
 //        } catch (IOException ex) {
 //            throw new RuntimeException(ex);

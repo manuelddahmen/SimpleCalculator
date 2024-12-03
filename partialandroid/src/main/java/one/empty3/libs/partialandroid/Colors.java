@@ -4,8 +4,10 @@ import android.graphics.Paint;
 import android.graphics.Canvas;
 
 import android.graphics.Color;
+
 public class Colors {
     private int color;
+
     public void setColor(int color) {
         this.color = color;
     }
@@ -24,5 +26,5 @@ public class Colors {
         return "Colors{" +
                 "color=" + color +
                 '}';
-}
+    }
 }

@@ -61,7 +61,7 @@ public class ImageContainer extends Representable implements ResourceLoader {
             this.url.setElem(url);
             if (url != null) {
                 try {
-                    image.setElem(ImageIO.read(url));
+                    image.setElem(one.empty3.ImageIO.read(url));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -133,7 +133,7 @@ public class ImageContainer extends Representable implements ResourceLoader {
 
     private void loadImage(File path) {
         if (path != null) {
-            image.setElem(Objects.requireNonNull(ImageIO.read(path)).bitmap);
+            image.setElem(Objects.requireNonNull(one.empty3.ImageIO.read(path)).bitmap);
         }
 
     }
@@ -142,7 +142,7 @@ public class ImageContainer extends Representable implements ResourceLoader {
         private void loadImage(URL url) {
             if (url != null) {
                 try {
-                    image.setElem(ImageIO.read(url));
+                    image.setElem(one.empty3.ImageIO.read(url));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -157,7 +157,7 @@ public class ImageContainer extends Representable implements ResourceLoader {
             DecodeAndEncodeFrames vd2 = new DecodeAndEncodeFrames(path, new TextureMov());
             vd.setElem(vd2);
             isMovie = true;
-            image.setElem(ImageIO.read(path));
+            image.setElem(one.empty3.ImageIO.read(path));
         }
 
     }*/
@@ -174,7 +174,7 @@ public class ImageContainer extends Representable implements ResourceLoader {
             vd.setElem(vd2);
             isMovie = true;
             try {
-                image.setElem(ImageIO.read(new FileInputStream(new File(url.getFile()))));
+                image.setElem(one.empty3.ImageIO.read(new FileInputStream(new File(url.getFile()))));
             } catch (IOException e) {
                 e.printStackTrace();
             }

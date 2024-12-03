@@ -76,7 +76,7 @@ public class HoughTransform extends ProcessFile {
     private int maxDrawn = 30;
 
     public boolean process(File in, File out) {
-        // load the file using Java's imageIO library
+        // load the file using Java'sone.empty3.ImageIO library
         Image image = null;
         image = Image.loadFile(in);
         // create a hough transform object with the right dimensions

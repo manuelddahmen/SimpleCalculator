@@ -21,7 +21,6 @@
 package one.empty3.featureAndroid;
 
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.M3;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
@@ -40,7 +39,7 @@ public class MagnitudeProcess extends ProcessFile {
         File file = in;
         PixM pix;
         try {
-            pix = one.empty3.matrix.PixM.getPixM(ImageIO.read(file), maxRes);
+            pix = one.empty3.matrix.PixM.getPixM(one.empty3.ImageIO.read(file), maxRes);
             GradientFilter gf = new GradientFilter(pix.getColumns(),
                     pix.getLines());
             one.empty3.matrix.PixM[][] imagesMatrix = gf.filter(
@@ -56,7 +55,7 @@ public class MagnitudeProcess extends ProcessFile {
             Linear res = new Linear(linearProd1.getImages()[2], linearProd2.getImages()[2],
                     new one.empty3.matrix.PixM(pix.getColumns(), pix.getLines()));
             res.op2d2d(new char[]{'+'}, new int[][]{{1, 0}}, new int[]{2});
-            ImageIO.write(res.getImages()[2].normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
+           one.empty3.ImageIO.write(res.getImages()[2].normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
 
             return true;
         } catch (Exception ex) {

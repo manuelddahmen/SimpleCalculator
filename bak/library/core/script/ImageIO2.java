@@ -56,7 +56,7 @@ import one.empty3.library.*;
 
 import java.io.File;
 
-public class ImageIO2 {
+public classone.empty3.ImageIO2 {
 
     public Scene read(File directory, File mooName) {
         Scene sc = new Scene();

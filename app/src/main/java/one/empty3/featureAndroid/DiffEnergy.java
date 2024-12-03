@@ -20,7 +20,6 @@
 
 package one.empty3.featureAndroid;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
@@ -43,8 +42,8 @@ public class DiffEnergy extends ProcessFile {
     }
 
     public void setPixMS(int img1, int img2) {
-        i1 = PixM.getPixM(Objects.requireNonNull(ImageIO.read(getStackItem(img1))), maxRes);
-        i2 = PixM.getPixM(Objects.requireNonNull(ImageIO.read(getStackItem(img2))), maxRes);
+        i1 = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(getStackItem(img1))), maxRes);
+        i2 = PixM.getPixM(Objects.requireNonNull(one.empty3.ImageIO.read(getStackItem(img2))), maxRes);
 
 
     }

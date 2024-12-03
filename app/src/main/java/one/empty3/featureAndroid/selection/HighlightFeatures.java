@@ -30,7 +30,6 @@ import one.empty3.library.Point3D;
 import one.empty3.library.Scene;
 import one.empty3.library.core.nurbs.ParametricCurve;
 
-import one.empty3.ImageIO;
 import one.empty3.libs.Image;
 
 import java.io.File;
@@ -147,10 +146,10 @@ public class HighlightFeatures extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        Image read = ImageIO.read(in);
+        Image read =one.empty3.ImageIO.read(in);
         PixM pixM = PixM.getPixM(read.getBitmap());
         File stackItem = getStackItem(1);
-        PixM original = new PixM(ImageIO.read(stackItem));
+        PixM original = new PixM(one.empty3.ImageIO.read(stackItem));
         int cadre = (int) Math.min((pixM.getColumns() + pixM.getLines()) / 2., 10.);
         for (int i = 0; i < pixM.getColumns(); i++)
             for (int j = 0; j < pixM.getLines(); j++) {
@@ -163,7 +162,7 @@ public class HighlightFeatures extends ProcessFile {
                         }
                 }
             }
-        ImageIO.write(original.normalize(0., 1., 0., 1.).getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(original.normalize(0., 1., 0., 1.).getImage(), "jpg", out, shouldOverwrite);
 
         return true;
     }

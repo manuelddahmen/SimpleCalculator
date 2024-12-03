@@ -190,7 +190,7 @@ public class TextureImg extends ITexture {
 //        ByteArrayOutputStream bos = new ByteArrayOutputStream();
 //
 //        try {
-//            ImageIO.write(image.getElem(), "jpg", bos);
+//           one.empty3.ImageIO.write(image.getElem(), "jpg", bos);
 //            byte[] imageBytes = bos.toByteArray();
 //
 //            Base64.Encoder encoder =Base64.getEncoder();

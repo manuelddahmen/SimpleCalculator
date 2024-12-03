@@ -29,7 +29,6 @@ import one.empty3.library.Point;
 import one.empty3.library.Point3D;
 import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 
-import one.empty3.ImageIO;
 import one.empty3.libs.*;
 import one.empty3.libs.Image;
 
@@ -96,7 +95,7 @@ public class Lines4 extends ProcessFile {
         if (!in.getName().endsWith("jpg"))
             return false;
         pixM = null;
-        pixM = new one.empty3.matrix.PixM(ImageIO.read(in));
+        pixM = new one.empty3.matrix.PixM(one.empty3.ImageIO.read(in));
         ArrayList<List<Point3D>> lists = new ArrayList<>();
         lists.add(new ArrayList<>());
         one.empty3.matrix.PixM o = new one.empty3.matrix.PixM(pixM.getColumns(), pixM.getLines());
@@ -371,7 +370,7 @@ public class Lines4 extends ProcessFile {
                 }
             }
         }
-        ImageIO.write(o.getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(o.getImage(), "jpg", out, shouldOverwrite);
 
         return true;
 

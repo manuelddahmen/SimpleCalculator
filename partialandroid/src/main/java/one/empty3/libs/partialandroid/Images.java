@@ -12,9 +12,11 @@ import java.io.IOException;
 
 public class Images {
     private Bitmap image;
+
     public Images(Bitmap image) {
         this.image = image;
     }
+
     public Images(int x, int y) {
         this.image = Bitmap.createBitmap(x, y, Bitmap.Config.ARGB_8888);
     }
@@ -43,9 +45,11 @@ public class Images {
     public void setImage(Bitmap image) {
         this.image = image;
     }
+
     public int getRgb(int x, int y) {
         return image.getPixel(x, y);
     }
+
     public void setRgb(int x, int y, int rgb) {
         image.setPixel(x, y, rgb);
     }

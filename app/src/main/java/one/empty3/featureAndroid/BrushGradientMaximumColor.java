@@ -24,7 +24,6 @@ import android.graphics.BitmapFactory;
 
 import java.io.File;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.M;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
@@ -70,7 +69,7 @@ public class BrushGradientMaximumColor extends ProcessFile {
                     }
             }
         }
-        ImageIO.write(pixM2.normalize(0, 1).getBitmap(), "jpg", out);
+       one.empty3.ImageIO.write(pixM2.normalize(0, 1).getBitmap(), "jpg", out);
         return true;
     }
 }

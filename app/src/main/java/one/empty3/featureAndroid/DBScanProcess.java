@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
@@ -125,7 +124,7 @@ public class DBScanProcess extends ProcessFile {
 
         try {
             pix = PixM
-                    .getPixM(ImageIO.read(in), maxRes);
+                    .getPixM(one.empty3.ImageIO.read(in), maxRes);
         } catch (Exception ex1) {
             ex1.printStackTrace();
             return false;
@@ -169,7 +168,7 @@ public class DBScanProcess extends ProcessFile {
                 }
         });
         try {
-            ImageIO.write(pix2.normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
+           one.empty3.ImageIO.write(pix2.normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
         } catch (Exception ex1) {
             ex1.printStackTrace();
 

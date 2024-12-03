@@ -138,7 +138,7 @@ public class InterpreteSphere implements Interprete {
 
         TRISphere sphere = new TRISphere(centre, pos);
         sphere.texture(
-                new TextureImg(new ECBufferedImage(Objects.requireNonNull(ImageIO.read(file)).bitmap)));
+                new TextureImg(new ECBufferedImage(Objects.requireNonNull(one.empty3.ImageIO.read(file)).bitmap)));
 
         return sphere;
     }

@@ -20,7 +20,6 @@
 
 package one.empty3.featureAndroid.tryocr;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Lumiere;
@@ -33,7 +32,7 @@ public class SelectColor extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        PixM pixM = new PixM(ImageIO.read(in));
+        PixM pixM = new PixM(one.empty3.ImageIO.read(in));
 
         PixM pixM2 = new PixM(pixM.getColumns(), pixM.getLines());
 
@@ -53,7 +52,7 @@ public class SelectColor extends ProcessFile {
                     pixM2.set(i, j, pixM.get(i, j) == (col[c] / 255.) ? 1 : 0);
                 }
             }
-        ImageIO.write(pixM2.getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(pixM2.getImage(), "jpg", out, shouldOverwrite);
         return true;
     }
 }

@@ -21,8 +21,6 @@
 package one.empty3.featureAndroid;
 
 
-import one.empty3.ImageIO;
-
 import java.io.File;
 
 import one.empty3.matrix.PixM;
@@ -43,7 +41,7 @@ public class TrueHarrisProcess extends ProcessFile {
         Image img = null;
 
         try {
-            img = ImageIO.read(file);
+            img =one.empty3.ImageIO.read(file);
             pix = one.empty3.matrix.PixM.getPixM(img, maxRes);
 
         } catch (Exception ex) {
@@ -77,7 +75,7 @@ public class TrueHarrisProcess extends ProcessFile {
 
         try {
 
-            ImageIO.write(normalize.getImage(), "JPEG", out, shouldOverwrite);
+           one.empty3.ImageIO.write(normalize.getImage(), "JPEG", out, shouldOverwrite);
             return true;
         } catch (Exception ex) {
 

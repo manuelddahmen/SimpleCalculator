@@ -22,7 +22,6 @@ package one.empty3.featureAndroid.histograms;
 
 import java.io.File;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
@@ -107,7 +106,7 @@ public class Hist4Contour2 extends ProcessFile {
             return false;
         }
         PixM inP;
-        inP = PixM.getPixM(ImageIO.read(in), maxRes);
+        inP = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
 
 
         double max = 0.0;
@@ -148,7 +147,7 @@ public class Hist4Contour2 extends ProcessFile {
         //        Circle c2 = getLevel(cc, inP, cc.r/2);
         try {
             //ImageIO.write(outP.normalize(0, 1).getImage(), "jpg", out);
-            ImageIO.write(outP.normalize(0,1).getBitmap(), "jpg", out);
+           one.empty3.ImageIO.write(outP.normalize(0,1).getBitmap(), "jpg", out);
             //ImageIO.write(outP0.normalize(0, 1).getImage(), "jpg", out);
             return true;
 

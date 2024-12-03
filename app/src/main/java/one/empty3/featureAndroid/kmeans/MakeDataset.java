@@ -26,7 +26,6 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 import one.empty3.libs.Image;
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 
 /*
@@ -36,7 +35,7 @@ public class MakeDataset {
     public MakeDataset(File image,
                        File outputCsv, int res) {
         try {
-            Image img = ImageIO.read(image);
+            Image img =one.empty3.ImageIO.read(image);
             PixM pix;
             if (res > 0)
 

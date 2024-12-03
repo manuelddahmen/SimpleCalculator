@@ -171,7 +171,7 @@ public class InterpreteSimpleSphereTexture implements Interprete {
 
             this.pos = pos;
             SimpleSphereAvecTexture s = null;
-            s = new SimpleSphereAvecTexture(c, r, Color.WHITE, Objects.requireNonNull(ImageIO.read(f)).bitmap);
+            s = new SimpleSphereAvecTexture(c, r, Color.WHITE, Objects.requireNonNull(one.empty3.ImageIO.read(f)).bitmap);
             s.fichier(f.getName());
             return s;
         } catch (InterpreteException ex) {

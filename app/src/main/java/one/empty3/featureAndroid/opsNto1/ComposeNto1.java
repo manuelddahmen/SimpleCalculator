@@ -27,7 +27,6 @@ import static one.empty3.io.ProcessFile.shouldOverwrite;
 import one.empty3.feature.ProcessFiles;
 import one.empty3.matrix.PixM;
 
-import one.empty3.ImageIO;
 import one.empty3.io.ProcessFile;
 
 import java.io.File;
@@ -39,10 +38,10 @@ public class ComposeNto1 extends ProcessFiles {
 
     public boolean process(File in, File out) {
         boolean success = false;
-        PixM inpix = PixM.getPixM(ImageIO.read(in), maxRes);
-        PixM outpix = PixM.getPixM(ImageIO.read(in), maxRes);
+        PixM inpix = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
+        PixM outpix = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
         //success = processMem(inpix, outpix);
-        ImageIO.write(outpix.getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(outpix.getImage(), "jpg", out, shouldOverwrite);
         return success;
     }
 

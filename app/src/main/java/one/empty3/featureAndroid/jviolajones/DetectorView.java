@@ -20,7 +20,7 @@ package one.empty3.featureAndroid.jviolajones;//package one.empty3.feature202207
 //    public DetectorView(File img, String XMLFile) throws FileNotFoundException, IOException {
 //        Image image = null;
 //        try {
-//            image = ImageIO.read(img);
+//            image =one.empty3.ImageIO.read(img);
 //        } catch (IOException e) {
 //            // TODO Auto-generated catch block
 //            e.printStackTrace();

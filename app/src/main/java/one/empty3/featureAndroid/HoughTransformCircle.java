@@ -108,7 +108,7 @@ package one.empty3.featureAndroid;//package one.empty3.feature20220726;
 //
 //    //converts given file into a grayscale image
 //    private javaAnd.awt.image.Image toGrayScale(File f) throws Exception {
-//        Image img = ImageIO.read(f);
+//        Image img =one.empty3.ImageIO.read(f);
 //        Image grey = new javaAnd.awt.image.Image(img.getWidth(), img.getHeight(), javaAnd.awt.image.Image.TYPE_BYTE_GRAY);
 //        grey.drawImage(img,0,0,0,0);
 //

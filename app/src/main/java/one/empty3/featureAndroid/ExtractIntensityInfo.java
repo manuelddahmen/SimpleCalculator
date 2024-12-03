@@ -22,7 +22,6 @@ package one.empty3.featureAndroid;
 
 import android.graphics.Color;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.M3;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
@@ -45,7 +44,7 @@ public class ExtractIntensityInfo extends
     public boolean process(File in, File out) {
         Image img = null;
         try {
-            img = ImageIO.read(in);
+            img =one.empty3.ImageIO.read(in);
         } catch (Exception rx) {
         }
         PixM pix = one.empty3.matrix.PixM.getPixM(img, -1);
@@ -131,7 +130,7 @@ public class ExtractIntensityInfo extends
 
 
         try {
-            ImageIO.write(pix.getImage(),
+           one.empty3.ImageIO.write(pix.getImage(),
                     "JPEG", out, shouldOverwrite);
         } catch (Exception ex) {
         }

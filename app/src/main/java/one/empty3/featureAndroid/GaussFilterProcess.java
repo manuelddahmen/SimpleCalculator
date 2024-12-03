@@ -20,7 +20,6 @@
 
 package one.empty3.featureAndroid;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.libs.Image;
 import one.empty3.io.ProcessFile;
@@ -39,7 +38,7 @@ public class GaussFilterProcess extends ProcessFile {
         Image img = null;
 
         try {
-            img = ImageIO.read(in);
+            img =one.empty3.ImageIO.read(in);
             pix = PixM.getPixM(img, maxRes);
 
         } catch (Exception ex) {
@@ -74,7 +73,7 @@ public class GaussFilterProcess extends ProcessFile {
 
         try {
 
-            ImageIO.write(normalize.getImage(), "JPEG", out, shouldOverwrite);
+           one.empty3.ImageIO.write(normalize.getImage(), "JPEG", out, shouldOverwrite);
             return true;
         } catch (Exception ex) {
 

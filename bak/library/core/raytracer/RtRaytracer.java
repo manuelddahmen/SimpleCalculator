@@ -258,7 +258,7 @@ public class RtRaytracer {
 
         File file = new File(outputfilename + ".jpg");
         System.out.print("+jpg: " + file.getAbsolutePath());
-        ImageIO.write(bi2, "jpg", file);
+       one.empty3.ImageIO.write(bi2, "jpg", file);
 
         return true;
     }

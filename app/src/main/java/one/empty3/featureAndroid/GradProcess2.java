@@ -20,7 +20,6 @@
 
 package one.empty3.featureAndroid;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
@@ -29,7 +28,7 @@ import java.io.File;
 public class GradProcess2 extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
-        one.empty3.matrix.PixM pixM = PixM.getPixM(ImageIO.read(in), maxRes);
+        one.empty3.matrix.PixM pixM = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
         PixM pixMout = new PixM(pixM.getColumns(), pixM.getLines());
 
         for (int x = 0; x < pixM.getColumns(); x++)
@@ -45,7 +44,7 @@ public class GradProcess2 extends ProcessFile {
                             + 4 * pixMout.get(x, y + 1));
                 }
 
-        ImageIO.write(pixMout.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(pixMout.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
         return true;
     }
 }

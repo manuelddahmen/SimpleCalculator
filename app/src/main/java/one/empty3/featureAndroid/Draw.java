@@ -24,8 +24,6 @@ import one.empty3.io.*;
 
 import java.io.File;
 
-import one.empty3.ImageIO;
-
 public class Draw extends ProcessFile {
     public Draw() {
 
@@ -33,7 +31,7 @@ public class Draw extends ProcessFile {
 
     public boolean process(File in, File out) {
         try {
-            ImageIO.write(ImageIO.read(in), "jpg", out, shouldOverwrite);
+           one.empty3.ImageIO.write(one.empty3.ImageIO.read(in), "jpg", out, shouldOverwrite);
 
         } catch (Exception ex) {
             ex.printStackTrace();

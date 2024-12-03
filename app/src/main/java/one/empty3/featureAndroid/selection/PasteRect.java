@@ -32,7 +32,6 @@ import one.empty3.library.ITexture;
 import one.empty3.library.Lumiere;
 import one.empty3.library.Point3D;
 
-import one.empty3.ImageIO;
 import one.empty3.libs.Image;
 
 import java.io.File;
@@ -152,11 +151,11 @@ public class PasteRect extends ProcessFile {
     public boolean process(File in, File out) {
         if (!in.getAbsolutePath().endsWith("jpg"))
             return false;
-        Image read = ImageIO.read(in);
+        Image read =one.empty3.ImageIO.read(in);
         PixM pixM = PixM.getPixM(read, maxRes);
         getSource("paste");
         PixM pixM1 = pasteList(pixM, new ColorTexture(Color.BLACK));
-        ImageIO.write(pixM1.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(pixM1.normalize(0, 1).getImage(), "jpg", out, shouldOverwrite);
         return true;
     }
 

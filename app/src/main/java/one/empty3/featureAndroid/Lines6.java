@@ -28,7 +28,6 @@ import one.empty3.library.LineSegment;
 import one.empty3.library.Point;
 import one.empty3.library.Point3D;
 
-import one.empty3.ImageIO;
 import one.empty3.libs.Image;
 
 import java.io.File;
@@ -93,7 +92,7 @@ public class Lines6 extends ProcessFile {
     @Override
     public boolean process(File in, File out) {
         pixM = null;
-        pixM = new PixM(ImageIO.read(in));
+        pixM = new PixM(one.empty3.ImageIO.read(in));
         ArrayList<List<Point3D>> lists = new ArrayList<>();
         PixM o = new PixM(pixM.getColumns(), pixM.getLines());
 
@@ -290,7 +289,7 @@ public class Lines6 extends ProcessFile {
                     stack, new ColorTexture(android.graphics.Color.WHITE));
         });
 
-        ImageIO.write(stack.getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(stack.getImage(), "jpg", out, shouldOverwrite);
 
         addSource(out);
 

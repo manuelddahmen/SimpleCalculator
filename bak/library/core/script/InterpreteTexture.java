@@ -113,7 +113,7 @@ public class InterpreteTexture implements Interprete {
                 pos = inf.getPosition();
                 pass = true;
 
-                tc = new TextureImg(new ECBufferedImage(Objects.requireNonNull(ImageIO.read(f)).bitmap));
+                tc = new TextureImg(new ECBufferedImage(Objects.requireNonNull(one.empty3.ImageIO.read(f)).bitmap));
             } catch (InterpreteException ex) {
             }
         }

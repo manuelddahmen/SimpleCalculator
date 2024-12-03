@@ -40,7 +40,7 @@ public abstract class ProcessFile extends ProcessNFiles {
         if( in != null && (in.getAbsolutePath().toLowerCase().endsWith(".jpg")
                 || in.getAbsolutePath().toLowerCase().endsWith(".png")))
             return true;
-        Image read = ImageIO.read(in);
+        Image read =one.empty3.ImageIO.read(in);
         if(read!=null) return true;
         return false;
     }

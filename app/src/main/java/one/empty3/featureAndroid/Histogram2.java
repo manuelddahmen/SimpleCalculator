@@ -20,7 +20,6 @@
 
 package one.empty3.featureAndroid;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.libs.Image;
 import one.empty3.io.ProcessFile;
@@ -181,7 +180,7 @@ public class Histogram2 extends ProcessFile {
 
     public boolean process(File in, File out) {
         File directory = new File(out.getParent());
-        PixM imageCoutours = new PixM(ImageIO.read(in));
+        PixM imageCoutours = new PixM(one.empty3.ImageIO.read(in));
         this.m = imageCoutours;
         Image file = m.getImage();
 
@@ -236,11 +235,11 @@ public class Histogram2 extends ProcessFile {
                 File fileToWrite3 = new File(directory.getAbsolutePath()
                         + "level"+ "_NEW_RGB.jpg");
                 //fileToWrite.mkdirs();*/
-        ImageIO.write(new PixM(img3).normalize(0., 1.).getImage(), "JPEG", out, shouldOverwrite);
+       one.empty3.ImageIO.write(new PixM(img3).normalize(0., 1.).getImage(), "JPEG", out, shouldOverwrite);
                 /*
-                ImageIO.write(img, "JPEG", fileToWrite);
-                ImageIO.write(img, "JPEG", fileToWrite2);
-                ImageIO.write(img, "JPEG", fileToWrite3);
+               one.empty3.ImageIO.write(img, "JPEG", fileToWrite);
+               one.empty3.ImageIO.write(img, "JPEG", fileToWrite2);
+               one.empty3.ImageIO.write(img, "JPEG", fileToWrite3);
 */
 
 

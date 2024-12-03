@@ -21,7 +21,6 @@
 package one.empty3.featureAndroid;
 
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.M3;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
@@ -41,7 +40,7 @@ public class GradAddProcess extends ProcessFile {
         PixM pix;
         try {
             pix = PixM.getPixM(
-                    Objects.requireNonNull(ImageIO.read(in)), maxRes);
+                    Objects.requireNonNull(one.empty3.ImageIO.read(in)), maxRes);
             GradientFilter gf = new GradientFilter(pix.getColumns(),
                     pix.getLines());
             PixM[][] imagesMatrix = gf.filter(
@@ -56,7 +55,7 @@ public class GradAddProcess extends ProcessFile {
 
             PixM image = linear.getImages()[2];
 
-            ImageIO.write(image.normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
+           one.empty3.ImageIO.write(image.normalize(0.0, 1.0).getImage(), "jpg", out, shouldOverwrite);
 
 
             addSource(out);

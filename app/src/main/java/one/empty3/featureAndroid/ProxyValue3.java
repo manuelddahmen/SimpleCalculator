@@ -23,7 +23,6 @@ package one.empty3.featureAndroid;
 
 import java.io.File;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 import one.empty3.library.Point3D;
@@ -37,7 +36,7 @@ public class ProxyValue3 extends ProcessFile {
         one.empty3.matrix.PixM original = null;
 
         try {
-            original = one.empty3.matrix.PixM.getPixM(ImageIO.read(in), maxRes);
+            original = one.empty3.matrix.PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -60,7 +59,7 @@ public class ProxyValue3 extends ProcessFile {
 
 
         try {
-            ImageIO.write(copy.getImage(), "jpg", out, shouldOverwrite);
+           one.empty3.ImageIO.write(copy.getImage(), "jpg", out, shouldOverwrite);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

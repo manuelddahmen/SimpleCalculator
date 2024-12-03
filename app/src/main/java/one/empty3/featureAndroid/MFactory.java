@@ -50,7 +50,7 @@ public class MFactory {
 //            }
 //            return null;
 //        } else {
-//            Image read = ImageIO.read(in);
+//            Image read =one.empty3.ImageIO.read(in);
 //            assert read != null;
 //            return new PixM(read);
 //        }

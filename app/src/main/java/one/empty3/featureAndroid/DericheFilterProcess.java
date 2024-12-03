@@ -20,7 +20,6 @@
 
 package one.empty3.featureAndroid;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.io.ProcessFile;
 
@@ -33,10 +32,10 @@ public class DericheFilterProcess extends ProcessFile {
 
     @Override
     public boolean process(File in, File out) {
-        PixM pixM = PixM.getPixM(ImageIO.read(in), maxRes);
+        PixM pixM = PixM.getPixM(one.empty3.ImageIO.read(in), maxRes);
 
 
-        ImageIO.write(pixM.getImage(), "jpg", out, shouldOverwrite);
+       one.empty3.ImageIO.write(pixM.getImage(), "jpg", out, shouldOverwrite);
 
 
         return false;

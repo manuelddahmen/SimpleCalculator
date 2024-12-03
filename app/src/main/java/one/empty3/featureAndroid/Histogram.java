@@ -20,7 +20,6 @@
 
 package one.empty3.featureAndroid;
 
-import one.empty3.ImageIO;
 import one.empty3.matrix.PixM;
 import one.empty3.libs.Image;
 import one.empty3.library.Lumiere;
@@ -187,9 +186,9 @@ public class Histogram {
             File fileToWrite3 = new File(directory.getAbsolutePath()
                     + "level" + finalI + "_NEW_RGB.jpg");
             fileToWrite.mkdirs();
-            ImageIO.write(img, "JPEG", fileToWrite, shouldOverwrite);
-            ImageIO.write(img, "JPEG", fileToWrite2, shouldOverwrite);
-            ImageIO.write(img, "JPEG", fileToWrite3, shouldOverwrite);
+           one.empty3.ImageIO.write(img, "JPEG", fileToWrite, shouldOverwrite);
+           one.empty3.ImageIO.write(img, "JPEG", fileToWrite2, shouldOverwrite);
+           one.empty3.ImageIO.write(img, "JPEG", fileToWrite3, shouldOverwrite);
 
         }
     }
