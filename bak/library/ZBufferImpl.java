@@ -42,7 +42,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import one.empty3.libs.Color;
-import javaAnd.awt.Point;
+import one.empty3.library.Point;
 import one.empty3.library.core.nurbs.ParametricCurve;
 import one.empty3.library.core.nurbs.ParametricSurface;
 import one.empty3.library.core.nurbs.ParametricVolume;
@@ -101,7 +101,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
     public ZBufferImpl() {
         that = this;
         scene = new Scene();
-        texture(new TextureCol(Color.BLACK));
+        texture(new ColorTexture(Color.BLACK));
     }
 
     public ZBufferImpl(int l, int h) {
@@ -1080,7 +1080,7 @@ public class ZBufferImpl extends Representable implements ZBuffer {
      */
     public Point3D clickAt(int x, int y) {
         Point3D p = ime.getIME().getElementPoint(x, y);
-        p.texture(new TextureCol(ime.getIME().getElementCouleur(x, y)));
+        p.texture(new ColorTexture(ime.getIME().getElementCouleur(x, y)));
         return p;
     }
 

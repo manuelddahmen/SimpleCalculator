@@ -6,7 +6,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import one.empty3.apps.simplecalculator.R
 
 
 class PrivacyPolicyActivity : AppCompatActivity() {
@@ -22,7 +21,7 @@ class PrivacyPolicyActivity : AppCompatActivity() {
         title = getString(R.string.title_activity_privacy_policy)
 
         webView = findViewById(R.id.webViewPrivacy)
-        // textViewPrivacyLink = findViewById(R.id.textViewPrivacyLink) // If using it
+        textViewPrivacyLink = findViewById(R.id.textViewPrivacyLink) // If using it
 
         // Configure WebView
         webView.webViewClient = WebViewClient() // Ensures links open within the WebView
@@ -37,6 +36,7 @@ class PrivacyPolicyActivity : AppCompatActivity() {
     }
 
     // Handle back press within WebView
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (webView.canGoBack()) {
             webView.goBack()

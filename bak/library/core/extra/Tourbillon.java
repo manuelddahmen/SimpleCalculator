@@ -104,7 +104,7 @@ public class Tourbillon extends Representable implements
                 Point3D p = new Point3D(-d
                         * Math.sin(2 * Math.PI * tours * h + angle), -h, d
                         * Math.cos(2 * Math.PI * tours * h + angle));
-                p.texture(new TextureCol(c));
+                p.texture(new ColorTexture(c));
 
                 obj.add(p);
 

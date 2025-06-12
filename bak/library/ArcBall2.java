@@ -21,7 +21,7 @@ package one.empty3.library;
 
 import one.empty3.libs.*;
 
-import javaAnd.awt.Point;
+import one.empty3.library.Point;
 
 /*__
  * Created by manue on 06-11-19.

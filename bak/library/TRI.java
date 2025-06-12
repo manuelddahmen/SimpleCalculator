@@ -88,7 +88,7 @@ public class TRI extends Representable {
         sommet.setElem(point3d, 0);
         sommet.setElem(point3d2, 1);
         sommet.setElem(point3d3, 2);
-        this.texture(new TextureCol(red));
+        this.texture(new ColorTexture(red));
     }
 
     public TRI(Point3D point3d, Point3D point3d2, Point3D point3d3,
@@ -123,7 +123,7 @@ public class TRI extends Representable {
 
 
     public void setCouleur(Color couleur) {
-        this.texture(new TextureCol(couleur));
+        this.texture(new ColorTexture(couleur));
 
     }
 

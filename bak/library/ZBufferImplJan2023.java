@@ -66,7 +66,7 @@
 //import android.graphics.Canvas;
 //import android.graphics.Color;
 //import android.graphics.Paint;
-//import javaAnd.awt.Point
+//import one.empty3.library.Point
 //import android.os.Build;
 //
 //import androidx.annotation.RequiresApi;
@@ -130,7 +130,7 @@ import one.empty3.library.StructureMatrix;
 //
 //    public ZBufferImplJan2023() {
 //        that = this;
-//        texture(new TextureCol(Color.BLACK));
+//        texture(new ColorTexture(Color.BLACK));
 //    }
 //
 //    public void copyResourceFiles(File destDirectory) {
@@ -1628,7 +1628,7 @@ import one.empty3.library.StructureMatrix;
 //     */
 //    public Point3D clickAt(int x, int y) {
 //        Point3D p = ime.getIME().getElementPoint(x, y);
-//        p.texture(new TextureCol(ime.getIME().getElementCouleur(x, y)));
+//        p.texture(new ColorTexture(ime.getIME().getElementCouleur(x, y)));
 //        return p;
 //    }
 //

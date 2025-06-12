@@ -41,7 +41,7 @@ import one.empty3.library.Representable;
 import one.empty3.library.TRI;
 import one.empty3.library.TRIConteneur;
 import one.empty3.library.TRIObject;
-import one.empty3.library.TextureCol;
+import one.empty3.library.ColorTexture;
 import one.empty3.library.core.nurbs.CourbeParametriquePolynomialeBezier;
 
 public class TubulaireN2 extends Representable implements TRIGenerable, TRIConteneur {
@@ -122,9 +122,9 @@ public class TubulaireN2 extends Representable implements TRIGenerable, TRIConte
                 for (int i = 3; i < tour1.size() - 1; i++) {
                     double s = 1.0 * (i - 3) / tour1.size();
                     TRI t1 = new TRI(tour0.get(i), tour1.get(i), tour1.get(i + 1), texture());
-                    t1.texture(new TextureCol(Color.valueOf(texture().getColorAt(t, s))));
+                    t1.texture(new ColorTexture(Color.valueOf(texture().getColorAt(t, s))));
                     TRI t2 = new TRI(tour0.get(i), tour0.get(i + 1), tour1.get(i + 1), texture());
-                    t2.texture(new TextureCol(Color.valueOf(texture().getColorAt(t, s))));
+                    t2.texture(new ColorTexture(Color.valueOf(texture().getColorAt(t, s))));
 
                     tris.add(t1);
                     tris.add(t2);

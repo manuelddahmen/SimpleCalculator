@@ -59,15 +59,15 @@ import android.graphics.Color;
  * @author Manuel Dahmen
  */
 //#TODO Repair
-public class TextureCol extends ITexture {
+public class ColorTexture extends ITexture {
 
     private final StructureMatrix<Integer> color = new StructureMatrix<>(0, Integer.class);
 
-    public TextureCol() {
+    public ColorTexture() {
         color.setElem(Color.valueOf(0f, 0f, 0f).toArgb());
     }
 
-    public TextureCol(Color c) {
+    public ColorTexture(Color c) {
         if (c != null) {
             color.setElem(c.toArgb());
         } else {
@@ -75,7 +75,7 @@ public class TextureCol extends ITexture {
         }
     }
 
-    public TextureCol(int c) {
+    public ColorTexture(int c) {
         color.setElem(c);
     }
 

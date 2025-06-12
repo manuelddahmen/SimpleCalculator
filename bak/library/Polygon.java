@@ -88,7 +88,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
 
     public Polygon(Color c) {
         this();
-        texture(new TextureCol(c));
+        texture(new ColorTexture(c));
     }
 
     public Polygon(ITexture c) {
@@ -97,7 +97,7 @@ public class Polygon extends Representable implements SurfaceElem, ClosedCurve, 
     }
 
     public Polygon(Point3D[] list, Color c) {
-        this(list, new TextureCol(c));
+        this(list, new ColorTexture(c));
     }
 
     public Polygon(Point3D[] list, ITexture c) {

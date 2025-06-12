@@ -57,7 +57,7 @@
  */
 package one.empty3.library;
 
-import javaAnd.awt.Point;
+import one.empty3.library.Point;
 
 
 /*__

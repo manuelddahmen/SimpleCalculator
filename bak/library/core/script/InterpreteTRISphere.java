@@ -53,7 +53,7 @@ package one.empty3.library.core.script;
 
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
-import one.empty3.library.TextureCol;
+import one.empty3.library.ColorTexture;
 import one.empty3.library.core.tribase.TRISphere;
 
 import java.util.ArrayList;
@@ -112,13 +112,13 @@ public class InterpreteTRISphere implements Interprete {
         Double r = (Double) ib.read(text, pos).get(1);
         pos = ib.getPosition();
 
-        TextureCol tc = null;
+        ColorTexture tc = null;
 
         InterpreteTColor tci = new InterpreteTColor();
 
         tci.setRepertoire(repertoire);
 
-        tc = (TextureCol) tci.interprete(text, pos);
+        tc = (ColorTexture) tci.interprete(text, pos);
 
         pos = tci.getPosition();
 

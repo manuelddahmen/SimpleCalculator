@@ -52,7 +52,7 @@
 package one.empty3.library;
 
 
-import javaAnd.awt.Point;
+import one.empty3.library.Point;
 
 /*__
  * @author Manuel Dahmen
@@ -260,7 +260,7 @@ public class Camera extends CameraBox {
     }
 
     public Point coordonneesPointEcranIsometrique(Point3D p, ZBufferImpl.Box2D box, int la, int ha) {
-        javaAnd.awt.Point p2 = new Point(
+        one.empty3.library.Point p2 = new Point(
                 (int) (1.0 * la / (box.getMaxx() - box.getMinx()) * (p.getX() - box.getMinx())),
                 ha - (int) (1.0 * ha / (box.getMaxy() - box.getMiny()) * (p.getY() - box.getMiny())));
         if (p2.x >= 0.0 && p2.x < la && p2.y >= 0 && p2.y < ha) {

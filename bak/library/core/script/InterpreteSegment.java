@@ -142,7 +142,7 @@ public class InterpreteSegment implements Interprete {
         this.pos = pos;
 
         LineSegment sd = new LineSegment(p1, p2);
-        sd.texture(new TextureCol(c));
+        sd.texture(new ColorTexture(c));
 
         return sd;
     }

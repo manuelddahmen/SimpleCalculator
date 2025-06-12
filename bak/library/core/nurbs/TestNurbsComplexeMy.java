@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 import one.empty3.libs.Color;
 import one.empty3.library.Camera;
 import one.empty3.library.Point3D;
-import one.empty3.library.TextureCol;
+import one.empty3.library.ColorTexture;
 import one.empty3.library.core.move.Trajectoires;
 import one.empty3.library.core.testing.TestObjetSub;
 
@@ -117,7 +117,7 @@ public class TestNurbsComplexeMy extends TestObjetSub {
                 {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
         });
 
-        n.texture(new TextureCol(Color.WHITE));
+        n.texture(new ColorTexture(Color.WHITE));
 
         n.creerNurbs();
 

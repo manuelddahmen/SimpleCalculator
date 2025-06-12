@@ -100,7 +100,7 @@ public class Parallelepiped extends RepresentableConteneur {
 
     }
 
-    public Parallelepiped(double a, double b, double c, TextureCol texture) {
+    public Parallelepiped(double a, double b, double c, ColorTexture texture) {
         this.a = a;
         this.b = b;
         this.c = c;

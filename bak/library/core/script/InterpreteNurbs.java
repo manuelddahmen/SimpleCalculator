@@ -62,7 +62,7 @@ package one.empty3.library.core.script;
 
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
-import one.empty3.library.TextureCol;
+import one.empty3.library.ColorTexture;
 import one.empty3.library.core.nurbs.NurbsSurface;
 
 import java.util.ArrayList;
@@ -146,7 +146,7 @@ public class InterpreteNurbs implements Interprete {
         }
         InterpreteTColor itc = new InterpreteTColor();
 
-        TextureCol tc = (TextureCol) itc.interprete(text, pos);
+        ColorTexture tc = (ColorTexture) itc.interprete(text, pos);
         pos = itc.getPosition();
 
         nurbs.setMaillage(points, poids);

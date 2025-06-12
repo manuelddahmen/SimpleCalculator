@@ -171,7 +171,7 @@ public class LumiereScene {/*
             synthese = Color.valueOf(f[0], f[1], f[2]);
         }
 
-        return new TextureCol(synthese);
+        return new ColorTexture(synthese);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

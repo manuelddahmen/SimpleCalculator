@@ -164,7 +164,7 @@ public class SimpleSphere extends Representable implements TRIGenerable {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public TextureCol texture(Bitmap img) {
+    public ColorTexture texture(Bitmap img) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

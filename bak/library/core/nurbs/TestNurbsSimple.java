@@ -65,7 +65,7 @@ import android.graphics.Color;
 import one.empty3.library.Camera;
 import one.empty3.library.Point3D;
 import one.empty3.library.StructureMatrix;
-import one.empty3.library.TextureCol;
+import one.empty3.library.ColorTexture;
 import one.empty3.library.core.testing.TestObjetSub;
 
 
@@ -115,7 +115,7 @@ public class TestNurbsSimple extends TestObjetSub {
                 {0, 0, 1, 1}
         });
 
-        n.texture(new TextureCol(Color.WHITE));
+        n.texture(new ColorTexture(Color.WHITE));
 
         n.setStartU(0.0);
         n.setStartV(0.0);

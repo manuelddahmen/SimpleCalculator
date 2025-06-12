@@ -64,7 +64,7 @@ import androidx.annotation.RequiresApi;
 
 import one.empty3.library.ECBufferedImage;
 import one.empty3.library.ITexture;
-import one.empty3.library.TextureCol;
+import one.empty3.library.ColorTexture;
 import one.empty3.library.TextureImg;
 
 import one.empty3.ImageIO;
@@ -116,7 +116,7 @@ public class InterpreteTColor implements Interprete {
 
             Color c = (Color) ic.interprete(text, pos);
 
-            tc = new TextureCol(c);
+            tc = new ColorTexture(c);
 
             pos = ic.getPosition();
 
@@ -138,7 +138,7 @@ public class InterpreteTColor implements Interprete {
 				
                  ECBufferedImage ec = (ECBufferedImage) iPGM.interprete(text, pos);
 				
-                 tc = new TextureCol(ec);
+                 tc = new ColorTexture(ec);
 				
                  this.pos = inf.getPosition();
                  */

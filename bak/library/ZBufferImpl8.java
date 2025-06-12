@@ -48,7 +48,7 @@ import one.empty3.pointset.PCont;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Picture;
-import javaAnd.awt.Point
+import one.empty3.library.Point
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -261,7 +261,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
     public ZBufferImpl8() {
 
         that = this;
-        texture(new TextureCol(Color.BLACK));
+        texture(new ColorTexture(Color.BLACK));
     }
 
 
@@ -1676,7 +1676,7 @@ public class ZBufferImpl8 extends ZBufferImpl {
 
     public Point3D clickAt(int x, int y) {
         Point3D p = ime.getIME().getElementPoint(x, y);
-        p.texture(new TextureCol(ime.getIME().getElementCouleur(x, y)));
+        p.texture(new ColorTexture(ime.getIME().getElementCouleur(x, y)));
         return p;
     }
 

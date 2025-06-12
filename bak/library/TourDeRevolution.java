@@ -135,7 +135,7 @@ public class TourDeRevolution extends Representable {
 
                 Point3D p2d = new Point3D(diamx * Math.cos(a), diamy, -diamx * Math.sin(a));
 
-                p2d.texture(new TextureCol(colors[(int) ((Math.cos(a) + 1) / 2 * 255)]));
+                p2d.texture(new ColorTexture(colors[(int) ((Math.cos(a) + 1) / 2 * 255)]));
 
                 op.add(p2d);
 

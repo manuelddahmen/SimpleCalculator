@@ -229,7 +229,7 @@ class MainActivity : AppCompatActivity() {
             openUserData(it)
         }
         findViewById<Button>(R.id.textCalculatorButton).setOnClickListener(View.OnClickListener {
-            val intentText: Intent = Intent(this, PrivacyPolicyActivity::class.java)
+            val intentText: Intent = Intent(this, ScrollingActivity::class.java)
             startActivity(intentText)
         })
 

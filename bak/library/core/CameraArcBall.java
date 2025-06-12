@@ -19,7 +19,7 @@
 
 package one.empty3.library.core;
 
-import javaAnd.awt.Point;
+import one.empty3.library.Point;
 import one.empty3.library.*;
 
 import one.empty3.libs.*;

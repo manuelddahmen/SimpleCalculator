@@ -76,7 +76,7 @@ public class Point2D {
         y = p1.getY();
     }
 
-    public Point2D(javaAnd.awt.Point coordonneesPoint2D) {
+    public Point2D(one.empty3.library.Point coordonneesPoint2D) {
         x = coordonneesPoint2D.getX();
         y = coordonneesPoint2D.getY();
     }

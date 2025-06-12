@@ -6,54 +6,48 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 
 import org.jetbrains.annotations.NotNull;
-
-import one.empty3.library.core.nurbs.F;
 import one.empty3.libs.commons.IImageMp;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.nio.Buffer;
+import java.io.*;
 
 public class Image extends BitmapDrawable implements IImageMp {
-    private Bitmap image;
 
-    public Image(Bitmap image) {
-        if (image != null) {
-            setImage(image);
-        }
-    }
 
-    private void setImage(Bitmap image) {
-        this.image = image;
+    public Image(@NotNull Bitmap bitmap) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            setBitmap(image);
+            if (bitmap != null) {
+                bitmap = bitmap.copy(Bitmap.Config.RGB_565, true);
+                setBitmap(bitmap);
+            }
         }
     }
 
     public Image(int width, int height) {
-        setImage(Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888));
-        ;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            setBitmap(image);
+            setBitmap(Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565));
         }
     }
 
-    public Image(int columns, int lines, int i) {
+    public Image(int width, int height, int nothing) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            setImage(Bitmap.createBitmap(columns, lines, Bitmap.Config.ARGB_8888));
-            setBitmap(image);
+            setBitmap(Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565));
         }
     }
 
-
-    public int getRgb(int x, int y) {
-        return image.getPixel(x, y);
+    public static Image getFromInputStream(InputStream stream) {
+        Bitmap bitmap = BitmapFactory.decodeStream(stream);
+        bitmap = bitmap.copy(Bitmap.Config.RGB_565, true);
+        return bitmap != null ? new Image(bitmap) : null;
     }
 
     @Override
-    public IImageMp getFromFile(File file) {
-        return loadFile(file);
+    public boolean toOutputStream(OutputStream stream) {
+        return false;
+    }
+
+    public static Image getFromFile(File file) {
+        Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+        return bitmap != null ? new Image(bitmap) : null;
     }
 
     @Override
@@ -61,54 +55,60 @@ public class Image extends BitmapDrawable implements IImageMp {
         return saveFile(new File(path));
     }
 
+    public boolean saveFile(File path) {
+        return saveFile(path, Bitmap.CompressFormat.JPEG, 100); // Default JPEG, quality 100
+    }
+
+    public boolean saveFile(File path, Bitmap.CompressFormat format, int quality) {
+        try (FileOutputStream fos = new FileOutputStream(path)) {
+            getBitmap().compress(format, quality, fos);
+            return true;
+        } catch (IOException e) {
+            throw new RuntimeException("Error saving image: " + e.getMessage(), e);
+        }
+    }
+
     @Override
-    public void setImageToMatrix(int[][] ints) {
+    public int getWidth() {
+        return getBitmap().getWidth(); // Or handle null Bitmap
+    }
+
+    @Override
+    public int getHeight() {
+        return getBitmap().getHeight(); // Or handle null Bitmap
+    }
+
+    public int getRgb(int x, int y) {
+        return getBitmap().getPixel(x, y); // Or handle out-of-bounds
+    }
+
+    @Override
+    public void setImageToMatrix(int[][] imagetoMatrix) {
 
     }
 
     @Override
     public int[][] getMatrix() {
-        return new int[1][1];
-    }
-
-    @Override
-    public int getWidth() {
-        if (image == null)
-            return getBitmap().getWidth();
-        return image.getWidth();
-    }
-
-    @Override
-    public int getHeight() {
-        if (image == null)
-            return getBitmap().getHeight();
-        return image.getHeight();
+        return new int[0][];
     }
 
     public void setRgb(int x, int y, int rgb) {
-        image.setPixel(x, y, rgb);
-    }
-
-    public static Image loadFile(File path) {
-        Bitmap bitmap = BitmapFactory.decodeFile(String.valueOf(path));
-        return new Image(bitmap);
-    }
-
-    public boolean saveFile(File path) {
-        try {
-            if (image != null) {
-                image.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(path));
-                return true;
-            } else {
-                getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(path));
-                return true;
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+        if (x >= 0 && y >= 0 && x < getWidth() && y < getHeight()) {
+            getBitmap().setPixel(x, y, rgb & 0x00FFFFFF); // Or handle out-of-bounds
         }
     }
 
-    public @NotNull Bitmap getImage() {
-        return image == null ? getBitmap() : image;
+    // Optional: Add Color-based methods
+    public Color getColor(int x, int y) {
+        return new Color(getBitmap().getPixel(x, y)); // Or handle out-of-bounds
+    }
+
+    public void setColor(int x, int y, Color color) {
+        setRgb(x, y, color.getRgb());
+    }
+
+    @NotNull
+    public final Bitmap getImage() {
+        return getBitmap();
     }
 }

@@ -62,7 +62,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
     public static final int SURFACE_DISPLAY_COL_TRI = 4;
     public static final int SURFACE_DISPLAY_LINES = 5;
     public static final int SURFACE_DISPLAY_POINTS = 6;
-    public static final ITexture DEFAULT_TEXTURE = new TextureCol(Color.WHITE);
+    public static final ITexture DEFAULT_TEXTURE = new ColorTexture(Color.WHITE);
     private static final String[] displayTypes = {"All", "Textured Quad", "SURFACE_DISPLAY_TEXT_TRI", "SURFACE_DISPLAY_COL_QUADS", "SURFACE_DISPLAY_COL_TRI", "SURFACE_DISPLAY_LINES", "SURFACE_DISPLAY_POINTS"};
     public static Point3D SCALE1;
     protected static ArrayList<Painter> classPainters = new ArrayList<Painter>();
@@ -92,7 +92,7 @@ public class Representable /*extends RepresentableT*/ implements Serializable, C
         if (!(this instanceof Matrix33 || this instanceof Point3D || this instanceof Camera)) {
             rotation.setElem(new Rotation());
             //scale = new Point3D(1d, 1d, 1d);
-            //texture = new TextureCol(Colors.random());
+            //texture = new ColorTexture(Colors.random());
             vectors = new StructureMatrix<>(1, Point3D.class);
             vectors.setElem(Point3D.X, 0);
             vectors.setElem(Point3D.Y, 1);

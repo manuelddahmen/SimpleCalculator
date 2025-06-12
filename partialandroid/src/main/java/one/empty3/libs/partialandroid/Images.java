@@ -18,7 +18,7 @@ public class Images {
     }
 
     public Images(int x, int y) {
-        this.image = Bitmap.createBitmap(x, y, Bitmap.Config.ARGB_8888);
+        this.image = Bitmap.createBitmap(x, y, Bitmap.Config.RGB_565);
     }
 
     public static void save(Images images, File path) {
