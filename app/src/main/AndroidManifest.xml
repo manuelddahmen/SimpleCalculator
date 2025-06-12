@@ -31,6 +31,10 @@
         tools:ignore="UnusedAttribute"
         tools:remove="android:appComponentFactory"
         -->
+
+        <activity
+            android:name=".PrivacyPolicyActivity"
+            android:exported="false" android:label="@string/title_activity_privacy_policy" />
         <activity
             android:name=".SettingsActivity"
             android:exported="false"

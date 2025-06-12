@@ -229,7 +229,7 @@ class MainActivity : AppCompatActivity() {
             openUserData(it)
         }
         findViewById<Button>(R.id.textCalculatorButton).setOnClickListener(View.OnClickListener {
-            val intentText: Intent = Intent(applicationContext, ScrollingActivity::class.java)
+            val intentText: Intent = Intent(this, PrivacyPolicyActivity::class.java)
             startActivity(intentText)
         })
 
@@ -303,7 +303,7 @@ class MainActivity : AppCompatActivity() {
         return labelAnswer
     }
     private fun openUserData(view: View) {
-        val intent: Intent = Intent(view.context, LicenceUserData::class.java).apply {
+        val intent: Intent = Intent(view.context, PrivacyPolicyActivity::class.java).apply {
             putExtra("class", "")
         }
         startActivity(intent)

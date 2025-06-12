@@ -25,10 +25,12 @@
     android:layout_height="match_parent"
     android:background="#F3E6E6"
     android:backgroundTintMode="add"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
 
     <LinearLayout
+        android:layout_marginTop="80dp"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:orientation="horizontal">
@@ -44,10 +46,12 @@
             android:hint="@string/edit_text_here_or_by_push_numbers"
             android:inputType="textPersonName"
             android:labelFor="@id/answerText"
-            android:textAlignment="center"
-            android:textSize="24sp"
+            android:textAlignment="textStart"
+            android:scrollbarAlwaysDrawVerticalTrack="false"
+            android:textSize="24dp"
             tools:ignore="DuplicateSpeakableTextCheck"
-            android:theme="?android:attr/buttonBarButtonStyle"/>
+            android:theme="?android:attr/buttonBarButtonStyle"
+            android:layout_marginTop="60dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -80,7 +84,7 @@
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:text="@string/_3"
-            android:textAlignment="viewStart"
+            android:textAlignment="center"
             android:textColorHint="#FBD3D3" />
 
         <Button

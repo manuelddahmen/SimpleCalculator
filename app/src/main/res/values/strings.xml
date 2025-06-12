@@ -89,4 +89,8 @@
     <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
     <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Données utilisateur personnelles et sensibles Voir le lien pour plus d\'infos</string>
     <string name="fx">fx(</string>
+    <!-- ... other strings ... -->
+    <string name="privacy_policy_link_text">View Privacy Policy Online: https://empty3.app/android/privacy.html</string>
+    <string name="title_activity_privacy_policy">Privacy Policy</string>
+
 </resources>

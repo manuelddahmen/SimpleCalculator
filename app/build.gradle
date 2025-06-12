@@ -11,21 +11,26 @@ if (hasProperty('buildScan')) {
     }
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_23
+    targetCompatibility = JavaVersion.VERSION_23
+}
 
-def versionCode1000 = 406999505
-def kotlin_version = '2.0.0'
-def javaVersionEnum = JavaVersion.VERSION_21
-def javaVersion = 21
+
+def versionCode1000 = 406999506
+def kotlin_version = '2.1.20'
+def javaVersionEnum = JavaVersion.VERSION_23
+def javaVersion = 23
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(javaVersion))
+        languageVersion.set(JavaLanguageVersion.of(javaVersion.toString()))
     }
 }
 kotlin {
-    version javaVersionEnum
+    version '2.1.20'
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(javaVersion))
+        languageVersion.set(JavaLanguageVersion.of(javaVersion.toString()))
     }
 }
 android {
@@ -67,7 +72,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = javaVersionEnum
+        jvmTarget = javaVersion.toString()
     }
 
     buildTypes {
