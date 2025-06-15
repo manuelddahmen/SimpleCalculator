@@ -17,7 +17,7 @@ java {
 }
 
 
-def versionCode1000 = 406999509
+def versionCode1000 = 406999510
 def kotlin_version = '2.1.20'
 def javaVersionEnum = JavaVersion.VERSION_23
 def javaVersion = 23
@@ -222,8 +222,8 @@ android {
     defaultConfig {
         //resourceConfigurations += ['en']
         javaVersionEnum
-        compileSdk 35
-        targetSdk 35
+        compileSdk 36
+        targetSdk 36
         minSdkVersion 29
         versionName "9.3"
         versionCode versionCode1000

@@ -1,5 +1,6 @@
 package one.empty3.apps.simplecalculator // Remplacez par votre nom de package réel
 
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.Editable
@@ -11,6 +12,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 // import androidx.core.view.isVisible // Plus utilisé directement, remplacé par View.VISIBLE/GONE
 import com.google.android.material.textfield.TextInputEditText
@@ -20,9 +22,12 @@ import one.empty3.library1.tree.AlgebraicFormulaSyntaxException
 import one.empty3.library1.tree.AlgebraicTree
 import one.empty3.libs.Image
 import java.io.File
+import kotlin.String
 
 
 class GraphActivity : AppCompatActivity() {
+    private lateinit var strings: List<String>
+    private lateinit var prefs: SharedPreferences
     private lateinit var editTextYMax: TextInputEditText
     private lateinit var editTextYMin: TextInputEditText
     private var imageWidth: Float = 0.0f
@@ -85,9 +90,25 @@ class GraphActivity : AppCompatActivity() {
         buttonDownloadImage.setOnClickListener {
             downloadImage()
         }
+        prefs = PreferenceManager
+            .getDefaultSharedPreferences(this)
 
         // Vérification initiale pour l'état du bouton Plot
         checkAllFieldsValidated()
+
+        strings = listOf<String>("x", "Fx", "xMin", "xMax", "yMin", "yMax")
+        val stringsIds = listOf<Int>(R.id.editTextFormulaX, R.id.editTextFormulaFx,
+            R.id.editTextXMin, R.id.editTextXMax, R.id.editTextYMin, R.id.editTextYMax)
+
+        for (i in strings.indices) {
+            prefs = PreferenceManager
+                .getDefaultSharedPreferences(this)
+            val string: String? = prefs.getString(strings[i], "")
+            val editText : TextInputEditText = findViewById<TextInputEditText>(stringsIds[i])
+            editText.setText(string?: "")
+            addTextChangedListener(editText, strings[i])
+        }
+
     }
 
     private fun setupTextWatchers() {
@@ -177,6 +198,26 @@ class GraphActivity : AppCompatActivity() {
         checkAllFieldsValidated()
         return isValid
     }
+    fun addTextChangedListener(editText: TextInputEditText, propName : String){
+        prefs = PreferenceManager
+            .getDefaultSharedPreferences(this)
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val toString = editText.text.toString()
+                runOnUiThread {
+                    prefs.edit().putString(propName, toString).apply();
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+    }
+
 
     private fun checkAllFieldsValidated() {
         // Vérifier si tous les états de validation sont true
@@ -287,7 +328,7 @@ class GraphActivity : AppCompatActivity() {
                     x0paint = x1paint
                     y0paint = y1paint
 
-                    println("logical (x,y) ($x,$y) screen (x,y) ($x1paint,$y1paint)")
+                    //println("logical (x,y) ($x,$y) screen (x,y) ($x1paint,$y1paint)")
                 }
 
 
