@@ -89,8 +89,18 @@
     <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
     <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Données utilisateur personnelles et sensibles Voir le lien pour plus d\'infos</string>
     <string name="fx">fx(</string>
-    <!-- ... other strings ... -->
     <string name="privacy_policy_link_text">View Privacy Policy Online: https://empty3.app/android/privacy.html</string>
     <string name="title_activity_privacy_policy">Privacy Policy</string>
-
+    <string name="title_activity_graph">Graph Plotter</string>
+    <string name="hint_formula_x">Formula X (e.g., t*cos(t))</string>
+    <string name="hint_formula_y">Formula Y (e.g., t*sin(t))</string>
+    <string name="hint_formula_fx">y = f(x) (e.g., x^2)</string>
+    <string name="button_plot">Plot Graph</string>
+    <string name="button_download_image">Download Image</string>
+    <string name="content_description_graph_image">Plotted graph image</string>
+        <string name="hint_x_min">X Min</string>
+        <string name="hint_x_max">X Max</string>
+    <!-- ... existing strings ... -->
+    <string name="hint_y_min">Y Min (e.g., -10)</string>
+    <string name="hint_y_max">Y Max (e.g., 10)</string>
 </resources>

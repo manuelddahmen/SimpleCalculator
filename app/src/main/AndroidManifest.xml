@@ -31,7 +31,10 @@
         tools:ignore="UnusedAttribute"
         tools:remove="android:appComponentFactory"
         -->
-
+        <activity
+            android:name=".GraphActivity"
+            android:exported="false" /> <!-- Ajustez 'exported' selon vos besoins -->
+        <!-- ... autres activités ... -->
         <activity
             android:name=".PrivacyPolicyActivity"
             android:exported="false" android:label="@string/title_activity_privacy_policy" />

@@ -80,13 +80,13 @@
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
                 android:text="@string/_3"
-                android:textAlignment="viewStart"
+                android:textAlignment="center"
                 android:textColorHint="#FBD3D3" />
 
             <Button
                 android:id="@+id/buttonParenthesisA"
                 style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="48dp"
+                android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/open_brace"
@@ -127,7 +127,6 @@
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:width="128dp"
                 android:text="function(" />
 
         </LinearLayout>
@@ -198,6 +197,7 @@
                 android:id="@+id/buttonComa"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="48dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="@string/coma" />
         </LinearLayout>
@@ -280,9 +280,16 @@
         android:orientation="horizontal">
     <Button
         android:id="@+id/textCalculatorButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_weight="50"
         android:layout_height="48dp"
         android:text="@string/text_calculator"/>
+    <Button
+            android:id="@+id/your_button_id_to_open_graph_activity"
+            android:layout_width="wrap_content"
+            android:layout_weight="50"
+            android:layout_height="48dp"
+            android:text="@string/title_activity_graph"/>
     </LinearLayout>
 
     <LinearLayout

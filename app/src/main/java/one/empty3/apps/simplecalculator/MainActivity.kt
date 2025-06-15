@@ -39,7 +39,7 @@ import com.google.firebase.vertexai.vertexAI
 import one.empty3.library.StructureMatrix
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException
 import one.empty3.library1.tree.AlgebraicTree
-
+import one.empty3.apps.simplecalculator.R
 
 class MainActivity : AppCompatActivity() {
 
@@ -254,7 +254,12 @@ class MainActivity : AppCompatActivity() {
 
 
         })
-    }
+// Dans votre MainActivity.kt ou une autre activité
+        val buttonOpenGraph: Button = findViewById(R.id.your_button_id_to_open_graph_activity)
+        buttonOpenGraph.setOnClickListener {
+            val intent = Intent(this, GraphActivity::class.java)
+            startActivity(intent)
+        }    }
 
     private fun compute(
         tree: AlgebraicTree,
