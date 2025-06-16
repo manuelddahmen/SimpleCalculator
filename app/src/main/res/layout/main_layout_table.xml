@@ -18,22 +18,57 @@
   ~
   ~
   -->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3E6E6"
-    android:backgroundTintMode="add"
-    android:orientation="vertical"
-    >
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
 
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/app_bar_height"
+        android:fitsSystemWindows="true"
+        android:theme="@style/Theme.SimpleCalculator.AppBarOverlay">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/toolbar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/Theme.SimpleCalculator.PopupOverlay" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
-        android:layout_marginTop="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginVertical="100dp">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+
+        >
 
         <EditText
             android:id="@+id/editTextCalculus"
@@ -51,7 +86,7 @@
             android:textSize="24dp"
             tools:ignore="DuplicateSpeakableTextCheck"
             android:theme="?android:attr/buttonBarButtonStyle"
-            android:layout_marginTop="60dp"/>
+            android:layout_marginTop="50dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -281,24 +316,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:orientation="horizontal">
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
         <Button
             android:id="@+id/textCalculatorButton"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="36dp"
+            android:layout_weight="0.5"
             android:text="@string/text_calculator"/>
         <Button
             android:id="@+id/your_button_id_to_open_graph_activity"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_weight="0.5"
+            android:layout_height="36dp"
             android:text="@string/title_activity_graph"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="48dp"
         android:orientation="horizontal">
 
         <EditText
@@ -307,7 +345,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="monospace"
-            android:textSize="34sp"
+            android:textSize="48dp"
             android:theme="?android:attr/buttonBarButtonStyle"
             android:typeface="monospace" />
     </LinearLayout>
@@ -324,5 +362,6 @@
             android:text="@string/about_and_policies" />
 
     </LinearLayout>
-
 </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</ScrollView>

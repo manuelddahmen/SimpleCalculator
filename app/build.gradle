@@ -17,7 +17,7 @@ java {
 }
 
 
-def versionCode1000 = 406999510
+def versionCode1000 = 406999511
 def kotlin_version = '2.1.20'
 def javaVersionEnum = JavaVersion.VERSION_23
 def javaVersion = 23
