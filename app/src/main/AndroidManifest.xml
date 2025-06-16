@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:versionName="3.0">
+    android:versionName="3.0"
+    package="one.empty3.apps.simplecalculator">
 
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
     <uses-permission
@@ -13,7 +14,6 @@
         android:maxSdkVersion="34"
         />
     <application
-        android:name=".SciProgCalculator"
         android:allowBackup="true"
         android:enableOnBackInvokedCallback="true"
         android:exported="true"
@@ -26,36 +26,48 @@
         android:theme="@style/Theme.SimpleCalculator"
         android:usesCleartextTraffic="true"
         tools:remove="android:appComponentFactory"
-        tools:targetApi="tiramisu">
+        tools:targetApi="tiramisu"
+        android:name="one.empty3.apps.simplecalculator.SciProgCalculator">
         <!--
         tools:ignore="UnusedAttribute"
         tools:remove="android:appComponentFactory"
         -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="one.empty3.apps.simplecalculator.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+
         <activity
-            android:name=".GraphActivity"
-            android:exported="false" /> <!-- Ajustez 'exported' selon vos besoins -->
+            android:exported="false"
+            android:name="one.empty3.apps.simplecalculator.GraphActivity" /> <!-- Ajustez 'exported' selon vos besoins -->
         <!-- ... autres activités ... -->
         <activity
-            android:name=".PrivacyPolicyActivity"
-            android:exported="false" android:label="@string/title_activity_privacy_policy" />
+            android:exported="false" android:label="@string/title_activity_privacy_policy"
+            android:name="one.empty3.apps.simplecalculator.PrivacyPolicyActivity" />
         <activity
-            android:name=".SettingsActivity"
             android:exported="false"
-            android:label="@string/title_activity_settings" />
+            android:label="@string/title_activity_settings"
+            android:name="one.empty3.apps.simplecalculator.SettingsActivity" />
         <activity
-            android:name=".ScrollingActivity"
             android:exported="false"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/Theme.SimpleCalculator" />
+            android:theme="@style/Theme.SimpleCalculator"
+            android:name="one.empty3.apps.simplecalculator.ScrollingActivity" />
         <activity
-            android:name=".LicenceUserData"
             android:label="License text"
-            android:exported="false" /> <!-- <a href="https://www.flaticon.com/free-icons/electronics" title="electronics icons">Electronics icons created by 88 Cloud - Flaticon</a> -->
+            android:exported="false"
+            android:name="one.empty3.apps.simplecalculator.LicenceUserData" /> <!-- <a href="https://www.flaticon.com/free-icons/electronics" title="electronics icons">Electronics icons created by 88 Cloud - Flaticon</a> -->
         <activity
-            android:name=".MainActivity"
             android:exported="true"
             android:label="Sci-prog Calculator"
-            android:theme="@style/Theme.SimpleCalculator">
+            android:theme="@style/Theme.SimpleCalculator"
+            android:name="one.empty3.apps.simplecalculator.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

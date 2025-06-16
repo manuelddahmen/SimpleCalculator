@@ -305,9 +305,12 @@ class GraphActivity : AppCompatActivity() {
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
         val imageFileName = "GRAPH_${timeStamp}_"
         // Utilise le répertoire de cache externe pour que FileProvider puisse y accéder facilement
-        val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES) // Ou getExternalCacheDir()
+        val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES+File.separator+"simplecalculator") // Ou getExternalCacheDir()
 
         return try {
+            if(storageDir!=null &&!storageDir.exists())
+                storageDir.mkdirs()
+
             val imageFile = File.createTempFile(imageFileName, ".png", storageDir)
             val fos = FileOutputStream(imageFile)
             bitmapToSave.compress(Bitmap.CompressFormat.PNG, 100, fos)
