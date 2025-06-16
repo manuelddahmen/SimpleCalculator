@@ -37,8 +37,15 @@
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
+        <!-- YOUR SCROLLING CONTENT -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">  <!-- Applied here! -->
 
-        <include layout="@layout/content_graph"/>
+            <!-- Your content_graph.xml or other included layout would go here -->
+            <include layout="@layout/content_graph" />
 
+        </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </ScrollView>
