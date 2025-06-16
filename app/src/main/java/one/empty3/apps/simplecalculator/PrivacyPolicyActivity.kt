@@ -36,6 +36,7 @@ class PrivacyPolicyActivity : AppCompatActivity() {
     }
 
     // Handle back press within WebView
+    @Suppress("DEPRECATION")
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (webView.canGoBack()) {
@@ -44,4 +45,5 @@ class PrivacyPolicyActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
+
 }

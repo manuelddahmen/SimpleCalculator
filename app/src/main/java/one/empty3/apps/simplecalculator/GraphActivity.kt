@@ -154,9 +154,11 @@ class GraphActivity : AppCompatActivity() {
                 if (isValid) {
                     try {
                         AlgebraicTree(content).construct()
-                    } catch (e: Exception) {
+                    } catch (e: RuntimeException) {
                         isValid = false
                         specificError = e.localizedMessage ?: "Syntax error"
+                    } catch (e: AlgebraicFormulaSyntaxException) {
+                        isValid = false
                     }
                 } else { isValid = false }
             }
@@ -261,7 +263,7 @@ class GraphActivity : AppCompatActivity() {
                 treeFx.setParameter("x", logicalX)
                 val logicalY = treeFx.eval().getElem()
 
-                if (logicalX.isFinite() && logicalY.isFinite()) {
+                if (logicalX!=null && logicalY!=null &&logicalX.isFinite() && logicalY.isFinite()) {
                     val screenX = logicalToScreenX(logicalX); val screenY = logicalToScreenY(logicalY)
                     if (previousScreenX != -1f) {
                         if (!((previousScreenY < 0 && screenY < 0) || (previousScreenY > this.imageHeight && screenY > this.imageHeight) ||
@@ -278,7 +280,7 @@ class GraphActivity : AppCompatActivity() {
 
         } catch (e: AlgebraicFormulaSyntaxException) {
             handlePlottingError("Syntax Error: Algebraic formula syntax error", null)
-        } catch (e: Exception) {
+        } catch (e: RuntimeException) {
             handlePlottingError("Plotting Error: ${e.localizedMessage ?: "An unexpected error occurred"}", e)
         }
     }
