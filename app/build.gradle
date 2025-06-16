@@ -17,7 +17,7 @@ java {
 }
 
 
-def versionCode1000 = 406999511
+def versionCode1000 = 406999512
 def kotlin_version = '2.1.20'
 def javaVersionEnum = JavaVersion.VERSION_23
 def javaVersion = 23
@@ -253,11 +253,11 @@ dependencies {
     implementation("one.empty3.libs:commons-mp:0.0.10")
 
     implementation("one.empty3:empty3-library-mp:2025.5.31-2") {
-        exclude(group:"one.empty3.libs", module:"partial-deskop")
+        exclude(group: "one.empty3.libs", module: "partial-deskop")
     }
 
     implementation("one.empty3:empty3-library-mp:2025.5.31-2") {
-        exclude(group:"one.empty3.libs", module:"partial-deskop")
+        exclude(group: "one.empty3.libs", module: "partial-deskop")
     }
     // This dependency is downloaded from the Google’s Maven repository.
     // So, make sure you also include that repository in your project's build.gradle file.
@@ -342,6 +342,7 @@ dependencies {
     // Optional - Integration with RxJava
     implementation 'androidx.compose.runtime:runtime-rxjava2'
 
+    implementation 'com.google.android.material:material:1.12.0'
 }
 
 Properties properties = new Properties()

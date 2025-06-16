@@ -103,4 +103,13 @@
     <!-- ... existing strings ... -->
     <string name="hint_y_min">Y Min (e.g., -10)</string>
     <string name="hint_y_max">Y Max (e.g., 10)</string>
+    <!-- ... autres chaînes ... -->
+    <string name="button_save_image">Save</string>
+    <string name="button_share_image">Share</string>
+    <string name="share_image_title">Share Graph Image</string>
+    <string name="error_no_image_to_share">No image available to share.</string>
+    <string name="error_failed_to_share_image">Failed to share image.</string>
+    <string name="image_saved_to">Image saved to %s</string> <!-- Pour le message de sauvegarde -->
+    <string name="failed_to_save_image">Failed to save image: %s</string> <!-- Pour le message d'erreur de sauvegarde -->
+
 </resources>

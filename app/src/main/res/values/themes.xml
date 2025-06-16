@@ -42,4 +42,5 @@
     <style name="Theme.SimpleCalculator.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.SimpleCalculator.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

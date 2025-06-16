@@ -1,259 +1,229 @@
-package one.empty3.apps.simplecalculator // Remplacez par votre nom de package réel
+package one.empty3.apps.simplecalculator
 
-import android.content.SharedPreferences
+import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Button
-// import android.widget.EditText // Plus nécessaire si on utilise TextInputEditText partout
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout // Ajouté
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.PreferenceManager
+import androidx.core.content.FileProvider // Ajouté
+import com.google.android.material.button.MaterialButton // Ajouté
 import com.google.android.material.snackbar.Snackbar
-// import androidx.core.view.isVisible // Plus utilisé directement, remplacé par View.VISIBLE/GONE
 import com.google.android.material.textfield.TextInputEditText
-// Assurez-vous d'importer votre fichier R correctement
-import one.empty3.apps.simplecalculator.R
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException
 import one.empty3.library1.tree.AlgebraicTree
-import one.empty3.libs.Image
+// Assurez-vous que cette classe existe et gère la sauvegarde
+// import one.empty3.libs.Image
 import java.io.File
-import kotlin.String
-
+import java.io.FileOutputStream
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class GraphActivity : AppCompatActivity() {
-    private lateinit var strings: List<String>
-    private lateinit var prefs: SharedPreferences
-    private lateinit var editTextYMax: TextInputEditText
-    private lateinit var editTextYMin: TextInputEditText
+    // ... (autres propriétés comme imageWidth, imageHeight etc.)
     private var imageWidth: Float = 0.0f
-    private var xScale: Float = 1.0f
+    private var xScale: Float = 0.0f
     private var yScale: Float = 0.0f
-    private var yMinLogical: Float = 0.0f
+    private var yMinLogicalUi: Float = 0.0f
     private var imageHeight: Float = 0.0f
-    private var xMin: Double = 0.0
-    private var xMax: Double = 0.0
+    private var xMinUi: Double = -10.0
+    private var xMaxUi: Double = 10.0
+    private var yMaxLogicalUi: Float = 0.0f
+
     private lateinit var bitmap: Bitmap
     private lateinit var editTextFormulaX: TextInputEditText
     private lateinit var editTextFormulaFx: TextInputEditText
-    private lateinit var editTextXMin: TextInputEditText // Nouveau
-    private lateinit var editTextXMax: TextInputEditText // Nouveau
+    private lateinit var editTextXMin: TextInputEditText
+    private lateinit var editTextXMax: TextInputEditText
+    private lateinit var editTextYMin: TextInputEditText
+    private lateinit var editTextYMax: TextInputEditText
 
     private lateinit var buttonPlot: Button
     private lateinit var imageViewGraph: ImageView
-    private lateinit var buttonDownloadImage: Button
-    private lateinit var frameLayoutImageView: FrameLayout
+    private lateinit var frameLayoutImageView: FrameLayout // Gardez cela si vous en avez besoin pour d'autres raisons
 
-    // États de validation pour chaque champ
+    // Nouveaux boutons et leur layout
+    private lateinit var layoutImageActions: LinearLayout
+    private lateinit var buttonSaveImage: MaterialButton
+    private lateinit var buttonShareImage: MaterialButton
+
+    private var currentImageFile: File? = null // Pour stocker le fichier image actuel
+
     private val validationStates = mutableMapOf(
         FIELD_FORMULA_X to false,
         FIELD_FORMULA_FX to false,
-        FIELD_X_MIN to false, // Nouveau
-        FIELD_X_MAX to false  // Nouveau
+        FIELD_X_MIN to true,
+        FIELD_X_MAX to true,
+        FIELD_Y_MIN to true,
+        FIELD_Y_MAX to true
     )
 
     companion object {
         private const val FIELD_FORMULA_X = 1
         private const val FIELD_FORMULA_FX = 3
-        private const val FIELD_X_MIN = 4 // Nouveau
-        private const val FIELD_X_MAX = 5 // Nouveau
+        private const val FIELD_X_MIN = 4
+        private const val FIELD_X_MAX = 5
+        private const val FIELD_Y_MIN = 6
+        private const val FIELD_Y_MAX = 7
+
+        private const val DEFAULT_X_MIN = -10.0
+        private const val DEFAULT_X_MAX = 10.0
+        private const val DEFAULT_Y_MIN = -10.0
+        private const val DEFAULT_Y_MAX = 10.0
+
+        private const val AUTHORITY = "one.empty3.apps.simplecalculator.fileprovider" // Correspond à celui du Manifest
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_graph)
+        setContentView(R.layout.content_graph) // Assurez-vous que c'est le bon layout principal
 
         title = getString(R.string.title_activity_graph)
 
         editTextFormulaX = findViewById(R.id.editTextFormulaX)
         editTextFormulaFx = findViewById(R.id.editTextFormulaFx)
-        editTextXMin = findViewById(R.id.editTextXMin) // Nouveau
-        editTextXMax = findViewById(R.id.editTextXMax) // Nouveau
-        editTextYMin = findViewById(R.id.editTextYMin) // Nouveau
-        editTextYMax = findViewById(R.id.editTextYMax) // Nouveau
+        editTextXMin = findViewById(R.id.editTextXMin)
+        editTextXMax = findViewById(R.id.editTextXMax)
+        editTextYMin = findViewById(R.id.editTextYMin)
+        editTextYMax = findViewById(R.id.editTextYMax)
 
         buttonPlot = findViewById(R.id.buttonPlot)
         imageViewGraph = findViewById(R.id.imageViewGraph)
-        buttonDownloadImage = findViewById(R.id.buttonDownloadImage)
         frameLayoutImageView = findViewById(R.id.frameLayoutImageView)
 
+        // Initialisation des nouveaux boutons et du layout
+        layoutImageActions = findViewById(R.id.layoutImageActions)
+        buttonSaveImage = findViewById(R.id.buttonSaveImage)
+        buttonShareImage = findViewById(R.id.buttonShareImage)
+
+
+        validateInitialFields()
         setupTextWatchers()
+
 
         buttonPlot.setOnClickListener {
             plotGraph()
         }
 
-        buttonDownloadImage.setOnClickListener {
-            downloadImage()
+        buttonSaveImage.setOnClickListener {
+            saveImageToStorage()
         }
-        prefs = PreferenceManager
-            .getDefaultSharedPreferences(this)
 
-        // Vérification initiale pour l'état du bouton Plot
+        buttonShareImage.setOnClickListener {
+            shareImage()
+        }
+
         checkAllFieldsValidated()
-
-        strings = listOf<String>("x", "Fx", "xMin", "xMax", "yMin", "yMax")
-        val stringsIds = listOf<Int>(R.id.editTextFormulaX, R.id.editTextFormulaFx,
-            R.id.editTextXMin, R.id.editTextXMax, R.id.editTextYMin, R.id.editTextYMax)
-
-        for (i in strings.indices) {
-            prefs = PreferenceManager
-                .getDefaultSharedPreferences(this)
-            val string: String? = prefs.getString(strings[i], "")
-            val editText : TextInputEditText = findViewById<TextInputEditText>(stringsIds[i])
-            editText.setText(string?: "")
-            addTextChangedListener(editText, strings[i])
-        }
-
     }
 
+    private fun validateInitialFields() {
+        validate(FIELD_FORMULA_X, editTextFormulaX.text.toString())
+        validate(FIELD_FORMULA_FX, editTextFormulaFx.text.toString())
+        validate(FIELD_X_MIN, editTextXMin.text.toString())
+        validate(FIELD_X_MAX, editTextXMax.text.toString())
+        validate(FIELD_Y_MIN, editTextYMin.text.toString())
+        validate(FIELD_Y_MAX, editTextYMax.text.toString())
+    }
     private fun setupTextWatchers() {
-        editTextFormulaX.addTextChangedListener(
-            GenericTextWatcher(
-                FIELD_FORMULA_X,
-                editTextFormulaX
-            )
-        )
-
-        editTextFormulaFx.addTextChangedListener(
-            GenericTextWatcher(
-                FIELD_FORMULA_FX,
-                editTextFormulaFx
-            )
-        )
-        editTextXMin.addTextChangedListener(
-            GenericTextWatcher(
-                FIELD_X_MIN,
-                editTextXMin
-            )
-        ) // Nouveau
-        editTextXMax.addTextChangedListener(
-            GenericTextWatcher(
-                FIELD_X_MAX,
-                editTextXMax
-            )
-        ) // Nouveau
+        editTextFormulaX.addTextChangedListener(GenericTextWatcher(FIELD_FORMULA_X, editTextFormulaX))
+        editTextFormulaFx.addTextChangedListener(GenericTextWatcher(FIELD_FORMULA_FX, editTextFormulaFx))
+        editTextXMin.addTextChangedListener(GenericTextWatcher(FIELD_X_MIN, editTextXMin))
+        editTextXMax.addTextChangedListener(GenericTextWatcher(FIELD_X_MAX, editTextXMax))
+        editTextYMin.addTextChangedListener(GenericTextWatcher(FIELD_Y_MIN, editTextYMin))
+        editTextYMax.addTextChangedListener(GenericTextWatcher(FIELD_Y_MAX, editTextYMax))
     }
 
     private fun validate(fieldId: Int, content: String): Boolean {
-        var isValid = content.isNotBlank() // Validation de base non vide
+        var isValid = content.isNotBlank()
+        var specificError: String? = null
 
         when (fieldId) {
             FIELD_FORMULA_X, FIELD_FORMULA_FX -> {
-                // Logique de validation pour les formules (syntaxe, etc.)
-                // Pour l'instant, on utilise votre logique existante avec AlgebraicTree
-                if (isValid) { // Ne tentez de parser que si ce n'est pas vide
+                if (isValid) {
                     try {
-                        val aTree = AlgebraicTree(content)
-                        aTree.construct()
-                        // Optionnel : vous pouvez ajouter plus de vérifications sur aTree ici
-                    } catch (e: RuntimeException) {
+                        AlgebraicTree(content).construct()
+                    } catch (e: Exception) {
                         isValid = false
-                        // Log.e("GraphActivity", "Validation error for field $fieldId: ${e.message}")
-                    } catch (e: AlgebraicFormulaSyntaxException) {
+                        specificError = e.localizedMessage ?: "Syntax error"
+                    }
+                } else { isValid = false }
+            }
+            FIELD_X_MIN, FIELD_X_MAX, FIELD_Y_MIN, FIELD_Y_MAX -> {
+                if (isValid) {
+                    isValid = content.toDoubleOrNull() != null
+                    if (!isValid) specificError = "Not a number"
+                } else { isValid = false }
 
+                if (isValid && (fieldId == FIELD_X_MAX || fieldId == FIELD_X_MIN)) {
+                    val xMinVal = editTextXMin.text.toString().toDoubleOrNull()
+                    val xMaxVal = editTextXMax.text.toString().toDoubleOrNull()
+                    if (xMinVal != null && xMaxVal != null && xMaxVal <= xMinVal) {
+                        isValid = false
+                        if (fieldId == FIELD_X_MAX) specificError = "X Max must be > X Min"
+                        else editTextXMax.error = "X Max must be > X Min"
+                    } else {
+                        if(fieldId == FIELD_X_MAX) editTextXMax.error = null else editTextXMin.error = null
                     }
                 }
-            }
-
-            FIELD_X_MIN, FIELD_X_MAX -> {
-                // Logique de validation pour X Min et X Max (doivent être des nombres valides)
-                if (isValid) { // Ne tentez de convertir que si ce n'est pas vide
-                    isValid = content.toDoubleOrNull() != null
-                }
-                if (isValid && fieldId == FIELD_X_MAX) {
-                    // Optionnel : Vérifier si X Max > X Min
-                    val xMinStr = editTextXMin.text.toString()
-                    val xMaxStr = editTextXMax.text.toString()
-                    val xMin = xMinStr.toDoubleOrNull()
-                    val xMax = xMaxStr.toDoubleOrNull()
-                    if (xMin != null && xMax != null && xMax <= xMin) {
-                        // isValid = false // Décommentez pour activer cette validation
-                        // editTextXMax.error = "X Max must be greater than X Min" // Ou afficher un message d'erreur
+                if (isValid && (fieldId == FIELD_Y_MAX || fieldId == FIELD_Y_MIN)) {
+                    val yMinVal = editTextYMin.text.toString().toDoubleOrNull()
+                    val yMaxVal = editTextYMax.text.toString().toDoubleOrNull()
+                    if (yMinVal != null && yMaxVal != null && yMaxVal <= yMinVal) {
+                        isValid = false
+                        if (fieldId == FIELD_Y_MAX) specificError = "Y Max must be > Y Min"
+                        else editTextYMax.error = "Y Max must be > Y Min"
                     } else {
-                        // editTextXMax.error = null // Effacer l'erreur si valide
+                        if(fieldId == FIELD_Y_MAX) editTextYMax.error = null else editTextYMin.error = null
                     }
                 }
             }
         }
-
         validationStates[fieldId] = isValid
-
         val editText = when (fieldId) {
-            FIELD_FORMULA_X -> editTextFormulaX
-            FIELD_FORMULA_FX -> editTextFormulaFx
-            FIELD_X_MIN -> editTextXMin
-            FIELD_X_MAX -> editTextXMax
+            FIELD_FORMULA_X -> editTextFormulaX; FIELD_FORMULA_FX -> editTextFormulaFx
+            FIELD_X_MIN -> editTextXMin; FIELD_X_MAX -> editTextXMax
+            FIELD_Y_MIN -> editTextYMin; FIELD_Y_MAX -> editTextYMax
             else -> null
         }
-        // Afficher l'erreur seulement si le champ n'est pas valide ET qu'il n'est pas vide
-        // (pour éviter d'afficher "Invalid" sur un champ vide dès le début)
-        editText?.error = if (!isValid && content.isNotEmpty()) "Invalid input" else null
-
-
+        if (!isValid && content.isNotEmpty()) {
+            editText?.error = specificError ?: "Invalid input"
+        } else if (isValid || content.isEmpty()) {
+            if(specificError == null) editText?.error = null
+        }
         checkAllFieldsValidated()
         return isValid
     }
-    fun addTextChangedListener(editText: TextInputEditText, propName : String){
-        prefs = PreferenceManager
-            .getDefaultSharedPreferences(this)
-        editText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                val toString = editText.text.toString()
-                runOnUiThread {
-                    prefs.edit().putString(propName, toString).apply();
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-        })
-    }
-
 
     private fun checkAllFieldsValidated() {
-        // Vérifier si tous les états de validation sont true
         val allValid = validationStates.values.all { it }
         buttonPlot.visibility = if (allValid) View.VISIBLE else View.GONE
     }
-    fun logicalToScreenX(logicalX: Double): Float {
-        return ((logicalX - xMin) * xScale).toFloat()
-    }
 
-    fun logicalToScreenY(logicalY: Double): Float {
-        // Y-axis is inverted on screen (0 is top, height is bottom)
-        return imageHeight - ((logicalY - yMinLogical) * yScale).toFloat()
-    }
     private fun plotGraph() {
-        val formulaX = editTextFormulaX.text.toString()
-        val formulaFx = editTextFormulaFx.text.toString()
-        xMin = editTextXMin.text.toString().toDoubleOrNull()
-            ?: -10.0 // Valeur par défaut si invalide/vide
-        xMax = editTextXMax.text.toString().toDoubleOrNull() ?: 10.0 // Valeur par défaut
-        val xRange = xMax - xMin
-        yMinLogical =
-            (editTextYMin.text.toString().toDoubleOrNull() ?: -10.0).toFloat() // Valeur par défaut  // Example: Set your desired logical Y max
-        val yMaxLogical = editTextYMax.text.toString().toDoubleOrNull() ?: 10.0 // Valeur par défaut  // Example: Set your desired logical Y max
-        val yRange = yMaxLogical - yMinLogical
+        val formulaXStr = editTextFormulaX.text.toString()
+        val formulaFxStr = editTextFormulaFx.text.toString()
+        val xMin = editTextXMin.text.toString().toDoubleOrNull() ?: DEFAULT_X_MIN
+        val xMax = editTextXMax.text.toString().toDoubleOrNull() ?: DEFAULT_X_MAX
+        val yMinUser = editTextYMin.text.toString().toDoubleOrNull() ?: DEFAULT_Y_MIN
+        val yMaxUser = editTextYMax.text.toString().toDoubleOrNull() ?: DEFAULT_Y_MAX
 
-        if (xMin >= xMax) {
-            Toast.makeText(this, "X Min must be less than X Max.", Toast.LENGTH_SHORT).show()
-            return
-        }
+        if (xMin >= xMax) { /* ... gestion d'erreur ... */ return }
+        if (yMinUser >= yMaxUser) { /* ... gestion d'erreur ... */ return }
 
-        Toast.makeText(
-            this,
-            "Plotting: X=$formulaX, Y=$formulaFx, XMin=$xMin, XMax=$xMax",
-            Toast.LENGTH_LONG
-        ).show()
+        this.xMinUi = xMin; this.xMaxUi = xMax
+        this.yMinLogicalUi = yMinUser.toFloat(); this.yMaxLogicalUi = yMaxUser.toFloat()
 
         try {
             bitmap = Bitmap.createBitmap(
@@ -261,148 +231,147 @@ class GraphActivity : AppCompatActivity() {
                 imageViewGraph.height.coerceAtLeast(100),
                 Bitmap.Config.ARGB_8888
             )
-            imageWidth = bitmap.width.toFloat()
-            imageHeight = bitmap.height.toFloat()
             val canvas = android.graphics.Canvas(bitmap)
-            val paint = android.graphics.Paint().apply {
-                color = android.graphics.Color.BLUE
-                strokeWidth = 5f
-            }
-            canvas.drawColor(android.graphics.Color.WHITE)
+            canvas.drawColor(android.graphics.Color.LTGRAY)
+            this.imageWidth = bitmap.width.toFloat(); this.imageHeight = bitmap.height.toFloat()
+            val xRangeLogical = xMax - xMin; val yRangeLogical = yMaxUser - yMinUser
+            this.xScale = if (xRangeLogical != 0.0) this.imageWidth / xRangeLogical.toFloat() else 1f
+            this.yScale = if (yRangeLogical != 0.0) this.imageHeight / yRangeLogical.toFloat() else 1f
 
-            val centerX = bitmap.width / 2f
-            val centerY = bitmap.height / 2f
-            try {
-                val fX = AlgebraicTree(formulaX)
-                fX.construct()
-                val fXY = AlgebraicTree(formulaFx)
-                fXY.construct()
+            fun logicalToScreenX(logicalX: Double): Float { return ((logicalX - this.xMinUi) * this.xScale).toFloat() }
+            fun logicalToScreenY(logicalY: Double): Float { return this.imageHeight - ((logicalY - this.yMinLogicalUi) * this.yScale).toFloat() }
 
-                var x1paint :Float = 0f
-                var y1paint :Float = 1f
-                var x0paint :Float = 0f
-                var y0paint :Float = 1f
+            val axisPaint = android.graphics.Paint().apply { color = android.graphics.Color.BLACK; strokeWidth = 2f }
+            val dataPaint = android.graphics.Paint().apply { color = android.graphics.Color.BLUE; strokeWidth = 3f }
 
-                // Inside your plotGraph() method, after you have bitmap dimensions
+            val xAxisScreenY = logicalToScreenY(0.0).coerceIn(0f, this.imageHeight)
+            canvas.drawLine(0f, xAxisScreenY, this.imageWidth, xAxisScreenY, axisPaint)
+            val yAxisScreenX = logicalToScreenX(0.0).coerceIn(0f, this.imageWidth)
+            canvas.drawLine(yAxisScreenX, 0f, yAxisScreenX, this.imageHeight, axisPaint)
 
-// Logical range for X
+            val treeX = AlgebraicTree(formulaXStr); treeX.construct()
+            val treeFx = AlgebraicTree(formulaFxStr); treeFx.construct()
+            var previousScreenX = -1f; var previousScreenY = -1f
+            val numberOfPoints = this.imageWidth.toInt().coerceAtLeast(200)
 
-// Assume you have yMin and yMax for your Y-axis
-// For example, if you iterate through your function once to find these:
-// var yMinActual = Double.POSITIVE_INFINITY
-// var yMaxActual = Double.NEGATIVE_INFINITY
-// for (xValue in xMin..xMax step someStep) {
-//    val yValue = calculateY(xValue) // Your function f(x)
-//    yMinActual = minOf(yMinActual, yValue)
-//    yMaxActual = maxOf(yMaxActual, yValue)
-// }
-// Or set fixed yMin, yMax if you know the typical output range
+            for (i in 0 until numberOfPoints) {
+                val currentParamForX = xMin + (xRangeLogical * i / (numberOfPoints - 1).toDouble())
+                treeX.setParameter("t", currentParamForX)
+                val logicalX = treeX.eval().getElem()
+                treeFx.setParameter("x", logicalX)
+                val logicalY = treeFx.eval().getElem()
 
-// Scale factors: pixels per logical unit
-                xScale = if (xRange != 0.0) imageWidth / xRange.toFloat() else 1f
-                yScale = if (yRange != 0.0) imageHeight / yRange.toFloat() else 1f
-                for (x0 in 0 until bitmap.width) {
-                    var x =
-                        xMin + x0.toFloat() /bitmap.width * (xMax - xMin)
-                    val pc = (x-xMin) / (xMax - xMin)
-                    fX.setParameter("x", x)
-                    x = fX.eval().getElem()
-                    fXY.setParameter("x", x)
-                    val y = fXY.eval().getElem()
-                    //x1paint = pc.toFloat()
-                    //y1paint =(imageViewGraph.height / 2 - y).toFloat()
-                    x1paint = logicalToScreenX(x)
-                    y1paint = logicalToScreenY(y)
-                    if(x0>0) {
-                        canvas.drawLine(
-                            x0paint,
-                            y0paint,
-                            x1paint,
-                            y1paint,
-                            paint.apply { color = android.graphics.Color.BLACK }) // Axe X
-                    } else {
-
-                        canvas.drawPoint(x1paint, y1paint, paint.apply { color = android.graphics.Color.BLACK }) // Axe X
-
+                if (logicalX.isFinite() && logicalY.isFinite()) {
+                    val screenX = logicalToScreenX(logicalX); val screenY = logicalToScreenY(logicalY)
+                    if (previousScreenX != -1f) {
+                        if (!((previousScreenY < 0 && screenY < 0) || (previousScreenY > this.imageHeight && screenY > this.imageHeight) ||
+                                    (previousScreenX < 0 && screenX < 0) || (previousScreenX > this.imageWidth && screenX > this.imageWidth))) {
+                            canvas.drawLine(previousScreenX, previousScreenY, screenX, screenY, dataPaint)
+                        }
                     }
-                    x0paint = x1paint
-                    y0paint = y1paint
-
-                    //println("logical (x,y) ($x,$y) screen (x,y) ($x1paint,$y1paint)")
-                }
-
-
-                val axisPaint = android.graphics.Paint().apply {
-                    color = android.graphics.Color.BLACK
-                    strokeWidth = 4f
-                }
-
-                // Draw X-Axis
-                val xAxisScreenY = logicalToScreenY(0.0).coerceIn(0f, this.imageHeight)
-                canvas.drawLine(0f, xAxisScreenY, this.imageWidth, xAxisScreenY, axisPaint)
-
-                // Draw Y-Axis
-                val yAxisScreenX = logicalToScreenX(0.0).coerceIn(0f, this.imageWidth)
-                canvas.drawLine(yAxisScreenX, 0f, yAxisScreenX, this.imageHeight, axisPaint)
-
-            } catch (e: AlgebraicFormulaSyntaxException) {
-                e.printStackTrace()
-                // Show a Snackbar with the exception message
-                val rootView = findViewById<View>(android.R.id.content) // Get the root view
-                Snackbar.make(rootView, "Syntax Error: ${e.localizedMessage ?: "Invalid formula"}", Snackbar.LENGTH_LONG)
-                    .setAction("Details") {
-                        // Optionally, you can add an action, e.g., to show more details
-                        // or guide the user.
-                        Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
-                    }
-                    .show()
-            } catch (e1: RuntimeException) {
-                e1.printStackTrace()
-                // Show a Snackbar for other runtime exceptions
-                val rootView = findViewById<View>(android.R.id.content)
-                Snackbar.make(
-                    rootView,
-                    "Error: ${e1.localizedMessage ?: "An unexpected error occurred"}",
-                    Snackbar.LENGTH_LONG
-                )
+                    previousScreenX = screenX; previousScreenY = screenY
+                } else { previousScreenX = -1f; previousScreenY = -1f }
             }
-
-            canvas.drawText(
-                "Graph ($formulaFx) from $xMin to $xMax",
-                50f,
-                50f,
-                paint.apply { textSize = 20f; color = android.graphics.Color.BLACK })
-
-
             imageViewGraph.setImageBitmap(bitmap)
-            buttonDownloadImage.visibility = View.VISIBLE
+            currentImageFile = null // Réinitialiser le fichier sauvegardé car le bitmap a changé
+            layoutImageActions.visibility = View.VISIBLE // Afficher les boutons Save/Share
+
+        } catch (e: AlgebraicFormulaSyntaxException) {
+            handlePlottingError("Syntax Error: Algebraic formula syntax error", null)
         } catch (e: Exception) {
-            Toast.makeText(this, "Error generating graph: ${e.message}", Toast.LENGTH_SHORT).show()
-            imageViewGraph.setImageBitmap(null)
-            buttonDownloadImage.visibility = View.GONE
+            handlePlottingError("Plotting Error: ${e.localizedMessage ?: "An unexpected error occurred"}", e)
         }
     }
 
-    private fun downloadImage() {
-        // ... (votre code existant pour downloadImage) ...
-        // Assurez-vous que le code de downloadImage est présent et fonctionnel
-        imageViewGraph.isDrawingCacheEnabled = true
-        val bitmap = imageViewGraph.drawingCache
-        if (bitmap != null) {
-            val dir = File(applicationContext.externalMediaDirs[0].absolutePath+File.separator+ this.packageName)
-            if(!dir.exists()) {
-                dir.mkdir()
+    private fun handlePlottingError(message: String, exception: Exception?) {
+        if(exception!=null) {
+            exception.printStackTrace()
+        }
+        val rootView = findViewById<View>(android.R.id.content)
+        val exceptionString = if(exception!=null) exception.toString() else ""
+        Snackbar.make(rootView, message, Snackbar.LENGTH_LONG)
+
+            .setAction("Details") { Toast.makeText(this, exceptionString, Toast.LENGTH_LONG).show() }
+            .show()
+        imageViewGraph.setImageBitmap(null)
+        layoutImageActions.visibility = View.GONE // Cacher les boutons si erreur
+        currentImageFile = null
+    }
+
+
+    private fun saveBitmapToFile(bitmapToSave: Bitmap): File? {
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val imageFileName = "GRAPH_${timeStamp}_"
+        // Utilise le répertoire de cache externe pour que FileProvider puisse y accéder facilement
+        val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES) // Ou getExternalCacheDir()
+
+        return try {
+            val imageFile = File.createTempFile(imageFileName, ".png", storageDir)
+            val fos = FileOutputStream(imageFile)
+            bitmapToSave.compress(Bitmap.CompressFormat.PNG, 100, fos)
+            fos.flush()
+            fos.close()
+            // Ajoute l'image à la galerie du téléphone pour qu'elle soit visible
+            Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
+                mediaScanIntent.data = Uri.fromFile(imageFile)
+                sendBroadcast(mediaScanIntent)
             }
-
-            val i = dir.listFiles().size
-            Image(bitmap).saveFile(File(dir.absolutePath+File.separator+ "graph"+(i+1)+".png"))
-            Toast.makeText(this, "Download image logic to be implemented.", Toast.LENGTH_SHORT)
-                .show()
-        } else {
-            Toast.makeText(this, "No image to download.", Toast.LENGTH_SHORT).show()
+            imageFile
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
         }
-        imageViewGraph.isDrawingCacheEnabled = false
     }
+
+
+    private fun saveImageToStorage() {
+        if (!::bitmap.isInitialized) {
+            Toast.makeText(this, R.string.error_no_image_to_share, Toast.LENGTH_SHORT).show()
+            return
+        }
+        currentImageFile = saveBitmapToFile(bitmap)
+        if (currentImageFile != null) {
+            Toast.makeText(this, getString(R.string.image_saved_to, currentImageFile!!.absolutePath), Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(this, getString(R.string.failed_to_save_image, "Could not create file"), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun shareImage() {
+        if (!::bitmap.isInitialized) {
+            Toast.makeText(this, R.string.error_no_image_to_share, Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Si l'image n'a pas encore été sauvegardée pour le partage, la sauvegarder maintenant
+        if (currentImageFile == null || !currentImageFile!!.exists()) {
+            currentImageFile = saveBitmapToFile(bitmap)
+        }
+
+        if (currentImageFile != null && currentImageFile!!.exists()) {
+            val imageUri: Uri = FileProvider.getUriForFile(
+                this,
+                AUTHORITY, // Doit correspondre à celui dans le Manifest et res/xml/file_paths.xml
+                currentImageFile!!
+            )
+
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "image/png"
+                putExtra(Intent.EXTRA_STREAM, imageUri)
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION) // Important pour les URI de FileProvider
+                putExtra(Intent.EXTRA_SUBJECT, getString(R.string.title_activity_graph)) // Titre optionnel pour email/etc.
+            }
+            try {
+                startActivity(Intent.createChooser(shareIntent, getString(R.string.share_image_title)))
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(this, R.string.error_failed_to_share_image, Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(this, R.string.error_no_image_to_share, Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     private inner class GenericTextWatcher(
         private val fieldId: Int,
@@ -410,8 +379,6 @@ class GraphActivity : AppCompatActivity() {
     ) : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        override fun afterTextChanged(s: Editable?) {
-            validate(fieldId, s.toString())
-        }
+        override fun afterTextChanged(s: Editable?) { validate(fieldId, s.toString()) }
     }
 }
