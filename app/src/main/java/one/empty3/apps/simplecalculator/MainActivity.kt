@@ -29,6 +29,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.preference.PreferenceManager
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
@@ -48,7 +52,25 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false) // Essentiel pour le bord à bord
         setContentView(R.layout.main_layout_table)
+        val yourRootView = findViewById<View>(R.id.root_activity_calc) // Ou la vue qui a besoin de padding
+
+        ViewCompat.setOnApplyWindowInsetsListener(yourRootView) { view, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            // Appliquer le padding pour éviter le chevauchement avec les barres système
+            view.updatePadding(
+                left = insets.left,
+                top = insets.top,
+                right = insets.right,
+                bottom = insets.bottom
+            )
+
+            // Indiquer que les insets ont été consommés
+            WindowInsetsCompat.CONSUMED
+        }
+
 
         purchasesUpdatedListener =
             PurchasesUpdatedListener { billingResult, purchases ->

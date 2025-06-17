@@ -1,6 +1,7 @@
 package one.empty3.apps.simplecalculator
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -17,13 +18,15 @@ import android.widget.LinearLayout // Ajouté
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider // Ajouté
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.google.android.material.button.MaterialButton // Ajouté
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException
 import one.empty3.library1.tree.AlgebraicTree
-// Assurez-vous que cette classe existe et gère la sauvegarde
-// import one.empty3.libs.Image
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -32,23 +35,23 @@ import java.util.Date
 import java.util.Locale
 
 class GraphActivity : AppCompatActivity() {
-    // ... (autres propriétés comme imageWidth, imageHeight etc.)
-    private var imageWidth: Float = 0.0f
-    private var xScale: Float = 0.0f
-    private var yScale: Float = 0.0f
-    private var yMinLogicalUi: Float = 0.0f
-    private var imageHeight: Float = 0.0f
-    private var xMinUi: Double = -10.0
-    private var xMaxUi: Double = 10.0
-    private var yMaxLogicalUi: Float = 0.0f
 
+    private lateinit var strings: List<String>
+    private lateinit var prefs: SharedPreferences
+    private lateinit var editTextYMax: TextInputEditText
+    private lateinit var editTextYMin: TextInputEditText
+    private var imageWidth: Float = 0.0f
+    private var xScale: Float = 1.0f
+    private var yScale: Float = 0.0f
+    private var yMinLogical: Float = 0.0f
+    private var imageHeight: Float = 0.0f
+    private var xMin: Double = 0.0
+    private var xMax: Double = 0.0
     private lateinit var bitmap: Bitmap
     private lateinit var editTextFormulaX: TextInputEditText
     private lateinit var editTextFormulaFx: TextInputEditText
-    private lateinit var editTextXMin: TextInputEditText
-    private lateinit var editTextXMax: TextInputEditText
-    private lateinit var editTextYMin: TextInputEditText
-    private lateinit var editTextYMax: TextInputEditText
+    private lateinit var editTextXMin: TextInputEditText // Nouveau
+    private lateinit var editTextXMax: TextInputEditText // Nouveau
 
     private lateinit var buttonPlot: Button
     private lateinit var imageViewGraph: ImageView
@@ -58,6 +61,7 @@ class GraphActivity : AppCompatActivity() {
     private lateinit var layoutImageActions: LinearLayout
     private lateinit var buttonSaveImage: MaterialButton
     private lateinit var buttonShareImage: MaterialButton
+    private lateinit var buttonDownloadImage: MaterialButton
 
     private var currentImageFile: File? = null // Pour stocker le fichier image actuel
 
@@ -88,7 +92,28 @@ class GraphActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.content_graph) // Assurez-vous que c'est le bon layout principal
+        WindowCompat.setDecorFitsSystemWindows(window, false) // Essentiel pour le bord à bord
+
+
+
+
+        setContentView(R.layout.activity_graph) // Assurez-vous que c'est le bon layout principal
+        val yourRootView = findViewById<View>(R.id.root_activity_graph) // Ou la vue qui a besoin de padding
+
+        ViewCompat.setOnApplyWindowInsetsListener(yourRootView) { view, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            // Appliquer le padding pour éviter le chevauchement avec les barres système
+            view.updatePadding(
+                left = insets.left,
+                top = insets.top,
+                right = insets.right,
+                bottom = insets.bottom
+            )
+
+            // Indiquer que les insets ont été consommés
+            WindowInsetsCompat.CONSUMED
+        }
 
         title = getString(R.string.title_activity_graph)
 
@@ -212,20 +237,36 @@ class GraphActivity : AppCompatActivity() {
         val allValid = validationStates.values.all { it }
         buttonPlot.visibility = if (allValid) View.VISIBLE else View.GONE
     }
+    fun logicalToScreenX(logicalX: Double): Float {
+        return ((logicalX - xMin) * xScale).toFloat()
+    }
 
+    fun logicalToScreenY(logicalY: Double): Float {
+        // Y-axis is inverted on screen (0 is top, height is bottom)
+        return imageHeight - ((logicalY - yMinLogical) * yScale).toFloat()
+    }
     private fun plotGraph() {
-        val formulaXStr = editTextFormulaX.text.toString()
-        val formulaFxStr = editTextFormulaFx.text.toString()
-        val xMin = editTextXMin.text.toString().toDoubleOrNull() ?: DEFAULT_X_MIN
-        val xMax = editTextXMax.text.toString().toDoubleOrNull() ?: DEFAULT_X_MAX
-        val yMinUser = editTextYMin.text.toString().toDoubleOrNull() ?: DEFAULT_Y_MIN
-        val yMaxUser = editTextYMax.text.toString().toDoubleOrNull() ?: DEFAULT_Y_MAX
+        val formulaX = editTextFormulaX.text.toString()
+        val formulaFx = editTextFormulaFx.text.toString()
+        xMin = editTextXMin.text.toString().toDoubleOrNull()
+            ?: -10.0 // Valeur par défaut si invalide/vide
+        xMax = editTextXMax.text.toString().toDoubleOrNull() ?: 10.0 // Valeur par défaut
+        val xRange = xMax - xMin
+        yMinLogical =
+            (editTextYMin.text.toString().toDoubleOrNull() ?: -10.0).toFloat() // Valeur par défaut  // Example: Set your desired logical Y max
+        val yMaxLogical = editTextYMax.text.toString().toDoubleOrNull() ?: 10.0 // Valeur par défaut  // Example: Set your desired logical Y max
+        val yRange = yMaxLogical - yMinLogical
 
-        if (xMin >= xMax) { /* ... gestion d'erreur ... */ return }
-        if (yMinUser >= yMaxUser) { /* ... gestion d'erreur ... */ return }
+        if (xMin >= xMax) {
+            Toast.makeText(this, "X Min must be less than X Max.", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        this.xMinUi = xMin; this.xMaxUi = xMax
-        this.yMinLogicalUi = yMinUser.toFloat(); this.yMaxLogicalUi = yMaxUser.toFloat()
+        Toast.makeText(
+            this,
+            "Plotting: X=$formulaX, Y=$formulaFx, XMin=$xMin, XMax=$xMax",
+            Toast.LENGTH_LONG
+        ).show()
 
         try {
             bitmap = Bitmap.createBitmap(
@@ -233,71 +274,144 @@ class GraphActivity : AppCompatActivity() {
                 imageViewGraph.height.coerceAtLeast(100),
                 Bitmap.Config.ARGB_8888
             )
+            imageWidth = bitmap.width.toFloat()
+            imageHeight = bitmap.height.toFloat()
             val canvas = android.graphics.Canvas(bitmap)
-            canvas.drawColor(android.graphics.Color.LTGRAY)
-            this.imageWidth = bitmap.width.toFloat(); this.imageHeight = bitmap.height.toFloat()
-            val xRangeLogical = xMax - xMin; val yRangeLogical = yMaxUser - yMinUser
-            this.xScale = if (xRangeLogical != 0.0) this.imageWidth / xRangeLogical.toFloat() else 1f
-            this.yScale = if (yRangeLogical != 0.0) this.imageHeight / yRangeLogical.toFloat() else 1f
-
-            fun logicalToScreenX(logicalX: Double): Float { return ((logicalX - this.xMinUi) * this.xScale).toFloat() }
-            fun logicalToScreenY(logicalY: Double): Float { return this.imageHeight - ((logicalY - this.yMinLogicalUi) * this.yScale).toFloat() }
-
-            val axisPaint = android.graphics.Paint().apply { color = android.graphics.Color.BLACK; strokeWidth = 2f }
-            val dataPaint = android.graphics.Paint().apply { color = android.graphics.Color.BLUE; strokeWidth = 3f }
-
-            val xAxisScreenY = logicalToScreenY(0.0).coerceIn(0f, this.imageHeight)
-            canvas.drawLine(0f, xAxisScreenY, this.imageWidth, xAxisScreenY, axisPaint)
-            val yAxisScreenX = logicalToScreenX(0.0).coerceIn(0f, this.imageWidth)
-            canvas.drawLine(yAxisScreenX, 0f, yAxisScreenX, this.imageHeight, axisPaint)
-
-            val treeX = AlgebraicTree(formulaXStr); treeX.construct()
-            val treeFx = AlgebraicTree(formulaFxStr); treeFx.construct()
-            var previousScreenX = -1f; var previousScreenY = -1f
-            val numberOfPoints = this.imageWidth.toInt().coerceAtLeast(200)
-
-            for (i in 0 until numberOfPoints) {
-                val currentParamForX = xMin + (xRangeLogical * i / (numberOfPoints - 1).toDouble())
-                treeX.setParameter("t", currentParamForX)
-                val logicalX = treeX.eval().getElem()
-                treeFx.setParameter("x", logicalX)
-                val logicalY = treeFx.eval().getElem()
-
-                if (logicalX!=null && logicalY!=null &&logicalX.isFinite() && logicalY.isFinite()) {
-                    val screenX = logicalToScreenX(logicalX); val screenY = logicalToScreenY(logicalY)
-                    if (previousScreenX != -1f) {
-                        if (!((previousScreenY < 0 && screenY < 0) || (previousScreenY > this.imageHeight && screenY > this.imageHeight) ||
-                                    (previousScreenX < 0 && screenX < 0) || (previousScreenX > this.imageWidth && screenX > this.imageWidth))) {
-                            canvas.drawLine(previousScreenX, previousScreenY, screenX, screenY, dataPaint)
-                        }
-                    }
-                    previousScreenX = screenX; previousScreenY = screenY
-                } else { previousScreenX = -1f; previousScreenY = -1f }
+            val paint = android.graphics.Paint().apply {
+                color = android.graphics.Color.BLUE
+                strokeWidth = 5f
             }
+            canvas.drawColor(android.graphics.Color.WHITE)
+
+            val centerX = bitmap.width / 2f
+            val centerY = bitmap.height / 2f
+            try {
+                val fX = AlgebraicTree(formulaX)
+                fX.construct()
+                val fXY = AlgebraicTree(formulaFx)
+                fXY.construct()
+
+                var x1paint :Float = 0f
+                var y1paint :Float = 1f
+                var x0paint :Float = 0f
+                var y0paint :Float = 1f
+
+                // Inside your plotGraph() method, after you have bitmap dimensions
+
+// Logical range for X
+
+// Assume you have yMin and yMax for your Y-axis
+// For example, if you iterate through your function once to find these:
+// var yMinActual = Double.POSITIVE_INFINITY
+// var yMaxActual = Double.NEGATIVE_INFINITY
+// for (xValue in xMin..xMax step someStep) {
+//    val yValue = calculateY(xValue) // Your function f(x)
+//    yMinActual = minOf(yMinActual, yValue)
+//    yMaxActual = maxOf(yMaxActual, yValue)
+// }
+// Or set fixed yMin, yMax if you know the typical output range
+
+// Scale factors: pixels per logical unit
+                xScale = if (xRange != 0.0) imageWidth / xRange.toFloat() else 1f
+                yScale = if (yRange != 0.0) imageHeight / yRange.toFloat() else 1f
+                for (x0 in 0 until bitmap.width) {
+                    var x =
+                        xMin + x0.toFloat() /bitmap.width * (xMax - xMin)
+                    val pc = (x-xMin) / (xMax - xMin)
+                    fX.setParameter("x", x)
+                    x = fX.eval().getElem()
+                    fXY.setParameter("x", x)
+                    val y = fXY.eval().getElem()
+                    //x1paint = pc.toFloat()
+                    //y1paint =(imageViewGraph.height / 2 - y).toFloat()
+                    x1paint = logicalToScreenX(x)
+                    y1paint = logicalToScreenY(y)
+                    if(x0>0) {
+                        canvas.drawLine(
+                            x0paint,
+                            y0paint,
+                            x1paint,
+                            y1paint,
+                            paint.apply { color = android.graphics.Color.BLACK }) // Axe X
+                    } else {
+
+                        canvas.drawPoint(x1paint, y1paint, paint.apply { color = android.graphics.Color.BLACK }) // Axe X
+
+                    }
+                    x0paint = x1paint
+                    y0paint = y1paint
+
+                    //println("logical (x,y) ($x,$y) screen (x,y) ($x1paint,$y1paint)")
+                }
+
+
+                val axisPaint = android.graphics.Paint().apply {
+                    color = android.graphics.Color.BLACK
+                    strokeWidth = 4f
+                }
+
+                // Draw X-Axis
+                val xAxisScreenY = logicalToScreenY(0.0).coerceIn(0f, this.imageHeight)
+                canvas.drawLine(0f, xAxisScreenY, this.imageWidth, xAxisScreenY, axisPaint)
+
+                // Draw Y-Axis
+                val yAxisScreenX = logicalToScreenX(0.0).coerceIn(0f, this.imageWidth)
+                canvas.drawLine(yAxisScreenX, 0f, yAxisScreenX, this.imageHeight, axisPaint)
+
+            } catch (e: AlgebraicFormulaSyntaxException) {
+                e.printStackTrace()
+                // Show a Snackbar with the exception message
+                val rootView = findViewById<View>(android.R.id.content) // Get the root view
+                Snackbar.make(rootView, "Syntax Error: ${e.localizedMessage ?: "Invalid formula"}", Snackbar.LENGTH_LONG)
+                    .setAction("Details") {
+                        // Optionally, you can add an action, e.g., to show more details
+                        // or guide the user.
+                        Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
+                    }
+                    .show()
+            } catch (e1: RuntimeException) {
+                e1.printStackTrace()
+                // Show a Snackbar for other runtime exceptions
+                val rootView = findViewById<View>(android.R.id.content)
+                Snackbar.make(
+                    rootView,
+                    "Error: ${e1.localizedMessage ?: "An unexpected error occurred"}",
+                    Snackbar.LENGTH_LONG
+                )
+            }
+
+            canvas.drawText(
+                "Graph ($formulaFx) from $xMin to $xMax",
+                50f,
+                50f,
+                paint.apply { textSize = 20f; color = android.graphics.Color.BLACK })
+
+
             imageViewGraph.setImageBitmap(bitmap)
-            currentImageFile = null // Réinitialiser le fichier sauvegardé car le bitmap a changé
-            layoutImageActions.visibility = View.VISIBLE // Afficher les boutons Save/Share
-
+            buttonDownloadImage.visibility = View.VISIBLE
+            buttonSaveImage.visibility = View.VISIBLE
+            buttonShareImage.visibility = View.VISIBLE
         } catch (e: AlgebraicFormulaSyntaxException) {
-            handlePlottingError("Syntax Error: Algebraic formula syntax error", null)
-        } catch (e: RuntimeException) {
-            handlePlottingError("Plotting Error: ${e.localizedMessage ?: "An unexpected error occurred"}", e)
+            e.printStackTrace()
+            // Show a Snackbar with the exception message
+            val rootView = findViewById<View>(android.R.id.content) // Get the root view
+            Snackbar.make(rootView, "Syntax Error: ${e.localizedMessage ?: "Invalid formula"}", Snackbar.LENGTH_LONG)
+                .setAction("Details") {
+                    // Optionally, you can add an action, e.g., to show more details
+                    // or guide the user.
+                    Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
+                }
+                .show()
+        } catch (e1: RuntimeException) {
+            e1.printStackTrace()
+            // Show a Snackbar for other runtime exceptions
+            val rootView = findViewById<View>(android.R.id.content)
+            Snackbar.make(
+                rootView,
+                "Error: ${e1.localizedMessage ?: "An unexpected error occurred"}",
+                Snackbar.LENGTH_LONG
+            )
         }
-    }
-
-    private fun handlePlottingError(message: String, exception: Exception?) {
-        if(exception!=null) {
-            exception.printStackTrace()
-        }
-        val rootView = findViewById<View>(android.R.id.content)
-        val exceptionString = if(exception!=null) exception.toString() else ""
-        Snackbar.make(rootView, message, Snackbar.LENGTH_LONG)
-
-            .setAction("Details") { Toast.makeText(this, exceptionString, Toast.LENGTH_LONG).show() }
-            .show()
-        imageViewGraph.setImageBitmap(null)
-        layoutImageActions.visibility = View.GONE // Cacher les boutons si erreur
-        currentImageFile = null
     }
 
 
@@ -317,6 +431,7 @@ class GraphActivity : AppCompatActivity() {
             fos.flush()
             fos.close()
             // Ajoute l'image à la galerie du téléphone pour qu'elle soit visible
+            @Suppress("DEPRECATION")
             Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
                 mediaScanIntent.data = Uri.fromFile(imageFile)
                 sendBroadcast(mediaScanIntent)

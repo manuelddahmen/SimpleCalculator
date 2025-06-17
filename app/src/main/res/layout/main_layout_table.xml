@@ -18,7 +18,7 @@
   ~
   ~
   -->
-<ScrollView
+<ScrollView android:id="@+id/root_activity_calc"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -28,7 +28,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
 
     <com.google.android.material.appbar.AppBarLayout
