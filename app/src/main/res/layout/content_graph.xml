@@ -7,12 +7,13 @@
     android:fillViewport="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".GraphActivity"
-    tools:showIn="@layout/activity_graph">
+    tools:showIn="@layout/activity_graph"
+    android:minHeight="1600dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:minHeight="1600dp">
         <!-- ... TextInputLayouts, LinearLayouts pour les min/max, ButtonPlot ... -->
         <!-- Tous les éléments précédents restent les mêmes -->
         <com.google.android.material.textview.MaterialTextView
