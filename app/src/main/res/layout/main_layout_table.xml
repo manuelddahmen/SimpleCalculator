@@ -347,6 +347,8 @@
             android:layout_height="match_parent"
             android:fontFamily="monospace"
             android:textSize="48dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:theme="?android:attr/buttonBarButtonStyle"
             android:typeface="monospace" />
     </LinearLayout>
