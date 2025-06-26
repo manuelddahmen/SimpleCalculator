@@ -33,9 +33,17 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.logging.Level
+import java.util.logging.Logger
 
 class GraphActivity : AppCompatActivity() {
 
+    private val desiredBitmapHeight: Int = 1000
+    private val desiredBitmapWidth: Int= 1000
+    private var yMaxLogicalUi: Float = 1f
+    private var yMinLogicalUi: Float = 1f
+    private var xMaxUi: Double = 0.0
+    private var xMinUi: Double= 0.0
     private lateinit var strings: List<String>
     private lateinit var prefs: SharedPreferences
     private lateinit var editTextYMax: TextInputEditText
@@ -414,6 +422,159 @@ class GraphActivity : AppCompatActivity() {
         }
     }
 
+
+    private fun plotGraph1() {
+        val formulaXStr = editTextFormulaX.text.toString()
+        val formulaFxStr = editTextFormulaFx.text.toString()
+        val xMin = editTextXMin.text.toString().toDoubleOrNull() ?: DEFAULT_X_MIN
+        val xMax = editTextXMax.text.toString().toDoubleOrNull() ?: DEFAULT_X_MAX
+        val yMinUser = editTextYMin.text.toString().toDoubleOrNull() ?: DEFAULT_Y_MIN
+        val yMaxUser = editTextYMax.text.toString().toDoubleOrNull() ?: DEFAULT_Y_MAX
+
+        if (xMin >= xMax) {
+            Toast.makeText(this, "X Min must be less than X Max.", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (yMinUser >= yMaxUser) {
+            Toast.makeText(this, "Y Min must be less than Y Max.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        this.xMinUi = xMin
+        this.xMaxUi = xMax
+        this.yMinLogicalUi = yMinUser.toFloat()
+        this.yMaxLogicalUi = yMaxUser.toFloat()
+
+        try {
+            // Créer le bitmap avec les dimensions fixes 1000x1000
+            bitmap = Bitmap.createBitmap(
+                desiredBitmapWidth,
+                desiredBitmapHeight,
+                Bitmap.Config.ARGB_8888
+            )
+            // Utiliser android.graphics.Canvas
+            val canvas = android.graphics.Canvas(bitmap)
+
+            // Définir les dimensions de l'image pour les calculs de mise à l'échelle
+            // Ces dimensions sont maintenant celles du bitmap, et non de l'ImageView
+            this.imageWidth = bitmap.width.toFloat()
+            this.imageHeight = bitmap.height.toFloat()
+
+            canvas.drawColor(android.graphics.Color.LTGRAY) // Fond du bitmap
+
+            val xRangeLogical = this.xMaxUi - this.xMinUi
+            val yRangeLogical =1.0* this.yMaxLogicalUi - this.yMinLogicalUi
+
+            this.xScale = if (xRangeLogical != 0.0) this.imageWidth / xRangeLogical.toFloat() else 1f
+            this.yScale = if (yRangeLogical != 0.0) this.imageHeight / yRangeLogical.toFloat() else 1f
+
+            // Fonctions de conversion (inchangées, mais opèrent maintenant sur les dimensions du bitmap)
+            fun logicalToScreenX(logicalX: Double): Float {
+                return ((logicalX - this.xMinUi) * this.xScale).toFloat()
+            }
+            fun logicalToScreenY(logicalY: Double): Float {
+                return this.imageHeight - ((logicalY - this.yMinLogicalUi) * this.yScale).toFloat()
+            }
+
+            // Peintures pour les axes et les données (utiliser android.graphics.Paint et android.graphics.Color)
+            val axisPaint = android.graphics.Paint().apply {
+                color = android.graphics.Color.BLACK
+                strokeWidth = 4f // Augmenté pour la visibilité sur une image plus grande
+                textSize = 30f   // Augmenté pour la visibilité
+            }
+            val dataPaint = android.graphics.Paint().apply {
+                color = android.graphics.Color.BLUE
+                strokeWidth = 5f // Augmenté pour la visibilité
+            }
+
+            // Dessiner les axes X et Y
+            val xAxisScreenY = logicalToScreenY(0.0).coerceIn(0f, this.imageHeight)
+            canvas.drawLine(0f, xAxisScreenY, this.imageWidth, xAxisScreenY, axisPaint)
+            val yAxisScreenX = logicalToScreenX(0.0).coerceIn(0f, this.imageWidth)
+            canvas.drawLine(yAxisScreenX, 0f, yAxisScreenX, this.imageHeight, axisPaint)
+
+            // Ajouter des graduations et des étiquettes aux axes (exemple simple)
+            val numTicks = 5
+            // Étiquettes Axe X
+            for (i in 0..numTicks) {
+                val logicalVal = xMin + (xRangeLogical * i / numTicks)
+                val screenTickX = logicalToScreenX(logicalVal)
+                canvas.drawLine(screenTickX, xAxisScreenY - 10f, screenTickX, xAxisScreenY + 10f, axisPaint)
+                canvas.drawText(String.format(Locale.US, "%.1f", logicalVal), screenTickX - 15f, xAxisScreenY + 40f, axisPaint)
+            }
+            // Étiquettes Axe Y
+            for (i in 0..numTicks) {
+                val logicalVal = yMinUser + (yRangeLogical * i / numTicks)
+                val screenTickY = logicalToScreenY(logicalVal)
+                canvas.drawLine(yAxisScreenX - 10f, screenTickY, yAxisScreenX + 10f, screenTickY, axisPaint)
+                if (Math.abs(logicalVal) > 0.01 || logicalVal == 0.0) { // Éviter le texte superposé à l'origine
+                    canvas.drawText(String.format(Locale.US, "%.1f", logicalVal), yAxisScreenX - 70f, screenTickY + 10f, axisPaint)
+                }
+            }
+
+
+            val treeX = AlgebraicTree(formulaXStr); treeX.construct()
+            val treeFx = AlgebraicTree(formulaFxStr); treeFx.construct()
+
+            var previousScreenX = -1f
+            var previousScreenY = -1f
+
+            // Le nombre de points peut être basé sur la largeur du bitmap pour une bonne résolution
+            val numberOfPoints = this.imageWidth.toInt().coerceAtLeast(500) // Ou this.desiredBitmapWidth
+
+            for (i in 0 until numberOfPoints) {
+                val currentParamForX = xMin + (xRangeLogical * i / (numberOfPoints - 1).toDouble())
+                treeX.setParameter("t", currentParamForX) // "t" pour paramétrique, ou "x" si X(t)=t
+                val logicalX = treeX.eval().getElem()
+
+                treeFx.setParameter("x", logicalX)
+                val logicalY = treeFx.eval().getElem()
+
+                if (logicalX.isFinite() && logicalY.isFinite()) {
+                    val screenX = logicalToScreenX(logicalX)
+                    val screenY = logicalToScreenY(logicalY)
+
+                    // Vérifier si le point est dans les limites du canvas avant de dessiner (optionnel mais bon pour le débogage)
+                    // if (screenX >= 0 && screenX <= this.imageWidth && screenY >= 0 && screenY <= this.imageHeight) {
+                    if (previousScreenX != -1f) {
+                        // Un écrêtage simple pour éviter de dessiner des lignes très longues hors écran
+                        if (!((previousScreenY < 0 && screenY < 0) || (previousScreenY > this.imageHeight && screenY > this.imageHeight) ||
+                                    (previousScreenX < 0 && screenX < 0) || (previousScreenX > this.imageWidth && screenX > this.imageWidth))) {
+                            canvas.drawLine(previousScreenX, previousScreenY, screenX, screenY, dataPaint)
+                        }
+                    }
+                    // } else {
+                    //     Log.d("PlotGraph", "Point out of bounds: ($logicalX, $logicalY) -> ($screenX, $screenY)")
+                    // }
+                    previousScreenX = screenX
+                    previousScreenY = screenY
+                } else {
+                    // Si une valeur n'est pas finie, on ne peut pas tracer de ligne depuis le point précédent
+                    previousScreenX = -1f
+                    previousScreenY = -1f
+                }
+            }
+
+            imageViewGraph.setImageBitmap(bitmap)
+            currentImageFile = null
+            layoutImageActions.visibility = View.VISIBLE
+
+        } catch (e: AlgebraicFormulaSyntaxException) {
+            handlePlottingError("Syntax Error: ${e.localizedMessage ?: "Invalid formula"}", e)
+        } catch (e: RuntimeException) { // Attraper les exceptions plus générales aussi
+            handlePlottingError("Plotting Error: ${e.localizedMessage ?: "An unexpected error occurred"}", e)
+        }
+    }
+
+    private fun handlePlottingError(
+        string: String,
+        e: RuntimeException
+    ) {
+        if(e.javaClass.isAssignableFrom(RuntimeException::class.java)) {
+            e.printStackTrace()
+            Logger.getLogger(GraphActivity::class.java.name).log(Level.SEVERE, null, e)
+        }
+    }
 
     private fun saveBitmapToFile(bitmapToSave: Bitmap): File? {
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())

@@ -17,7 +17,7 @@ java {
 }
 
 
-def versionCode1000 = 406999512
+def versionCode1000 = 406999515
 def kotlin_version = '2.1.20'
 def javaVersionEnum = JavaVersion.VERSION_23
 def javaVersion = 23
@@ -36,11 +36,6 @@ kotlin {
 android {
     namespace 'one.empty3.apps.simplecalculator'
 
-    packagingOptions {
-        resources {
-            excludes += ['/META-INF/{AL2.0,LGPL2.1}', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module', 'xsd/catalog.xml', 'META-INF/LICENSE.md', 'META-INF/NOTICE.md', 'META-INF/io.netty.versions.properties', 'META-INF/INDEX.LIST']
-        }
-    }
     signingConfigs {
         debug {
             storeFile file('C:\\Users\\manue\\keystore')
@@ -133,28 +128,9 @@ android {
     }
     packagingOptions {
         resources {
+            excludes += ['/META-INF/{AL2.0,LGPL2.1}', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module', 'xsd/catalog.xml', 'META-INF/LICENSE.md', 'META-INF/NOTICE.md', 'META-INF/io.netty.versions.properties', 'META-INF/INDEX.LIST', 'META-INF/LICENSE.md', 'mozilla/public-suffix-list.txt', 'META-INF/LICENSE-notice.md', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module', 'META-INF/INDEX.LIST', 'META-INF/spring.factories', 'META-INF/spring/aot.factories', 'META-INF/spring.schemas', 'META-INF/spring.tooling', 'META-INF/spring.handlers', 'META-INF/spring-configuration-metadata.json', 'META-INF/additional-spring-configuration-metadata.json']
             exclude('/META-INF/{AL2.0,LGPL2.1}')
         }
-        exclude('META-INF/LICENSE.md')
-        exclude('mozilla/public-suffix-list.txt')
-        exclude('META-INF/LICENSE-notice.md')
-        exclude("META-INF/DEPENDENCIES")
-        exclude("META-INF/LICENSE")
-        exclude("META-INF/LICENSE.txt")
-        exclude("META-INF/license.txt")
-        exclude("META-INF/NOTICE")
-        exclude("META-INF/NOTICE.txt")
-        exclude("META-INF/notice.txt")
-        exclude("META-INF/ASL2.0")
-        exclude("META-INF/*.kotlin_module")
-        exclude('META-INF/INDEX.LIST')
-        exclude('META-INF/spring.factories')
-        exclude('META-INF/spring/aot.factories')
-        exclude('META-INF/spring.schemas')
-        exclude('META-INF/spring.tooling')
-        exclude('META-INF/spring.handlers')
-        exclude('META-INF/spring-configuration-metadata.json')
-        exclude('META-INF/additional-spring-configuration-metadata.json')
         dex {
             useLegacyPackaging = false
         }
@@ -252,11 +228,11 @@ configurations {
 dependencies {
     implementation("one.empty3.libs:commons-mp:0.0.10")
 
-    implementation("one.empty3:empty3-library-mp:2025.5.31-2") {
+    implementation("one.empty3:empty3-library-mp:2025.6.23") {
         exclude(group: "one.empty3.libs", module: "partial-deskop")
     }
 
-    implementation("one.empty3:empty3-library-mp:2025.5.31-2") {
+    implementation("one.empty3:empty3-library-mp:2025.5.6.23") {
         exclude(group: "one.empty3.libs", module: "partial-deskop")
     }
     // This dependency is downloaded from the Google’s Maven repository.
@@ -387,7 +363,7 @@ dependencies {
         // also has a dependency on partial-desktop.
         // For now, let's assume :partialandroid is the intended source.
     }
-    implementation("one.empty3:empty3-library-mp:2025.5.31-2") {
+    implementation("one.empty3:empty3-library-mp:2025.6.23") {
         exclude(group:"one.empty3.libs", module:"partial-desktop") // Corrected typo
     }
 

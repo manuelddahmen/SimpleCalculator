@@ -8,7 +8,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".GraphActivity"
     tools:showIn="@layout/activity_graph"
-    android:minHeight="1600dp">
+    android:minHeight="3200dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -181,6 +181,7 @@
                 android:id="@+id/imageViewGraph"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:layout_constraintDimensionRatio="H,1:1"
                 android:scaleType="fitCenter"
                 android:contentDescription="@string/content_description_graph_image" />
 
@@ -190,9 +191,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_gravity="bottom|end"
+                android:layout_gravity="top|end"
                 android:layout_margin="8dp"
-                android:visibility="gone"
             tools:visibility="visible">
 
             <com.google.android.material.button.MaterialButton
