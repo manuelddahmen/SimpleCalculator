@@ -253,7 +253,7 @@ class GraphActivity : AppCompatActivity() {
         // Y-axis is inverted on screen (0 is top, height is bottom)
         return imageHeight - ((logicalY - yMinLogical) * yScale).toFloat()
     }
-    private fun plotGraph() {
+    private fun plotGraph1() {
         val formulaX = editTextFormulaX.text.toString()
         val formulaFx = editTextFormulaFx.text.toString()
         xMin = editTextXMin.text.toString().toDoubleOrNull()
@@ -423,7 +423,7 @@ class GraphActivity : AppCompatActivity() {
     }
 
 
-    private fun plotGraph1() {
+    private fun plotGraph() {
         val formulaXStr = editTextFormulaX.text.toString()
         val formulaFxStr = editTextFormulaFx.text.toString()
         val xMin = editTextXMin.text.toString().toDoubleOrNull() ?: DEFAULT_X_MIN
