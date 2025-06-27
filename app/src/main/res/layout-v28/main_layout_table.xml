@@ -343,10 +343,12 @@
                 <EditText
                     android:autofillHints="Result here"
                     android:id="@+id/answerText"
+                    android:autoSizeTextType="uniform"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="monospace"
                     android:textSize="48dp"
+                    android:textColor="#0000FF"
                     android:theme="?android:attr/buttonBarButtonStyle"
                     android:typeface="monospace" />
             </LinearLayout>

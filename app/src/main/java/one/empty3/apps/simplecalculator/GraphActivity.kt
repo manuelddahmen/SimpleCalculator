@@ -141,6 +141,7 @@ class GraphActivity : AppCompatActivity() {
         buttonSaveImage = findViewById(R.id.buttonSaveImage)
         buttonShareImage = findViewById(R.id.buttonShareImage)
 
+        imageViewGraph = findViewById<ImageView>(R.id.imageViewGraph)
 
         validateInitialFields()
         setupTextWatchers()
@@ -244,6 +245,7 @@ class GraphActivity : AppCompatActivity() {
     private fun checkAllFieldsValidated() {
         val allValid = validationStates.values.all { it }
         buttonPlot.visibility = if (allValid) View.VISIBLE else View.GONE
+        layoutImageActions.visibility = if (allValid) View.VISIBLE else View.GONE
     }
     fun logicalToScreenX(logicalX: Double): Float {
         return ((logicalX - xMin) * xScale).toFloat()
@@ -278,8 +280,8 @@ class GraphActivity : AppCompatActivity() {
 
         try {
             bitmap = Bitmap.createBitmap(
-                imageViewGraph.width.coerceAtLeast(100),
-                imageViewGraph.height.coerceAtLeast(100),
+                1000,
+                1000,
                 Bitmap.Config.ARGB_8888
             )
             imageWidth = bitmap.width.toFloat()
@@ -330,8 +332,6 @@ class GraphActivity : AppCompatActivity() {
                     x = fX.eval().getElem()
                     fXY.setParameter("x", x)
                     val y = fXY.eval().getElem()
-                    //x1paint = pc.toFloat()
-                    //y1paint =(imageViewGraph.height / 2 - y).toFloat()
                     x1paint = logicalToScreenX(x)
                     y1paint = logicalToScreenY(y)
                     if(x0>0) {
@@ -538,10 +538,10 @@ class GraphActivity : AppCompatActivity() {
                     // if (screenX >= 0 && screenX <= this.imageWidth && screenY >= 0 && screenY <= this.imageHeight) {
                     if (previousScreenX != -1f) {
                         // Un écrêtage simple pour éviter de dessiner des lignes très longues hors écran
-                        if (!((previousScreenY < 0 && screenY < 0) || (previousScreenY > this.imageHeight && screenY > this.imageHeight) ||
-                                    (previousScreenX < 0 && screenX < 0) || (previousScreenX > this.imageWidth && screenX > this.imageWidth))) {
-                            canvas.drawLine(previousScreenX, previousScreenY, screenX, screenY, dataPaint)
-                        }
+                        //if (!((previousScreenY < 0 && screenY < 0) || (previousScreenY > this.imageHeight && screenY > this.imageHeight) ||
+                        //            (previousScreenX < 0 && screenX < 0) || (previousScreenX > this.imageWidth && screenX > this.imageWidth))) {
+                        canvas.drawLine(previousScreenX, previousScreenY, screenX, screenY, dataPaint)
+                        //}
                     }
                     // } else {
                     //     Log.d("PlotGraph", "Point out of bounds: ($logicalX, $logicalY) -> ($screenX, $screenY)")
@@ -555,9 +555,13 @@ class GraphActivity : AppCompatActivity() {
                 }
             }
 
-            imageViewGraph.setImageBitmap(bitmap)
             currentImageFile = null
             layoutImageActions.visibility = View.VISIBLE
+            buttonDownloadImage.visibility = View.VISIBLE
+            buttonSaveImage.visibility = View.VISIBLE
+            buttonShareImage.visibility = View.VISIBLE
+            imageViewGraph.visibility = View.VISIBLE
+            imageViewGraph.setImageBitmap(bitmap)
 
         } catch (e: AlgebraicFormulaSyntaxException) {
             handlePlottingError("Syntax Error: ${e.localizedMessage ?: "Invalid formula"}", e)
@@ -580,8 +584,10 @@ class GraphActivity : AppCompatActivity() {
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
         val imageFileName = "GRAPH_${timeStamp}_"
         // Utilise le répertoire de cache externe pour que FileProvider puisse y accéder facilement
-        val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES+File.separator+"simplecalculator") // Ou getExternalCacheDir()
-
+        val storageDir = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+            "simplecalculator"
+        )
         return try {
             if(storageDir!=null &&!storageDir.exists())
                 storageDir.mkdirs()
@@ -591,8 +597,6 @@ class GraphActivity : AppCompatActivity() {
             bitmapToSave.compress(Bitmap.CompressFormat.PNG, 100, fos)
             fos.flush()
             fos.close()
-            // Ajoute l'image à la galerie du téléphone pour qu'elle soit visible
-            @Suppress("DEPRECATION")
             Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
                 mediaScanIntent.data = Uri.fromFile(imageFile)
                 sendBroadcast(mediaScanIntent)

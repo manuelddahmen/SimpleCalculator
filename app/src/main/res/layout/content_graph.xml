@@ -200,7 +200,7 @@
                 android:layout_gravity="top|end"
                 android:layout_margin="8dp"
                 android:orientation="horizontal"
-                tools:visibility="visible">
+                tools:visibility="gone">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/buttonShareImage"

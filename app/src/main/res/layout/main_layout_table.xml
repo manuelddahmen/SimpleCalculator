@@ -325,6 +325,8 @@
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_weight="0.5"
+            android:autoSizeTextType="uniform"
+            android:textColor="#0000FF"
             android:text="@string/text_calculator"/>
         <Button
             android:id="@+id/your_button_id_to_open_graph_activity"
