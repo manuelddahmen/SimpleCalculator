@@ -17,7 +17,14 @@ import android.widget.ImageView
 import android.widget.LinearLayout // Ajouté
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.graphics.Canvas
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.semantics.text
+import androidx.compose.ui.text.drawText
 import androidx.core.content.FileProvider // Ajouté
+import androidx.core.text.color
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -159,6 +166,18 @@ class GraphActivity : AppCompatActivity() {
             shareImage()
         }
 
+        buttonDownloadImage.setOnClickListener {
+            currentImageFile = File(getFilesDir(), "graph.png")
+            val intent = Intent(Intent.ACTION_VIEW)
+            val uri = FileProvider.getUriForFile(this, AUTHORITY, currentImageFile!!)
+            intent.setDataAndType(uri, MediaStore.Images.Media.CONTENT_TYPE)
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            startActivity(intent)
+
+
+        }
+
+
         checkAllFieldsValidated()
     }
 
@@ -255,6 +274,8 @@ class GraphActivity : AppCompatActivity() {
         // Y-axis is inverted on screen (0 is top, height is bottom)
         return imageHeight - ((logicalY - yMinLogical) * yScale).toFloat()
     }
+
+
     private fun plotGraph() {
         val formulaXStr = editTextFormulaX.text.toString()
         val formulaFxStr = editTextFormulaFx.text.toString()
@@ -402,15 +423,13 @@ class GraphActivity : AppCompatActivity() {
         }
     }
 
-    private fun handlePlottingError(
-        string: String,
-        e: RuntimeException
-    ) {
-        if(e.javaClass.isAssignableFrom(RuntimeException::class.java)) {
-            e.printStackTrace()
-            Logger.getLogger(GraphActivity::class.java.name).log(Level.SEVERE, null, e)
-        }
+    private fun handlePlottingError(message: String, e: Exception) {
+        e.printStackTrace()
+        Logger.getLogger(GraphActivity::class.java.name).log(Level.SEVERE, "Error plotting graph", e)
+        val rootView = findViewById<View>(R.id.root_activity_graph)
+        Snackbar.make(rootView, message, Snackbar.LENGTH_LONG).show()
     }
+
 
     private fun saveBitmapToFile(bitmapToSave: Bitmap): File? {
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
