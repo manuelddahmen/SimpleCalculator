@@ -140,7 +140,7 @@ class GraphActivity : AppCompatActivity() {
         layoutImageActions = findViewById(R.id.layoutImageActions)
         buttonSaveImage = findViewById(R.id.buttonSaveImage)
         buttonShareImage = findViewById(R.id.buttonShareImage)
-
+        frameLayoutImageView = findViewById(R.id.frameLayoutImageView)
         imageViewGraph = findViewById<ImageView>(R.id.imageViewGraph)
 
         validateInitialFields()
@@ -255,174 +255,6 @@ class GraphActivity : AppCompatActivity() {
         // Y-axis is inverted on screen (0 is top, height is bottom)
         return imageHeight - ((logicalY - yMinLogical) * yScale).toFloat()
     }
-    private fun plotGraph1() {
-        val formulaX = editTextFormulaX.text.toString()
-        val formulaFx = editTextFormulaFx.text.toString()
-        xMin = editTextXMin.text.toString().toDoubleOrNull()
-            ?: -10.0 // Valeur par défaut si invalide/vide
-        xMax = editTextXMax.text.toString().toDoubleOrNull() ?: 10.0 // Valeur par défaut
-        val xRange = xMax - xMin
-        yMinLogical =
-            (editTextYMin.text.toString().toDoubleOrNull() ?: -10.0).toFloat() // Valeur par défaut  // Example: Set your desired logical Y max
-        val yMaxLogical = editTextYMax.text.toString().toDoubleOrNull() ?: 10.0 // Valeur par défaut  // Example: Set your desired logical Y max
-        val yRange = yMaxLogical - yMinLogical
-
-        if (xMin >= xMax) {
-            Toast.makeText(this, "X Min must be less than X Max.", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        Toast.makeText(
-            this,
-            "Plotting: X=$formulaX, Y=$formulaFx, XMin=$xMin, XMax=$xMax",
-            Toast.LENGTH_LONG
-        ).show()
-
-        try {
-            bitmap = Bitmap.createBitmap(
-                1000,
-                1000,
-                Bitmap.Config.ARGB_8888
-            )
-            imageWidth = bitmap.width.toFloat()
-            imageHeight = bitmap.height.toFloat()
-            val canvas = android.graphics.Canvas(bitmap)
-            val paint = android.graphics.Paint().apply {
-                color = android.graphics.Color.BLUE
-                strokeWidth = 5f
-            }
-            canvas.drawColor(android.graphics.Color.WHITE)
-
-            val centerX = bitmap.width / 2f
-            val centerY = bitmap.height / 2f
-            try {
-                val fX = AlgebraicTree(formulaX)
-                fX.construct()
-                val fXY = AlgebraicTree(formulaFx)
-                fXY.construct()
-
-                var x1paint :Float = 0f
-                var y1paint :Float = 1f
-                var x0paint :Float = 0f
-                var y0paint :Float = 1f
-
-                // Inside your plotGraph() method, after you have bitmap dimensions
-
-// Logical range for X
-
-// Assume you have yMin and yMax for your Y-axis
-// For example, if you iterate through your function once to find these:
-// var yMinActual = Double.POSITIVE_INFINITY
-// var yMaxActual = Double.NEGATIVE_INFINITY
-// for (xValue in xMin..xMax step someStep) {
-//    val yValue = calculateY(xValue) // Your function f(x)
-//    yMinActual = minOf(yMinActual, yValue)
-//    yMaxActual = maxOf(yMaxActual, yValue)
-// }
-// Or set fixed yMin, yMax if you know the typical output range
-
-// Scale factors: pixels per logical unit
-                xScale = if (xRange != 0.0) imageWidth / xRange.toFloat() else 1f
-                yScale = if (yRange != 0.0) imageHeight / yRange.toFloat() else 1f
-                for (x0 in 0 until bitmap.width) {
-                    var x =
-                        xMin + x0.toFloat() /bitmap.width * (xMax - xMin)
-                    val pc = (x-xMin) / (xMax - xMin)
-                    fX.setParameter("x", x)
-                    x = fX.eval().getElem()
-                    fXY.setParameter("x", x)
-                    val y = fXY.eval().getElem()
-                    x1paint = logicalToScreenX(x)
-                    y1paint = logicalToScreenY(y)
-                    if(x0>0) {
-                        canvas.drawLine(
-                            x0paint,
-                            y0paint,
-                            x1paint,
-                            y1paint,
-                            paint.apply { color = android.graphics.Color.BLACK }) // Axe X
-                    } else {
-
-                        canvas.drawPoint(x1paint, y1paint, paint.apply { color = android.graphics.Color.BLACK }) // Axe X
-
-                    }
-                    x0paint = x1paint
-                    y0paint = y1paint
-
-                    //println("logical (x,y) ($x,$y) screen (x,y) ($x1paint,$y1paint)")
-                }
-
-
-                val axisPaint = android.graphics.Paint().apply {
-                    color = android.graphics.Color.BLACK
-                    strokeWidth = 4f
-                }
-
-                // Draw X-Axis
-                val xAxisScreenY = logicalToScreenY(0.0).coerceIn(0f, this.imageHeight)
-                canvas.drawLine(0f, xAxisScreenY, this.imageWidth, xAxisScreenY, axisPaint)
-
-                // Draw Y-Axis
-                val yAxisScreenX = logicalToScreenX(0.0).coerceIn(0f, this.imageWidth)
-                canvas.drawLine(yAxisScreenX, 0f, yAxisScreenX, this.imageHeight, axisPaint)
-
-            } catch (e: AlgebraicFormulaSyntaxException) {
-                e.printStackTrace()
-                // Show a Snackbar with the exception message
-                val rootView = findViewById<View>(android.R.id.content) // Get the root view
-                Snackbar.make(rootView, "Syntax Error: ${e.localizedMessage ?: "Invalid formula"}", Snackbar.LENGTH_LONG)
-                    .setAction("Details") {
-                        // Optionally, you can add an action, e.g., to show more details
-                        // or guide the user.
-                        Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
-                    }
-                    .show()
-            } catch (e1: RuntimeException) {
-                e1.printStackTrace()
-                // Show a Snackbar for other runtime exceptions
-                val rootView = findViewById<View>(android.R.id.content)
-                Snackbar.make(
-                    rootView,
-                    "Error: ${e1.localizedMessage ?: "An unexpected error occurred"}",
-                    Snackbar.LENGTH_LONG
-                )
-            }
-
-            canvas.drawText(
-                "Graph ($formulaFx) from $xMin to $xMax",
-                50f,
-                50f,
-                paint.apply { textSize = 20f; color = android.graphics.Color.BLACK })
-
-
-            imageViewGraph.setImageBitmap(bitmap)
-            buttonDownloadImage.visibility = View.VISIBLE
-            buttonSaveImage.visibility = View.VISIBLE
-            buttonShareImage.visibility = View.VISIBLE
-        } catch (e: AlgebraicFormulaSyntaxException) {
-            e.printStackTrace()
-            // Show a Snackbar with the exception message
-            val rootView = findViewById<View>(android.R.id.content) // Get the root view
-            Snackbar.make(rootView, "Syntax Error: ${e.localizedMessage ?: "Invalid formula"}", Snackbar.LENGTH_LONG)
-                .setAction("Details") {
-                    // Optionally, you can add an action, e.g., to show more details
-                    // or guide the user.
-                    Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
-                }
-                .show()
-        } catch (e1: RuntimeException) {
-            e1.printStackTrace()
-            // Show a Snackbar for other runtime exceptions
-            val rootView = findViewById<View>(android.R.id.content)
-            Snackbar.make(
-                rootView,
-                "Error: ${e1.localizedMessage ?: "An unexpected error occurred"}",
-                Snackbar.LENGTH_LONG
-            )
-        }
-    }
-
-
     private fun plotGraph() {
         val formulaXStr = editTextFormulaX.text.toString()
         val formulaFxStr = editTextFormulaFx.text.toString()
@@ -520,11 +352,11 @@ class GraphActivity : AppCompatActivity() {
             var previousScreenY = -1f
 
             // Le nombre de points peut être basé sur la largeur du bitmap pour une bonne résolution
-            val numberOfPoints = this.imageWidth.toInt().coerceAtLeast(500) // Ou this.desiredBitmapWidth
+            val numberOfPoints = this.imageWidth.toInt()
 
             for (i in 0 until numberOfPoints) {
                 val currentParamForX = xMin + (xRangeLogical * i / (numberOfPoints - 1).toDouble())
-                treeX.setParameter("t", currentParamForX) // "t" pour paramétrique, ou "x" si X(t)=t
+                treeX.setParameter("x", currentParamForX) // "t" pour paramétrique, ou "x" si X(t)=t
                 val logicalX = treeX.eval().getElem()
 
                 treeFx.setParameter("x", logicalX)
