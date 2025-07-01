@@ -76,7 +76,6 @@ class GraphActivity : AppCompatActivity() {
     private lateinit var layoutImageActions: LinearLayout
     private lateinit var buttonSaveImage: MaterialButton
     private lateinit var buttonShareImage: MaterialButton
-    private lateinit var buttonDownloadImage: MaterialButton
 
     private var currentImageFile: File? = null // Pour stocker le fichier image actuel
 
@@ -149,7 +148,6 @@ class GraphActivity : AppCompatActivity() {
         buttonShareImage = findViewById(R.id.buttonShareImage)
         frameLayoutImageView = findViewById(R.id.frameLayoutImageView)
         imageViewGraph = findViewById<ImageView>(R.id.imageViewGraph)
-
         validateInitialFields()
         setupTextWatchers()
 
@@ -160,22 +158,19 @@ class GraphActivity : AppCompatActivity() {
 
         buttonSaveImage.setOnClickListener {
             saveImageToStorage()
+            currentImageFile = File(getFilesDir(), "graph.png")
+            val intent = Intent(Intent.ACTION_CREATE_DOCUMENT)
+            val uri = FileProvider.getUriForFile(this, AUTHORITY, currentImageFile!!)
+            intent.setDataAndType(uri, MediaStore.Images.Media.CONTENT_TYPE)
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            startActivity(intent)
+
         }
 
         buttonShareImage.setOnClickListener {
             shareImage()
         }
 
-        buttonDownloadImage.setOnClickListener {
-            currentImageFile = File(getFilesDir(), "graph.png")
-            val intent = Intent(Intent.ACTION_VIEW)
-            val uri = FileProvider.getUriForFile(this, AUTHORITY, currentImageFile!!)
-            intent.setDataAndType(uri, MediaStore.Images.Media.CONTENT_TYPE)
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            startActivity(intent)
-
-
-        }
 
 
         checkAllFieldsValidated()
@@ -410,7 +405,6 @@ class GraphActivity : AppCompatActivity() {
 
             currentImageFile = null
             layoutImageActions.visibility = View.VISIBLE
-            buttonDownloadImage.visibility = View.VISIBLE
             buttonSaveImage.visibility = View.VISIBLE
             buttonShareImage.visibility = View.VISIBLE
             imageViewGraph.visibility = View.VISIBLE

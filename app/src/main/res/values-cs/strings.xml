@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name" translatable="false">Sci-prog Calculator</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">čtvereční</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">Upravte text zde nebo pomocí čísel push</string>
+      
+  <string name="result">Výsledek</string>
+      
+  <string name="about_and_policies">O nás a zásady ochrany osobních údajů</string>
+      
+  <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Données utilisateur staffles and senses Dans l\'application image featuring, les seules données auxquelles l\'application accède sont les fichiers multimédia ouvert par le bouton prize de vue ou choisir un fichier. Ceux-ci sont traités par l\'application et éventuellement des copy de travail sont stockées dans le répertoire data de l\'application and figure donc sur le system dans un format ou l\'autre. Dans une future version il sera possible de partager os résultats avec d\'autres utilisateurs, internautes. Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme privées et ne sont pas collectées, ni traitées par no services.</string>
+      
+  <string name="title_activity_formula_store">Obchod s formulemi</string>
+      
+  <string name="store_formula">Obchodní receptura</string>
+      
+  <string name="add">Přidat</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">Zadní</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">Přijměte zásady správy uživatelských dat a ochrany osobních údajů</string>
+      
+  <string name="about_privacy">O ochraně osobních údajů</string>
+      
+  <string name="dialog_message">Vyberte si funkci</string>
+      
+  <string name="dialog_title">Předdefinované funkce</string>
+      
+  <string name="cancel_button">Zrušit</string>
+      
+  <string name="ok_button">OK</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">OK</string>
+      
+  <string name="fragment_function_cancel">Zrušit</string>
+      
+  <string name="function_string">Funkce Řetězec</string>
+      
+  <string name="title_activity_scrolling">Poznámka k výpočtu</string>
+      
+  <string name="action_settings">Nastavení</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">Text</string>
+      
+  <string name="title_activity_settings">NastaveníAktivita</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">Zprávy</string>
+      
+  <string name="sync_header">Synchronizace</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">Váš podpis</string>
+      
+  <string name="reply_title">Výchozí akce odpovědi</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">Pravidelná synchronizace e-mailů</string>
+      
+  <string name="attachment_title">Stažení příchozích příloh</string>
+      
+  <string name="attachment_summary_on">Automatické stahování příloh příchozích e-mailů</string>
+      
+  <string name="attachment_summary_off">Přílohy stahujte pouze v případě ručního požadavku</string>
+      
+  <string name="empty_string"/>
+      
+  <string name="textCalculatorTextMultiLine">Víceřádkový skript</string>
+      
+  <string name="com.crashlytics.android.build_id" translatable="false">1</string>
+      
+  <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
+      
+  <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
+      
+  <string name="execute_code">Spustit kód</string>
+      
+  <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Osobní a citlivé uživatelské údaje. Více informací naleznete na odkazu</string>
+      
+  <string name="fx">fx(</string>
+      
+  <string name="privacy_policy_link_text">Zásady ochrany osobních údajů si můžete prohlédnout online: https://empty3.app/android/privacy.html</string>
+      
+  <string name="title_activity_privacy_policy">Zásady ochrany osobních údajů</string>
+      
+  <string name="title_activity_graph">Grafový plotr</string>
+      
+  <string name="hint_formula_x">Vzorec X (např. t*cos(t))</string>
+      
+  <string name="hint_formula_y">Vzorec Y (např. t*sin(t))</string>
+      
+  <string name="hint_formula_fx">y = f(x) (např. x^2)</string>
+      
+  <string name="button_plot">Vykreslení grafu</string>
+      
+  <string name="button_download_image">Stáhnout obrázek</string>
+      
+  <string name="content_description_graph_image">Vykreslený graf</string>
+          
+  <string name="hint_x_min">X min.</string>
+          
+  <string name="hint_x_max">X Max</string>
+      
+  <!-- ... existing strings ... -->
+      
+  <string name="hint_y_min">Y Min (např. -10)</string>
+      
+  <string name="hint_y_max">Y Max (např. 10)</string>
+      
+  <!-- ... autres chaînes ... -->
+      
+  <string name="button_save_image">Uložit</string>
+      
+  <string name="button_share_image">Podíl</string>
+      
+  <string name="share_image_title">Sdílet obrázek grafu</string>
+      
+  <string name="error_no_image_to_share">Není k dispozici žádný obrázek ke sdílení.</string>
+      
+  <string name="error_failed_to_share_image">Sdílení obrázku se nezdařilo.</string>
+      
+  <string name="image_saved_to">Obrázek uložen do%s</string>
+   
+  <!-- Pour le message de sauvegarde -->
+      
+  <string name="failed_to_save_image">Nepodařilo se uložit obrázek: %s</string>
+      
+  <string name="error_syntax">Syntaktická chyba</string>
+      
+  <string name="error_not_a_number">Není to číslo</string>
+      
+  <string name="error_x_max_lt_x_min">X Max musí být &gt; X Min</string>
+      
+  <string name="error_y_max_lt_y_min">Y Max musí být &gt; Y Min</string>
+      
+  <string name="error_invalid_input">Neplatný vstup</string>
+      
+  <string name="error_x_min_lt_x_max">Hodnota X Min musí být menší než X Max.</string>
+      
+  <string name="error_y_min_lt_y_max">Y Min musí být menší než Y Max.</string>
+      
+  <string name="error_syntax_with_message">Syntaktická chyba: %s</string>
+      
+  <string name="error_plotting_with_message">Chyba vykreslování: %s</string>
+      
+  <string name="file_name_prefix">GRAF_%s _</string>
+      
+  <string name="file_name_suffix">.png</string>
+      
+  <string name="storage_directory">jednoduchá kalkulačka</string>
+      
+  <string name="error_could_not_create_file">Nepodařilo se vytvořit soubor</string>
+      
+  <string name="graph_plotter_description">Grafový plotter definuje proměnnou a vykreslí funkci</string>
+   
+  <!-- Pour le message d'erreur de sauvegarde -->
+      
+  <string name="hint_result_here">Výsledek zde</string>
+  
+</resources>

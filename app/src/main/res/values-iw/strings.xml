@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name" translatable="false">Sci-prog Calculator</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">רבוע</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">ערוך טקסט כאן או באמצעות מספרי דחיפה</string>
+      
+  <string name="result">תוֹצָאָה</string>
+      
+  <string name="about_and_policies">אודות ומדיניות פרטיות</string>
+      
+  <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">פרסונלי שימושי וחכמים. תמונה של יישום מציגה את תמונת היישום. Ceux-ci sont traités par l\'application et éventuellement des copies de travail sont stockées dans le répertoire data de l\'application et figure donc sur le système dans un format ou l\'autre. Dans une גרסה עתידית il sera possible de partager ו-résultats avec d\'autres utilisateurs, internautes. Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme privées et ne sont pas collectées, ni traitées par nos services.</string>
+      
+  <string name="title_activity_formula_store">פורמולה סטור</string>
+      
+  <string name="store_formula">פורמולת החנות</string>
+      
+  <string name="add">לְהוֹסִיף</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">בְּחֲזָרָה</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">קבל את מדיניות ניהול נתוני המשתמש ואת מדיניות הפרטיות</string>
+      
+  <string name="about_privacy">אודות פרטיות</string>
+      
+  <string name="dialog_message">בחר פונקציה</string>
+      
+  <string name="dialog_title">פונקציות מוגדרות מראש</string>
+      
+  <string name="cancel_button">לְבַטֵל</string>
+      
+  <string name="ok_button">בְּסֵדֶר</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">בְּסֵדֶר</string>
+      
+  <string name="fragment_function_cancel">לְבַטֵל</string>
+      
+  <string name="function_string">מחרוזת פונקציה</string>
+      
+  <string name="title_activity_scrolling">הערת חישוב</string>
+      
+  <string name="action_settings">הגדרות</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">טֶקסט</string>
+      
+  <string name="title_activity_settings">הגדרותפעילות</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">הודעות</string>
+      
+  <string name="sync_header">סנכרון</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">החתימה שלך</string>
+      
+  <string name="reply_title">פעולת תשובה ברירת מחדל</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">סנכרון דוא\"ל מעת לעת</string>
+      
+  <string name="attachment_title">הורד קבצים מצורפים נכנסים</string>
+      
+  <string name="attachment_summary_on">הורדה אוטומטית של קבצים מצורפים עבור הודעות דוא\"ל נכנסות</string>
+      
+  <string name="attachment_summary_off">הורד קבצים מצורפים רק כאשר נדרשת בקשה ידנית</string>
+      
+  <string name="empty_string"/>
+      
+  <string name="textCalculatorTextMultiLine">כתב מרובה שורות</string>
+      
+  <string name="com.crashlytics.android.build_id" translatable="false">1</string>
+      
+  <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
+      
+  <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
+      
+  <string name="execute_code">ביצוע קוד</string>
+      
+  <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">נתוני משתמש אישיים ורגישים. ראה את הקישור למידע נוסף</string>
+      
+  <string name="fx">FX(</string>
+      
+  <string name="privacy_policy_link_text">צפה במדיניות הפרטיות באינטרנט: https://empty3.app/android/privacy.html</string>
+      
+  <string name="title_activity_privacy_policy">מדיניות פרטיות</string>
+      
+  <string name="title_activity_graph">פלוטר גרפים</string>
+      
+  <string name="hint_formula_x">נוסחה X (לדוגמה, t*cos(t))</string>
+      
+  <string name="hint_formula_y">נוסחה Y (לדוגמה, t*sin(t))</string>
+      
+  <string name="hint_formula_fx">y = f(x) (לדוגמה, x^2)</string>
+      
+  <string name="button_plot">גרף שרטוט</string>
+      
+  <string name="button_download_image">הורד תמונה</string>
+      
+  <string name="content_description_graph_image">תמונת גרף מוצגת</string>
+          
+  <string name="hint_x_min">X דקות</string>
+          
+  <string name="hint_x_max">X מקס</string>
+      
+  <!-- ... existing strings ... -->
+      
+  <string name="hint_y_min">Y מינימום (לדוגמה, -10)</string>
+      
+  <string name="hint_y_max">Y מקסימלי (למשל, 10)</string>
+      
+  <!-- ... autres chaînes ... -->
+      
+  <string name="button_save_image">לְהַצִיל</string>
+      
+  <string name="button_share_image">לַחֲלוֹק</string>
+      
+  <string name="share_image_title">שתף תמונה של גרף</string>
+      
+  <string name="error_no_image_to_share">אין תמונה זמינה לשיתוף.</string>
+      
+  <string name="error_failed_to_share_image">שיתוף התמונה נכשל.</string>
+      
+  <string name="image_saved_to">התמונה נשמרה ב-%s</string>
+   
+  <!-- Pour le message de sauvegarde -->
+      
+  <string name="failed_to_save_image">שמירת התמונה נכשלה: %s</string>
+      
+  <string name="error_syntax">שגיאת תחביר</string>
+      
+  <string name="error_not_a_number">לא מספר</string>
+      
+  <string name="error_x_max_lt_x_min">X Max חייב להיות &gt; X Min</string>
+      
+  <string name="error_y_max_lt_y_min">Y Max חייב להיות &gt; Y Min</string>
+      
+  <string name="error_invalid_input">קלט לא חוקי</string>
+      
+  <string name="error_x_min_lt_x_max">X מינימום חייב להיות קטן מ-X מקסימום.</string>
+      
+  <string name="error_y_min_lt_y_max">Y מינימום חייב להיות קטן מ-Y מקסימום.</string>
+      
+  <string name="error_syntax_with_message">שגיאת תחביר: %s</string>
+      
+  <string name="error_plotting_with_message">שגיאת גרף: %s</string>
+      
+  <string name="file_name_prefix">גרף_%s_</string>
+      
+  <string name="file_name_suffix">.png</string>
+      
+  <string name="storage_directory">מחשבון פשוט</string>
+      
+  <string name="error_could_not_create_file">לא ניתן היה ליצור את הקובץ</string>
+      
+  <string name="graph_plotter_description">מתווה גרפים מגדיר משתנה ומשרטט את הפונקציה</string>
+   
+  <!-- Pour le message d'erreur de sauvegarde -->
+      
+  <string name="hint_result_here">התוצאה כאן</string>
+  
+</resources>

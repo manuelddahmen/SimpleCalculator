@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name" translatable="false">Sci-prog Calculator</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">Quadratwurzel</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">Bearbeiten Sie den Text hier oder durch Drücken von Zahlen</string>
+      
+  <string name="result">Ergebnis</string>
+      
+  <string name="about_and_policies">Über uns und Datenschutzbestimmungen</string>
+      
+  <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Sie verwenden kein Personal und keine sensiblen Daten für das Anwendungsbild, und alle anderen Personen, die mit der Anwendung zu tun haben, müssen auf die Multimedia-Dateien zugreifen, indem Sie auf die Schaltfläche „Preis für die Ansicht“ klicken oder ein Dokument auswählen. Es handelt sich hierbei um Merkmale der Anwendung und eventuelle Kopien, die im Datenrepertoire der Anwendung gespeichert sind, und die sich auf dem System in einem Format oder anderen Format befinden. In einer zukünftigen Version wird es wahrscheinlich sein, dass Sie Ihre Ergebnisse mit anderen, internen Benutzern teilen. Diese Personen wurden von uns in Betracht gezogen, DAHMEN Manuel bei empty3.one ist privat und nicht an Dritte gebunden und verfügt nicht über unsere Dienste.</string>
+      
+  <string name="title_activity_formula_store">FormulaStore</string>
+      
+  <string name="store_formula">Formel speichern</string>
+      
+  <string name="add">Hinzufügen</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">Zurück</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">Akzeptieren Sie die Richtlinie zur Benutzerdatenverwaltung und den Datenschutz</string>
+      
+  <string name="about_privacy">Über den Datenschutz</string>
+      
+  <string name="dialog_message">Wählen Sie eine Funktion</string>
+      
+  <string name="dialog_title">Vordefinierte Funktionen</string>
+      
+  <string name="cancel_button">Stornieren</string>
+      
+  <string name="ok_button">OK</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">OK</string>
+      
+  <string name="fragment_function_cancel">Stornieren</string>
+      
+  <string name="function_string">Funktionszeichenfolge</string>
+      
+  <string name="title_activity_scrolling">Kalkulationshinweis</string>
+      
+  <string name="action_settings">Einstellungen</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">Text</string>
+      
+  <string name="title_activity_settings">EinstellungenAktivität</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">Nachrichten</string>
+      
+  <string name="sync_header">Synchronisieren</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">Ihre Unterschrift</string>
+      
+  <string name="reply_title">Standardantwortaktion</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">E-Mails regelmäßig synchronisieren</string>
+      
+  <string name="attachment_title">Herunterladen eingehender Anhänge</string>
+      
+  <string name="attachment_summary_on">Automatischer Download von Anhängen für eingehende E-Mails</string>
+      
+  <string name="attachment_summary_off">Anhänge nur herunterladen, wenn sie manuell angefordert werden</string>
+      
+  <string name="empty_string"/>
+      
+  <string name="textCalculatorTextMultiLine">Mehrzeiliges Skript</string>
+      
+  <string name="com.crashlytics.android.build_id" translatable="false">1</string>
+      
+  <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
+      
+  <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
+      
+  <string name="execute_code">Code ausführen</string>
+      
+  <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Persönliche und sensible Benutzerdaten. Weitere Informationen finden Sie unter dem Link</string>
+      
+  <string name="fx">fx(</string>
+      
+  <string name="privacy_policy_link_text">Datenschutzrichtlinie online ansehen: https://empty3.app/android/privacy.html</string>
+      
+  <string name="title_activity_privacy_policy">Datenschutzrichtlinie</string>
+      
+  <string name="title_activity_graph">Graphenplotter</string>
+      
+  <string name="hint_formula_x">Formel X (zB t*cos(t))</string>
+      
+  <string name="hint_formula_y">Formel Y (zB t*sin(t))</string>
+      
+  <string name="hint_formula_fx">y = f(x) (zB x^2)</string>
+      
+  <string name="button_plot">Diagramm zeichnen</string>
+      
+  <string name="button_download_image">Bild herunterladen</string>
+      
+  <string name="content_description_graph_image">Gezeichnetes Diagrammbild</string>
+          
+  <string name="hint_x_min">X Min</string>
+          
+  <string name="hint_x_max">X Max</string>
+      
+  <!-- ... existing strings ... -->
+      
+  <string name="hint_y_min">Y Min (zB -10)</string>
+      
+  <string name="hint_y_max">Y Max (zB 10)</string>
+      
+  <!-- ... autres chaînes ... -->
+      
+  <string name="button_save_image">Speichern</string>
+      
+  <string name="button_share_image">Aktie</string>
+      
+  <string name="share_image_title">Diagrammbild teilen</string>
+      
+  <string name="error_no_image_to_share">Kein Bild zum Teilen verfügbar.</string>
+      
+  <string name="error_failed_to_share_image">Bild konnte nicht geteilt werden.</string>
+      
+  <string name="image_saved_to">Bild gespeichert unter %s</string>
+   
+  <!-- Pour le message de sauvegarde -->
+      
+  <string name="failed_to_save_image">Bild konnte nicht gespeichert werden: %s</string>
+      
+  <string name="error_syntax">Syntaxfehler</string>
+      
+  <string name="error_not_a_number">Keine Nummer</string>
+      
+  <string name="error_x_max_lt_x_min">X Max muss &gt; X Min sein</string>
+      
+  <string name="error_y_max_lt_y_min">Y Max muss &gt; Y Min sein</string>
+      
+  <string name="error_invalid_input">Ungültige Eingabe</string>
+      
+  <string name="error_x_min_lt_x_max">X Min muss kleiner sein als X Max.</string>
+      
+  <string name="error_y_min_lt_y_max">Y Min muss kleiner sein als Y Max.</string>
+      
+  <string name="error_syntax_with_message">Syntaxfehler: %s</string>
+      
+  <string name="error_plotting_with_message">Plotfehler: %s</string>
+      
+  <string name="file_name_prefix">GRAPH_%s_</string>
+      
+  <string name="file_name_suffix">.png</string>
+      
+  <string name="storage_directory">einfacher Rechner</string>
+      
+  <string name="error_could_not_create_file">Datei konnte nicht erstellt werden</string>
+      
+  <string name="graph_plotter_description">Graphenplotter definieren eine Variable und zeichnen die Funktion</string>
+   
+  <!-- Pour le message d'erreur de sauvegarde -->
+      
+  <string name="hint_result_here">Ergebnis hier</string>
+  
+</resources>

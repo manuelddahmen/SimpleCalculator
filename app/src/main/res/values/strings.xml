@@ -87,7 +87,7 @@
     <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
     <string name="execute_code">Execute code</string>
     <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
-    <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Données utilisateur personnelles et sensibles Voir le lien pour plus d\'infos</string>
+    <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Personal and sensitive user data. See the link for more info</string>
     <string name="fx">fx(</string>
     <string name="privacy_policy_link_text">View Privacy Policy Online: https://empty3.app/android/privacy.html</string>
     <string name="title_activity_privacy_policy">Privacy Policy</string>
@@ -110,6 +110,22 @@
     <string name="error_no_image_to_share">No image available to share.</string>
     <string name="error_failed_to_share_image">Failed to share image.</string>
     <string name="image_saved_to">Image saved to %s</string> <!-- Pour le message de sauvegarde -->
-    <string name="failed_to_save_image">Failed to save image: %s</string> <!-- Pour le message d'erreur de sauvegarde -->
+    <string name="failed_to_save_image">Failed to save image: %s</string>
+    <string name="error_syntax">Syntax error</string>
+    <string name="error_not_a_number">Not a number</string>
+    <string name="error_x_max_lt_x_min">X Max must be > X Min</string>
+    <string name="error_y_max_lt_y_min">Y Max must be > Y Min</string>
+    <string name="error_invalid_input">Invalid input</string>
+    <string name="error_x_min_lt_x_max">X Min must be less than X Max.</string>
+    <string name="error_y_min_lt_y_max">Y Min must be less than Y Max.</string>
+    <string name="error_syntax_with_message">Syntax Error: %s</string>
+    <string name="error_plotting_with_message">Plotting Error: %s</string>
+    <string name="file_name_prefix">GRAPH_%s_</string>
+    <string name="file_name_suffix">.png</string>
+    <string name="storage_directory">simplecalculator</string>
+    <string name="error_could_not_create_file">Could not create file</string>
+    <string name="graph_plotter_description">Graph plotter define a variable and plot the function
+    </string> <!-- Pour le message d'erreur de sauvegarde -->
+    <string name="hint_result_here">Result here</string>
 
 </resources>

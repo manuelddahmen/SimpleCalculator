@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name" translatable="false">Sci-prog Calculator</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">wortel</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">Bewerk hier de tekst of druk op de cijfers</string>
+      
+  <string name="result">Resultaat</string>
+      
+  <string name="about_and_policies">Over ons en privacybeleid</string>
+      
+  <string name="POLICY_URI">https://empty3.app/android/Gebruikersbeleid en gezinsbeleidEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Gebruik personeels- en verstandige gebruikers Als de afbeelding van de applicatie wordt weergegeven, worden deze hulpprogramma\'s door de multimedia-bestanden ondersteund door de prijs die u krijgt of een fiche te kiezen. Dit zijn de kenmerken van de applicatie en het uitvoeren van kopieën van de taak door de repertoiregegevens van de applicatie en de afbeelding op het systeem in een formaat of het origineel. In een toekomstige versie zal het mogelijk zijn om uw resultaten te delen met behulp van gebruikers, internetgebruikers. DAHMEN Manuel bij empty3.one commume privées en ne sont pas collectées, no traitées par nos services.</string>
+      
+  <string name="title_activity_formula_store">Formulewinkel</string>
+      
+  <string name="store_formula">Winkelformule</string>
+      
+  <string name="add">Toevoegen</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">Rug</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">Accepteer het beleid voor gebruikersgegevensbeheer en privacy</string>
+      
+  <string name="about_privacy">Over privacy</string>
+      
+  <string name="dialog_message">Een functie kiezen</string>
+      
+  <string name="dialog_title">Vooraf gedefinieerde functies</string>
+      
+  <string name="cancel_button">Annuleren</string>
+      
+  <string name="ok_button">OK</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">OK</string>
+      
+  <string name="fragment_function_cancel">Annuleren</string>
+      
+  <string name="function_string">Functie String</string>
+      
+  <string name="title_activity_scrolling">Calc-notitie</string>
+      
+  <string name="action_settings">Instellingen</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">Tekst</string>
+      
+  <string name="title_activity_settings">InstellingenActiviteit</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">Berichten</string>
+      
+  <string name="sync_header">Synchroniseren</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">Uw handtekening</string>
+      
+  <string name="reply_title">Standaard antwoordactie</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">E-mail periodiek synchroniseren</string>
+      
+  <string name="attachment_title">Inkomende bijlagen downloaden</string>
+      
+  <string name="attachment_summary_on">Automatisch bijlagen downloaden voor inkomende e-mails</string>
+      
+  <string name="attachment_summary_off">Download alleen bijlagen als u hier handmatig om vraagt</string>
+      
+  <string name="empty_string"/>
+      
+  <string name="textCalculatorTextMultiLine">Meerregelig script</string>
+      
+  <string name="com.crashlytics.android.build_id" translatable="false">1</string>
+      
+  <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
+      
+  <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
+      
+  <string name="execute_code">Code uitvoeren</string>
+      
+  <string name="POLICY_URI_INT">https://empty3.app/android/Gebruikersbeleid en gezinsbeleidEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Persoonlijke en gevoelige gebruikersgegevens. Zie de link voor meer informatie</string>
+      
+  <string name="fx">fx(</string>
+      
+  <string name="privacy_policy_link_text">Bekijk het privacybeleid online: https://empty3.app/android/privacy.html</string>
+      
+  <string name="title_activity_privacy_policy">Privacybeleid</string>
+      
+  <string name="title_activity_graph">Grafiekplotter</string>
+      
+  <string name="hint_formula_x">Formule X (bijv. t*cos(t))</string>
+      
+  <string name="hint_formula_y">Formule Y (bijv. t*sin(t))</string>
+      
+  <string name="hint_formula_fx">y = f(x) (bijv. x^2)</string>
+      
+  <string name="button_plot">Grafiek plotten</string>
+      
+  <string name="button_download_image">Afbeelding downloaden</string>
+      
+  <string name="content_description_graph_image">Geploteerde grafiekafbeelding</string>
+          
+  <string name="hint_x_min">X Min</string>
+          
+  <string name="hint_x_max">X Max</string>
+      
+  <!-- ... existing strings ... -->
+      
+  <string name="hint_y_min">Y Min (bijv. -10)</string>
+      
+  <string name="hint_y_max">Y Max (bijv. 10)</string>
+      
+  <!-- ... autres chaînes ... -->
+      
+  <string name="button_save_image">Redden</string>
+      
+  <string name="button_share_image">Deel</string>
+      
+  <string name="share_image_title">Grafiekafbeelding delen</string>
+      
+  <string name="error_no_image_to_share">Geen afbeelding beschikbaar om te delen.</string>
+      
+  <string name="error_failed_to_share_image">Het delen van de afbeelding is mislukt.</string>
+      
+  <string name="image_saved_to">Afbeelding opgeslagen in %s</string>
+   
+  <!-- Pour le message de sauvegarde -->
+      
+  <string name="failed_to_save_image">Afbeelding opslaan mislukt: %s</string>
+      
+  <string name="error_syntax">Syntaxisfout</string>
+      
+  <string name="error_not_a_number">Geen nummer</string>
+      
+  <string name="error_x_max_lt_x_min">X Max moet &gt; X Min zijn</string>
+      
+  <string name="error_y_max_lt_y_min">Y Max moet &gt; Y Min zijn</string>
+      
+  <string name="error_invalid_input">Ongeldige invoer</string>
+      
+  <string name="error_x_min_lt_x_max">X Min moet kleiner zijn dan X Max.</string>
+      
+  <string name="error_y_min_lt_y_max">Y Min moet kleiner zijn dan Y Max.</string>
+      
+  <string name="error_syntax_with_message">Syntaxisfout: %s</string>
+      
+  <string name="error_plotting_with_message">Plotfout: %s</string>
+      
+  <string name="file_name_prefix">GRAFIEK_%s_</string>
+      
+  <string name="file_name_suffix">.png</string>
+      
+  <string name="storage_directory">eenvoudige rekenmachine</string>
+      
+  <string name="error_could_not_create_file">Kon bestand niet aanmaken</string>
+      
+  <string name="graph_plotter_description">Grafiekplotter definieert een variabele en tekent de functie</string>
+   
+  <!-- Pour le message d'erreur de sauvegarde -->
+      
+  <string name="hint_result_here">Resultaat hier</string>
+  
+</resources>

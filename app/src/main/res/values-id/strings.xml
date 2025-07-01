@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name" translatable="false">Sci-prog Calculator</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">angka 0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">akar persegi</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">Edit teks di sini atau dengan nomor push</string>
+      
+  <string name="result">Hasil</string>
+      
+  <string name="about_and_policies">Tentang dan kebijakan privasi</string>
+      
+  <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Pengguna pengguna dan orang yang bijaksana Dalam menampilkan gambar aplikasi, semua pengguna yang mengakses aplikasi tersebut akan membuka file multimedia dengan tombol hadiah de vue atau memilih file. Ini adalah ciri-ciri aplikasi dan hasil salinan kerja keras yang disimpan dalam daftar data aplikasi dan gambar di sistem dalam format atau format lainnya. Dalam versi masa depan, mungkin saja Anda akan membagikan hasil Anda dengan pengguna lain, pengguna internet. Ini tidak dianggap sebagai milik kita, DAHMEN Manuel di kosong3.satu sebagai hak istimewa dan tidak dapat dikumpulkan, bukan sifat dari layanan kita.</string>
+      
+  <string name="title_activity_formula_store">Toko Formula</string>
+      
+  <string name="store_formula">Formula Toko</string>
+      
+  <string name="add">Menambahkan</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">Kembali</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">Terima Kebijakan Manajemen Data Pengguna dan Privasi</string>
+      
+  <string name="about_privacy">Tentang privasi</string>
+      
+  <string name="dialog_message">Pilih fungsi</string>
+      
+  <string name="dialog_title">Fungsi yang telah ditentukan sebelumnya</string>
+      
+  <string name="cancel_button">Membatalkan</string>
+      
+  <string name="ok_button">OKE</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">Bahasa Indonesia:</string>
+      
+  <string name="fragment_function_ok">OKE</string>
+      
+  <string name="fragment_function_cancel">Membatalkan</string>
+      
+  <string name="function_string">Fungsi String</string>
+      
+  <string name="title_activity_scrolling">Catatan Kalkulus</string>
+      
+  <string name="action_settings">Pengaturan</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">Teks</string>
+      
+  <string name="title_activity_settings">PengaturanAktivitas</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">Pesan</string>
+      
+  <string name="sync_header">Sinkronisasi</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">Tanda tangan Anda</string>
+      
+  <string name="reply_title">Tindakan balasan default</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">Sinkronkan email secara berkala</string>
+      
+  <string name="attachment_title">Unduh lampiran masuk</string>
+      
+  <string name="attachment_summary_on">Unduh lampiran secara otomatis untuk email masuk</string>
+      
+  <string name="attachment_summary_off">Unduh lampiran hanya jika diminta secara manual</string>
+      
+  <string name="empty_string"/>
+      
+  <string name="textCalculatorTextMultiLine">Skrip multibaris</string>
+      
+  <string name="com.crashlytics.android.build_id" translatable="false">1</string>
+      
+  <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
+      
+  <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
+      
+  <string name="execute_code">Menjalankan kode</string>
+      
+  <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Data pengguna yang pribadi dan sensitif. Lihat tautan untuk informasi lebih lanjut</string>
+      
+  <string name="fx">fx(</string>
+      
+  <string name="privacy_policy_link_text">Lihat Kebijakan Privasi Online: https://empty3.app/android/privacy.html</string>
+      
+  <string name="title_activity_privacy_policy">Kebijakan Privasi</string>
+      
+  <string name="title_activity_graph">Plotter Grafik</string>
+      
+  <string name="hint_formula_x">Rumus X (misalnya, t*cos(t))</string>
+      
+  <string name="hint_formula_y">Rumus Y (misalnya, t*sin(t))</string>
+      
+  <string name="hint_formula_fx">y = f(x) (misalnya, x^2)</string>
+      
+  <string name="button_plot">Grafik Plot</string>
+      
+  <string name="button_download_image">Unduh Gambar</string>
+      
+  <string name="content_description_graph_image">Gambar grafik yang diplot</string>
+          
+  <string name="hint_x_min">X Menit</string>
+          
+  <string name="hint_x_max">X Maksimal</string>
+      
+  <!-- ... existing strings ... -->
+      
+  <string name="hint_y_min">Y Min (misalnya, -10)</string>
+      
+  <string name="hint_y_max">Y Max (misalnya, 10)</string>
+      
+  <!-- ... autres chaînes ... -->
+      
+  <string name="button_save_image">Menyimpan</string>
+      
+  <string name="button_share_image">Membagikan</string>
+      
+  <string name="share_image_title">Bagikan Gambar Grafik</string>
+      
+  <string name="error_no_image_to_share">Tidak ada gambar yang tersedia untuk dibagikan.</string>
+      
+  <string name="error_failed_to_share_image">Gagal membagikan gambar.</string>
+      
+  <string name="image_saved_to">Gambar disimpan ke%s</string>
+   
+  <!-- Pour le message de sauvegarde -->
+      
+  <string name="failed_to_save_image">Gagal menyimpan gambar: %s</string>
+      
+  <string name="error_syntax">Kesalahan sintaksis</string>
+      
+  <string name="error_not_a_number">Bukan angka</string>
+      
+  <string name="error_x_max_lt_x_min">X Max harus &gt; X Min</string>
+      
+  <string name="error_y_max_lt_y_min">Y Max harus &gt; Y Min</string>
+      
+  <string name="error_invalid_input">Masukan tidak valid</string>
+      
+  <string name="error_x_min_lt_x_max">X Min harus kurang dari X Maks.</string>
+      
+  <string name="error_y_min_lt_y_max">Y Min harus kurang dari Y Max.</string>
+      
+  <string name="error_syntax_with_message">Kesalahan Sintaksis: %s</string>
+      
+  <string name="error_plotting_with_message">Kesalahan dalam merencanakan: %s</string>
+      
+  <string name="file_name_prefix">GRAFIK_%s Bahasa Indonesia:</string>
+      
+  <string name="file_name_suffix">Gambar PNG</string>
+      
+  <string name="storage_directory">kalkulator sederhana</string>
+      
+  <string name="error_could_not_create_file">Tidak dapat membuat file</string>
+      
+  <string name="graph_plotter_description">Plotter grafik mendefinisikan variabel dan memplot fungsinya</string>
+   
+  <!-- Pour le message d'erreur de sauvegarde -->
+      
+  <string name="hint_result_here">Hasil di sini</string>
+  
+</resources>

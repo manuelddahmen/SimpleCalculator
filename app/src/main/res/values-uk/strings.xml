@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name" translatable="false">Sci-prog Calculator</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">квадрат</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">Редагуйте текст тут або за допомогою номерів push</string>
+      
+  <string name="result">Результат</string>
+      
+  <string name="about_and_policies">Про нас та політика конфіденційності</string>
+      
+  <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Données utilisateur personnelles et sensibles Dans l\'application image featuring, les seules données auxquelles l\'application accède sont les fichiers multimédia ouvert par le bouton prize de vue ou choisir un fichier. Ceux-ci sont traités par l\'application et éventuellement des copies de travail sont stockées dans le répertoire data de l\'application et figure donc sur le stème dans un format ou l\'autre. Dans une future version il sera possible de partager vos résultats avec d\'autres utilisateurs, internautes. Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme privées et ne sont pas collectées, ni traitées par nos services.</string>
+      
+  <string name="title_activity_formula_store">Магазин формул</string>
+      
+  <string name="store_formula">Магазин Формула</string>
+      
+  <string name="add">Додати</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">Назад</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">Прийняти Політику управління даними користувачів та конфіденційності</string>
+      
+  <string name="about_privacy">Про конфіденційність</string>
+      
+  <string name="dialog_message">Виберіть функцію</string>
+      
+  <string name="dialog_title">Попередньо визначені функції</string>
+      
+  <string name="cancel_button">Скасувати</string>
+      
+  <string name="ok_button">Гаразд</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">Гаразд</string>
+      
+  <string name="fragment_function_cancel">Скасувати</string>
+      
+  <string name="function_string">Рядок функції</string>
+      
+  <string name="title_activity_scrolling">Примітка щодо обчислення</string>
+      
+  <string name="action_settings">Налаштування</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">Текст</string>
+      
+  <string name="title_activity_settings">НалаштуванняДіяльність</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">Повідомлення</string>
+      
+  <string name="sync_header">Синхронізація</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">Ваш підпис</string>
+      
+  <string name="reply_title">Дія відповіді за замовчуванням</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">Періодично синхронізуйте електронну пошту</string>
+      
+  <string name="attachment_title">Завантаження вхідних вкладень</string>
+      
+  <string name="attachment_summary_on">Автоматично завантажувати вкладення для вхідних електронних листів</string>
+      
+  <string name="attachment_summary_off">Завантажуйте вкладення лише за запитом вручну</string>
+      
+  <string name="empty_string"/>
+      
+  <string name="textCalculatorTextMultiLine">Багаторядковий скрипт</string>
+      
+  <string name="com.crashlytics.android.build_id" translatable="false">1</string>
+      
+  <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
+      
+  <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
+      
+  <string name="execute_code">Виконати код</string>
+      
+  <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Персональні та конфіденційні дані користувачів. Дивіться посилання для отримання додаткової інформації</string>
+      
+  <string name="fx">fx(</string>
+      
+  <string name="privacy_policy_link_text">Переглянути Політику конфіденційності онлайн: https://empty3.app/android/privacy.html</string>
+      
+  <string name="title_activity_privacy_policy">Політика конфіденційності</string>
+      
+  <string name="title_activity_graph">Графічний плоттер</string>
+      
+  <string name="hint_formula_x">Формула X (наприклад, t*cos(t))</string>
+      
+  <string name="hint_formula_y">Формула Y (наприклад, t*sin(t))</string>
+      
+  <string name="hint_formula_fx">y = f(x) (наприклад, x^2)</string>
+      
+  <string name="button_plot">Графік побудови</string>
+      
+  <string name="button_download_image">Завантажити зображення</string>
+      
+  <string name="content_description_graph_image">Зображення графіка</string>
+          
+  <string name="hint_x_min">Х хв.</string>
+          
+  <string name="hint_x_max">X Макс</string>
+      
+  <!-- ... existing strings ... -->
+      
+  <string name="hint_y_min">Y Мін. (наприклад, -10)</string>
+      
+  <string name="hint_y_max">Y Max (наприклад, 10)</string>
+      
+  <!-- ... autres chaînes ... -->
+      
+  <string name="button_save_image">Зберегти</string>
+      
+  <string name="button_share_image">Поділитися</string>
+      
+  <string name="share_image_title">Поділитися зображенням графіка</string>
+      
+  <string name="error_no_image_to_share">Немає зображення для поширення.</string>
+      
+  <string name="error_failed_to_share_image">Не вдалося поділитися зображенням.</string>
+      
+  <string name="image_saved_to">Зображення збережено в%s</string>
+   
+  <!-- Pour le message de sauvegarde -->
+      
+  <string name="failed_to_save_image">Не вдалося зберегти зображення: %s</string>
+      
+  <string name="error_syntax">Синтаксична помилка</string>
+      
+  <string name="error_not_a_number">Не число</string>
+      
+  <string name="error_x_max_lt_x_min">X Max має бути &gt; X Min</string>
+      
+  <string name="error_y_max_lt_y_min">Y Max має бути &gt; Y Min</string>
+      
+  <string name="error_invalid_input">Недійсний ввід</string>
+      
+  <string name="error_x_min_lt_x_max">Значення X Мін. має бути меншим за значення X Макс.</string>
+      
+  <string name="error_y_min_lt_y_max">Y Min має бути менше, ніж Y Max.</string>
+      
+  <string name="error_syntax_with_message">Синтаксична помилка: %s</string>
+      
+  <string name="error_plotting_with_message">Помилка побудови графіка: %s</string>
+      
+  <string name="file_name_prefix">ГРАФІК_%s _</string>
+      
+  <string name="file_name_suffix">.png</string>
+      
+  <string name="storage_directory">простийкалькулятор</string>
+      
+  <string name="error_could_not_create_file">Не вдалося створити файл</string>
+      
+  <string name="graph_plotter_description">Графічний плоттер визначає змінну та будує графік функції</string>
+   
+  <!-- Pour le message d'erreur de sauvegarde -->
+      
+  <string name="hint_result_here">Результат тут</string>
+  
+</resources>

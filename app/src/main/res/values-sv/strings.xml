@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name" translatable="false">Sci-prog Calculator</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">kvadrat</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">Redigera text här eller med push-nummer</string>
+      
+  <string name="result">Resultat</string>
+      
+  <string name="about_and_policies">Om och integritetspolicy</string>
+      
+  <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Données utilisateur personnelles et sensibles Dans l\'application image featuring, les seules données auxquelles l\'application accède sont les fichiers multimédia ouvert par le bouton prize de vue ou choisir un fichier. Ceux-ci sont traités par l\'application et éventuellement des copies de travail sont stockées dans le répertoire data de l\'application et figure donc sur le système dans un format ou l\'autre. Dans une future version il sera possible de partager vos résultats avec d\'autres utilisateurs, internautes. Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme privées et ne sont pas collectées, ni traitées par nos services.</string>
+      
+  <string name="title_activity_formula_store">FormelStore</string>
+      
+  <string name="store_formula">Butiksformel</string>
+      
+  <string name="add">Tillägga</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">Tillbaka</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">Godkänn policy för användardatahantering och sekretesspolicy</string>
+      
+  <string name="about_privacy">Om integritet</string>
+      
+  <string name="dialog_message">Välj en funktion</string>
+      
+  <string name="dialog_title">Fördefinierade funktioner</string>
+      
+  <string name="cancel_button">Avboka</string>
+      
+  <string name="ok_button">OK</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">OK</string>
+      
+  <string name="fragment_function_cancel">Avboka</string>
+      
+  <string name="function_string">Funktionssträng</string>
+      
+  <string name="title_activity_scrolling">Beräkningsanteckning</string>
+      
+  <string name="action_settings">Inställningar</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">Text</string>
+      
+  <string name="title_activity_settings">InställningarAktivitet</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">Meddelanden</string>
+      
+  <string name="sync_header">Synkronisera</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">Din signatur</string>
+      
+  <string name="reply_title">Standardåtgärd för svar</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">Synkronisera e-post regelbundet</string>
+      
+  <string name="attachment_title">Ladda ner inkommande bilagor</string>
+      
+  <string name="attachment_summary_on">Ladda automatiskt ner bilagor för inkommande e-postmeddelanden</string>
+      
+  <string name="attachment_summary_off">Ladda bara ner bilagor när de begärs manuellt</string>
+      
+  <string name="empty_string"/>
+      
+  <string name="textCalculatorTextMultiLine">Flerradig skrift</string>
+      
+  <string name="com.crashlytics.android.build_id" translatable="false">1</string>
+      
+  <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
+      
+  <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
+      
+  <string name="execute_code">Kör kod</string>
+      
+  <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Personliga och känsliga användaruppgifter. Se länken för mer information</string>
+      
+  <string name="fx">fx(</string>
+      
+  <string name="privacy_policy_link_text">Se integritetspolicyn online: https://empty3.app/android/privacy.html</string>
+      
+  <string name="title_activity_privacy_policy">Integritetspolicy</string>
+      
+  <string name="title_activity_graph">Grafplotter</string>
+      
+  <string name="hint_formula_x">Formel X (t.ex. t*cos(t))</string>
+      
+  <string name="hint_formula_y">Formel Y (t.ex. t*sin(t))</string>
+      
+  <string name="hint_formula_fx">y = f(x) (t.ex. x^2)</string>
+      
+  <string name="button_plot">Rita graf</string>
+      
+  <string name="button_download_image">Ladda ner bild</string>
+      
+  <string name="content_description_graph_image">Plottad grafbild</string>
+          
+  <string name="hint_x_min">X Min</string>
+          
+  <string name="hint_x_max">X Max</string>
+      
+  <!-- ... existing strings ... -->
+      
+  <string name="hint_y_min">Y Min (t.ex. -10)</string>
+      
+  <string name="hint_y_max">Y Max (t.ex. 10)</string>
+      
+  <!-- ... autres chaînes ... -->
+      
+  <string name="button_save_image">Spara</string>
+      
+  <string name="button_share_image">Dela</string>
+      
+  <string name="share_image_title">Dela grafbild</string>
+      
+  <string name="error_no_image_to_share">Ingen bild tillgänglig att dela.</string>
+      
+  <string name="error_failed_to_share_image">Misslyckades med att dela bilden.</string>
+      
+  <string name="image_saved_to">Bilden sparad till %s</string>
+   
+  <!-- Pour le message de sauvegarde -->
+      
+  <string name="failed_to_save_image">Misslyckades med att spara bilden: %s</string>
+      
+  <string name="error_syntax">Syntaxfel</string>
+      
+  <string name="error_not_a_number">Inte ett nummer</string>
+      
+  <string name="error_x_max_lt_x_min">X Max måste vara &gt; X Min</string>
+      
+  <string name="error_y_max_lt_y_min">Y Max måste vara &gt; Y Min</string>
+      
+  <string name="error_invalid_input">Ogiltig inmatning</string>
+      
+  <string name="error_x_min_lt_x_max">X Min måste vara mindre än X Max.</string>
+      
+  <string name="error_y_min_lt_y_max">Y Min måste vara mindre än Y Max.</string>
+      
+  <string name="error_syntax_with_message">Syntaxfel: %s</string>
+      
+  <string name="error_plotting_with_message">Plottningsfel: %s</string>
+      
+  <string name="file_name_prefix">GRAF_%s_</string>
+      
+  <string name="file_name_suffix">.png</string>
+      
+  <string name="storage_directory">enkel kalkylator</string>
+      
+  <string name="error_could_not_create_file">Kunde inte skapa filen</string>
+      
+  <string name="graph_plotter_description">Grafplotter definierar en variabel och plottar funktionen</string>
+   
+  <!-- Pour le message d'erreur de sauvegarde -->
+      
+  <string name="hint_result_here">Resultat här</string>
+  
+</resources>

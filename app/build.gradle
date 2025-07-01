@@ -17,7 +17,7 @@ java {
 }
 
 
-def versionCode1000 = 406999522
+def versionCode1000 = 406999525
 def kotlin_version = '2.1.20'
 def javaVersionEnum = JavaVersion.VERSION_23
 def javaVersion = 23
@@ -201,7 +201,7 @@ android {
         compileSdk 36
         targetSdk 36
         minSdkVersion 29
-        versionName "9.3"
+        versionName "9.4"
         versionCode versionCode1000
         signingConfig signingConfigs.release
     }
@@ -338,15 +338,6 @@ publishing {
             groupId = "one.empty3.apps"
             artifactId = "simplecalculator"
             version = "9.1"
-        }
-    }
-    repositories {
-        maven {
-            url "https://maven.pkg.jetbrains.space/empty3/p/empty3/mavensimplecalculator"
-            credentials {
-                username = properties.get("spaceUsername")
-                password = properties.get("spacePassword")
-            }
         }
     }
 }

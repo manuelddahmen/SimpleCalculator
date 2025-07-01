@@ -38,7 +38,7 @@
       
   <string name="EXP">^</string>
       
-  <string name="edit_text_here_or_by_push_numbers">在此处编辑文本或通过推送号码编辑文本</string>
+  <string name="edit_text_here_or_by_push_numbers">在此处编辑文本或按推送号码编辑文本</string>
       
   <string name="result">结果</string>
       
@@ -46,11 +46,11 @@
       
   <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
       
-  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">数据使用者可自行判断 在应用程序图像显示过程中，应用程序所包含的仅有的数据可通过点击查看按钮或选择文件的方式访问多媒体文件。所有这些均由应用程序处理，并且工作副本存储在应用程序的数据列表和系统中的格式或其他格式中的数据中。在未来版本中，您可以与其他用户、互联网用户分享您的结果。这些数据是我们考虑的，但 Manuel Dahmen 在 empty3.one 上是私人的，不会被收集，也不会受到我们的服务的约束。</string>
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">如果用户使用人员和敏感人员使用应用程序图像，则用户的应用程序将获得多媒体文件或文件中的按钮奖。应用程序的特征和应用程序的所有数据以及系统中的图形或其他格式的工作库存副本的事件。在未来版本中，可能会分享用户、用户之间的结果。DAHMEN Manuel 在 empty3.one 上提供私人服务，但不提供集体服务，不提供任何服务。</string>
       
   <string name="title_activity_formula_store">FormulaStore</string>
       
-  <string name="store_formula">储存配方</string>
+  <string name="store_formula">商店配方</string>
       
   <string name="add">添加</string>
       
@@ -70,9 +70,9 @@
       
   <string name="ok_button">好的</string>
       
-  <string name="open_brace">（</string>
+  <string name="open_brace">(</string>
       
-  <string name="close_brace">）</string>
+  <string name="close_brace">)</string>
       
   <string name="coma">，</string>
       
@@ -82,7 +82,7 @@
       
   <string name="function_string">函数字符串</string>
       
-  <string name="title_activity_scrolling">计算说明</string>
+  <string name="title_activity_scrolling">计算注释</string>
       
   <string name="action_settings">设置</string>
       
@@ -100,7 +100,7 @@
       
   <!-- Messages Preferences -->
       
-  <string name="signature_title">你的签名</string>
+  <string name="signature_title">您的签名</string>
       
   <string name="reply_title">默认回复操作</string>
       
@@ -128,7 +128,86 @@
       
   <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
       
-  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">个人信息及使用信息查看链接以获取更多信息</string>
-    <string name="fx">fx(</string>
-
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">个人和敏感的用户数据。请参阅链接了解更多信息</string>
+      
+  <string name="fx">外汇（</string>
+      
+  <string name="privacy_policy_link_text">在线查看隐私政策：https://empty3.app/android/privacy.html</string>
+      
+  <string name="title_activity_privacy_policy">隐私政策</string>
+      
+  <string name="title_activity_graph">绘图仪</string>
+      
+  <string name="hint_formula_x">公式 X（例如，t*cos(t)）</string>
+      
+  <string name="hint_formula_y">公式 Y（例如，t*sin(t)）</string>
+      
+  <string name="hint_formula_fx">y = f(x) （例如 x^2）</string>
+      
+  <string name="button_plot">绘图图</string>
+      
+  <string name="button_download_image">下载图片</string>
+      
+  <string name="content_description_graph_image">绘制的图形图像</string>
+          
+  <string name="hint_x_min">X 最小值</string>
+          
+  <string name="hint_x_max">X Max</string>
+      
+  <!-- ... existing strings ... -->
+      
+  <string name="hint_y_min">Y 最小值（例如， -10）</string>
+      
+  <string name="hint_y_max">Y 轴最大值（例如， 10）</string>
+      
+  <!-- ... autres chaînes ... -->
+      
+  <string name="button_save_image">节省</string>
+      
+  <string name="button_share_image">分享</string>
+      
+  <string name="share_image_title">分享图表</string>
+      
+  <string name="error_no_image_to_share">没有可供分享的图像。</string>
+      
+  <string name="error_failed_to_share_image">图像分享失败。</string>
+      
+  <string name="image_saved_to">图片已保存至 %s</string>
+   
+  <!-- Pour le message de sauvegarde -->
+      
+  <string name="failed_to_save_image">无法保存图片：%s</string>
+      
+  <string name="error_syntax">语法错误</string>
+      
+  <string name="error_not_a_number">不是一个数字</string>
+      
+  <string name="error_x_max_lt_x_min">X 最大值必须 &gt; X 最小值</string>
+      
+  <string name="error_y_max_lt_y_min">Y 最大值必须 &gt; Y 最小值</string>
+      
+  <string name="error_invalid_input">输入无效</string>
+      
+  <string name="error_x_min_lt_x_max">X Min 必须小于 X Max。</string>
+      
+  <string name="error_y_min_lt_y_max">Y 最小值必须小于 Y 最大值。</string>
+      
+  <string name="error_syntax_with_message">语法错误：%s</string>
+      
+  <string name="error_plotting_with_message">绘图错误：%s</string>
+      
+  <string name="file_name_prefix">GRAPH_%s_</string>
+      
+  <string name="file_name_suffix">.png</string>
+      
+  <string name="storage_directory">简单计算器</string>
+      
+  <string name="error_could_not_create_file">无法创建文件</string>
+      
+  <string name="graph_plotter_description">图形绘图仪定义变量并绘制函数</string>
+   
+  <!-- Pour le message d'erreur de sauvegarde -->
+      
+  <string name="hint_result_here">结果在这里</string>
+  
 </resources>
