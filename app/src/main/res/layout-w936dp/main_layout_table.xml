@@ -74,17 +74,17 @@
                 <EditText
                     android:id="@+id/editTextCalculus"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="match_parent"
 
                     android:autofillHints="@string/edit_text_here_or_by_push_numbers"
                     android:ems="10"
+                    android:textSize="12dp"
                     android:fontFamily="sans-serif-condensed"
                     android:hint="@string/edit_text_here_or_by_push_numbers"
                     android:inputType="textPersonName"
                     android:labelFor="@id/answerText"
                     android:textAlignment="textStart"
                     android:scrollbarAlwaysDrawVerticalTrack="false"
-                    android:textSize="12dp"
                     tools:ignore="DuplicateSpeakableTextCheck"
                     android:theme="?android:attr/buttonBarButtonStyle"
                     android:layout_marginTop="50dp"/>
@@ -325,6 +325,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="36dp"
                     android:layout_weight="0.5"
+                    android:autoSizeTextType="uniform"
+                    android:textColor="#0000FF"
                     android:text="@string/text_calculator"/>
                 <Button
                     android:id="@+id/your_button_id_to_open_graph_activity"
@@ -353,6 +355,7 @@
                     android:ems="10"
                     android:textSize="12dp"
                     android:inputType="text" />
+
 
             </LinearLayout>
 

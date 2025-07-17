@@ -74,17 +74,17 @@
         <EditText
             android:id="@+id/editTextCalculus"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="match_parent"
 
             android:autofillHints="@string/edit_text_here_or_by_push_numbers"
             android:ems="10"
+            android:textSize="12dp"
             android:fontFamily="sans-serif-condensed"
             android:hint="@string/edit_text_here_or_by_push_numbers"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:labelFor="@id/answerText"
             android:textAlignment="textStart"
             android:scrollbarAlwaysDrawVerticalTrack="false"
-            android:textSize="24dp"
             tools:ignore="DuplicateSpeakableTextCheck"
             android:theme="?android:attr/buttonBarButtonStyle"
             android:layout_marginTop="50dp"/>
@@ -348,11 +348,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="monospace"
-            android:textSize="48dp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
+            android:scrollbarAlwaysDrawVerticalTrack="false"
+            tools:ignore="DuplicateSpeakableTextCheck"
             android:theme="?android:attr/buttonBarButtonStyle"
-            android:typeface="monospace" />
+            android:ems="10"
+            android:textSize="12dp"
+            android:inputType="text" />
+
+
     </LinearLayout>
 
     <LinearLayout
