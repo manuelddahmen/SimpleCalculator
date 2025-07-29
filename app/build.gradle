@@ -17,7 +17,7 @@ java {
 }
 
 
-def versionCode1000 = 406999531
+def versionCode1000 = 406999532
 def kotlin_version = '2.1.20'
 def javaVersionEnum = JavaVersion.VERSION_23
 def javaVersion = 23
@@ -84,7 +84,7 @@ android {
                     'proguard-android-optimize.txt'),
                     'proguard-rules.pro'
             ndk {
-                debugSymbolLevel = 'full'
+                //debugSymbolLevel = 'full'
             }
             /* Add the firebaseCrashlytics extension (by default,
             * it's disabled to improve build speeds) and set
@@ -147,8 +147,7 @@ android {
                          'META-INF/native-image/macosx-arm64/jnijavacpp/jni-config.json',
                          'META-INF/native-image/macosx-x86_64/jnijavacpp/reflect-config.json',
                          'META-INF/native-image/**.json',
-                         "lib/*/ffmpeg"
-
+                         "lib/**"
             ]
             exclude('/META-INF/{AL2.0,LGPL2.1}')
         }
@@ -265,12 +264,8 @@ configurations {
 }
 
 dependencies {
-    implementation("one.empty3.libs:commons-mp:0.0.10")
-
-    implementation("one.empty3:empty3-library-mp:2025.6.23") {
-        exclude(group: "one.empty3.libs", module: "partial-deskop")
-    }
-
+    // https://mvnrepository.com/artifact/one.empty3.libs/commons-mp
+    runtimeOnly 'one.empty3.libs:commons-mp:0.0.11'
     implementation("one.empty3:empty3-library-mp:2025.5.6.23") {
         exclude(group: "one.empty3.libs", module: "partial-deskop")
     }
