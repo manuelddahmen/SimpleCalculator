@@ -21,7 +21,17 @@ public class Image extends BitmapDrawable implements IImageMp {
             }
         }
     }
-
+    public Image(int la, int ha, int[] pixels) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            setBitmap(Bitmap.createBitmap(la, ha, Bitmap.Config.RGB_565));
+        }
+        for (int i = 0; i < pixels.length; i++) {
+            int x = i % la;
+            int y = i / la;
+            int rgb = pixels[i];
+            setRgb(x, y, rgb);
+        }
+    }
     public Image(int width, int height) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             setBitmap(Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565));

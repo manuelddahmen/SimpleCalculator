@@ -17,7 +17,7 @@ java {
 }
 
 
-def versionCode1000 = 406999530
+def versionCode1000 = 406999531
 def kotlin_version = '2.1.20'
 def javaVersionEnum = JavaVersion.VERSION_23
 def javaVersion = 23
@@ -128,7 +128,28 @@ android {
     }
     packagingOptions {
         resources {
-            excludes += ['/META-INF/{AL2.0,LGPL2.1}', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module', 'xsd/catalog.xml', 'META-INF/LICENSE.md', 'META-INF/NOTICE.md', 'META-INF/io.netty.versions.properties', 'META-INF/INDEX.LIST', 'META-INF/LICENSE.md', 'mozilla/public-suffix-list.txt', 'META-INF/LICENSE-notice.md', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module', 'META-INF/INDEX.LIST', 'META-INF/spring.factories', 'META-INF/spring/aot.factories', 'META-INF/spring.schemas', 'META-INF/spring.tooling', 'META-INF/spring.handlers', 'META-INF/spring-configuration-metadata.json', 'META-INF/additional-spring-configuration-metadata.json']
+            excludes += ['/META-INF/{AL2.0,LGPL2.1}', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module', 'xsd/catalog.xml', 'META-INF/LICENSE.md', 'META-INF/NOTICE.md', 'META-INF/io.netty.versions.properties', 'META-INF/INDEX.LIST', 'META-INF/LICENSE.md', 'mozilla/public-suffix-list.txt', 'META-INF/LICENSE-notice.md', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module', 'META-INF/INDEX.LIST', 'META-INF/spring.factories', 'META-INF/spring/aot.factories', 'META-INF/spring.schemas', 'META-INF/spring.tooling', 'META-INF/spring.handlers', 'META-INF/spring-configuration-metadata.json', 'META-INF/additional-spring-configuration-metadata.json'
+            ,// byte.co
+                         'META-INF/native-image/windows-x86/jnijavacpp/jni-config.json',
+                         'META-INF/native-image/windows-x86/jnijavacpp/reflect-config.json',
+                         'META-INF/native-image/windows-x86_64/jnijavacpp/reflect-config.json',
+                         'META-INF/native-image/windows-x86_64/jnijavacpp/jni-config.json',
+                         'META-INF/native-image/linux-x86_64/jnijavacpp/jni-config.json',
+                         'META-INF/native-image/linux-x86/jnijavacpp/reflect-config.json',
+                         'META-INF/native-image/linux-x86/jnijavacpp/jni-config.json',
+                         'META-INF/native-image/linux-armhf/jnijavacpp/reflect-config.json',
+                         'META-INF/native-image/linux-armhf/jnijavacpp/jni-config.json',
+                         'META-INF/native-image/android-x86_64/jnijavacpp/jni-config.json',
+                         'META-INF/native-image/ios-arm64/jnijavacpp/reflect-config.json',
+                         'META-INF/native-image/ios-arm64/jnijavacpp/jni-config.json',
+                         'META-INF/native-image/ios-x86_64/jnijavacpp/reflect-config.json',
+                         'META-INF/native-image/macosx-arm64/jnijavacpp/reflect-config.json',
+                         'META-INF/native-image/macosx-arm64/jnijavacpp/jni-config.json',
+                         'META-INF/native-image/macosx-x86_64/jnijavacpp/reflect-config.json',
+                         'META-INF/native-image/**.json',
+                         "lib/*/ffmpeg"
+
+            ]
             exclude('/META-INF/{AL2.0,LGPL2.1}')
         }
         dex {
@@ -180,6 +201,24 @@ android {
 // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-reflect
                 //force group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.8.0'
 
+            }
+        }
+    }
+    // In app/build.gradle
+
+    configurations.all {
+        resolutionStrategy {
+            eachDependency { DependencyResolveDetails details ->
+                // Force the 'lite' version of protobuf for Android
+                if (details.requested.group == 'com.google.protobuf' && details.requested.name == 'protobuf-java') {
+                    details.useTarget("com.google.protobuf:protobuf-javalite:${details.requested.version}")
+                    details.because 'Android uses the lite version of Protobuf'
+                }
+                // Force the 'lite' version of google-common-protos for Android
+                if (details.requested.group == 'com.google.api.grpc' && details.requested.name == 'proto-google-common-protos') {
+                    details.useTarget("com.google.firebase:protolite-well-known-types:18.0.1") // Use the firebase version
+                    details.because 'Android uses the protolite version of google-common-protos'
+                }
             }
         }
     }

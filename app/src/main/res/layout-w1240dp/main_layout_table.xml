@@ -345,12 +345,13 @@
                 <EditText
                     android:autofillHints="Result here"
                     android:id="@+id/answerText"
+                    android:textAlignment="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="monospace"
                     android:ems="10"
                     android:textSize="12dp"
-                    android:theme="?android:attr/buttonBarButtonStyle"
+
                     android:typeface="monospace" />
             </LinearLayout>
 

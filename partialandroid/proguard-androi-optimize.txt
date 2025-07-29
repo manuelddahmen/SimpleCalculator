@@ -1,0 +1,23 @@
+-dontwarn org.xmlpull.v1.**
+-dontwarn org.kobjects.**
+-dontwarn org.ksoap2.**
+-dontwarn org.kxml2.**
+-dontwarn org.jdom2.**
+-dontwarn one.empty3.**
+-dontwarn one.empty3.libs.**
+
+-keep class org.kobjects.** { *; }
+-keep class org.ksoap2.** { *; }
+-keep class org.kxml2.** { *; }
+-keep class org.xmlpull.** { *; }
+-keep class org.jdom2.** { *; }
+-keep class java.awt.** { *; }
+-keep class javax.** { *; }
+-keep class one.empty3.** { *; }
+-keep class one.empty3.libs.** { *; }
+-dontusemixedcaseclassnames
+#-dontskipnonpubliclibraryclasses
+-dontoptimize
+#-dontpreverify
+
+

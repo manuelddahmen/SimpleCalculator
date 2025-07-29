@@ -80,7 +80,6 @@
                     android:ems="10"
                     android:fontFamily="sans-serif-condensed"
                     android:hint="@string/edit_text_here_or_by_push_numbers"
-                    android:inputType="textPersonName"
                     android:labelFor="@id/answerText"
                     android:textAlignment="textStart"
                     android:scrollbarAlwaysDrawVerticalTrack="false"
@@ -342,18 +341,17 @@
 
                 <EditText
                     android:autofillHints="Result here"
+                    android:textAlignment="center"
                     android:id="@+id/answerText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="monospace"
                     android:scrollbarAlwaysDrawVerticalTrack="false"
                     tools:ignore="DuplicateSpeakableTextCheck"
-                    android:theme="?android:attr/buttonBarButtonStyle"
 
                     android:ems="10"
                     android:textSize="12dp"
                     android:inputType="text" />
-
             </LinearLayout>
 
             <LinearLayout

@@ -350,7 +350,6 @@
                     android:fontFamily="monospace"
                     android:scrollbarAlwaysDrawVerticalTrack="false"
                     tools:ignore="DuplicateSpeakableTextCheck"
-                    android:theme="?android:attr/buttonBarButtonStyle"
 
                     android:ems="10"
                     android:textSize="12dp"

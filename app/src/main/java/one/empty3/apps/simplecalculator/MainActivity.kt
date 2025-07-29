@@ -293,7 +293,7 @@ class MainActivity : AppCompatActivity() {
             val str = stringFromEval(d)
             runOnUiThread {
                 textAnswer.setText(str)
-                textAnswer.setTextColor(Color.BLACK)
+                textAnswer.setTextColor(Color.GRAY)
             }
             println("Calculus OK, displayed")
         } catch (ex: AlgebraicFormulaSyntaxException) {

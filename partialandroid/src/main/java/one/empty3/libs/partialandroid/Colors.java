@@ -8,10 +8,6 @@ import android.graphics.Color;
 public class Colors {
     private int color;
 
-    public static int randomColor() {
-        return  Color.argb(255, (int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
-    }
-
     public void setColor(int color) {
         this.color = color;
     }
