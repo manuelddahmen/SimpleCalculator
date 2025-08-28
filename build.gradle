@@ -4,7 +4,7 @@ buildscript {
         // Add dependencies.
         classpath 'com.google.gms:google-services:4.4.3'
         classpath 'com.android.tools.build:gradle:8.12.1'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.21'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.2.10'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.6'
         classpath "one.empty3:empty3-library-mp:2025.8.20-1"
     }
