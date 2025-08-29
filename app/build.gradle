@@ -17,7 +17,7 @@ java {
 }
 
 
-def versionCode1000 = 406999538
+def versionCode1000 = 406999539
 def kotlin_version = '2.2.10'
 def javaVersionEnum = JavaVersion.VERSION_23
 def javaVersion = 23
@@ -123,11 +123,12 @@ android {
     kotlinOptions {
         jvmTarget = javaVersion
     }
-/*  packagingOptions {
-      jniLibs {
-        useLegacyPackaging true
-      }
-  }*/
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging true
+        }
+        resources.excludes.add("com/fasterxml/jackson/core/**")
+    }
     packaging {
     }
     packagingOptions {
@@ -155,6 +156,8 @@ android {
                     "lib/org/bytedeco/**"
             ]
             exclude('/META-INF/{AL2.0,LGPL2.1}')
+            excludes.add('com/fasterxml/jackson/core/**')
+
         }
         dex {
             useLegacyPackaging = false
@@ -172,6 +175,16 @@ android {
 
 
     configurations {
+        all*.exclude group: 'com.fasterxml.jackson.core', module: 'jackson-core'
+        all*.exclude group: 'com.google.cloud.functions.invoker', module:'java-function-invoker'
+        all*.exclude group: 'one.empty3.libs', module: 'partial-deskop'
+        all*.exclude group:'com.google.firebase', module:'firebase-messaging'
+        all*.exclude module:'firebase-database', group:'com.google.firebase'
+        all*.exclude module:'firebase-common', group:'com.google.firebase'
+        all*.exclude module:'firebase-admin', group:'com.google.firebase'
+
+        all*.exclude group: 'com.google.cloud.functions.invoker', module:'java-function-invoker'
+        all*.exclude group: 'com.fasterxml.jackson.core', module: 'jackson-core'
         all*.exclude group: 'org.jdom', module: 'jdom2'
         all*.exclude group: 'com.formdev', module: 'flatlaf'
         all*.exclude group: 'xpp3', module: 'xpp3'
@@ -288,9 +301,11 @@ dependencies {
 
     // https://mvnrepository.com/artifact/one.empty3.libs/commons-mp
     runtimeOnly 'one.empty3.libs:commons-mp:0.0.11'
-    implementation("one.empty3:empty3-library-mp:2025.8.20-1") {
+    implementation('one.empty3:empty3-library-mp:2025.8.20-1') {
         // Exclude desktop-only and conflicting libraries
-        exclude(group: "one.empty3.libs", module: "partial-deskop")
+        exclude group: 'one.empty3.libs', module: 'partial-deskop'
+
+        exclude group: 'com.fasterxml.jackson.core', module: 'jackson-core'
 
         // --- Media and UI Libraries (Not for Android) ---
         exclude(group: "org.jcodec", module: "jcodec-javase")
@@ -424,8 +439,7 @@ dependencies {
     // Optional - Integration with LiveData
     implementation 'androidx.compose.runtime:runtime-livedata'
     // Optional - Integration with RxJava
-    implementation 'androidx.compose.runtime:runtime-rxjava2'
-
+    implementation 'com.google.firebase:firebase-core:21.1.1'
     implementation 'com.google.android.material:material:1.12.0'
 
     implementation 'com.google.firebase:firebase-analytics-ktx:22.5.0'
