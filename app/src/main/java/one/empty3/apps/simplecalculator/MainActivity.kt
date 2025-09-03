@@ -79,7 +79,8 @@ class MainActivity : AppCompatActivity() {
         billingClient = BillingClient.newBuilder(applicationContext)
             .setListener(purchasesUpdatedListener)
             // Configure other settings.
-            .enablePendingPurchases(PendingPurchasesParams.newBuilder().build())
+            .enablePendingPurchases(PendingPurchasesParams.newBuilder().
+            enablePrepaidPlans().enableOneTimeProducts().build())
             .build()
         billingClient.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(billingResult: BillingResult) {
