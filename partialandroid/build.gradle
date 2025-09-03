@@ -55,18 +55,13 @@ android {
         all*.exclude group: 'commons-logging', module: 'commons-logging'
         all*.exclude group: 'org.jdom', module: 'jdom2'
         all*.exclude group: 'org.apache.servicemix.bundles', module: 'org.apache.servicemix.bundles.jdom'
-        all {
-            resolutionStrategy {
-                force("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.6.2")
-                force 'org.xerial:sqlite-jdbc:3.34.0'
-            }
-        }
+
     }
 }
 
 dependencies {
     implementation "androidx.multidex:multidex:2.0.1"
-    implementation("one.empty3:empty3-library-mp:2025.8.20-1") {
+    implementation("one.empty3:empty3-library-mp:2025.9.1") {
         exclude group: "one.empty3.libs", module: "partial-desktop" // Correct
     }
     //implementation("one.empty3.libs:partial-desktop:0.0.23") {
