@@ -174,46 +174,61 @@ android {
     }
 
 
-    configurations {
-        all*.exclude group: 'com.fasterxml.jackson.core', module: 'jackson-core'
-        all*.exclude group: 'com.google.cloud.functions.invoker', module: 'java-function-invoker'
-        all*.exclude group: 'one.empty3.libs', module: 'partial-deskop'
-        all*.exclude group: 'com.google.firebase', module: 'firebase-messaging'
-        all*.exclude module: 'firebase-database', group: 'com.google.firebase'
-        all*.exclude module: 'firebase-common', group: 'com.google.firebase'
-        all*.exclude module: 'firebase-admin', group: 'com.google.firebase'
-
-        all*.exclude group: 'com.google.cloud.functions.invoker', module: 'java-function-invoker'
-        all*.exclude group: 'com.fasterxml.jackson.core', module: 'jackson-core'
-        all*.exclude group: 'org.jdom', module: 'jdom2'
-        all*.exclude group: 'com.formdev', module: 'flatlaf'
-        all*.exclude group: 'xpp3', module: 'xpp3'
-        all*.exclude group: 'one.empty3.libs', module: 'partial-deskop'
-        all*.exclude group: 'xml-apis', module: 'xml-apis'
-        all*.exclude group: 'net.sf.kxml', module: 'kxml2'
-        all*.exclude group: 'xmlpull', module: 'xmlpull'
-        all*.exclude group: 'com.sun.activation', module: 'javax.activation'
-        //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-compiler-embeddable'
-        //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin-api'
-        all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin'
-        //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-build-common'
-        all*.exclude group: 'org.springframework', module: 'spring-jcl'
-        all*.exclude group: 'commons-logging', module: 'commons-logging'
-        // ---- DELETE THIS ENTIRE BLOCK ----
-// JOGL libraries
-        all*.exclude group: "org.jogamp.jogl", module: "jogl-all"
-        all*.exclude group: "org.jogamp.gluegen", module: "gluegen-rt-main"
-        all*.exclude group: "org.jogamp.jogl", module: "jogl-all-main"
-        all*.exclude group: "org.bytedeco", module: "javacpp"
-        all*.exclude group: "org.bytedeco", module: "videoinput"
-        all*.exclude group: "org.bytedeco", module: "opencv"
-        all*.exclude group: "org.bytedeco", module: "tesseract"
-        all*.exclude group: "org.bytedeco", module: "openblas"
-        all*.exclude group: "org.bytedeco", module: "librealsense2"
-        all*.exclude group: "org.bytedeco", module: "ffmpeg"
-        all*.exclude group: "org.bytedeco", module: "leptonica"
+    configurations.all {
+        /*resolutionStrategy {
+            force("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.6.2")
+            force 'org.xerial:sqlite-jdbc:3.34.0'
+        }*/
+        exclude group: 'org.jdom', module: 'jdom2'
+        exclude group: 'com.formdev', module: 'flatlaf'
+        exclude group: 'xpp3', module: 'xpp3'
+        exclude group: "one.empty3.libs",module: "partial-desktop"
+        exclude group: "one.empty3.libs",module: "partial-android"
+        exclude group: 'xml-apis', module: 'xml-apis'
+        exclude group: 'net.sf.kxml', module: 'kxml2'
+        exclude group: 'xmlpull', module: 'xmlpull'
+        exclude group: 'com.sun.activation', module: 'javax.activation'
+        exclude group: 'com.google.api.grpc', module: 'proto-google-common-protos'
+        exclude module: 'protobuf-java'
+        exclude group: 'org.springframework', module: 'spring-jcl'
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'org.jdom', module: 'jdom2'
+        exclude group: 'org.apache.servicemix.bundles', module: 'org.apache.servicemix.bundles.jdom'
+        exclude group: 'org.bytedeco', module:'javacv-platform'
+        exclude group: 'org.bytedeco', module:'javacpp'
+        exclude group: 'org.bytedeco', module:'leptonica'
+        exclude group: 'org.bytedeco', module:'opencv'
+        exclude group: 'org.bytedeco', module:'tesseract'
+        exclude group: 'org.bytedeco', module:'openblas'
+        exclude group: 'org.bytedeco', module:'librealsense2'
+        exclude group: 'org.bytedeco', module:'ffmpeg'
+        exclude group: 'org.bytedeco', module:'videoinput'
+        exclude group: 'com.fasterxml.jackson.core', module:'jackson-core'
+        exclude group: 'com.google.cloud.functions.invoker', module:'java-function-invoker'
+        exclude group: 'org.jetbrains.kotlin', module:'kotlin-compiler-embeddable'
+        exclude group: 'org.jetbrains.kotlin', module:'kotlin-gradle-plugin-api'
+        exclude group: 'org.jetbrains.kotlin', module:'kotlin-gradle-plugin'
+//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-build-common'
+//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-stdlib'
+//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-stdlib-common'
+//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-stdlib-jdk8'
+//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-stdlib-js'
+//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-reflect'
+//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-sam'
+        exclude group: 'pcom.google.api.grpc', module:'proto-google-common-protos'
+        exclude group:'com.google.cloud.functions.invoker', module:'java-function-invoker'
+        exclude group:'com.google.protobuf', module:'protobuf-javalite'
+        exclude group:'com.google.protobuf', module:'protobuf-java'
+        exclude group:'com.google.firebase', module:'protolite-well-known-types'
+        exclude group:'com.google.firebase', module:'firebase-admin'
     }
-
+// Apply resolution strategy to all configurations
+    configurations.all {
+        resolutionStrategy {
+            force("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.6.2")
+            force 'org.xerial:sqlite-jdbc:3.34.0'
+        }
+    }
     testOptions {
         unitTests.returnDefaultValues = true
     }
