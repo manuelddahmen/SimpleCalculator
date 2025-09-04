@@ -3,7 +3,7 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'kotlin-android'
 apply plugin: 'maven-publish'
-
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 if (hasProperty('buildScan')) {
     buildScan {
         termsOfServiceUrl = 'https://gradle.com/terms-of-service'
@@ -17,7 +17,7 @@ java {
 }
 
 
-def versionCode1000 = 406999540
+def versionCode1000 = 406999541
 def kotlin_version = '2.2.10'
 def javaVersionEnum = JavaVersion.VERSION_21
 def javaVersion = 21
@@ -70,7 +70,7 @@ android {
         jvmTarget = javaVersion.toString()
     }
     buildFeatures {
-        compose true
+        dataBinding true
     }
     buildTypes {
         release {
@@ -205,15 +205,17 @@ android {
         exclude group: 'org.bytedeco', module:'videoinput'
         exclude group: 'com.fasterxml.jackson.core', module:'jackson-core'
         exclude group: 'com.google.cloud.functions.invoker', module:'java-function-invoker'
-        exclude group: 'org.jetbrains.kotlin', module:'kotlin-compiler-embeddable'
-        exclude group: 'org.jetbrains.kotlin', module:'kotlin-gradle-plugin-api'
-        exclude group: 'org.jetbrains.kotlin', module:'kotlin-gradle-plugin'
+//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-compiler-embeddable'
+//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-gradle-plugin-api'
+//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-gradle-plugin'
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
 //        exclude group: 'org.jetbrains.kotlin', module:'kotlin-build-common'
 //        exclude group: 'org.jetbrains.kotlin', module:'kotlin-stdlib'
 //        exclude group: 'org.jetbrains.kotlin', module:'kotlin-stdlib-common'
 //        exclude group: 'org.jetbrains.kotlin', module:'kotlin-stdlib-jdk8'
 //        exclude group: 'org.jetbrains.kotlin', module:'kotlin-stdlib-js'
-//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-reflect'
+        exclude group: 'org.jetbrains.kotlin', module:'kotlin-reflect'
 //        exclude group: 'org.jetbrains.kotlin', module:'kotlin-sam'
         exclude group: 'pcom.google.api.grpc', module:'proto-google-common-protos'
         exclude group:'com.google.cloud.functions.invoker', module:'java-function-invoker'
@@ -243,9 +245,10 @@ android {
     defaultConfig {
         //resourceConfigurations += ['en']
         javaVersionEnum
-        compileSdk 36
         targetSdk 36
-        minSdkVersion 29
+        minSdkVersion 23
+        minSdk 23
+        compileSdk 36
         versionName "9.4"
         versionCode versionCode1000
         signingConfig signingConfigs.release
