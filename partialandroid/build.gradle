@@ -12,10 +12,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
-    buildFeatures {
+   /* buildFeatures {
         compose true
         dataBinding true
-    }
+        viewBinding true
+    }*/
     buildTypes {
         release {
 

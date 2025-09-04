@@ -249,7 +249,7 @@ android {
         minSdkVersion 29
         minSdk 29
         compileSdk 36
-        versionName "9.4"
+        versionName "9.5"
         versionCode versionCode1000
         signingConfig signingConfigs.release
     }
