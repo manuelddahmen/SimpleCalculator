@@ -246,8 +246,8 @@ android {
         //resourceConfigurations += ['en']
         javaVersionEnum
         targetSdk 36
-        minSdkVersion 23
-        minSdk 23
+        minSdkVersion 29
+        minSdk 29
         compileSdk 36
         versionName "9.4"
         versionCode versionCode1000
