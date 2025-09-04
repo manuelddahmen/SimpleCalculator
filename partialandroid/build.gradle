@@ -19,7 +19,7 @@ android {
     }*/
     buildTypes {
         release {
-
+            ndk.debugSymbolLevel = 'FULL'
             shrinkResources false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -93,6 +93,9 @@ android {
         exclude group:'com.google.protobuf', module:'protobuf-java'
         exclude group:'com.google.firebase', module:'protolite-well-known-types'
     }
+
+    ndkVersion '29.0.14033849-rc4'
+
 }
 
 dependencies {

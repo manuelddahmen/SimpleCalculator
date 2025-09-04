@@ -50,9 +50,6 @@ android {
             keyPassword 'faeeagrzdsd'
         }
     }
-    lint {
-        baseline = file("lint-baseline.xml")
-    }
 
     dependenciesInfo {
         // Disables dependency metadata when building APKs.
@@ -69,67 +66,38 @@ android {
     kotlinOptions {
         jvmTarget = javaVersion.toString()
     }
-    // buildFeatures { dataBinding true } Removed this redundant block
+
     buildTypes {
         release {
             shrinkResources true
             minifyEnabled true
             debuggable false
-            // Includes the default ProGuard rules files that are packaged with
-            // the Android Gradle plugin. To learn more, go to the section about
-            // R8 configuration files.
             proguardFiles getDefaultProguardFile(
                     'proguard-android-optimize.txt'),
                     'proguard-rules.pro'
-            ndk {
-                //debugSymbolLevel = 'full'
-            }
-            /* Add the firebaseCrashlytics extension (by default,
-            * it's disabled to improve build speeds) and set
-            * nativeSymbolUploadEnabled to true along with a pointer to native libs. */
+            ndk.debugSymbolLevel = 'FULL'
 
-            // Add this extension
             firebaseCrashlytics {
-                // Enable processing and uploading of native symbols to Firebase servers.
-                // By default, this is disabled to improve build speeds.
-                // This flag must be enabled to see properly-symbolicated native
-                // stack traces in the Crashlytics dashboard.
                 nativeSymbolUploadEnabled true
-                //strippedNativeLibsDir 'build/intermediates/stripped_native_libs/release/out/lib'
-                //unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
             }
         }
-
         debug {
             debuggable true
-            //buildConfigField "Boolean", "DEBUG_MODE", "false"
             ndk {
                 debugSymbolLevel 'FULL'
             }
         }
     }
 
-    compileOptions {
-        sourceCompatibility javaVersionEnum
-        targetCompatibility javaVersionEnum
-    }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         main.kotlin.srcDirs += 'src/main/java'
     }
 
-    kotlinOptions {
-        jvmTarget = javaVersion
-    }
     packagingOptions {
         jniLibs {
             useLegacyPackaging true
         }
-        resources.excludes.add("com/fasterxml/jackson/core/**")
-    }
-    packaging {
-    }
-    packagingOptions {
         resources {
             excludes += ['/META-INF/{AL2.0,LGPL2.1}', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module', 'xsd/catalog.xml', 'META-INF/LICENSE.md', 'META-INF/NOTICE.md', 'META-INF/io.netty.versions.properties', 'META-INF/INDEX.LIST', 'META-INF/LICENSE.md', 'mozilla/public-suffix-list.txt', 'META-INF/LICENSE-notice.md', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module', 'META-INF/INDEX.LIST', 'META-INF/spring.factories', 'META-INF/spring/aot.factories', 'META-INF/spring.schemas', 'META-INF/spring.tooling', 'META-INF/spring.handlers', 'META-INF/spring-configuration-metadata.json', 'META-INF/additional-spring-configuration-metadata.json'
                          ,// byte.co
@@ -151,16 +119,16 @@ android {
                          'META-INF/native-image/macosx-x86_64/jnijavacpp/reflect-config.json',
                          'META-INF/native-image/**.json',
                          "lib/**",
-                    "lib/org/bytedeco/**"
+                         "lib/org/bytedeco/**"
             ]
-            exclude('/META-INF/{AL2.0,LGPL2.1}')
-            excludes.add('com/fasterxml/jackson/core/**')
-
+            // exclude('/META-INF/{AL2.0,LGPL2.1}') // This was redundant with the list above
+            excludes.add('com/fasterxml/jackson/core/**') // This ensures jackson-core is excluded
         }
         dex {
             useLegacyPackaging = false
         }
     }
+
     lint {
         baseline file('lint-baseline.xml')
         abortOnError false
@@ -171,10 +139,8 @@ android {
         quiet true
     }
 
-
     configurations.all {
         /*resolutionStrategy {
-            force("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.6.2")
             force 'org.xerial:sqlite-jdbc:3.34.0'
         }*/
         exclude group: 'org.jdom', module: 'jdom2'
@@ -203,18 +169,9 @@ android {
         exclude group: 'org.bytedeco', module:'videoinput'
         exclude group: 'com.fasterxml.jackson.core', module:'jackson-core'
         exclude group: 'com.google.cloud.functions.invoker', module:'java-function-invoker'
-//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-compiler-embeddable'
-//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-gradle-plugin-api'
-//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-gradle-plugin'
-        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
-        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
-//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-build-common'
-//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-stdlib'
-//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-stdlib-common'
-//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-stdlib-jdk8'
-//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-stdlib-js'
-        exclude group: 'org.jetbrains.kotlin', module:'kotlin-reflect'
-//        exclude group: 'org.jetbrains.kotlin', module:'kotlin-sam'
+        //exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+        //exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
+        //exclude group: 'org.jetbrains.kotlin', module:'kotlin-reflect'
         exclude group: 'pcom.google.api.grpc', module:'proto-google-common-protos'
         exclude group:'com.google.cloud.functions.invoker', module:'java-function-invoker'
         exclude group:'com.google.protobuf', module:'protobuf-javalite'
@@ -222,17 +179,12 @@ android {
         exclude group:'com.google.firebase', module:'protolite-well-known-types'
         exclude group:'com.google.firebase', module:'firebase-admin'
     }
-// Apply resolution strategy to all configurations
-    configurations.all {
-        resolutionStrategy {
-            force("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.6.2")
-            force 'org.xerial:sqlite-jdbc:3.34.0'
-        }
-    }
+
     testOptions {
         unitTests.returnDefaultValues = true
     }
 
+    // composeOptions block removed
 
     buildFeatures {
         viewBinding true
@@ -242,19 +194,18 @@ android {
 
     defaultConfig {
         //resourceConfigurations += ['en']
-        javaVersionEnum
+        // javaVersionEnum Removed this line
         targetSdk 36
         minSdkVersion 29
-        minSdk 29
+        // minSdk 29 Removed this redundant line
         compileSdk 36
         versionName "9.5"
         versionCode versionCode1000
         signingConfig signingConfigs.release
     }
-    testOptions {
-        unitTests.returnDefaultValues = true
-    }
+    // Second testOptions block removed
 
+    ndkVersion '29.0.14033849-rc4'
 }
 
 
@@ -350,15 +301,12 @@ dependencies {
 
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
-    // implementation "com.google.gms.google-services:com.google.gms.google-services.gradle.plugin:4.4.3" // Removed
-    // implementation 'com.google.firebase:firebase-crashlytics-buildtools:3.0.6' // Removed
     implementation "com.google.android.play:integrity:1.5.0"
-    implementation "com.google.firebase:firebase-crashlytics" // This is a duplicate, but firebase-bom should handle it.
-    implementation "com.google.firebase:firebase-crashlytics-ktx" // This is a duplicate, but firebase-bom should handle it.
+    implementation "com.google.firebase:firebase-crashlytics"
+    implementation "com.google.firebase:firebase-crashlytics-ktx"
     implementation 'androidx.core:core-ktx:1.17.0'
     implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'com.google.android.material:material:1.12.0'
-    implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.9.3'
     implementation 'androidx.recyclerview:recyclerview:1.4.0'
