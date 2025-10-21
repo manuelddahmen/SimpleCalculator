@@ -17,7 +17,7 @@ java {
 }
 
 
-def versionCode1000 = 406999541
+def versionCode1000 = 406999544
 def kotlin_version = '2.2.10'
 def javaVersionEnum = JavaVersion.VERSION_21
 def javaVersion = 21
@@ -199,13 +199,13 @@ android {
         minSdkVersion 29
         // minSdk 29 Removed this redundant line
         compileSdk 36
-        versionName "9.5"
+        versionName "9.6"
         versionCode versionCode1000
         signingConfig signingConfigs.release
     }
     // Second testOptions block removed
 
-    ndkVersion '29.0.14033849-rc4'
+    ndkVersion '29.0.14033849 rc4'
 }
 
 

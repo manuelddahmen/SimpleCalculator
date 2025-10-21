@@ -94,7 +94,7 @@ android {
         exclude group:'com.google.firebase', module:'protolite-well-known-types'
     }
 
-    ndkVersion '29.0.14033849-rc4'
+    ndkVersion '29.0.14033849 rc4'
 
 }
 
