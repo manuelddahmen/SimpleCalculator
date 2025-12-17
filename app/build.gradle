@@ -17,7 +17,7 @@ java {
 }
 
 
-def versionCode1000 = 406999544
+def versionCode1000 = 406999547
 def kotlin_version = '2.2.10'
 def javaVersionEnum = JavaVersion.VERSION_21
 def javaVersion = 21
@@ -205,7 +205,6 @@ android {
     }
     // Second testOptions block removed
 
-    ndkVersion '29.0.14033849 rc4'
 }
 
 
@@ -223,10 +222,10 @@ configurations {
 }
 
 dependencies {
-
+    implementation 'com.google.android.play:age-signals:0.0.2'
     // https://mvnrepository.com/artifact/one.empty3.libs/commons-mp
     runtimeOnly 'one.empty3.libs:commons-mp:0.0.11'
-    implementation('one.empty3:empty3-library-mp:2025.8.20-1') {
+    implementation('one.empty3:empty3-library-mp:2025.10.21') {
         // Exclude desktop-only and conflicting libraries
         exclude group: 'one.empty3.libs', module: 'partial-deskop'
 
@@ -394,13 +393,14 @@ java {
     targetCompatibility = javaVersionEnum
 }
 dependencies {
+    implementation 'androidx.test:core-ktx:1.7.0'
     implementation(project(":partialandroid")) {
         // If :partialandroid itself provides one.empty3.libs.Image,
         // you might not need to exclude anything here unless :partialandroid
         // also has a dependency on partial-desktop.
         // For now, let's assume :partialandroid is the intended source.
     }
-    implementation("one.empty3:empty3-library-mp:2025.8.20-1") {
+    implementation("one.empty3:empty3-library-mp:2025.10.21") {
         exclude(group: "one.empty3.libs", module: "partial-desktop") // Corrected typo
     }
 

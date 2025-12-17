@@ -3,10 +3,10 @@ buildscript {
     dependencies {
         // Add dependencies.
         classpath 'com.google.gms:google-services:4.4.3'
-        classpath 'com.android.tools.build:gradle:8.13.0'  // Changed to a stable version
+        classpath 'com.android.tools.build:gradle:8.13.2'  // Changed to a stable version
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.2.10'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.6'
-        classpath "one.empty3:empty3-library-mp:2025.9.1"
+        classpath "one.empty3:empty3-library-mp:2025.10.21"
     }
 }
 plugins {
@@ -16,7 +16,7 @@ plugins {
     // Add the dependency for the Crashlytics Gradle plugin
     id 'com.google.firebase.crashlytics' version '3.0.6' apply false
     id 'org.jetbrains.kotlin.jvm' version '2.2.10' apply false
-    id 'com.android.library' version '8.13.0' apply false // Aligned with classpath
+    id 'com.android.library' version '8.13.2' apply false // Aligned with classpath
 }
 def kotlin_version = '2.2.10'
 // Top-level build file where you can add configuration options common to all sub-projects/modules.

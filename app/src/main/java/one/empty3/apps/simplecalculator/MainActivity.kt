@@ -34,11 +34,14 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.preference.PreferenceManager
+import androidx.test.core.app.ApplicationProvider
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingResult
 import com.android.billingclient.api.PendingPurchasesParams
 import com.android.billingclient.api.PurchasesUpdatedListener
+import com.google.android.play.agesignals.AgeSignalsManagerFactory
+import com.google.android.play.agesignals.AgeSignalsRequest
 import one.empty3.library.StructureMatrix
 import one.empty3.library1.tree.AlgebraicFormulaSyntaxException
 import one.empty3.library1.tree.AlgebraicTree
@@ -46,14 +49,15 @@ import one.empty3.apps.simplecalculator.R
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var purchasesUpdatedListener:PurchasesUpdatedListener
-    private lateinit var billingClient:BillingClient
+    private lateinit var purchasesUpdatedListener: PurchasesUpdatedListener
+    private lateinit var billingClient: BillingClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false) // Essentiel pour le bord à bord
         setContentView(R.layout.main_layout_table)
-        val yourRootView = findViewById<View>(R.id.root_activity_calc) // Ou la vue qui a besoin de padding
+        val yourRootView =
+            findViewById<View>(R.id.root_activity_calc) // Ou la vue qui a besoin de padding
 
         ViewCompat.setOnApplyWindowInsetsListener(yourRootView) { view, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -79,15 +83,18 @@ class MainActivity : AppCompatActivity() {
         billingClient = BillingClient.newBuilder(applicationContext)
             .setListener(purchasesUpdatedListener)
             // Configure other settings.
-            .enablePendingPurchases(PendingPurchasesParams.newBuilder().
-            enablePrepaidPlans().enableOneTimeProducts().build())
+            .enablePendingPurchases(
+                PendingPurchasesParams.newBuilder().enablePrepaidPlans().enableOneTimeProducts()
+                    .build()
+            )
             .build()
         billingClient.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(billingResult: BillingResult) {
-                if (billingResult.responseCode ==  BillingClient.BillingResponseCode.OK) {
+                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                     // The BillingClient is ready. You can query purchases here.
                 }
             }
+
             override fun onBillingServiceDisconnected() {
                 // Try to restart the connection on the next request to
                 // Google Play by calling the startConnection() method.
@@ -96,6 +103,8 @@ class MainActivity : AppCompatActivity() {
         // Initialize the Vertex AI service and the generative model
 // Specify a model that supports your use case
 // Gemini 1.5 Pro is versatile and can accept both text-only and multimodal prompt inputs
+
+
         val buttonsNumbers = arrayListOf(
             R.id.button0,
             R.id.button1,
@@ -141,11 +150,12 @@ class MainActivity : AppCompatActivity() {
                     val toString: String = editText.text.toString()
                     if (toString.length > 1) {
                         val myEditText = editText
-                        val textToInsert:String = findViewById.text.toString()
-                        if(myEditText.getSelectionStart()==myEditText.getSelectionEnd()) {
+                        val textToInsert: String = findViewById.text.toString()
+                        if (myEditText.getSelectionStart() == myEditText.getSelectionEnd()) {
                             val end = Math.max(myEditText.getSelectionStart(), 0);
-                            val start = Math.max(myEditText.getSelectionStart()-1, 0);
-                            myEditText.getText().replace(start, end,
+                            val start = Math.max(myEditText.getSelectionStart() - 1, 0);
+                            myEditText.getText().replace(
+                                start, end,
                                 "", 0, 0
                             );
 
@@ -165,11 +175,13 @@ class MainActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
                 val myEditText = editText
-                val textToInsert:String = findViewById.text.toString()
+                val textToInsert: String = findViewById.text.toString()
                 val start = Math.max(myEditText.getSelectionStart(), 0);
                 val end = Math.max(myEditText.getSelectionEnd(), 0);
-                myEditText.getText().replace(Math.min(start, end), Math.max(start, end),
-                    textToInsert, 0, textToInsert.length);
+                myEditText.getText().replace(
+                    Math.min(start, end), Math.max(start, end),
+                    textToInsert, 0, textToInsert.length
+                );
                 //editText.text = editText.text.append(findViewById.text)
 
                 val tree = AlgebraicTree(editText.text.toString())
@@ -198,11 +210,13 @@ class MainActivity : AppCompatActivity() {
                         val result: String = dialog.functionName
                         if (result.isNotEmpty()) {
                             val myEditText = editText
-                            val textToInsert:String = result
+                            val textToInsert: String = result
                             val start = Math.max(myEditText.getSelectionStart(), 0);
                             val end = Math.max(myEditText.getSelectionEnd(), 0);
-                            myEditText.getText().replace(Math.min(start, end), Math.max(start, end),
-                                textToInsert, 0, textToInsert.length);
+                            myEditText.getText().replace(
+                                Math.min(start, end), Math.max(start, end),
+                                textToInsert, 0, textToInsert.length
+                            );
                         }
                     }
                 }
@@ -228,11 +242,13 @@ class MainActivity : AppCompatActivity() {
                         val result: String = dialog.functionName
                         if (result.isNotEmpty()) {
                             val myEditText = editText
-                            val textToInsert:String = result
+                            val textToInsert: String = result
                             val start = Math.max(myEditText.getSelectionStart(), 0);
                             val end = Math.max(myEditText.getSelectionEnd(), 0);
-                            myEditText.getText().replace(Math.min(start, end), Math.max(start, end),
-                                textToInsert, 0, textToInsert.length);
+                            myEditText.getText().replace(
+                                Math.min(start, end), Math.max(start, end),
+                                textToInsert, 0, textToInsert.length
+                            );
                         }
                     }
                 }
@@ -280,7 +296,28 @@ class MainActivity : AppCompatActivity() {
         buttonOpenGraph.setOnClickListener {
             val intent = Intent(this, GraphActivity::class.java)
             startActivity(intent)
-        }    }
+        }
+
+
+        // Create an instance of a manager
+        val ageSignalsManager =
+            AgeSignalsManagerFactory.create(ApplicationProvider.getApplicationContext())
+
+        // Request an age signals check
+        ageSignalsManager
+            .checkAgeSignals(AgeSignalsRequest.builder().build())
+            .addOnSuccessListener { ageSignalsResult ->
+                // Store the install ID for later...
+                val installId = ageSignalsResult.installId()
+
+                if (ageSignalsResult.userStatus() == AgeSignalsVerificationStatus.SUPERVISED_APPROVAL_DENIED) {
+                    // Disallow access...
+                } else {
+                    // Do something else if the user is SUPERVISED, VERIFIED, etc.
+                }
+            }
+
+    }
 
     private fun compute(
         tree: AlgebraicTree,
@@ -300,14 +337,14 @@ class MainActivity : AppCompatActivity() {
                 textAnswer.setTextColor(Color.RED)
             }
         } catch (ex: IndexOutOfBoundsException) {
-                runOnUiThread {
-                    textAnswer.setTextColor(Color.RED)
-                }
+            runOnUiThread {
+                textAnswer.setTextColor(Color.RED)
+            }
         } catch (ex: NullPointerException) {
-                runOnUiThread {
-                    textAnswer.setTextColor(Color.RED)
-                    textAnswer.setTextColor(Color.RED)
-                }
+            runOnUiThread {
+                textAnswer.setTextColor(Color.RED)
+                textAnswer.setTextColor(Color.RED)
+            }
         }
     }
 
@@ -328,6 +365,7 @@ class MainActivity : AppCompatActivity() {
         }
         return labelAnswer
     }
+
     private fun openUserData(view: View) {
         val intent: Intent = Intent(view.context, PrivacyPolicyActivity::class.java).apply {
             putExtra("class", "")
