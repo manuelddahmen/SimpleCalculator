@@ -24,8 +24,13 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.preference.PreferenceManager
 import one.empty3.apps.simplecalculator.databinding.ActivityScrollingBinding
 import one.empty3.library1.tree.ListInstructions
@@ -44,12 +49,33 @@ class ScrollingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false) // Essentiel pour le bord à bord
 
         binding = ActivityScrollingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val yourRootView = findViewById<View>(R.id.root_activity_text) // Ou la vue qui a besoin de padding
+
+        ViewCompat.setOnApplyWindowInsetsListener(yourRootView) { view, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            // Appliquer le padding pour éviter le chevauchement avec les barres système
+            view.updatePadding(
+                left = insets.left,
+                top = insets.top,
+                right = insets.right,
+                bottom = insets.bottom
+            )
+
+            // Indiquer que les insets ont été consommés
+            WindowInsetsCompat.CONSUMED
+        }
+
 
         //setSupportActionBar(toolbar)
-        this.text = findViewById<EditText>(R.id.textCalculator)
+        var t0 : EditText? = findViewById<EditText>(R.id.textCalculator)
+        if(t0!=null) {
+            text = t0
+        } else return
 
         binding.execute.setOnClickListener {
                 view -> runOnUiThread {

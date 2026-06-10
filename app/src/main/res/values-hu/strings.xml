@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name" translatable="false">Sci-prog Calculator</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">négyzetméter</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">Szerkeszd a szöveget itt, vagy push számokkal</string>
+      
+  <string name="result">Eredmény</string>
+      
+  <string name="about_and_policies">Rólunk és adatvédelmi irányelvek</string>
+      
+  <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Données utilisateur personnelles et sensibles Dans l\'application image featuring, les seules données auxquelles l\'application accède sont les fichiers multimédia ouvert par le bouton prize de vue ou choisir un fichier. Ceux-ci sont traités par l\'application et éventuellement des copies de travail sont stockées dans le répertoire data de l\'application et figure donc sur le système dans un format ou l\'autre. Dans une future version il sera possible de partage vos resultats avec d\'autres utilisateurs, internautes. Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme privées et ne sont pas collectées, ni traitées par nos services.</string>
+      
+  <string name="title_activity_formula_store">FormulaStore</string>
+      
+  <string name="store_formula">Tárolja a képletet</string>
+      
+  <string name="add">Hozzáadás</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">Vissza</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">Elfogadom a felhasználói adatkezelési szabályzatot és az adatvédelmet</string>
+      
+  <string name="about_privacy">Az adatvédelemről</string>
+      
+  <string name="dialog_message">Válasszon egy funkciót</string>
+      
+  <string name="dialog_title">Előre beállított funkciók</string>
+      
+  <string name="cancel_button">Mégsem</string>
+      
+  <string name="ok_button">RENDBEN</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">RENDBEN</string>
+      
+  <string name="fragment_function_cancel">Mégsem</string>
+      
+  <string name="function_string">Függvény karakterlánc</string>
+      
+  <string name="title_activity_scrolling">Számoljon megjegyzést</string>
+      
+  <string name="action_settings">Beállítások</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">Szöveg</string>
+      
+  <string name="title_activity_settings">BeállításokTevékenység</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">Üzenetek</string>
+      
+  <string name="sync_header">Szinkronizál</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">Az aláírásod</string>
+      
+  <string name="reply_title">Alapértelmezett válaszművelet</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">E-mailek rendszeres szinkronizálása</string>
+      
+  <string name="attachment_title">Bejövő mellékletek letöltése</string>
+      
+  <string name="attachment_summary_on">Bejövő e-mailek mellékleteinek automatikus letöltése</string>
+      
+  <string name="attachment_summary_off">Csak manuális kérés esetén töltse le a mellékleteket</string>
+      
+  <string name="empty_string"/>
+      
+  <string name="textCalculatorTextMultiLine">Többsoros szkript</string>
+      
+  <string name="com.crashlytics.android.build_id" translatable="false">1</string>
+      
+  <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
+      
+  <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
+      
+  <string name="execute_code">Kód végrehajtása</string>
+      
+  <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Személyes és bizalmas felhasználói adatok. További információért lásd a linket</string>
+      
+  <string name="fx">fx(</string>
+      
+  <string name="privacy_policy_link_text">Adatvédelmi irányelvek online megtekintése: https://empty3.app/android/privacy.html</string>
+      
+  <string name="title_activity_privacy_policy">Adatvédelmi irányelvek</string>
+      
+  <string name="title_activity_graph">Grafikon-plotter</string>
+      
+  <string name="hint_formula_x">X képlet (pl. t*cos(t))</string>
+      
+  <string name="hint_formula_y">Y képlet (pl. t*sin(t))</string>
+      
+  <string name="hint_formula_fx">y = f(x) (pl. x^2)</string>
+      
+  <string name="button_plot">Ábrázolási grafikon</string>
+      
+  <string name="button_download_image">Kép letöltése</string>
+      
+  <string name="content_description_graph_image">Ábrázolt grafikon kép</string>
+          
+  <string name="hint_x_min">X perc</string>
+          
+  <string name="hint_x_max">X-Max</string>
+      
+  <!-- ... existing strings ... -->
+      
+  <string name="hint_y_min">Y Min (pl. -10)</string>
+      
+  <string name="hint_y_max">Y Max (pl. 10)</string>
+      
+  <!-- ... autres chaînes ... -->
+      
+  <string name="button_save_image">Megtakarítás</string>
+      
+  <string name="button_share_image">Részesedés</string>
+      
+  <string name="share_image_title">Grafikon megosztása</string>
+      
+  <string name="error_no_image_to_share">Nincs megosztható kép.</string>
+      
+  <string name="error_failed_to_share_image">Nem sikerült megosztani a képet.</string>
+      
+  <string name="image_saved_to">Kép mentése ide:%s</string>
+   
+  <!-- Pour le message de sauvegarde -->
+      
+  <string name="failed_to_save_image">Nem sikerült menteni a képet: %s</string>
+      
+  <string name="error_syntax">Szintaxishiba</string>
+      
+  <string name="error_not_a_number">Nem egy szám</string>
+      
+  <string name="error_x_max_lt_x_min">X Max-nak &gt; X Min-nek kell lennie</string>
+      
+  <string name="error_y_max_lt_y_min">Y Max-nak &gt; Y Min-nek kell lennie</string>
+      
+  <string name="error_invalid_input">Érvénytelen bevitel</string>
+      
+  <string name="error_x_min_lt_x_max">Az X Min értékének kisebbnek kell lennie, mint az X Max értékének.</string>
+      
+  <string name="error_y_min_lt_y_max">Az Y Min értékének kisebbnek kell lennie az Y Max értékénél.</string>
+      
+  <string name="error_syntax_with_message">Szintaxishiba: %s</string>
+      
+  <string name="error_plotting_with_message">Rajzoláshiba: %s</string>
+      
+  <string name="file_name_prefix">GRAFIKON_%s _</string>
+      
+  <string name="file_name_suffix">.png</string>
+      
+  <string name="storage_directory">egyszerű számológép</string>
+      
+  <string name="error_could_not_create_file">Nem sikerült létrehozni a fájlt</string>
+      
+  <string name="graph_plotter_description">Grafikon-plotter definiál egy változót és ábrázolja a függvényt</string>
+   
+  <!-- Pour le message d'erreur de sauvegarde -->
+      
+  <string name="hint_result_here">Eredmény itt</string>
+  
+</resources>

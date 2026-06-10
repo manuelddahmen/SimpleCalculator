@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><resources>
       
-  <string name="app_name">Sci-prog Calculator</string>
+  <string name="app_name" translatable="false">Sci-prog Calculator</string>
       
   <string name="_1">1</string>
       
@@ -38,7 +38,7 @@
       
   <string name="EXP">^</string>
       
-  <string name="edit_text_here_or_by_push_numbers">Modifiez le texte ici ou en appuyant sur des numéros</string>
+  <string name="edit_text_here_or_by_push_numbers">Modifiez le texte ici ou en appuyant sur les numéros</string>
       
   <string name="result">Résultat</string>
       
@@ -46,11 +46,11 @@
       
   <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
       
-  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Données utilisateur personnelles et sensibles Dans l\'application image featuring, les seules données auxquelles l\'application accède sont les fichiers multimédia ouverts par le bouton prise de vue ou choisir un fichier. Ceux-ci sont traités par l\'application et éventuellement des copies de travail sont stockées dans le répertoire données de l\'application et figure donc sur le système dans un format ou l\'autre. Dans une future version il sera possible de partager vos résultats avec d\'autres utilisateurs, internautes. Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme privées et ne sont pas collectées, ni traitées par nos services.</string>
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Données utilisateur personnelles et sensibles Dans l\'application image featuring, les seules données concernées par l\'application accèdent aux fichiers multimédia ouverts par le bouton prise de vue ou choisir un fichier. Ceux-ci sont traités par l\'application et éventuellement des copies de travail sont stockées dans le répertoire des données de l\'application et figurent donc sur le système dans un format ou l\'autre. Dans une future version il sera possible de partager vos résultats avec d\'autres utilisateurs, internautes. Ces données sont considérées par nous, DAHMEN Manuel at empty3.one comme privées et ne sont pas collectées, ni traitées par nos services.</string>
       
-  <string name="title_activity_formula_store">FormuleStore</string>
+  <string name="title_activity_formula_store">FormulaStore</string>
       
-  <string name="store_formula">Formule de magasin</string>
+  <string name="store_formula">Formule du magasin</string>
       
   <string name="add">Ajouter</string>
       
@@ -58,7 +58,7 @@
       
   <string name="back">Dos</string>
       
-  <string name="accept_user_data_management_policy_and_privacy">Accepter la politique de gestion des données utilisateur et la confidentialité</string>
+  <string name="accept_user_data_management_policy_and_privacy">Accepter la politique de gestion des données utilisateur et de confidentialité</string>
       
   <string name="about_privacy">À propos de la confidentialité</string>
       
@@ -82,20 +82,19 @@
       
   <string name="function_string">Chaîne de fonction</string>
       
-  <string name="title_activity_scrolling">Activité de défilement</string>
+  <string name="title_activity_scrolling">Note de calcul</string>
       
-
   <string name="action_settings">Paramètres</string>
       
   <string name="instructions"/>
       
-  <string name="text_calculator">Calculatrice de texte</string>
+  <string name="text_calculator">Texte</string>
       
   <string name="title_activity_settings">ParamètresActivité</string>
       
   <!-- Preference Titles -->
       
-  <string name="messages_header">messages</string>
+  <string name="messages_header">Messages</string>
       
   <string name="sync_header">Synchroniser</string>
       
@@ -111,14 +110,104 @@
       
   <string name="attachment_title">Télécharger les pièces jointes entrantes</string>
       
-  <string name="attachment_summary_on">Téléchargez automatiquement les pièces jointes des e-mails entrants</string>
+  <string name="attachment_summary_on">Télécharger automatiquement les pièces jointes des e-mails entrants</string>
       
   <string name="attachment_summary_off">Téléchargez les pièces jointes uniquement lorsque cela est demandé manuellement</string>
-  <string name="empty_string" />
-    <string name="textCalculatorTextMultiLine">Multiline script</string>
-    <string name="execute_code">Execute code</string>
-    <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
-    <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Données utilisateur personnelles et sensibles Voir le lien pour plus d\'infos</string>
-    <string name="fx">fx(</string>
-
+      
+  <string name="empty_string"/>
+      
+  <string name="textCalculatorTextMultiLine">Script multiligne</string>
+      
+  <string name="com.crashlytics.android.build_id" translatable="false">1</string>
+      
+  <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
+      
+  <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
+      
+  <string name="execute_code">Exécuter le code</string>
+      
+  <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Données personnelles et sensibles des utilisateurs. Voir le lien pour plus d\'informations</string>
+      
+  <string name="fx">fx(</string>
+      
+  <string name="privacy_policy_link_text">Consultez la politique de confidentialité en ligne : https://empty3.app/android/privacy.html</string>
+      
+  <string name="title_activity_privacy_policy">politique de confidentialité</string>
+      
+  <string name="title_activity_graph">Traceur de graphiques</string>
+      
+  <string name="hint_formula_x">Formule X (par exemple, t*cos(t))</string>
+      
+  <string name="hint_formula_y">Formule Y (par exemple, t*sin(t))</string>
+      
+  <string name="hint_formula_fx">y = f(x) (par exemple, x^2)</string>
+      
+  <string name="button_plot">Graphique de tracé</string>
+      
+  <string name="button_download_image">Télécharger l\'image</string>
+      
+  <string name="content_description_graph_image">Image graphique tracée</string>
+          
+  <string name="hint_x_min">X min</string>
+          
+  <string name="hint_x_max">X Max</string>
+      
+  <!-- ... existing strings ... -->
+      
+  <string name="hint_y_min">Y Min (par exemple, -10)</string>
+      
+  <string name="hint_y_max">Y Max (par exemple, 10)</string>
+      
+  <!-- ... autres chaînes ... -->
+      
+  <string name="button_save_image">Sauvegarder</string>
+      
+  <string name="button_share_image">Partager</string>
+      
+  <string name="share_image_title">Partager l\'image graphique</string>
+      
+  <string name="error_no_image_to_share">Aucune image disponible à partager.</string>
+      
+  <string name="error_failed_to_share_image">Échec du partage de l\'image.</string>
+      
+  <string name="image_saved_to">Image enregistrée sur %s</string>
+   
+  <!-- Pour le message de sauvegarde -->
+      
+  <string name="failed_to_save_image">Échec de l\'enregistrement de l\'image : %s</string>
+      
+  <string name="error_syntax">Erreur de syntaxe</string>
+      
+  <string name="error_not_a_number">Pas un numéro</string>
+      
+  <string name="error_x_max_lt_x_min">X Max doit être &gt; X Min</string>
+      
+  <string name="error_y_max_lt_y_min">Y Max doit être &gt; Y Min</string>
+      
+  <string name="error_invalid_input">Entrée invalide</string>
+      
+  <string name="error_x_min_lt_x_max">X Min doit être inférieur à X Max.</string>
+      
+  <string name="error_y_min_lt_y_max">Y Min doit être inférieur à Y Max.</string>
+      
+  <string name="error_syntax_with_message">Erreur de syntaxe : %s</string>
+      
+  <string name="error_plotting_with_message">Erreur de traçage : %s</string>
+      
+  <string name="file_name_prefix">GRAPHIQUE_%s_</string>
+      
+  <string name="file_name_suffix">.png</string>
+      
+  <string name="storage_directory">calculatrice simple</string>
+      
+  <string name="error_could_not_create_file">Impossible de créer le fichier</string>
+      
+  <string name="graph_plotter_description">Le traceur graphique définit une variable et trace la fonction</string>
+   
+  <!-- Pour le message d'erreur de sauvegarde -->
+      
+  <string name="hint_result_here">Résultat ici</string>
+  
 </resources>

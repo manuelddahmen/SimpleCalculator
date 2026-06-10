@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name" translatable="false">Sci-prog Calculator</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">الجذر التربيعي</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">قم بتعديل النص هنا أو عن طريق الضغط على الأرقام</string>
+      
+  <string name="result">نتيجة</string>
+      
+  <string name="about_and_policies">حول وسياسة الخصوصية</string>
+      
+  <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Données utilisateur personles and sensibles Dans l\'application image feature، فإن البيانات الوحيدة التي يتم الوصول إليها من خلال التطبيق هي ملفات الوسائط المتعددة المفتوحة بواسطة زر الرؤية أو اختيار ملف. Ceux-ci sont سمات التطبيق وحدث نسخ العمل مخزنة في سجل بيانات التطبيق والشكل على النظام في تنسيق أو آخر. في الإصدار المستقبلي، سيكون من الممكن مشاركة نتائجك مع مستخدمين آخرين، عبر الإنترنت. هذه البيانات تعتبر من قبلنا، DAHMEN Manuel atempty3.one comme privées et ne sont pas Collectées، ni السمات من قبل خدماتنا.</string>
+      
+  <string name="title_activity_formula_store">متجر الفورمولا</string>
+      
+  <string name="store_formula">صيغة المتجر</string>
+      
+  <string name="add">يضيف</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">خلف</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">قبول سياسة إدارة بيانات المستخدم والخصوصية</string>
+      
+  <string name="about_privacy">حول الخصوصية</string>
+      
+  <string name="dialog_message">اختر وظيفة</string>
+      
+  <string name="dialog_title">الوظائف المحددة مسبقًا</string>
+      
+  <string name="cancel_button">يلغي</string>
+      
+  <string name="ok_button">نعم</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">،</string>
+      
+  <string name="fragment_function_ok">نعم</string>
+      
+  <string name="fragment_function_cancel">يلغي</string>
+      
+  <string name="function_string">سلسلة دالة</string>
+      
+  <string name="title_activity_scrolling">ملاحظة حسابية</string>
+      
+  <string name="action_settings">إعدادات</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">نص</string>
+      
+  <string name="title_activity_settings">الإعداداتالنشاط</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">رسائل</string>
+      
+  <string name="sync_header">المزامنة</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">توقيعك</string>
+      
+  <string name="reply_title">إجراء الرد الافتراضي</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">مزامنة البريد الإلكتروني بشكل دوري</string>
+      
+  <string name="attachment_title">تنزيل المرفقات الواردة</string>
+      
+  <string name="attachment_summary_on">تنزيل المرفقات تلقائيًا لرسائل البريد الإلكتروني الواردة</string>
+      
+  <string name="attachment_summary_off">قم بتنزيل المرفقات فقط عند طلبها يدويًا</string>
+      
+  <string name="empty_string"/>
+      
+  <string name="textCalculatorTextMultiLine">نص متعدد الأسطر</string>
+      
+  <string name="com.crashlytics.android.build_id" translatable="false">1</string>
+      
+  <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
+      
+  <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
+      
+  <string name="execute_code">تنفيذ الكود</string>
+      
+  <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">بيانات المستخدم الشخصية والحساسة. انظر الرابط للمزيد من المعلومات</string>
+      
+  <string name="fx">FX(</string>
+      
+  <string name="privacy_policy_link_text">عرض سياسة الخصوصية عبر الإنترنت: https://empty3.app/android/privacy.html</string>
+      
+  <string name="title_activity_privacy_policy">سياسة الخصوصية</string>
+      
+  <string name="title_activity_graph">مخطط بياني</string>
+      
+  <string name="hint_formula_x">الصيغة X (على سبيل المثال، t*cos(t))</string>
+      
+  <string name="hint_formula_y">الصيغة Y (على سبيل المثال، t*sin(t))</string>
+      
+  <string name="hint_formula_fx">y = f(x) (على سبيل المثال، x^2)</string>
+      
+  <string name="button_plot">الرسم البياني</string>
+      
+  <string name="button_download_image">تنزيل الصورة</string>
+      
+  <string name="content_description_graph_image">صورة بيانية مرسومة</string>
+          
+  <string name="hint_x_min">X دقيقة</string>
+          
+  <string name="hint_x_max">إكس ماكس</string>
+      
+  <!-- ... existing strings ... -->
+      
+  <string name="hint_y_min">Y Min (على سبيل المثال، -10)</string>
+      
+  <string name="hint_y_max">Y Max (على سبيل المثال، 10)</string>
+      
+  <!-- ... autres chaînes ... -->
+      
+  <string name="button_save_image">يحفظ</string>
+      
+  <string name="button_share_image">يشارك</string>
+      
+  <string name="share_image_title">مشاركة صورة الرسم البياني</string>
+      
+  <string name="error_no_image_to_share">لا توجد صورة متاحة للمشاركة.</string>
+      
+  <string name="error_failed_to_share_image">فشل في مشاركة الصورة.</string>
+      
+  <string name="image_saved_to">تم حفظ الصورة في %s</string>
+   
+  <!-- Pour le message de sauvegarde -->
+      
+  <string name="failed_to_save_image">فشل حفظ الصورة: %s</string>
+      
+  <string name="error_syntax">خطأ في بناء الجملة</string>
+      
+  <string name="error_not_a_number">ليس رقما</string>
+      
+  <string name="error_x_max_lt_x_min">يجب أن يكون X Max &gt; X Min</string>
+      
+  <string name="error_y_max_lt_y_min">يجب أن يكون Y Max &gt; Y Min</string>
+      
+  <string name="error_invalid_input">إدخال غير صالح</string>
+      
+  <string name="error_x_min_lt_x_max">يجب أن يكون الحد الأدنى X أقل من الحد الأقصى X.</string>
+      
+  <string name="error_y_min_lt_y_max">يجب أن يكون الحد الأدنى Y أقل من الحد الأقصى Y.</string>
+      
+  <string name="error_syntax_with_message">خطأ في بناء الجملة: %s</string>
+      
+  <string name="error_plotting_with_message">خطأ في التخطيط: %s</string>
+      
+  <string name="file_name_prefix">الرسم البياني_%s_</string>
+      
+  <string name="file_name_suffix">.png</string>
+      
+  <string name="storage_directory">آلة حاسبة بسيطة</string>
+      
+  <string name="error_could_not_create_file">لم يتمكن من إنشاء الملف</string>
+      
+  <string name="graph_plotter_description">يقوم مخطط الرسم البياني بتعريف متغير ورسم الدالة</string>
+   
+  <!-- Pour le message d'erreur de sauvegarde -->
+      
+  <string name="hint_result_here">النتيجة هنا</string>
+  
+</resources>

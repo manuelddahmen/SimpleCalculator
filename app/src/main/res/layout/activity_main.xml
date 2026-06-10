@@ -28,8 +28,9 @@
     android:visibility="visible">
 
     <EditText
-        android:autofillHints="Result here"
+        android:autofillHints="@string/hint_result_here"
         android:id="@+id/answerText"
+        android:textAlignment="center"
         android:layout_width="375dp"
         android:layout_height="152dp"
         android:layout_marginStart="16dp"

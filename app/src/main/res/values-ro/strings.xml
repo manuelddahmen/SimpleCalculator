@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name" translatable="false">Sci-prog Calculator</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">sqrt</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">Editați textul aici sau prin apăsarea numerelor</string>
+      
+  <string name="result">Rezultat</string>
+      
+  <string name="about_and_policies">Despre și politica de confidențialitate</string>
+      
+  <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Données utilisateurs personnels and sensitivs. În imaginea aplicației care include, singurele date auxiliare ale aplicației, accesul la aplicație sunt fișierele multimedia deschise prin intermediul butonului premiul de vedere sau alegerea unui fișier. Ceux-ci sont traités par l\'application et éventuellement des copies de travail sunt stocate în repertoriul de date de l\'application et figure donc pe sistem într-un format sau alt. Într-o versiune viitoare, va fi posibil să vă împărtășiți rezultatele cu alți utilizatori, internauți. Ces données sont considérées par nous, DAHMEN Manuel la empty3.one comme privées et ne sont pas collectées, ni traitées par nos services.</string>
+      
+  <string name="title_activity_formula_store">FormulăStore</string>
+      
+  <string name="store_formula">Formula de stocare</string>
+      
+  <string name="add">Adăuga</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">Spate</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">Acceptați Politica de gestionare a datelor utilizatorilor și confidențialitatea</string>
+      
+  <string name="about_privacy">Despre confidențialitate</string>
+      
+  <string name="dialog_message">Alegeți o funcție</string>
+      
+  <string name="dialog_title">Funcții predefinite</string>
+      
+  <string name="cancel_button">Anula</string>
+      
+  <string name="ok_button">Bine</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">Bine</string>
+      
+  <string name="fragment_function_cancel">Anula</string>
+      
+  <string name="function_string">Șir de funcții</string>
+      
+  <string name="title_activity_scrolling">Notă Calc</string>
+      
+  <string name="action_settings">Setări</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">Text</string>
+      
+  <string name="title_activity_settings">SetăriActivitate</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">Mesaje</string>
+      
+  <string name="sync_header">Sincronizare</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">Semnătura dumneavoastră</string>
+      
+  <string name="reply_title">Acțiune implicită de răspuns</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">Sincronizați periodic e-mailurile</string>
+      
+  <string name="attachment_title">Descărcați atașamentele primite</string>
+      
+  <string name="attachment_summary_on">Descărcați automat atașamentele pentru e-mailurile primite</string>
+      
+  <string name="attachment_summary_off">Descărcați atașamentele doar atunci când este solicitat manual</string>
+      
+  <string name="empty_string"/>
+      
+  <string name="textCalculatorTextMultiLine">Script multilinie</string>
+      
+  <string name="com.crashlytics.android.build_id" translatable="false">1</string>
+      
+  <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
+      
+  <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
+      
+  <string name="execute_code">Execută codul</string>
+      
+  <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Date personale și sensibile ale utilizatorilor. Vedeți linkul pentru mai multe informații</string>
+      
+  <string name="fx">efect(</string>
+      
+  <string name="privacy_policy_link_text">Vizualizați Politica de confidențialitate online: https://empty3.app/android/privacy.html</string>
+      
+  <string name="title_activity_privacy_policy">Politica de confidențialitate</string>
+      
+  <string name="title_activity_graph">Plotter grafic</string>
+      
+  <string name="hint_formula_x">Formula X (de exemplu, t*cos(t))</string>
+      
+  <string name="hint_formula_y">Formula Y (de exemplu, t*sin(t))</string>
+      
+  <string name="hint_formula_fx">y = f(x) (de exemplu, x^2)</string>
+      
+  <string name="button_plot">Graficul grafic</string>
+      
+  <string name="button_download_image">Descărcați imaginea</string>
+      
+  <string name="content_description_graph_image">Imagine grafică reprezentată grafic</string>
+          
+  <string name="hint_x_min">X min.</string>
+          
+  <string name="hint_x_max">X Max</string>
+      
+  <!-- ... existing strings ... -->
+      
+  <string name="hint_y_min">Y Min (de exemplu, -10)</string>
+      
+  <string name="hint_y_max">Y Max (de exemplu, 10)</string>
+      
+  <!-- ... autres chaînes ... -->
+      
+  <string name="button_save_image">Salva</string>
+      
+  <string name="button_share_image">Distribuie</string>
+      
+  <string name="share_image_title">Partajați imaginea grafică</string>
+      
+  <string name="error_no_image_to_share">Nicio imagine disponibilă pentru partajare.</string>
+      
+  <string name="error_failed_to_share_image">Imaginea nu a putut fi partajată.</string>
+      
+  <string name="image_saved_to">Imagine salvată în%s</string>
+   
+  <!-- Pour le message de sauvegarde -->
+      
+  <string name="failed_to_save_image">Imaginea nu a putut fi salvată: %s</string>
+      
+  <string name="error_syntax">Eroare de sintaxă</string>
+      
+  <string name="error_not_a_number">Nu este un număr</string>
+      
+  <string name="error_x_max_lt_x_min">X Max trebuie să fie &gt; X Min</string>
+      
+  <string name="error_y_max_lt_y_min">Y Max trebuie să fie &gt; Y Min</string>
+      
+  <string name="error_invalid_input">Intrare nevalidă</string>
+      
+  <string name="error_x_min_lt_x_max">X Min trebuie să fie mai mic decât X Max.</string>
+      
+  <string name="error_y_min_lt_y_max">Valoarea Y Min trebuie să fie mai mică decât valoarea Y Max.</string>
+      
+  <string name="error_syntax_with_message">Eroare de sintaxă: %s</string>
+      
+  <string name="error_plotting_with_message">Eroare de plotare: %s</string>
+      
+  <string name="file_name_prefix">GRAFIC_%s _</string>
+      
+  <string name="file_name_suffix">.png</string>
+      
+  <string name="storage_directory">calculator simplu</string>
+      
+  <string name="error_could_not_create_file">Nu s-a putut crea fișierul</string>
+      
+  <string name="graph_plotter_description">Plotterul grafic definește o variabilă și reprezintă grafic funcția</string>
+   
+  <!-- Pour le message d'erreur de sauvegarde -->
+      
+  <string name="hint_result_here">Rezultat aici</string>
+  
+</resources>

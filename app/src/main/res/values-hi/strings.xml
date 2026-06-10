@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name" translatable="false">Sci-prog Calculator</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">.</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">=</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">एसक्यूआरटी</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">पाठ को यहाँ या पुश नंबर द्वारा संपादित करें</string>
+      
+  <string name="result">परिणाम</string>
+      
+  <string name="about_and_policies">गोपनीयता नीति के बारे में</string>
+      
+  <string name="POLICY_URI">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">डोनीज़ यूटिलिसेटर कार्मिकल्स एंड सेंसिबल्स डैन्स एल\'एप्लिकेशन इमेज फीचरिंग, लेस सेउल्स डोनीज़ ऑक्सक्वेल्स एल\'एप्लिकेशन एकेडे सोंट लेस फिचियर्स मल्टीमीडिया ऑउवर्ट पार ले बाउटन प्राइज डे व्यू यू ओउ चॉइसिर अन फिचियर. एप्लिकेशन के डेटा की सूची और आपके द्वारा लिखे गए प्रारूप के अनुसार डेटा की सूची के माध्यम से स्टॉक की गई यात्रा के दौरान प्राप्त होने वाली घटनाओं की विशेषताएं. एक भविष्य के संस्करण के लिए, आपको उपयोगिताओं, इंटर्नशिप के साथ परिणामों की पूरी संभावना होगी. अभी हमारे पास कोई विचार नहीं है, डेहमेन मैनुएल एम्प्टी3.वन में निजी तौर पर शामिल है और हमें कोई सेवा नहीं मिली है.</string>
+      
+  <string name="title_activity_formula_store">फॉर्मूलास्टोर</string>
+      
+  <string name="store_formula">फ़ॉर्मूला स्टोर करें</string>
+      
+  <string name="add">जोड़ना</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">पीछे</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">उपयोगकर्ता डेटा प्रबंधन नीति और गोपनीयता स्वीकार करें</string>
+      
+  <string name="about_privacy">गोपनीयता के बारे में</string>
+      
+  <string name="dialog_message">एक फ़ंक्शन चुनें</string>
+      
+  <string name="dialog_title">पूर्वनिर्धारित कार्य</string>
+      
+  <string name="cancel_button">रद्द करना</string>
+      
+  <string name="ok_button">ठीक है</string>
+      
+  <string name="open_brace">(</string>
+      
+  <string name="close_brace">)</string>
+      
+  <string name="coma">,</string>
+      
+  <string name="fragment_function_ok">ठीक है</string>
+      
+  <string name="fragment_function_cancel">रद्द करना</string>
+      
+  <string name="function_string">फ़ंक्शन स्ट्रिंग</string>
+      
+  <string name="title_activity_scrolling">कैल्क नोट</string>
+      
+  <string name="action_settings">सेटिंग्स</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">मूलपाठ</string>
+      
+  <string name="title_activity_settings">सेटिंग्सगतिविधि</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">संदेशों</string>
+      
+  <string name="sync_header">साथ-साथ करना</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">आपका हस्ताक्षर</string>
+      
+  <string name="reply_title">डिफ़ॉल्ट उत्तर कार्रवाई</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">ईमेल को समय-समय पर सिंक करें</string>
+      
+  <string name="attachment_title">आने वाले अनुलग्नकों को डाउनलोड करें</string>
+      
+  <string name="attachment_summary_on">आने वाले ईमेल के लिए अनुलग्नक स्वचालित रूप से डाउनलोड करें</string>
+      
+  <string name="attachment_summary_off">केवल मैन्युअल रूप से अनुरोध किए जाने पर ही अनुलग्नक डाउनलोड करें</string>
+      
+  <string name="empty_string"/>
+      
+  <string name="textCalculatorTextMultiLine">मल्टीलाइन स्क्रिप्ट</string>
+      
+  <string name="com.crashlytics.android.build_id" translatable="false">1</string>
+      
+  <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
+      
+  <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
+      
+  <string name="execute_code">कोड निष्पादित करें</string>
+      
+  <string name="POLICY_URI_INT">https://empty3.app/android/UserPolicyandFamilyPolicyEmpty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">व्यक्तिगत एवं संवेदनशील उपयोगकर्ता डेटा. अधिक जानकारी के लिए लिंक देखें</string>
+      
+  <string name="fx">एफएक्स(</string>
+      
+  <string name="privacy_policy_link_text">गोपनीयता नीति ऑनलाइन देखें: https://empty3.app/android/privacy.html</string>
+      
+  <string name="title_activity_privacy_policy">गोपनीयता नीति</string>
+      
+  <string name="title_activity_graph">ग्राफ प्लॉटर</string>
+      
+  <string name="hint_formula_x">सूत्र X (उदाहरणार्थ, t*cos(t))</string>
+      
+  <string name="hint_formula_y">सूत्र Y (उदाहरणार्थ, t*sin(t))</string>
+      
+  <string name="hint_formula_fx">y = f(x) (उदाहरणार्थ, x^2)</string>
+      
+  <string name="button_plot">प्लॉट ग्राफ</string>
+      
+  <string name="button_download_image">छवि डाउनलोड करें</string>
+      
+  <string name="content_description_graph_image">प्लॉट किया गया ग्राफ चित्र</string>
+          
+  <string name="hint_x_min">X मिनट</string>
+          
+  <string name="hint_x_max">एक्स अधिकतम</string>
+      
+  <!-- ... existing strings ... -->
+      
+  <string name="hint_y_min">वाई मिन (उदाहरण, -10)</string>
+      
+  <string name="hint_y_max">वाई मैक्स (उदाहरण, 10)</string>
+      
+  <!-- ... autres chaînes ... -->
+      
+  <string name="button_save_image">बचाना</string>
+      
+  <string name="button_share_image">शेयर करना</string>
+      
+  <string name="share_image_title">ग्राफ़ छवि साझा करें</string>
+      
+  <string name="error_no_image_to_share">साझा करने के लिए कोई छवि उपलब्ध नहीं है.</string>
+      
+  <string name="error_failed_to_share_image">छवि साझा करने में विफल.</string>
+      
+  <string name="image_saved_to">छवि %s में सहेजी गई</string>
+   
+  <!-- Pour le message de sauvegarde -->
+      
+  <string name="failed_to_save_image">छवि सहेजने में विफल: %s</string>
+      
+  <string name="error_syntax">वक्य रचना त्रुटि</string>
+      
+  <string name="error_not_a_number">कोई संख्या नहीं</string>
+      
+  <string name="error_x_max_lt_x_min">X अधिकतम &gt; X न्यूनतम होना चाहिए</string>
+      
+  <string name="error_y_max_lt_y_min">Y अधिकतम &gt; Y न्यूनतम होना चाहिए</string>
+      
+  <string name="error_invalid_input">अमान्य निवेश</string>
+      
+  <string name="error_x_min_lt_x_max">X न्यूनतम, X अधिकतम से कम होना चाहिए.</string>
+      
+  <string name="error_y_min_lt_y_max">Y न्यूनतम, Y अधिकतम से कम होना चाहिए.</string>
+      
+  <string name="error_syntax_with_message">सिंटैक्स त्रुटि: %s</string>
+      
+  <string name="error_plotting_with_message">प्लॉटिंग त्रुटि: %s</string>
+      
+  <string name="file_name_prefix">ग्राफ़_%s_</string>
+      
+  <string name="file_name_suffix">.पीएनजी</string>
+      
+  <string name="storage_directory">सरलकैलकुलेटर</string>
+      
+  <string name="error_could_not_create_file">फ़ाइल नहीं बनाई जा सकी</string>
+      
+  <string name="graph_plotter_description">ग्राफ प्लॉटर एक चर को परिभाषित करता है और फ़ंक्शन को प्लॉट करता है</string>
+   
+  <!-- Pour le message d'erreur de sauvegarde -->
+      
+  <string name="hint_result_here">परिणाम यहां देखें</string>
+  
+</resources>

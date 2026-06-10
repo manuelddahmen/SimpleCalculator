@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2024.
+  ~
+  ~
+  ~  Copyright 2012-2023 Manuel Daniel Dahmen
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~  http://www.apache.org/licenses/LICENSE-2.0
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  ~
+  ~
+  -->
+<ScrollView android:id="@+id/root_activity_calc"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context=".MainActivity"
+        >
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/app_bar_height"
+            android:fitsSystemWindows="true"
+            android:theme="@style/Theme.SimpleCalculator.AppBarOverlay">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:toolbarId="@+id/toolbar">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/Theme.SimpleCalculator.PopupOverlay" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginVertical="100dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+
+                >
+
+                <EditText
+                    android:id="@+id/editTextCalculus"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:autofillHints="@string/edit_text_here_or_by_push_numbers"
+                    android:ems="10"
+                    android:textSize="12dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="@string/edit_text_here_or_by_push_numbers"
+                    android:inputType="textPersonName"
+                    android:labelFor="@id/answerText"
+                    android:textAlignment="textStart"
+                    android:scrollbarAlwaysDrawVerticalTrack="false"
+                    tools:ignore="DuplicateSpeakableTextCheck"
+                    android:theme="?android:attr/buttonBarButtonStyle"
+                    android:layout_marginTop="50dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                >
+
+                <Button
+                    android:id="@+id/button1"
+
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+
+                    android:layout_height="match_parent"
+                    android:text="@string/_1" />
+
+                <Button
+                    android:id="@+id/button2"
+
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/_2" />
+
+                <Button
+                    android:id="@+id/button3"
+
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/_3"
+                    android:textAlignment="center"
+                    android:textColorHint="#FBD3D3" />
+
+                <Button
+                    android:id="@+id/buttonParenthesisA"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="267dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/open_brace"
+                    android:textColorHighlight="#7E66A8" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button4"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/_4" />
+
+                <Button
+                    android:id="@+id/button5"
+
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/_5" />
+
+                <Button
+                    android:id="@+id/button6"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/_6" />
+
+                <Button
+                    android:id="@+id/buttonFunction"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:width="128dp"
+                    android:text="function(" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button7"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/_7" />
+
+                <Button
+                    android:id="@+id/button8"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/_8" />
+
+                <Button
+                    android:id="@+id/button9"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/_9" />
+
+                <Button
+                    android:id="@+id/buttonParenthesis"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:width="48dp"
+                    android:text="@string/close_brace" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/dotButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/DOT" />
+
+                <Button
+                    android:id="@+id/button0"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/_0" />
+
+                <Button
+                    android:id="@+id/equalButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/EQUALS" />
+
+                <Button
+                    android:id="@+id/buttonComa"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="275dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/coma" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/addButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/ADD" />
+
+                <Button
+                    android:id="@+id/multButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/MUL" />
+                <!--
+        <Button
+            android:id="@+id/sqrtButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/sqrt"
+            app:layout_constraintStart_toEndOf="@id/multButton"
+            app:layout_constraintTop_toBottomOf="@id/equalButton" />
+        -->
+                <Button
+                    android:id="@+id/delButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DEL" />
+
+                <Button
+                    android:id="@+id/buttonFunctionMultiple"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="271dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:width="128dp"
+                    android:text="@string/fx" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/substractButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/SUB" />
+
+                <Button
+                    android:id="@+id/divideButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/DIV" />
+
+                <Button
+                    android:id="@+id/expButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/EXP" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/textCalculatorButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_weight="0.5"
+                    android:autoSizeTextType="uniform"
+                    android:textColor="#0000FF"
+                    android:text="@string/text_calculator"/>
+                <Button
+                    android:id="@+id/your_button_id_to_open_graph_activity"
+                    android:layout_width="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_height="36dp"
+                    android:text="@string/title_activity_graph"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:autofillHints="Result here"
+                    android:id="@+id/answerText"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="monospace"
+                    android:ems="10"
+                    android:textSize="12dp"
+
+                    android:typeface="monospace" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/AboutButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/about_and_policies" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</ScrollView>

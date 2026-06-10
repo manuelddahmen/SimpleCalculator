@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024.
+ * Copyright (c) 2024-2025.
  *
  *
  *  Copyright 2012-2023 Manuel Daniel Dahmen
@@ -20,24 +20,3 @@
 
 package one.empty3.apps.simplecalculator
 
-import com.google.firebase.Firebase
-import com.google.firebase.vertexai.type.GenerateContentResponse
-import com.google.firebase.vertexai.type.GenerationConfig
-import com.google.firebase.vertexai.vertexAI
-import java.util.concurrent.Flow
-
-class GeminiCall {
-    fun call(generativeModel: com.google.firebase.vertexai.GenerativeModel): kotlinx.coroutines.flow.Flow<GenerateContentResponse> {
-        // Initialize the Vertex AI service and the generative model
-// Specify a model that supports your use case
-// Gemini 1.5 Pro is versatile and can accept both text-only and multimodal prompt inputs
-
-// Provide a prompt that includes only text
-        val prompt = "Write a story about a magic backpack."
-
-// To stream generated text output, call generateContentStream and pass in the prompt
-        var response = ""
-        val resp:kotlinx.coroutines.flow.Flow<GenerateContentResponse>  = generativeModel.generateContentStream(prompt)
-        return resp
-    }
-}

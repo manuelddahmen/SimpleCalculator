@@ -30,27 +30,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
-import one.empty3.library1.tree.functions.ListVecDoublesFunction
+import one.empty3.library1.tree.Functions
+import one.empty3.library1.tree.functions.ListMathDoubleFunction
 
 class ChooseFxDialogFragment : DialogFragment() {
     public var isExited: Boolean = false
     var functionName = ""
     private lateinit var rv: RecyclerView
-    private lateinit var main2022: ListVecDoublesFunction
+    private var main2022: List<String> = Functions.getListOfFunctions()
     var function : String = ""
     var selectedItem = -1
 
 
-    public fun setMainAnd(main2022 : ListVecDoublesFunction, rv: RecyclerView) {
-        this.main2022 = main2022
-        ListVecDoublesFunction.functionName = ""
+    public fun setMainAnd(rv: RecyclerView) {
+        ListVecDoubleFunction.functionName = ""
+        Main.functionName = ""
         this.rv = rv
     }
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val ret =  activity?.let {
-            val mathList : Array<String> = ListVecDoublesFunction.getList()
+        val ret = activity?.let {
+            val mathList : Array<String> = Functions.getListOfFunctions().toTypedArray()
 
             val builder = AlertDialog.Builder(it)
             // Get the layout inflater
@@ -63,7 +64,7 @@ class ChooseFxDialogFragment : DialogFragment() {
                 // Add action buttons
                 .setPositiveButton(R.string.fragment_function_ok,
                     DialogInterface.OnClickListener { dialog, id ->
-                        this.functionName =  ListVecDoublesFunction.functionName
+                        this.functionName = Main.functionName
                         isExited = true;
 
                     })

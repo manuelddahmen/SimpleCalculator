@@ -28,7 +28,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import javaAnd.awt.Color
+//import one.empty3.libs.Color
 
 import one.empty3.apps.simplecalculator.placeholder.PlaceholderContent.PlaceholderItem
 import one.empty3.apps.simplecalculator.databinding.FragmentItemBinding

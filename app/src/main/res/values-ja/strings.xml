@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+      
+  <string name="app_name" translatable="false">Sci-prog Calculator</string>
+      
+  <string name="_1">1</string>
+      
+  <string name="_2">2</string>
+      
+  <string name="_3">3</string>
+      
+  <string name="_4">4</string>
+      
+  <string name="_5">5</string>
+      
+  <string name="_6">6</string>
+      
+  <string name="_7">7</string>
+      
+  <string name="_8">8</string>
+      
+  <string name="_9">9</string>
+      
+  <string name="DOT">。</string>
+      
+  <string name="_0">0</string>
+      
+  <string name="EQUALS">＝</string>
+      
+  <string name="ADD">+</string>
+      
+  <string name="MUL">*</string>
+      
+  <string name="sqrt">平方</string>
+      
+  <string name="SUB">-</string>
+      
+  <string name="DIV">/</string>
+      
+  <string name="EXP">^</string>
+      
+  <string name="edit_text_here_or_by_push_numbers">ここでテキストを編集するか、数字を押して編集します</string>
+      
+  <string name="result">結果</string>
+      
+  <string name="about_and_policies">会社概要とプライバシーポリシー</string>
+      
+  <string name="POLICY_URI">https://empty3.app/android/ユーザーポリシーとファミリーポリシー Empty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_dans_l_application_image_featuring_les_seules_donn_es_auxquelles_l_application_acc_de_sont_les_fichiers_multim_dia_ouvert_par_le_bouton_prise_de_vue_ou_choisir_un_fichier_ceux_ci_sont_trait_s_par_l_application_et_ventuellement_des_copies_de_travail_sont_stock_es_dans_le_r_pertoire_data_de_l_application_et_figure_donc_sur_le_syst_me_dans_un_format_ou_l_autre_dans_une_future_version_il_sera_possible_de_partager_vos_r_sultats_avec_d_autres_utilisateurs_internautes_ces_donn_es_sont_consid_r_es_par_nous_dahmen_manuel_at_empty3_one_comme_priv_es_et_ne_sont_pas_collect_es_ni_trait_es_par_nos_services">Données utilisateur personles et sensibles Dans l\'application image featuring les seules données auxquelles l\'application accède Sont les fichiers multimedia ouvert par le bouton award de vue ou choisir un fichier. Ceux-ci Sont traités par l\'application et éventuellement des Copy de travail Sont Stockées dans le répertoire data de l\'application et Figure donc sur le système dans un format ou l\'autre. 将来のバージョンは、実用化、国際的な成果を得ることができる可能性があります。Ces données Sont considérées par nous, DAHMEN Manuel at empty3.one comme privées et ne Sont pas collectionées, ni traitées par nos services.</string>
+      
+  <string name="title_activity_formula_store">フォーミュラストア</string>
+      
+  <string name="store_formula">ストアフォーミュラ</string>
+      
+  <string name="add">追加</string>
+      
+  <string name="DEL">&lt;&lt;&lt;</string>
+      
+  <string name="back">戻る</string>
+      
+  <string name="accept_user_data_management_policy_and_privacy">ユーザーデータ管理ポリシーとプライバシーに同意する</string>
+      
+  <string name="about_privacy">プライバシーについて</string>
+      
+  <string name="dialog_message">機能を選択する</string>
+      
+  <string name="dialog_title">定義済み関数</string>
+      
+  <string name="cancel_button">キャンセル</string>
+      
+  <string name="ok_button">わかりました</string>
+      
+  <string name="open_brace">（</string>
+      
+  <string name="close_brace">）</string>
+      
+  <string name="coma">、</string>
+      
+  <string name="fragment_function_ok">わかりました</string>
+      
+  <string name="fragment_function_cancel">キャンセル</string>
+      
+  <string name="function_string">関数文字列</string>
+      
+  <string name="title_activity_scrolling">計算ノート</string>
+      
+  <string name="action_settings">設定</string>
+      
+  <string name="instructions"/>
+      
+  <string name="text_calculator">文章</string>
+      
+  <string name="title_activity_settings">設定アクティビティ</string>
+      
+  <!-- Preference Titles -->
+      
+  <string name="messages_header">メッセージ</string>
+      
+  <string name="sync_header">同期</string>
+      
+  <!-- Messages Preferences -->
+      
+  <string name="signature_title">あなたの署名</string>
+      
+  <string name="reply_title">デフォルトの返信アクション</string>
+      
+  <!-- Sync Preferences -->
+      
+  <string name="sync_title">メールを定期的に同期する</string>
+      
+  <string name="attachment_title">受信した添付ファイルをダウンロードする</string>
+      
+  <string name="attachment_summary_on">受信メールの添付ファイルを自動的にダウンロードする</string>
+      
+  <string name="attachment_summary_off">手動でリクエストされた場合にのみ添付ファイルをダウンロードする</string>
+      
+  <string name="empty_string"/>
+      
+  <string name="textCalculatorTextMultiLine">複数行のスクリプト</string>
+      
+  <string name="com.crashlytics.android.build_id" translatable="false">1</string>
+      
+  <string name="com.google.firebase.crashlytics.mapping_file_id" translatable="false">none</string>
+      
+  <string name="numeric_calculus_script" translatable="false">Numeric calculus script</string>
+      
+  <string name="execute_code">コードを実行する</string>
+      
+  <string name="POLICY_URI_INT">https://empty3.app/android/ユーザーポリシーとファミリーポリシー Empty3.html</string>
+      
+  <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">個人情報および機密性の高いユーザーデータ。詳細についてはリンクをご覧ください</string>
+      
+  <string name="fx">外為(</string>
+      
+  <string name="privacy_policy_link_text">プライバシーポリシーをオンラインで見る: https://empty3.app/android/privacy.html</string>
+      
+  <string name="title_activity_privacy_policy">プライバシーポリシー</string>
+      
+  <string name="title_activity_graph">グラフプロッター</string>
+      
+  <string name="hint_formula_x">式 X（例：t*cos(t)）</string>
+      
+  <string name="hint_formula_y">式 Y（例：t*sin(t)）</string>
+      
+  <string name="hint_formula_fx">y = f(x) （例：x^2）</string>
+      
+  <string name="button_plot">グラフをプロットする</string>
+      
+  <string name="button_download_image">画像をダウンロード</string>
+      
+  <string name="content_description_graph_image">プロットされたグラフ画像</string>
+          
+  <string name="hint_x_min">X 分</string>
+          
+  <string name="hint_x_max">X マックス</string>
+      
+  <!-- ... existing strings ... -->
+      
+  <string name="hint_y_min">Y 最小値（例： -10）</string>
+      
+  <string name="hint_y_max">Y 最大値（例： 10）</string>
+      
+  <!-- ... autres chaînes ... -->
+      
+  <string name="button_save_image">保存</string>
+      
+  <string name="button_share_image">共有</string>
+      
+  <string name="share_image_title">グラフ画像を共有</string>
+      
+  <string name="error_no_image_to_share">共有できる画像がありません。</string>
+      
+  <string name="error_failed_to_share_image">画像の共有に失敗しました。</string>
+      
+  <string name="image_saved_to">画像を %s に保存しました</string>
+   
+  <!-- Pour le message de sauvegarde -->
+      
+  <string name="failed_to_save_image">画像の保存に失敗しました: %s</string>
+      
+  <string name="error_syntax">構文エラー</string>
+      
+  <string name="error_not_a_number">数字ではない</string>
+      
+  <string name="error_x_max_lt_x_min">X 最大値は X 最小値より大きい必要があります</string>
+      
+  <string name="error_y_max_lt_y_min">Y 最大値は Y 最小値より大きくなければなりません</string>
+      
+  <string name="error_invalid_input">無効な入力</string>
+      
+  <string name="error_x_min_lt_x_max">X 最小値は X 最大値より小さくなければなりません。</string>
+      
+  <string name="error_y_min_lt_y_max">Y 最小値は Y 最大値より小さくなければなりません。</string>
+      
+  <string name="error_syntax_with_message">構文エラー: %s</string>
+      
+  <string name="error_plotting_with_message">プロットエラー: %s</string>
+      
+  <string name="file_name_prefix">グラフ_%s _</string>
+      
+  <string name="file_name_suffix">.png</string>
+      
+  <string name="storage_directory">シンプルな計算機</string>
+      
+  <string name="error_could_not_create_file">ファイルを作成できませんでした</string>
+      
+  <string name="graph_plotter_description">グラフプロッタは変数を定義して関数をプロットします</string>
+   
+  <!-- Pour le message d'erreur de sauvegarde -->
+      
+  <string name="hint_result_here">結果はこちら</string>
+  
+</resources>

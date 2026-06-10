@@ -31,6 +31,7 @@ import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import kotlin.Array
 import kotlin.math.pow
 
 /**
@@ -43,7 +44,7 @@ class TestAlgebraicTreeVector() {
         expr: String,
         expectedResult: Double,
         map: Map<String, Double>,
-        echo: Boolean
+        echo: Boolean,
     ) {
         var algebraicTree: AlgebraicTree?
         try {
@@ -124,7 +125,7 @@ class TestAlgebraicTreeVector() {
     protected fun testConstructOrEvalFails(
         expr: String,
         expectedResult: Double,
-        echo: Boolean
+        echo: Boolean,
     ): Boolean {
         var algebraicTree: AlgebraicTree?
         try {
@@ -500,9 +501,6 @@ class TestAlgebraicTreeVector() {
         testResultVariable("sin(r*10)", Math.sin(r * 10), vars, true)
     }
 
-    companion object {
-        private val DELTA = Double.MIN_VALUE
-    }
 
     @Test
     fun testVectorSimple1() {
@@ -538,10 +536,9 @@ class TestAlgebraicTreeVector() {
         expr: String,
         expectedResult: Vec,
         map: HashMap<String, Double>,
-        echo: Boolean
+        echo: Boolean,
     ) {
         var algebraicTree: AlgebraicTree?
-        var assertion: Boolean
         try {
             println("Expression string : $expr")
             algebraicTree = AlgebraicTree(expr)
@@ -554,6 +551,7 @@ class TestAlgebraicTreeVector() {
                 println("Result : $result")
                 if (echo) println("Expected : $expectedResult")
 
+                var assertion: Boolean
 
                 try {
                     if (vecEqualsSM(result, expectedResult)) {
@@ -571,17 +569,15 @@ class TestAlgebraicTreeVector() {
 
             } catch (e: TreeNodeEvalException) {
                 e.printStackTrace()
-                assertion = false
+                Assert.assertFalse(true)
             }
         } catch (e: AlgebraicFormulaSyntaxException) {
             e.printStackTrace()
-            assertion = false
+            Assert.assertFalse(true)
         } catch (ex: NullPointerException) {
             ex.printStackTrace()
-            assertion = false
+            Assert.assertFalse(true)
         }
-
-        assertTrue(assertion)
     }
 
     @Test
@@ -614,6 +610,17 @@ class TestAlgebraicTreeVector() {
         val vars = HashMap<String, Double>()
         vars["r"] = r
         testResultVariableVec("(2,1,2)*(2,2,3)", Vec(4.0, 2.0, 6.0), vars, true)
+    }
+
+    @Test
+    fun testForVectorSumOfComponents() {
+        val r = 12.0
+        val vars = HashMap<String, Double>()
+        vars["r"] = r
+        testResultVariableVec(
+            "sum((2,1,2,2,2,3))",
+            Vec(12.0), vars, true
+        )
     }
 
     @Test
@@ -796,8 +803,8 @@ class TestAlgebraicTreeVector() {
         } catch (ex: RuntimeException) {
             ex.printStackTrace()
         }
-        println("" + parse + "/" + input.length)
-        assertTrue(parse + 2 >= input.length)
+        println("" + stringAnalyzer3.mPosition + "/" + input.length)
+        assertTrue(stringAnalyzer3.mPosition + 2 >= input.length)
     }
 
     @Test
@@ -891,13 +898,26 @@ class TestAlgebraicTreeVector() {
         listInstructions.addInstructions(
             "x=(1,2,3)\n"
                     + "y=(5,6,7)\n"
-                    + "z=x+y"
+                    + "z=x+y\n"
+                    + "1=\n"
+                    + "2*2\n"
+                    + "4*4\n" +
+                    "#comment to keep\n" +
+                    "## Comment to renew or erase if no instruction generates it\n"
         )
-        println(listInstructions.runInstructions())
+        val list = listInstructions.runInstructions()
+        System.out.println()
+        System.out.println()
+        System.out.println("((((((((((((((((((((((((((((((((((((((((")
+        list.forEach(System.out::println)
+        System.out.println("))))))))))))))))))))))))))))))))))))))))")
+        System.out.println()
+        System.out.println()
 
         println("x: " + listInstructions.getCurrentParamsValuesVecComputed()!!["x"]!!)
         println("y: " + listInstructions.getCurrentParamsValuesVecComputed()!!["y"]!!)
         println("z: " + listInstructions.getCurrentParamsValuesVecComputed()!!["z"]!!)
+
 
         var assertion = false
         try {
@@ -950,4 +970,13 @@ class TestAlgebraicTreeVector() {
         }
     }
 
+    companion object {
+        private val DELTA = Double.MIN_VALUE
+
+        @JvmStatic
+        fun main(args: Array<String>) {
+
+        }
+    }
 }
+

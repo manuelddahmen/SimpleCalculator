@@ -24,17 +24,14 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import javaAnd.awt.Color
 
-import one.empty3.apps.simplecalculator.placeholder.PlaceholderContent.PlaceholderItem
 import one.empty3.apps.simplecalculator.databinding.FragmentItemBinding
-import one.empty3.library1.tree.functions.ListVecDoublesFunction
+import one.empty3.library1.tree.Functions
 
-class MyStringRecyclerViewAdapterFunctionList(private var values: Array<String> = ListVecDoublesFunction.getList()) :
+class MyStringRecyclerViewAdapterFunctionList(private var values: Array<String> = one.empty3.library1.tree.Functions.getListOfFunctions().toTypedArray()) :
             RecyclerView.Adapter<MyStringRecyclerViewAdapterFunctionList.ViewHolder>(),
     Parcelable {
 
@@ -76,17 +73,17 @@ class MyStringRecyclerViewAdapterFunctionList(private var values: Array<String> 
                     (tv2).text = item
             holder.text = item
             holder.itemView.setOnClickListener {
-                ListVecDoublesFunction.functionName = tv2.text as String
+                Main.functionName = tv2.text as String
                 holder.itemView.setBackgroundColor(android.graphics.Color.BLUE)
                 Toast.makeText(rvVec.context, item, Toast.LENGTH_LONG).show()
             }
             tv1.setOnClickListener {
-                ListVecDoublesFunction.functionName = tv2.text as String
+                Main.functionName = tv2.text as String
                 tv1.setBackgroundColor(android.graphics.Color.BLUE)
                 Toast.makeText(rvVec.context, item, Toast.LENGTH_LONG).show()
             }
             tv2.setOnClickListener {
-                ListVecDoublesFunction.functionName = tv2.text as String
+                Main.functionName = tv2.text as String
                 tv2.setBackgroundColor(android.graphics.Color.BLUE)
                 Toast.makeText(rvVec.context, item, Toast.LENGTH_LONG).show()
             }

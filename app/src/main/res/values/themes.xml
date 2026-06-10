@@ -42,4 +42,19 @@
     <style name="Theme.SimpleCalculator.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.SimpleCalculator.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+<!-- res/values/themes.xml -->
+    <style name="Theme.YourApp.EdgeToEdge"
+        parent="Theme.Material3.DayNight.NoActionBar"> <!-- ou Theme.MaterialComponents.* -->
+        <!-- Rendre la barre de statut transparente -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!-- Rendre la barre de navigation transparente -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+
+        <!-- API 29+ pour le contraste des barres système (optionnel mais recommandé) -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true
+        </item> <!-- Icônes de statut sombres pour fond clair -->
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true
+        </item> <!-- Icônes de navigation sombres pour fond clair -->
+    </style>
+
 </resources>
