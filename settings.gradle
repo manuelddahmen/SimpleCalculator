@@ -2,9 +2,6 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         google()
-        maven {
-            url 'https://developer.huawei.com/repo/'
-        }
         mavenCentral()
         mavenLocal()
     }
