@@ -1,0 +1,205 @@
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\r\napply plugin: 'com.google.gms.google-services'\r\napply plugin: 'com.google.firebase.crashlytics'\r\napply plugin: 'kotlin-android'\r\napply plugin: 'maven-publish'\r\n\r\nif (hasProperty('buildScan')) {\r\n    buildScan {\r\n        termsOfServiceUrl = 'https://gradle.com/terms-of-service'\r\n        termsOfServiceAgree = 'yes'\r\n    }\r\n}\r\n\r\n\r\ndef versionCode1000 = 406999600 //???\r\ndef kotlin_version = '2.0.21'\r\ndef javaVersionEnum = JavaVersion.VERSION_21\r\ndef javaVersion = \"21\"\r\n\r\njava {\r\n    toolchain {\r\n        languageVersion.set(JavaLanguageVersion.of(javaVersion))\r\n    }\r\n}\r\nkotlin {\r\n    jvmToolchain {\r\n        languageVersion.set(JavaLanguageVersion.of(javaVersion))\r\n    }\r\n}\r\nandroid {\r\n    namespace 'one.empty3.apps.simplecalculator'\r\n\r\n    packagingOptions {\r\n        resources {\r\n            excludes += ['/META-INF/{AL2.0,LGPL2.1}', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module', 'xsd/catalog.xml', 'META-INF/LICENSE.md', 'META-INF/NOTICE.md', 'META-INF/io.netty.versions.properties', 'META-INF/INDEX.LIST']\r\n        }\r\n    }\r\n    signingConfigs {\r\n        debug {\r\n            storeFile file('C:\\\\Users\\\\manue\\\\keystore')\r\n            storePassword 'faeeagrzdsd'\r\n            keyAlias 'upload'//manuel\r\n            keyPassword 'faeeagrzdsd'\r\n        }\r\n        release {\r\n            storeFile file('C:\\\\Users\\\\manue\\\\keystore')\r\n            storePassword 'faeeagrzdsd'\r\n            keyAlias 'upload'//manuel\r\n            keyPassword 'faeeagrzdsd'\r\n        }\r\n    }\r\n    lint {\r\n        baseline = file(\"lint-baseline.xml\")\r\n    }\r\n\r\n    dependenciesInfo {\r\n        // Disables dependency metadata when building APKs.\r\n        includeInApk = false\r\n        // Disables dependency metadata when building Android App Bundles.\r\n        includeInBundle = false\r\n    }\r\n\r\n    compileOptions {\r\n        sourceCompatibility = javaVersionEnum\r\n        targetCompatibility = javaVersionEnum\r\n    }\r\n\r\n    kotlinOptions {\r\n        jvmTarget = javaVersionEnum\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            shrinkResources true\r\n            minifyEnabled true\r\n            debuggable false\r\n            // Includes the default ProGuard rules files that are packaged with\r\n            // the Android Gradle plugin. To learn more, go to the section about\r\n            // R8 configuration files.\r\n            proguardFiles getDefaultProguardFile(\r\n                    'proguard-android-optimize.txt'),\r\n                    'proguard-rules.pro'\r\n            ndk {\r\n                debugSymbolLevel = 'full'\r\n            }\r\n            /* Add the firebaseCrashlytics extension (by default,\r\n            * it's disabled to improve build speeds) and set\r\n            * nativeSymbolUploadEnabled to true along with a pointer to native libs. */\r\n\r\n            // Add this extension\r\n            firebaseCrashlytics {\r\n                // Enable processing and uploading of native symbols to Firebase servers.\r\n                // By default, this is disabled to improve build speeds.\r\n                // This flag must be enabled to see properly-symbolicated native\r\n                // stack traces in the Crashlytics dashboard.\r\n                nativeSymbolUploadEnabled true\r\n                //strippedNativeLibsDir 'build/intermediates/stripped_native_libs/release/out/lib'\r\n                //unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'\r\n            }\r\n        }\r\n\r\n        debug {\r\n            debuggable true\r\n            //buildConfigField \"Boolean\", \"DEBUG_MODE\", \"false\"\r\n            ndk {\r\n                debugSymbolLevel 'FULL'\r\n            }\r\n        }\r\n    }\r\n\r\n    compileOptions {\r\n        sourceCompatibility javaVersionEnum\r\n        targetCompatibility javaVersionEnum\r\n    }\r\n    sourceSets {\r\n        main.java.srcDirs += 'src/main/kotlin'\r\n        main.kotlin.srcDirs += 'src/main/java'\r\n    }\r\n\r\n    kotlinOptions {\r\n        jvmTarget = javaVersion\r\n    }\r\n\r\n\r\n    packagingOptions {\r\n        resources {\r\n            excludes += '/META-INF/{AL2.0,LGPL2.1}'\r\n        }\r\n    }\r\n    lint {\r\n        baseline file('lint-baseline.xml')\r\n    }\r\n\r\n\r\n    configurations {\r\n        all*.exclude group: 'xpp3', module: 'xpp3'\r\n        all*.exclude group: 'xml-apis', module: 'xml-apis'\r\n        all*.exclude group: 'net.sf.kxml', module: 'kxml2'\r\n        all*.exclude group: 'xmlpull', module: 'xmlpull'\r\n        all*.exclude group: 'com.sun.activation', module: 'javax.activation'\r\n        //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-compiler-embeddable'\r\n        //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin-api'\r\n        all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin'\r\n        //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-build-common'\r\n        all {\r\n            resolutionStrategy {\r\n                force(\"org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.6.2\")\r\n                force 'org.xerial:sqlite-jdbc:3.34.0'\r\n                //force 'xpp3:xpp3:1.1.4c'\r\n                force 'jakarta.activation:jakarta.activation-api:1.2.1'\r\n                //force 'org.jetbrains.kotlin:kotlin-compiler-embeddable:1.8.0'\r\n                //force 'org.jetbrains.kotlin:kotlin-build-common:1.8.0'\r\n                //force 'net.sf.kxml:kxml2:2.3.0'\r\n                //force 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'\r\n                //force ' xmlpull:xmlpull:1.1.3.1'\r\n                //force 'org.jetbrains.kotlin:kotlin-compiler:1.8.0'\r\n                //force 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'\r\n                // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-reflect\r\n                //force group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: '1.8.0'\r\n// https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-reflect\r\n                //force group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.8.0'\r\n\r\n            }\r\n        }\r\n    }\r\n\r\n    testOptions {\r\n        unitTests.returnDefaultValues = true\r\n    }\r\n\r\n\r\n    buildFeatures {\r\n        viewBinding true\r\n        dataBinding true\r\n        compose false\r\n    }\r\n\r\n    defaultConfig {\r\n        //resourceConfigurations += ['en']\r\n        javaVersionEnum\r\n        compileSdk 35\r\n        compileSdkVersion 35\r\n        targetSdk 35\r\n        minSdkVersion 24\r\n        versionName \"9.1\"\r\n        versionCode versionCode1000\r\n        signingConfig signingConfigs.release\r\n    }\r\n\r\n    testOptions {\r\n        unitTests.returnDefaultValues = true\r\n    }\r\n\r\n}\r\n\r\n\r\ndependencies {\r\n\r\n    implementation 'com.google.android.play:integrity:1.3.0'\r\n    // Import the Firebase BoM\r\n    implementation platform('com.google.firebase:firebase-bom:33.5.0')\r\n    implementation 'com.google.firebase:firebase-analytics'\r\n    implementation 'com.google.firebase:firebase-analytics-ktx'\r\n    implementation 'com.google.firebase:firebase-crashlytics'\r\n    implementation 'com.google.firebase:firebase-crashlytics-ktx'\r\n\r\n    // Add the dependencies for any other desired Firebase products\r\n    // https://firebase.google.com/docs/android/setup#available-libraries\r\n    implementation \"com.google.gms.google-services:com.google.gms.google-services.gradle.plugin:4.4.2\"\r\n    implementation 'com.google.firebase:firebase-crashlytics-buildtools:3.0.2'\r\n    implementation \"com.google.android.play:integrity:1.3.0\"\r\n    implementation \"com.google.firebase:firebase-crashlytics\"\r\n    implementation \"com.google.firebase:firebase-crashlytics-ktx\"\r\n    implementation 'androidx.core:core-ktx:1.15.0'\r\n    implementation 'androidx.appcompat:appcompat:1.7.0'\r\n    implementation 'com.google.android.material:material:1.12.0'\r\n    implementation 'androidx.appcompat:appcompat:1.7.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'\r\n    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.7'\r\n    implementation 'androidx.recyclerview:recyclerview:1.3.2'\r\n    implementation 'androidx.work:work-runtime-ktx:2.9.0'\r\n    implementation 'androidx.preference:preference-ktx:1.2.1'\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.2.1'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'\r\n    // add the dependency for the Vertex AI SDK for Android\r\n    implementation(\"com.google.firebase:firebase-vertexai:16.0.0-beta02\")\r\n\r\n    def billingVersion = \"7.0.0\"\r\n\r\n    implementation \"com.android.billingclient:billing:$billingVersion\"\r\n\r\n    implementation 'one.empty3.libs:commons-mp:0.0.17-17'\r\n    implementation(\"one.empty3:empty3-library-mp:2026.6.7\") {\r\n        exclude module: 'one.empty3.libs:partial-desktop'\r\n        exclude module: 'jackson-core', group: 'com.fasterxml.jackson.core'\r\n        exclude module: 'java-function-invoker', group: 'com.google.cloud.functions.invoker'\r\n        exclude group: 'org.bytedeco', module: 'javacv-platform'\r\n        // --- Media and UI Libraries (Not for Android) ---\r\n        exclude group: \"org.jcodec\", module: \"jcodec-javase\"\r\n        exclude group: \"com.miglayout\", module: \"miglayout\"\r\n        exclude group: \"xom\", module: \"xom\"\r\n        exclude group: \"com.jgoodies\", module: \"jgoodies-common\"\r\n        exclude group: \"com.jgoodies\", module: \"jgoodies-forms\"\r\n        exclude group: \"xerces\", module: \"xercesImpl\"\r\n        exclude group: \"org.jdesktop\", module: \"beansbinding\"\r\n        exclude group: \"com.github.sarxos\", module: \"webcam-capture\"\r\n        exclude group: \"commons-net\", module: \"commons-net\"\r\n        exclude group: \"org.bytedeco\", module: \"javacv-platform\"\r\n\r\n        // --- XML Processing (Not for Android) ---\r\n        exclude group: \"org.jdom\", module: \"jdom2\"\r\n        exclude group: \"org.apache.servicemix.bundles\", module: \"org.apache.servicemix.bundles.jdom\"\r\n        exclude group: \"org.apache.santuario\", module: \"xmlsec\"\r\n\r\n        // --- Full Google Cloud/Server-side Libraries (Not for Android) ---\r\n        exclude group: \"com.google.cloud\", module: \"libraries-bom\"\r\n        exclude group: \"com.google.cloud\", module: \"google-cloud-vision\"\r\n        exclude group: \"com.google.cloud\", module: \"google-cloud-storage\"\r\n        exclude group: \"com.google.apis\", module: \"google-api-services-vision\"\r\n        exclude group: \"com.google.auth\", module: \"google-auth-library-oauth2-http\"\r\n        exclude group: \"com.google.auth\", module: \"google-auth-library-credentials\"\r\n        exclude group: \"com.google.http-client\", module: \"google-http-client-jackson2\"\r\n        exclude group: \"com.google.cloud.functions\", module: \"functions-framework-api\"\r\n        exclude group: \"dev.openfunction.functions\", module: \"functions-framework-invoker\"\r\n\r\n        // --- Other Conflicting/Unused Libraries ---\r\n        exclude group: \"com.google.guava\", module: \"guava\"\r\n        // Prefer Android-specific guava if needed\r\n        exclude group: \"com.google.android.gms\", module: \"play-services-vision\"\r\n        // Deprecated, use ML Kit\r\n        exclude group: \"com.google.code.gson\", module: \"gson\"\r\n        exclude group: \"org.danilopianini\", module: \"gson-extras\"\r\n        exclude group: \"com.google.code.gson\", module: \"gson-parent\"\r\n        exclude group: \"org.bytedeco\", module: \"javacpp\"\r\n        exclude group: \"org.bytedeco\", module: \"videoinput\"\r\n        exclude group: \"org.bytedeco\", module: \"opencv\"\r\n        exclude group: \"org.bytedeco\", module: \"tesseract\"\r\n        exclude group: \"org.bytedeco\", module: \"openblas\"\r\n        exclude group: \"org.bytedeco\", module: \"librealsense2\"\r\n        exclude group: \"org.bytedeco\", module: \"ffmpeg\"\r\n        exclude group: \"org.bytedeco\", module: \"javacv-platform\"\r\n        exclude group: \"org.bytedeco\", module: \"javacpp-platform\"\r\n        exclude group: \"org.bytedeco\", module: \"opencv-platform\"\r\n        exclude group: \"org.bytedeco\", module: \"ffmpeg-platform\"\r\n        exclude group: \"org.bytedeco\", module: \"tesseract-platform\"\r\n        exclude group: \"org.bytedeco\", module: \"openblas-platform\"\r\n        exclude group: \"org.bytedeco\", module: \"librealsense2-platform\"\r\n        exclude group: \"org.bytedeco\", module: \"leptonica\"\r\n\r\n    }\r\n\r\n}\r\n\r\nProperties properties = new Properties()\r\ntry {\r\n    // Other configuration here\r\n    File propertiesFile = new File('../../private.properties/gradle.properties')\r\n    propertiesFile.withInputStream {\r\n        properties.load(it)\r\n\r\n    }\r\n} catch (Exception ex) {\r\n    ex.printStackTrace()\r\n}\r\n\r\n\r\npublishing {\r\n    publications {\r\n        maven(MavenPublication) {\r\n            groupId = \"one.empty3.apps\"\r\n            artifactId = \"simplecalculator\"\r\n            version = \"9.1\"\r\n        }\r\n    }\r\n    repositories {\r\n        maven {\r\n            url \"https://maven.pkg.jetbrains.space/empty3/p/empty3/mavensimplecalculator\"\r\n            credentials {\r\n                username = properties.get(\"spaceUsername\")\r\n                password = properties.get(\"spacePassword\")\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n\r\njava {\r\n    sourceCompatibility = javaVersionEnum\r\n    targetCompatibility = javaVersionEnum\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision 04f4222ba2a737605d1dfb14d7342f7944db7b3f)
++++ b/app/build.gradle	(date 1781088364988)
+@@ -206,27 +206,27 @@
+ 
+     // Add the dependencies for any other desired Firebase products
+     // https://firebase.google.com/docs/android/setup#available-libraries
+-    implementation "com.google.gms.google-services:com.google.gms.google-services.gradle.plugin:4.4.2"
+-    implementation 'com.google.firebase:firebase-crashlytics-buildtools:3.0.2'
+-    implementation "com.google.android.play:integrity:1.3.0"
++    implementation "com.google.gms.google-services:com.google.gms.google-services.gradle.plugin:4.4.4"
++    implementation 'com.google.firebase:firebase-crashlytics-buildtools:3.0.7'
++    implementation "com.google.android.play:integrity:1.6.0"
+     implementation "com.google.firebase:firebase-crashlytics"
+     implementation "com.google.firebase:firebase-crashlytics-ktx"
+-    implementation 'androidx.core:core-ktx:1.15.0'
+-    implementation 'androidx.appcompat:appcompat:1.7.0'
+-    implementation 'com.google.android.material:material:1.12.0'
+-    implementation 'androidx.appcompat:appcompat:1.7.0'
+-    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.7'
+-    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+-    implementation 'androidx.work:work-runtime-ktx:2.9.0'
++    implementation 'androidx.core:core-ktx:1.19.0'
++    implementation 'androidx.appcompat:appcompat:1.7.1'
++    implementation 'com.google.android.material:material:1.14.0'
++    implementation 'androidx.appcompat:appcompat:1.7.1'
++    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
++    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.10.0'
++    implementation 'androidx.recyclerview:recyclerview:1.4.0'
++    implementation 'androidx.work:work-runtime-ktx:2.11.2'
+     implementation 'androidx.preference:preference-ktx:1.2.1'
+     testImplementation 'junit:junit:4.13.2'
+-    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
++    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
++    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
+     // add the dependency for the Vertex AI SDK for Android
+-    implementation("com.google.firebase:firebase-vertexai:16.0.0-beta02")
++    implementation("com.google.firebase:firebase-vertexai:16.5.0")
+ 
+-    def billingVersion = "7.0.0"
++    def billingVersion = "9.0.0"
+ 
+     implementation "com.android.billingclient:billing:$billingVersion"
+ 
+@@ -293,15 +293,15 @@
+ }
+ 
+ Properties properties = new Properties()
+-try {
+-    // Other configuration here
+-    File propertiesFile = new File('../../private.properties/gradle.properties')
+-    propertiesFile.withInputStream {
+-        properties.load(it)
+-
+-    }
+-} catch (Exception ex) {
+-    ex.printStackTrace()
++File propertiesFile = rootProject.file('../private.properties/gradle.properties')
++if (propertiesFile.exists()) {
++    try {
++        propertiesFile.withInputStream {
++            properties.load(it)
++        }
++    } catch (Exception ex) {
++        ex.printStackTrace()
++    }
+ }
+ 
+ 
+Index: settings.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>pluginManagement {\r\n    repositories {\r\n        gradlePluginPortal()\r\n        google()\r\n        mavenCentral()\r\n        mavenLocal()\r\n    }\r\n}\r\ndependencyResolutionManagement {\r\n\r\n    /**\r\n     * The dependencyResolutionManagement {repositories {...}}\r\n     * block is where you configure the repositories and dependencies used by\r\n     * all modules in your project, such as libraries that you are using to\r\n     * create your application. However, you should configure module-specific\r\n     * dependencies in each module-level build.gradle file. For new projects,\r\n     * Android Studio includes Google's Maven repository and the Maven Central\r\n     * Repository by default, but it does not configure any dependencies (unless\r\n     * you select a template that requires some).\r\n     */\r\n\r\n    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)\r\n    repositories {\r\n        google()\r\n        maven {\r\n            url 'https://developer.huawei.com/repo/'\r\n        }\r\n        mavenCentral()\r\n        maven {\r\n            url \"https://jitpack.io\"\r\n        }\r\n        maven {\r\n            url \"https://mvnrepository.com/\"\r\n        }\r\n        mavenLocal()\r\n    }\r\n}\r\nrootProject.name = \"Sci-prog Calculator\"\r\ninclude ':app'\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/settings.gradle b/settings.gradle
+--- a/settings.gradle	(revision 04f4222ba2a737605d1dfb14d7342f7944db7b3f)
++++ b/settings.gradle	(date 1781087815982)
+@@ -6,6 +6,9 @@
+         mavenLocal()
+     }
+ }
++plugins {
++    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.10.0'
++}
+ dependencyResolutionManagement {
+ 
+     /**
+Index: gradle.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#\r\n# Copyright (c) 2024.\r\n#\r\n#\r\n#  Copyright 2012-2023 Manuel Daniel Dahmen\r\n#\r\n#  Licensed under the Apache License, Version 2.0 (the \"License\");\r\n#  you may not use this file except in compliance with the License.\r\n#  You may obtain a copy of the License at\r\n#\r\n#  http://www.apache.org/licenses/LICENSE-2.0\r\n# Unless required by applicable law or agreed to in writing, software\r\n# distributed under the License is distributed on an \"AS IS\" BASIS,\r\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n# See the License for the specific language governing permissions and\r\n#  limitations under the License.\r\n#\r\n#\r\n#\r\n\r\n# Project-wide Gradle settings.\r\n# IDE (e.g. Android Studio) users:\r\n# Gradle settings configured through the IDE *will override*\r\n# any settings specified in this file.\r\n# For more details on how to configure your build environment visit\r\n# http://www.gradle.org/docs/current/userguide/build_environment.html\r\n# Specifies the JVM arguments used for the daemon process.\r\n# The setting is particularly useful for tweaking memory settings.\r\n#org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8\r\norg.gradle.jvmargs=-Xmx4048M -Dkotlin.daemon.jvm.options\\=\"-Xmx4048M\" -Dfile.encoding\\=UTF-8 --illegal-access\\=warn --add-exports jdk.compiler/com.sun.tools.javac.util\\=ALL-UNNAMED -Xmx2048M -Dfile.encoding\\=UTF-8 --add-exports jdk.compiler/com.sun.tools.javac.api\\=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.code\\=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.comp\\=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.file\\=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.parser\\=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.tree\\=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.main\\=ALL-UNNAMED --add-exports jdk.compiler/org.jetbrains.kotlin.kapt3.base.javac\\=ALL-UNNAMED --add-exports jdk.compiler/org.jetbrains.kotlin.kapt3.base.javac\\=ALL-UNNAMED --add-exports java.base/java.lang\\=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.jvm\\=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.processing\\=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.comp\\=ALL-UNNAMED --add-exports jdk.compiler/java.lang\\=ALL-UNNAMED --add-exports java.base/one.empty3.feature.app.maxSdk29.pro\\=ALL-UNNAMED --add-exports java.base/sun.nio.ch\\=ALL-UNNAMED\r\n\r\n# When configured, Gradle will run in incubating parallel mode.\r\n# This option should only be used with decoupled projects. More details, visit\r\n# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects\r\n# org.gradle.parallel=true\r\n# AndroidX package structure to make it clearer which packages are bundled with the\r\n# Android operating system, and which are packaged with your app\"s APK\r\n# https://developer.android.com/topic/libraries/support-library/androidx-rn\r\nandroid.useAndroidX=true\r\n# Automatically convert third-party libraries to use AndroidX\r\nandroid.enableJetifier=true\r\n# Kotlin code style for this project: \"official\" or \"obsolete\":\r\nkotlin.code.style=official\r\nandroid.enableR8.fullMode=true\r\n#android.defaults.buildfeatures.buildconfig=true\r\nandroid.nonTransitiveRClass=false\r\nandroid.nonFinalResIds=false\r\nandroid.suppressUnsupportedCompileSdk=34\r\nvcsInfo.include = true\r\nandroid.experimental.runLintInProcess=true\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradle.properties b/gradle.properties
+--- a/gradle.properties	(revision 04f4222ba2a737605d1dfb14d7342f7944db7b3f)
++++ b/gradle.properties	(date 1781088502598)
+@@ -48,3 +48,4 @@
+ android.suppressUnsupportedCompileSdk=34
+ vcsInfo.include = true
+ android.experimental.runLintInProcess=true
++configuration
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DesignSurface\">\r\n    <option name=\"filePathToZoomLevelMap\">\r\n      <map>\r\n        <entry key=\"..\\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout-land/tv.xml\" value=\"0.14010416666666667\" />\r\n        <entry key=\"..\\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout-notnight/tv.xml\" value=\"0.15104166666666666\" />\r\n        <entry key=\"..\\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout-port-notouch-keysexposed-nokeys/activity_main.xml\" value=\"0.264\" />\r\n        <entry key=\"..\\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout/activity_licence_user_data.xml\" value=\"0.12085308056872038\" />\r\n        <entry key=\"..\\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout/activity_main.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout/fragment_item.xml\" value=\"0.171875\" />\r\n        <entry key=\"..\\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout/fragment_item_list.xml\" value=\"0.1671875\" />\r\n        <entry key=\"..\\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout/function_list.xml\" value=\"0.17447916666666666\" />\r\n        <entry key=\"..\\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout/item_view.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/layout/main_layout_table.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Users/manue/AndroidStudioProjects/SimpleCalculator/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml\" value=\"0.146\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"FrameworkDetectionExcludesConfiguration\">\r\n    <file type=\"web\" url=\"file://$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"NullableNotNullManager\">\r\n    <option name=\"myDefaultNullable\" value=\"androidx.annotation.Nullable\" />\r\n    <option name=\"myDefaultNotNull\" value=\"androidx.annotation.NonNull\" />\r\n    <option name=\"myNullables\">\r\n      <value>\r\n        <list size=\"15\">\r\n          <item index=\"0\" class=\"java.lang.String\" itemvalue=\"org.jspecify.annotations.Nullable\" />\r\n          <item index=\"1\" class=\"java.lang.String\" itemvalue=\"com.android.annotations.Nullable\" />\r\n          <item index=\"2\" class=\"java.lang.String\" itemvalue=\"androidx.annotation.RecentlyNullable\" />\r\n          <item index=\"3\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.compatqual.NullableDecl\" />\r\n          <item index=\"4\" class=\"java.lang.String\" itemvalue=\"org.jetbrains.annotations.Nullable\" />\r\n          <item index=\"5\" class=\"java.lang.String\" itemvalue=\"androidx.annotation.Nullable\" />\r\n          <item index=\"6\" class=\"java.lang.String\" itemvalue=\"org.eclipse.jdt.annotation.Nullable\" />\r\n          <item index=\"7\" class=\"java.lang.String\" itemvalue=\"edu.umd.cs.findbugs.annotations.Nullable\" />\r\n          <item index=\"8\" class=\"java.lang.String\" itemvalue=\"android.support.annotation.Nullable\" />\r\n          <item index=\"9\" class=\"java.lang.String\" itemvalue=\"jakarta.annotation.Nullable\" />\r\n          <item index=\"10\" class=\"java.lang.String\" itemvalue=\"javax.annotation.CheckForNull\" />\r\n          <item index=\"11\" class=\"java.lang.String\" itemvalue=\"javax.annotation.Nullable\" />\r\n          <item index=\"12\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.qual.Nullable\" />\r\n          <item index=\"13\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.compatqual.NullableType\" />\r\n          <item index=\"14\" class=\"java.lang.String\" itemvalue=\"android.annotation.Nullable\" />\r\n        </list>\r\n      </value>\r\n    </option>\r\n    <option name=\"myNotNulls\">\r\n      <value>\r\n        <list size=\"14\">\r\n          <item index=\"0\" class=\"java.lang.String\" itemvalue=\"androidx.annotation.RecentlyNonNull\" />\r\n          <item index=\"1\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.qual.NonNull\" />\r\n          <item index=\"2\" class=\"java.lang.String\" itemvalue=\"org.jspecify.annotations.NonNull\" />\r\n          <item index=\"3\" class=\"java.lang.String\" itemvalue=\"jakarta.annotation.Nonnull\" />\r\n          <item index=\"4\" class=\"java.lang.String\" itemvalue=\"androidx.annotation.NonNull\" />\r\n          <item index=\"5\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.compatqual.NonNullType\" />\r\n          <item index=\"6\" class=\"java.lang.String\" itemvalue=\"android.support.annotation.NonNull\" />\r\n          <item index=\"7\" class=\"java.lang.String\" itemvalue=\"com.android.annotations.NonNull\" />\r\n          <item index=\"8\" class=\"java.lang.String\" itemvalue=\"edu.umd.cs.findbugs.annotations.NonNull\" />\r\n          <item index=\"9\" class=\"java.lang.String\" itemvalue=\"org.checkerframework.checker.nullness.compatqual.NonNullDecl\" />\r\n          <item index=\"10\" class=\"java.lang.String\" itemvalue=\"org.jetbrains.annotations.NotNull\" />\r\n          <item index=\"11\" class=\"java.lang.String\" itemvalue=\"javax.annotation.Nonnull\" />\r\n          <item index=\"12\" class=\"java.lang.String\" itemvalue=\"org.eclipse.jdt.annotation.NonNull\" />\r\n          <item index=\"13\" class=\"java.lang.String\" itemvalue=\"android.annotation.NonNull\" />\r\n        </list>\r\n      </value>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_21\" project-jdk-name=\"22\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 04f4222ba2a737605d1dfb14d7342f7944db7b3f)
++++ b/.idea/misc.xml	(date 1781087813078)
+@@ -24,49 +24,50 @@
+   <component name="NullableNotNullManager">
+     <option name="myDefaultNullable" value="androidx.annotation.Nullable" />
+     <option name="myDefaultNotNull" value="androidx.annotation.NonNull" />
++    <option name="myOrdered" value="true" />
+     <option name="myNullables">
+       <value>
+         <list size="15">
+-          <item index="0" class="java.lang.String" itemvalue="org.jspecify.annotations.Nullable" />
+-          <item index="1" class="java.lang.String" itemvalue="com.android.annotations.Nullable" />
+-          <item index="2" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNullable" />
+-          <item index="3" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
+-          <item index="4" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
+-          <item index="5" class="java.lang.String" itemvalue="androidx.annotation.Nullable" />
+-          <item index="6" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.Nullable" />
+-          <item index="7" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
+-          <item index="8" class="java.lang.String" itemvalue="android.support.annotation.Nullable" />
+-          <item index="9" class="java.lang.String" itemvalue="jakarta.annotation.Nullable" />
+-          <item index="10" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
+-          <item index="11" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
+-          <item index="12" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
+-          <item index="13" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
+-          <item index="14" class="java.lang.String" itemvalue="android.annotation.Nullable" />
++          <item index="0" class="java.lang.String" itemvalue="androidx.annotation.Nullable" />
++          <item index="1" class="java.lang.String" itemvalue="android.support.annotation.Nullable" />
++          <item index="2" class="java.lang.String" itemvalue="android.annotation.Nullable" />
++          <item index="3" class="java.lang.String" itemvalue="com.android.annotations.Nullable" />
++          <item index="4" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNullable" />
++          <item index="5" class="java.lang.String" itemvalue="org.jspecify.annotations.Nullable" />
++          <item index="6" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
++          <item index="7" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
++          <item index="8" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
++          <item index="9" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
++          <item index="10" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.Nullable" />
++          <item index="11" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
++          <item index="12" class="java.lang.String" itemvalue="jakarta.annotation.Nullable" />
++          <item index="13" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
++          <item index="14" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
+         </list>
+       </value>
+     </option>
+     <option name="myNotNulls">
+       <value>
+         <list size="14">
+-          <item index="0" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNonNull" />
+-          <item index="1" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
+-          <item index="2" class="java.lang.String" itemvalue="org.jspecify.annotations.NonNull" />
+-          <item index="3" class="java.lang.String" itemvalue="jakarta.annotation.Nonnull" />
+-          <item index="4" class="java.lang.String" itemvalue="androidx.annotation.NonNull" />
+-          <item index="5" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullType" />
+-          <item index="6" class="java.lang.String" itemvalue="android.support.annotation.NonNull" />
+-          <item index="7" class="java.lang.String" itemvalue="com.android.annotations.NonNull" />
+-          <item index="8" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
+-          <item index="9" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullDecl" />
+-          <item index="10" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
+-          <item index="11" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
+-          <item index="12" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
+-          <item index="13" class="java.lang.String" itemvalue="android.annotation.NonNull" />
++          <item index="0" class="java.lang.String" itemvalue="androidx.annotation.NonNull" />
++          <item index="1" class="java.lang.String" itemvalue="android.support.annotation.NonNull" />
++          <item index="2" class="java.lang.String" itemvalue="android.annotation.NonNull" />
++          <item index="3" class="java.lang.String" itemvalue="com.android.annotations.NonNull" />
++          <item index="4" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNonNull" />
++          <item index="5" class="java.lang.String" itemvalue="org.jspecify.annotations.NonNull" />
++          <item index="6" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
++          <item index="7" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
++          <item index="8" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullDecl" />
++          <item index="9" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullType" />
++          <item index="10" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
++          <item index="11" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
++          <item index="12" class="java.lang.String" itemvalue="jakarta.annotation.Nonnull" />
++          <item index="13" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
+         </list>
+       </value>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" project-jdk-name="22" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="jbr-21" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
