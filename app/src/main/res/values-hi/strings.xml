@@ -56,7 +56,7 @@
       
   <string name="DEL">&lt;&lt;&lt;</string>
       
-  <string name="back">पीछे</string>
+  <string name="back">वापस</string>
       
   <string name="accept_user_data_management_policy_and_privacy">उपयोगकर्ता डेटा प्रबंधन नीति और गोपनीयता स्वीकार करें</string>
       
@@ -210,4 +210,7 @@
       
   <string name="hint_result_here">परिणाम यहां देखें</string>
   
+  <string name="settings">सेटिंग्स</string>
+  <string name="hint_result">परिणाम</string>
+  <string name="function_prefix">f(</string>
 </resources>

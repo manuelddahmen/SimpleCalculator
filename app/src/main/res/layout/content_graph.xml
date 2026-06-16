@@ -5,38 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:minHeight="3200dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".GraphActivity"
-    tools:showIn="@layout/activity_graph">
+    tools:context=".GraphActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="1600dp">
-        <!-- ... TextInputLayouts, LinearLayouts pour les min/max, ButtonPlot ... -->
-        <!-- Tous les éléments précédents restent les mêmes -->
+        android:padding="16dp">
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewHeader"
-            style="@style/Widget.MaterialComponents.TextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:hint="@string/hint_formula_x"
-            android:text="Graph plotter define a variable and plot the function"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayoutFormulaX"
+            android:text="@string/graph_plotter_description"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></com.google.android.material.textview.MaterialTextView>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutFormulaX"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:hint="@string/hint_formula_x"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayoutFormulaFx"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewHeader">
@@ -44,14 +37,15 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextFormulaX"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutFormulaFx"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="@string/hint_formula_fx"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +55,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextFormulaFx"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
@@ -70,18 +65,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            android:weightSum="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutFormulaFx">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutXMin"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
-                android:layout_weight="0.5"
+                android:layout_weight="1"
                 android:hint="@string/hint_x_min"
                 app:errorEnabled="true">
 
@@ -89,17 +83,17 @@
                     android:id="@+id/editTextXMin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:inputType="numberDecimal|numberSigned"
                     android:text="-10" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutXMax"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_weight="0.5"
+                android:layout_weight="1"
                 android:hint="@string/hint_x_max"
                 app:errorEnabled="true">
 
@@ -107,7 +101,7 @@
                     android:id="@+id/editTextXMax"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:inputType="numberDecimal|numberSigned"
                     android:text="10" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -118,14 +112,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            android:weightSum="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layoutXMinMax">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutYMin"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
@@ -137,13 +130,13 @@
                     android:id="@+id/editTextYMin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:inputType="numberDecimal|numberSigned"
                     android:text="-10" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutYMax"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -155,74 +148,70 @@
                     android:id="@+id/editTextYMax"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:inputType="numberDecimal|numberSigned"
                     android:text="10" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonPlot"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/button_plot"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutYMinMax"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutYMinMax" />
 
-
-        <FrameLayout
-            android:id="@+id/frameLayoutImageView"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardImageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            android:background="@android:color/darker_gray"
-            android:minHeight="200dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonPlot">
 
-            <ImageView
-                android:id="@+id/imageViewGraph"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/content_description_graph_image"
-                android:scaleType="fitCenter"
-                app:layout_constraintDimensionRatio="H,1:1" />
+                android:layout_height="match_parent">
 
-            <!-- LinearLayout pour les boutons Save et Share -->
-            <LinearLayout
-                android:id="@+id/layoutImageActions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|end"
-                android:layout_margin="8dp"
-                android:orientation="horizontal"
-                tools:visibility="gone">
+                <ImageView
+                    android:id="@+id/imageViewGraph"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/content_description_graph_image"
+                    android:scaleType="fitCenter" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/buttonShareImage"
-
-                    style="?attr/materialButtonStyle"
+                <LinearLayout
+                    android:id="@+id/layoutImageActions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:tooltipText="@string/button_share_image"
-                    app:icon="@drawable/ic_share_24" />
+                    android:layout_gravity="top|end"
+                    android:layout_margin="8dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/buttonShareImage"
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:icon="@drawable/ic_share_24" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/buttonSaveImage"
-                    style="?attr/materialButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:tooltipText="@string/button_save_image"
-                    app:icon="@drawable/ic_save_24" />
-                <!-- android:text="@string/button_save_image" --> <!-- Le texte est optionnel avec une icône -->
-            </LinearLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/buttonSaveImage"
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        app:icon="@drawable/ic_save_24" />
+                </LinearLayout>
+            </FrameLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

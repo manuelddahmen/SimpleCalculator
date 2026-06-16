@@ -56,7 +56,7 @@
       
   <string name="DEL">&lt;&lt;&lt;</string>
       
-  <string name="back">Dos</string>
+  <string name="back">Retour</string>
       
   <string name="accept_user_data_management_policy_and_privacy">Accepter la politique de gestion des données utilisateur et de confidentialité</string>
       
@@ -210,4 +210,7 @@
       
   <string name="hint_result_here">Résultat ici</string>
   
+  <string name="settings">Paramètres</string>
+  <string name="hint_result">Résultat</string>
+  <string name="function_prefix">f(</string>
 </resources>

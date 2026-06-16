@@ -210,4 +210,7 @@
       
   <string name="hint_result_here">Tulos tässä</string>
   
+  <string name="settings">Asetukset</string>
+  <string name="hint_result">Tulos</string>
+  <string name="function_prefix">f(</string>
 </resources>

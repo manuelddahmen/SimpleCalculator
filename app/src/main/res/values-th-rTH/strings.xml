@@ -121,4 +121,42 @@
     <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Données utilisateur personnelles et sensibles Voir le lien pour plus d\'infos</string>
     <string name="fx">fx(</string>
 
+  <string name="button_download_image">ดาวน์โหลดรูปภาพ</string>
+  <string name="button_plot">พล็อตกราฟ</string>
+  <string name="button_save_image">บันทึก</string>
+  <string name="button_share_image">แชร์</string>
+  <string name="content_description_graph_image">รูปภาพกราฟที่พล็อต</string>
+  <string name="error_could_not_create_file">ไม่สามารถสร้างไฟล์ได้</string>
+  <string name="error_failed_to_share_image">ไม่สามารถแชร์รูปภาพได้</string>
+  <string name="error_invalid_input">ข้อมูลที่ป้อนไม่ถูกต้อง</string>
+  <string name="error_no_image_to_share">ไม่มีรูปภาพให้แชร์</string>
+  <string name="error_not_a_number">ไม่ใช่ตัวเลข</string>
+  <string name="error_plotting_with_message">ข้อผิดพลาดในการพล็อต: %s</string>
+  <string name="error_syntax">ข้อผิดพลาดทางไวยากรณ์</string>
+  <string name="error_syntax_with_message">ข้อผิดพลาดทางไวยากรณ์: %s</string>
+  <string name="error_x_max_lt_x_min">X สูงสุดต้องมากกว่า X ต่ำสุด</string>
+  <string name="error_x_min_lt_x_max">X ต่ำสุดต้องน้อยกว่า X สูงสุด</string>
+  <string name="error_y_max_lt_y_min">Y สูงสุดต้องมากกว่า Y ต่ำสุด</string>
+  <string name="error_y_min_lt_y_max">Y ต่ำสุดต้องน้อยกว่า Y สูงสุด</string>
+  <string name="failed_to_save_image">ไม่สามารถบันทึกรูปภาพได้: %s</string>
+  <string name="file_name_prefix">GRAPH_%s_</string>
+  <string name="file_name_suffix">.png</string>
+  <string name="function_prefix">f(</string>
+  <string name="graph_plotter_description">เครื่องพล็อตกราฟกำหนดตัวแปรและพล็อตฟังก์ชัน</string>
+  <string name="hint_formula_fx">y = f(x) (เช่น x^2)</string>
+  <string name="hint_formula_x">สูตร X (เช่น t*cos(t))</string>
+  <string name="hint_formula_y">สูตร Y (เช่น t*sin(t))</string>
+  <string name="hint_result">ผลลัพธ์</string>
+  <string name="hint_result_here">ผลลัพธ์ที่นี่</string>
+  <string name="hint_x_max">X สูงสุด</string>
+  <string name="hint_x_min">X ต่ำสุด</string>
+  <string name="hint_y_max">Y สูงสุด (เช่น 10)</string>
+  <string name="hint_y_min">Y ต่ำสุด (เช่น -10)</string>
+  <string name="image_saved_to">บันทึกรูปภาพไปยัง %s</string>
+  <string name="privacy_policy_link_text">ดูนโยบายความเป็นส่วนตัวออนไลน์: https://empty3.app/android/privacy.html</string>
+  <string name="settings">การตั้งค่า</string>
+  <string name="share_image_title">แชร์รูปภาพกราฟ</string>
+  <string name="storage_directory">simplecalculator</string>
+  <string name="title_activity_graph">เครื่องพล็อตกราฟ</string>
+  <string name="title_activity_privacy_policy">นโยบายความเป็นส่วนตัว</string>
 </resources>

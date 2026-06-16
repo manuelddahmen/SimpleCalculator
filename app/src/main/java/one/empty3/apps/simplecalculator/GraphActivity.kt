@@ -42,6 +42,7 @@ import java.util.Date
 import java.util.Locale
 import java.util.logging.Level
 import java.util.logging.Logger
+import androidx.core.graphics.createBitmap
 
 class GraphActivity : AppCompatActivity() {
 
@@ -140,13 +141,13 @@ class GraphActivity : AppCompatActivity() {
 
         buttonPlot = findViewById(R.id.buttonPlot)
         imageViewGraph = findViewById(R.id.imageViewGraph)
-        frameLayoutImageView = findViewById(R.id.frameLayoutImageView)
+        //frameLayoutImageView = findViewById(R.id.frameLayoutImageView)
 
         // Initialisation des nouveaux boutons et du layout
         layoutImageActions = findViewById(R.id.layoutImageActions)
         buttonSaveImage = findViewById(R.id.buttonSaveImage)
         buttonShareImage = findViewById(R.id.buttonShareImage)
-        frameLayoutImageView = findViewById(R.id.frameLayoutImageView)
+        //frameLayoutImageView = findViewById(R.id.frameLayoutImageView)
         imageViewGraph = findViewById<ImageView>(R.id.imageViewGraph)
         validateInitialFields()
         setupTextWatchers()
@@ -295,11 +296,7 @@ class GraphActivity : AppCompatActivity() {
 
         try {
             // Créer le bitmap avec les dimensions fixes 1000x1000
-            bitmap = Bitmap.createBitmap(
-                desiredBitmapWidth,
-                desiredBitmapHeight,
-                Bitmap.Config.ARGB_8888
-            )
+            bitmap = createBitmap(desiredBitmapWidth, desiredBitmapHeight)
             // Utiliser android.graphics.Canvas
             val canvas = android.graphics.Canvas(bitmap)
 
@@ -434,7 +431,7 @@ class GraphActivity : AppCompatActivity() {
             "simplecalculator"
         )
         return try {
-            if(storageDir!=null &&!storageDir.exists())
+            if(!storageDir.exists())
                 storageDir.mkdirs()
 
             val imageFile = File.createTempFile(imageFileName, ".png", storageDir)

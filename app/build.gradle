@@ -1,8 +1,10 @@
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.google.firebase.crashlytics'
-apply plugin: 'kotlin-android'
-apply plugin: 'maven-publish'
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.crashlytics)
+    id 'maven-publish'
+}
 
 if (hasProperty('buildScan')) {
     buildScan {
@@ -12,284 +14,139 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406999600 //???
-def kotlin_version = '2.0.21'
-def javaVersionEnum = JavaVersion.VERSION_21
-def javaVersion = "21"
+def versionCode1000 = 406999604
+def javaVersion = 21
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(javaVersion))
-    }
-}
-kotlin {
-    jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(javaVersion))
-    }
-}
 android {
     namespace 'one.empty3.apps.simplecalculator'
+    
+    compileSdk 37
 
-    packagingOptions {
-        resources {
-            excludes += ['/META-INF/{AL2.0,LGPL2.1}', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module', 'xsd/catalog.xml', 'META-INF/LICENSE.md', 'META-INF/NOTICE.md', 'META-INF/io.netty.versions.properties', 'META-INF/INDEX.LIST']
-        }
-    }
     signingConfigs {
         debug {
             storeFile file('C:\\Users\\manue\\keystore')
             storePassword 'faeeagrzdsd'
-            keyAlias 'upload'//manuel
+            keyAlias 'upload'
             keyPassword 'faeeagrzdsd'
         }
         release {
             storeFile file('C:\\Users\\manue\\keystore')
             storePassword 'faeeagrzdsd'
-            keyAlias 'upload'//manuel
+            keyAlias 'upload'
             keyPassword 'faeeagrzdsd'
         }
     }
-    lint {
-        baseline = file("lint-baseline.xml")
+
+    defaultConfig {
+        targetSdk 35
+        minSdkVersion 24
+        versionName "9.1"
+        versionCode versionCode1000
+        signingConfig signingConfigs.getByName("release")
     }
 
-    dependenciesInfo {
-        // Disables dependency metadata when building APKs.
-        includeInApk = false
-        // Disables dependency metadata when building Android App Bundles.
-        includeInBundle = false
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(javaVersion))
+        }
     }
 
     compileOptions {
-        sourceCompatibility = javaVersionEnum
-        targetCompatibility = javaVersionEnum
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
 
-    kotlinOptions {
-        jvmTarget = javaVersionEnum
+    kotlin {
+        jvmToolchain(javaVersion)
+    }
+
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+        compose true
     }
 
     buildTypes {
         release {
             shrinkResources true
             minifyEnabled true
-            debuggable false
-            // Includes the default ProGuard rules files that are packaged with
-            // the Android Gradle plugin. To learn more, go to the section about
-            // R8 configuration files.
-            proguardFiles getDefaultProguardFile(
-                    'proguard-android-optimize.txt'),
-                    'proguard-rules.pro'
-            ndk {
-                debugSymbolLevel = 'full'
-            }
-            /* Add the firebaseCrashlytics extension (by default,
-            * it's disabled to improve build speeds) and set
-            * nativeSymbolUploadEnabled to true along with a pointer to native libs. */
-
-            // Add this extension
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             firebaseCrashlytics {
-                // Enable processing and uploading of native symbols to Firebase servers.
-                // By default, this is disabled to improve build speeds.
-                // This flag must be enabled to see properly-symbolicated native
-                // stack traces in the Crashlytics dashboard.
                 nativeSymbolUploadEnabled true
-                //strippedNativeLibsDir 'build/intermediates/stripped_native_libs/release/out/lib'
-                //unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
             }
         }
-
         debug {
             debuggable true
-            //buildConfigField "Boolean", "DEBUG_MODE", "false"
-            ndk {
-                debugSymbolLevel 'FULL'
-            }
         }
     }
 
-    compileOptions {
-        sourceCompatibility javaVersionEnum
-        targetCompatibility javaVersionEnum
-    }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         main.kotlin.srcDirs += 'src/main/java'
     }
 
-    kotlinOptions {
-        jvmTarget = javaVersion
-    }
-
-
     packagingOptions {
         resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+            excludes += ['/META-INF/{AL2.0,LGPL2.1}', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module', 'xsd/catalog.xml', 'META-INF/LICENSE.md', 'META-INF/NOTICE.md', 'META-INF/io.netty.versions.properties', 'META-INF/INDEX.LIST', 'mozilla/public-suffix-list.txt',  'META-INF/LICENSE-notice.md']
         }
     }
-    lint {
-        baseline file('lint-baseline.xml')
-    }
-
-
-    configurations {
-        all*.exclude group: 'xpp3', module: 'xpp3'
-        all*.exclude group: 'xml-apis', module: 'xml-apis'
-        all*.exclude group: 'net.sf.kxml', module: 'kxml2'
-        all*.exclude group: 'xmlpull', module: 'xmlpull'
-        all*.exclude group: 'com.sun.activation', module: 'javax.activation'
-        //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-compiler-embeddable'
-        //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin-api'
-        all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin'
-        //all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-build-common'
-        all {
-            resolutionStrategy {
-                force("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.6.2")
-                force 'org.xerial:sqlite-jdbc:3.34.0'
-                //force 'xpp3:xpp3:1.1.4c'
-                force 'jakarta.activation:jakarta.activation-api:1.2.1'
-                //force 'org.jetbrains.kotlin:kotlin-compiler-embeddable:1.8.0'
-                //force 'org.jetbrains.kotlin:kotlin-build-common:1.8.0'
-                //force 'net.sf.kxml:kxml2:2.3.0'
-                //force 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'
-                //force ' xmlpull:xmlpull:1.1.3.1'
-                //force 'org.jetbrains.kotlin:kotlin-compiler:1.8.0'
-                //force 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'
-                // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-reflect
-                //force group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: '1.8.0'
-// https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-reflect
-                //force group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.8.0'
-
-            }
-        }
-    }
-
-    testOptions {
-        unitTests.returnDefaultValues = true
-    }
-
-
-    buildFeatures {
-        viewBinding true
-        dataBinding true
-        compose false
-    }
-
-    defaultConfig {
-        //resourceConfigurations += ['en']
-        javaVersionEnum
-        compileSdk 35
-        compileSdkVersion 35
-        targetSdk 35
-        minSdkVersion 24
-        versionName "9.1"
-        versionCode versionCode1000
-        signingConfig signingConfigs.release
-    }
-
-    testOptions {
-        unitTests.returnDefaultValues = true
-    }
-
 }
 
-
 dependencies {
+    implementation(libs.age.signals)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation libs.core.ktx
+    implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.preference.ktx)
+    
+    // Compose
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.compose.ui.main)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.foundation)
+    debugImplementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.test.manifest)
 
-    implementation 'com.google.android.play:integrity:1.3.0'
-    // Import the Firebase BoM
-    implementation platform('com.google.firebase:firebase-bom:33.5.0')
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-crashlytics'
-    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.vertexai)
+    implementation(libs.firebase.crashlytics.buildtools)
 
-    // Add the dependencies for any other desired Firebase products
-    // https://firebase.google.com/docs/android/setup#available-libraries
-    implementation "com.google.gms.google-services:com.google.gms.google-services.gradle.plugin:4.4.4"
-    implementation 'com.google.firebase:firebase-crashlytics-buildtools:3.0.7'
-    implementation "com.google.android.play:integrity:1.6.0"
-    implementation "com.google.firebase:firebase-crashlytics"
-    implementation "com.google.firebase:firebase-crashlytics-ktx"
-    implementation 'androidx.core:core-ktx:1.19.0'
-    implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'com.google.android.material:material:1.14.0'
-    implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.10.0'
-    implementation 'androidx.recyclerview:recyclerview:1.4.0'
-    implementation 'androidx.work:work-runtime-ktx:2.11.2'
-    implementation 'androidx.preference:preference-ktx:1.2.1'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
-    // add the dependency for the Vertex AI SDK for Android
-    implementation("com.google.firebase:firebase-vertexai:16.5.0")
+    // Play Services
+    implementation(libs.google.play.integrity)
+    
+    // Billing
+    implementation(libs.android.billing)
 
-    def billingVersion = "9.0.0"
+    // Testing
+    testImplementation(libs.junit)
+    testImplementation(libs.core.ktx)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation "com.android.billingclient:billing:$billingVersion"
-
-    implementation 'one.empty3.libs:commons-mp:0.0.17-17'
-    implementation("one.empty3:empty3-library-mp:2026.6.7") {
-        exclude module: 'one.empty3.libs:partial-desktop'
-        exclude module: 'jackson-core', group: 'com.fasterxml.jackson.core'
-        exclude module: 'java-function-invoker', group: 'com.google.cloud.functions.invoker'
-        exclude group: 'org.bytedeco', module: 'javacv-platform'
-        // --- Media and UI Libraries (Not for Android) ---
-        exclude group: "org.jcodec", module: "jcodec-javase"
-        exclude group: "com.miglayout", module: "miglayout"
-        exclude group: "xom", module: "xom"
-        exclude group: "com.jgoodies", module: "jgoodies-common"
-        exclude group: "com.jgoodies", module: "jgoodies-forms"
-        exclude group: "xerces", module: "xercesImpl"
-        exclude group: "org.jdesktop", module: "beansbinding"
-        exclude group: "com.github.sarxos", module: "webcam-capture"
-        exclude group: "commons-net", module: "commons-net"
-        exclude group: "org.bytedeco", module: "javacv-platform"
-
-        // --- XML Processing (Not for Android) ---
-        exclude group: "org.jdom", module: "jdom2"
-        exclude group: "org.apache.servicemix.bundles", module: "org.apache.servicemix.bundles.jdom"
-        exclude group: "org.apache.santuario", module: "xmlsec"
-
-        // --- Full Google Cloud/Server-side Libraries (Not for Android) ---
-        exclude group: "com.google.cloud", module: "libraries-bom"
-        exclude group: "com.google.cloud", module: "google-cloud-vision"
-        exclude group: "com.google.cloud", module: "google-cloud-storage"
-        exclude group: "com.google.apis", module: "google-api-services-vision"
-        exclude group: "com.google.auth", module: "google-auth-library-oauth2-http"
-        exclude group: "com.google.auth", module: "google-auth-library-credentials"
-        exclude group: "com.google.http-client", module: "google-http-client-jackson2"
-        exclude group: "com.google.cloud.functions", module: "functions-framework-api"
-        exclude group: "dev.openfunction.functions", module: "functions-framework-invoker"
-
-        // --- Other Conflicting/Unused Libraries ---
-        exclude group: "com.google.guava", module: "guava"
-        // Prefer Android-specific guava if needed
-        exclude group: "com.google.android.gms", module: "play-services-vision"
-        // Deprecated, use ML Kit
-        exclude group: "com.google.code.gson", module: "gson"
-        exclude group: "org.danilopianini", module: "gson-extras"
-        exclude group: "com.google.code.gson", module: "gson-parent"
-        exclude group: "org.bytedeco", module: "javacpp"
-        exclude group: "org.bytedeco", module: "videoinput"
-        exclude group: "org.bytedeco", module: "opencv"
-        exclude group: "org.bytedeco", module: "tesseract"
-        exclude group: "org.bytedeco", module: "openblas"
-        exclude group: "org.bytedeco", module: "librealsense2"
-        exclude group: "org.bytedeco", module: "ffmpeg"
-        exclude group: "org.bytedeco", module: "javacv-platform"
-        exclude group: "org.bytedeco", module: "javacpp-platform"
-        exclude group: "org.bytedeco", module: "opencv-platform"
-        exclude group: "org.bytedeco", module: "ffmpeg-platform"
-        exclude group: "org.bytedeco", module: "tesseract-platform"
-        exclude group: "org.bytedeco", module: "openblas-platform"
-        exclude group: "org.bytedeco", module: "librealsense2-platform"
-        exclude group: "org.bytedeco", module: "leptonica"
-
+    // Custom libraries
+    implementation(libs.one.empty3.libs.commons.mp)
+    implementation(libs.one.empty3.empty3.library.mp) {
+        exclude group: 'com.google.firebase', module: 'firebase-admin'
+        exclude group: 'com.google.cloud.functions.invoker', module: 'java-function-invoker'
+        exclude group: 'com.fasterxml.jackson.core', module: 'jackson-core'
+        exclude group: 'com.google.code.gson', module: 'gson'
+        exclude group: 'com.google.re2j', module: 're2j'
+        exclude group: 'xpp3', module: 'xpp3'
+        exclude group: 'xml-apis', module: 'xml-apis'
+        exclude group: 'net.sf.kxml', module: 'kxml2'
+        exclude group: 'xmlpull', module: 'xmlpull'
+        exclude group: 'com.sun.activation', module: 'javax.activation'
     }
-
 }
 
 Properties properties = new Properties()
@@ -303,7 +160,6 @@ if (propertiesFile.exists()) {
         ex.printStackTrace()
     }
 }
-
 
 publishing {
     publications {
@@ -322,10 +178,4 @@ publishing {
             }
         }
     }
-}
-
-
-java {
-    sourceCompatibility = javaVersionEnum
-    targetCompatibility = javaVersionEnum
 }

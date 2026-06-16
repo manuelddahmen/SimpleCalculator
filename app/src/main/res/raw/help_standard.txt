@@ -1,0 +1,5 @@
+Calculs : Saisissez votre expression et appuyez sur '=' pour obtenir le résultat.
+Chiffres et Nombres : Utilisez le pavé numérique pour entrer des valeurs entières ou décimales (touche '.').
+Opérateurs : +, -, *, /, ^ (puissance).
+Fonctions : Accédez aux fonctions mathématiques complexes via le bouton 'fx'.
+Ordre des opérations : La calculatrice respecte la priorité mathématique standard (PEMDAS/BODMAS). Utilisez les parenthèses '(' et ')' pour modifier cet ordre.

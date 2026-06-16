@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/app_name" />
+            app:title="@string/app_name_kids" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -30,44 +30,44 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:padding="24dp">
 
             <!-- Display Area -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/display_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/calc_border_radius"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/colorOutlineVariant">
+                app:strokeWidth="2dp"
+                app:strokeColor="?attr/colorPrimary">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="24dp">
 
                     <EditText
                         android:id="@+id/editTextCalculus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
-                        android:hint="@string/edit_text_here_or_by_push_numbers"
+                        android:hint="@string/_0"
                         android:autofillHints="none"
                         android:inputType="text"
-                        android:minHeight="48dp"
+                        android:minHeight="64dp"
                         android:textAlignment="viewEnd"
-                        android:textSize="28sp"
+                        android:textSize="36sp"
                         android:fontFamily="sans-serif-medium" />
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginVertical="8dp"
+                        android:layout_height="2dp"
+                        android:layout_marginVertical="12dp"
                         android:background="?attr/colorOutlineVariant" />
 
                     <EditText
@@ -81,81 +81,35 @@
                         android:autofillHints="none"
                         android:textAlignment="viewEnd"
                         android:textColor="?attr/colorPrimary"
-                        android:textSize="24sp"
+                        android:textSize="32sp"
                         android:fontFamily="sans-serif-condensed" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Buttons Grid -->
-            <!-- Row 1 -->
+            <!-- Buttons Grid - Simplified for Kids -->
+
+            <!-- Row 1: 7 8 9 / -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonParenthesisA"
+                android:id="@+id/button7"
                 style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/open_brace"
-                app:layout_constraintEnd_toStartOf="@+id/buttonParenthesis"
+                android:layout_height="80dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/_7"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/button8"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/display_card" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonParenthesis"
-                style="@style/Widget.Material3.Button.TonalButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/close_brace"
-                app:layout_constraintEnd_toStartOf="@+id/buttonFunction"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@id/buttonParenthesisA"
-                app:layout_constraintTop_toTopOf="@id/buttonParenthesisA" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonFunction"
-                style="@style/Widget.Material3.Button.TonalButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/fx"
-                app:layout_constraintEnd_toStartOf="@+id/delButton"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@id/buttonParenthesis"
-                app:layout_constraintTop_toTopOf="@id/buttonParenthesisA" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/delButton"
-                style="@style/Widget.Material3.Button.TonalButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/DEL"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@id/buttonFunction"
-                app:layout_constraintTop_toTopOf="@id/buttonParenthesisA" />
-
-            <!-- Row 2: 7 8 9 / -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button7"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/_7"
-                app:layout_constraintEnd_toStartOf="@+id/button8"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/buttonParenthesisA" />
-
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button8"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/_8"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toStartOf="@+id/button9"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/button7"
@@ -163,11 +117,12 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button9"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/_9"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toStartOf="@+id/divideButton"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/button8"
@@ -175,24 +130,26 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/divideButton"
-                style="@style/Widget.Material3.Button.TonalButton"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/DIV"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/button9"
                 app:layout_constraintTop_toTopOf="@id/button7" />
 
-            <!-- Row 3: 4 5 6 * -->
+            <!-- Row 2: 4 5 6 * -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button4"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/_4"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toStartOf="@+id/button5"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
@@ -200,11 +157,12 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button5"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/_5"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toStartOf="@+id/button6"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/button4"
@@ -212,11 +170,12 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button6"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/_6"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toStartOf="@+id/multButton"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/button5"
@@ -224,24 +183,26 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/multButton"
-                style="@style/Widget.Material3.Button.TonalButton"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/MUL"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/button6"
                 app:layout_constraintTop_toTopOf="@id/button4" />
 
-            <!-- Row 4: 1 2 3 - -->
+            <!-- Row 3: 1 2 3 - -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button1"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/_1"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toStartOf="@+id/button2"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
@@ -249,11 +210,12 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button2"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/_2"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toStartOf="@+id/button3"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/button1"
@@ -261,11 +223,12 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button3"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/_3"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toStartOf="@+id/substractButton"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/button2"
@@ -273,24 +236,26 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/substractButton"
-                style="@style/Widget.Material3.Button.TonalButton"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/SUB"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/button3"
                 app:layout_constraintTop_toTopOf="@id/button1" />
 
-            <!-- Row 5: . 0 = + -->
+            <!-- Row 4: . 0 = + -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/dotButton"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/DOT"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toStartOf="@+id/button0"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
@@ -298,11 +263,12 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button0"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/_0"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toStartOf="@+id/equalButton"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/dotButton"
@@ -312,9 +278,10 @@
                 android:id="@+id/equalButton"
                 style="@style/Widget.Material3.Button"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/EQUALS"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toStartOf="@+id/addButton"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/button0"
@@ -322,89 +289,54 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/addButton"
-                style="@style/Widget.Material3.Button.TonalButton"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="12dp"
                 android:text="@string/ADD"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/equalButton"
                 app:layout_constraintTop_toTopOf="@id/dotButton" />
 
-            <!-- Row 6: , exp fx(multiple) -->
+            <!-- Row 5: DEL (Extra wide for easy access) -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonComa"
-                style="@style/Widget.Material3.Button.TonalButton"
+                android:id="@+id/delButton"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/coma"
-                app:layout_constraintEnd_toStartOf="@+id/expButton"
-                app:layout_constraintHorizontal_weight="1"
+                android:layout_height="72dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/DEL"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dotButton" />
 
+            <!-- Row 6: Exercices (prototype enfants) -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/expButton"
+                android:id="@+id/kidsExercisesButton"
                 style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/EXP"
-                app:layout_constraintEnd_toStartOf="@+id/buttonFunctionMultiple"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@id/buttonComa"
-                app:layout_constraintTop_toTopOf="@id/buttonComa" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonFunctionMultiple"
-                style="@style/Widget.Material3.Button.TonalButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/fx"
+                android:layout_height="72dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/kids_ex_open"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="2"
-                app:layout_constraintStart_toEndOf="@id/expButton"
-                app:layout_constraintTop_toTopOf="@id/buttonComa" />
-
-            <!-- Row 7: Text Calc, Graph -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/textCalculatorButton"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/text_calculator"
-                app:layout_constraintEnd_toStartOf="@+id/your_button_id_to_open_graph_activity"
-                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/buttonComa" />
+                app:layout_constraintTop_toBottomOf="@id/delButton" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/your_button_id_to_open_graph_activity"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/title_activity_graph"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@id/textCalculatorButton"
-                app:layout_constraintTop_toTopOf="@id/textCalculatorButton" />
-
-            <!-- Row 8: About -->
+            <!-- Row 7: About -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/AboutButton"
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/about_and_policies"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textCalculatorButton" />
+                app:layout_constraintTop_toBottomOf="@id/kidsExercisesButton" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

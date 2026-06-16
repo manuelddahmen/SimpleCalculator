@@ -56,7 +56,7 @@
       
   <string name="DEL">&lt;&lt;&lt;</string>
       
-  <string name="back">Rug</string>
+  <string name="back">Terug</string>
       
   <string name="accept_user_data_management_policy_and_privacy">Accepteer het beleid voor gebruikersgegevensbeheer en privacy</string>
       
@@ -210,4 +210,7 @@
       
   <string name="hint_result_here">Resultaat hier</string>
   
+  <string name="settings">Instellingen</string>
+  <string name="hint_result">Resultaat</string>
+  <string name="function_prefix">f(</string>
 </resources>

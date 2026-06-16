@@ -1,0 +1,8 @@
+Calculer : Tape une opération et appuie sur '=' pour voir le résultat.
+Les nombres : Utilise les gros boutons de 0 à 9. Utilise le point '.' pour les nombres à virgule.
+Opérations simples :
++ : Pour ajouter (addition)
+- : Pour enlever (soustraction)
+* : Pour multiplier
+/ : Pour partager (division)
+Ordre des calculs : La calculatrice calcule dans l'ordre mathématique. Demande à un adulte de t'expliquer l'ordre des opérations !

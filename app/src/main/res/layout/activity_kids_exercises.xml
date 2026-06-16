@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_kids_exercises"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".KidsExercisesActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/kidsToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back_24"
+            app:title="@string/kids_ex_title" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Sélecteur de tranche d'âge -->
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/kidsTierToggle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/kidsTierToddler"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/kids_ex_tier_toddler" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/kidsTierKid"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/kids_ex_tier_kid" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/kidsTierJunior"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/kids_ex_tier_junior" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <!-- Étoiles gagnées -->
+            <TextView
+                android:id="@+id/kidsStars"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="end"
+                android:textSize="22sp"
+                tools:text="⭐ 0" />
+
+            <!-- Énoncé -->
+            <TextView
+                android:id="@+id/kidsPrompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="40sp"
+                android:textColor="?attr/colorPrimary"
+                tools:text="3 + 4 = ?" />
+
+            <!-- Visuel à compter (émojis) -->
+            <TextView
+                android:id="@+id/kidsVisual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:lineSpacingExtra="8dp"
+                android:textSize="64sp"
+                tools:text="🍎🍎🍎" />
+
+            <!-- Grille de réponses 2 x 2 -->
+            <GridLayout
+                android:id="@+id/kidsChoicesGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:columnCount="2"
+                android:useDefaultMargins="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/kidsChoice0"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="0dp"
+                    android:layout_height="96dp"
+                    android:layout_columnWeight="1"
+                    android:textSize="32sp"
+                    tools:text="7" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/kidsChoice1"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="0dp"
+                    android:layout_height="96dp"
+                    android:layout_columnWeight="1"
+                    android:textSize="32sp"
+                    tools:text="5" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/kidsChoice2"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="0dp"
+                    android:layout_height="96dp"
+                    android:layout_columnWeight="1"
+                    android:textSize="32sp"
+                    tools:text="8" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/kidsChoice3"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="0dp"
+                    android:layout_height="96dp"
+                    android:layout_columnWeight="1"
+                    android:textSize="32sp"
+                    tools:text="6" />
+            </GridLayout>
+
+            <!-- Retour visuel (bravo / réessaie) -->
+            <TextView
+                android:id="@+id/kidsFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:minHeight="40dp"
+                android:textSize="28sp"
+                tools:text="Bravo ! 🎉" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

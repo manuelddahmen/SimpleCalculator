@@ -70,6 +70,12 @@
 
         <activity
             android:exported="true"
+            android:label="@string/kids_ex_title"
+            android:theme="@style/Theme.SimpleCalculator"
+            android:name="one.empty3.apps.simplecalculator.KidsExercisesActivity" />
+
+        <activity
+            android:exported="true"
             android:label="Sci-prog Calculator"
             android:theme="@style/Theme.SimpleCalculator"
             android:name="one.empty3.apps.simplecalculator.MainActivity">

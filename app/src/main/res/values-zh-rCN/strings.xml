@@ -56,7 +56,7 @@
       
   <string name="DEL">&lt;&lt;&lt;</string>
       
-  <string name="back">后退</string>
+  <string name="back">返回</string>
       
   <string name="accept_user_data_management_policy_and_privacy">接受用户数据管理政策和隐私政策</string>
       
@@ -210,4 +210,7 @@
       
   <string name="hint_result_here">结果在这里</string>
   
+  <string name="settings">设置</string>
+  <string name="hint_result">结果</string>
+  <string name="function_prefix">f(</string>
 </resources>

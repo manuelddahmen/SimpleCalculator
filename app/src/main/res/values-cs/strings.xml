@@ -56,7 +56,7 @@
       
   <string name="DEL">&lt;&lt;&lt;</string>
       
-  <string name="back">Zadní</string>
+  <string name="back">Zpět</string>
       
   <string name="accept_user_data_management_policy_and_privacy">Přijměte zásady správy uživatelských dat a ochrany osobních údajů</string>
       
@@ -210,4 +210,7 @@
       
   <string name="hint_result_here">Výsledek zde</string>
   
+  <string name="settings">Nastavení</string>
+  <string name="hint_result">Výsledek</string>
+  <string name="function_prefix">f(</string>
 </resources>

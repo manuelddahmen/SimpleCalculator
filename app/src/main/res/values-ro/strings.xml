@@ -56,7 +56,7 @@
       
   <string name="DEL">&lt;&lt;&lt;</string>
       
-  <string name="back">Spate</string>
+  <string name="back">Înapoi</string>
       
   <string name="accept_user_data_management_policy_and_privacy">Acceptați Politica de gestionare a datelor utilizatorilor și confidențialitatea</string>
       
@@ -210,4 +210,7 @@
       
   <string name="hint_result_here">Rezultat aici</string>
   
+  <string name="settings">Setări</string>
+  <string name="hint_result">Rezultat</string>
+  <string name="function_prefix">f(</string>
 </resources>

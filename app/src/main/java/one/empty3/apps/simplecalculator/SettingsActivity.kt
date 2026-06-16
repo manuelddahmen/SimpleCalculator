@@ -29,6 +29,10 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
+        
+        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()

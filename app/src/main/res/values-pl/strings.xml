@@ -56,7 +56,7 @@
       
   <string name="DEL">&lt;&lt;&lt;</string>
       
-  <string name="back">Z powrotem</string>
+  <string name="back">Wstecz</string>
       
   <string name="accept_user_data_management_policy_and_privacy">Akceptuję Politykę zarządzania danymi użytkownika i politykę prywatności</string>
       
@@ -210,4 +210,7 @@
       
   <string name="hint_result_here">Wynik tutaj</string>
   
+  <string name="settings">Ustawienia</string>
+  <string name="hint_result">Wynik</string>
+  <string name="function_prefix">f(</string>
 </resources>

@@ -22,36 +22,32 @@ package one.empty3.apps.simplecalculator
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.AlarmClock
 import android.view.View
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 
 class LicenceUserData : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_licence_user_data)
-        findViewById<Button>(R.id.buttonBack).setOnClickListener {
-            backToMain(it)
-         }
-        findViewById<Button>(R.id.AboutButton).setOnClickListener{
+        
+        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener { finish() }
+
+        findViewById<Button>(R.id.acceptButton)?.setOnClickListener {
+             finish()
+        }
+        findViewById<Button>(R.id.AboutButton).setOnClickListener {
             openLink(it)
         }
     }
-    private fun backToMain(view:View) {
-
-        val intent: Intent = Intent(view.context, MainActivity::class.java).apply {
-        }
-        startActivity(intent)
-    }
-
 
     fun openLink(view: View) {
-        val uri : Uri = Uri.parse(getString(R.string.POLICY_URI_INT))
-
-        //val uri : Uri = Uri.parse(getString(R.string.POLICY_URI))
-        val intent:Intent  = Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+        val uri: Uri = Uri.parse(getString(R.string.POLICY_URI_INT))
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
     }
 }

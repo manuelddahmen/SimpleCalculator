@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Exercices pour enfants (3 niveaux). Traductions à ajouter dans les values-*/ -->
+    <string name="kids_ex_title">Exercices</string>
+    <string name="kids_ex_tier_toddler">Tout-petits</string>
+    <string name="kids_ex_tier_kid">6-7 ans</string>
+    <string name="kids_ex_tier_junior">8-9 ans</string>
+    <string name="kids_ex_prompt_count">Compte les objets</string>
+    <string name="kids_ex_correct">Bravo ! 🎉</string>
+    <string name="kids_ex_try_again">Essaie encore 🙂</string>
+    <!-- %1$d : étoiles totales, %2$d : série en cours -->
+    <string name="kids_ex_stars">⭐ %1$d   🔥 %2$d</string>
+    <string name="kids_ex_open">🎲 Exercices</string>
+
+    <!-- Sélecteur parental -->
+    <string name="kids_ex_parents">Réglages parents</string>
+    <string name="kids_ex_parent_gate_title">Accès parents</string>
+    <string name="kids_ex_parent_gate_q">Combien font %1$d × %2$d ?</string>
+    <string name="kids_ex_parent_settings_title">Niveau par défaut</string>
+    <string name="kids_ex_save">Enregistrer</string>
+    <string name="kids_ex_reset_stars">Réinitialiser les étoiles</string>
+</resources>

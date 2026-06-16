@@ -210,4 +210,7 @@
       
   <string name="hint_result_here">結果はこちら</string>
   
+  <string name="settings">設定</string>
+  <string name="hint_result">結果</string>
+  <string name="function_prefix">f(</string>
 </resources>

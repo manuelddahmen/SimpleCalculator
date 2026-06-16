@@ -56,7 +56,7 @@
       
   <string name="DEL">&lt;&lt;&lt;</string>
       
-  <string name="back">בְּחֲזָרָה</string>
+  <string name="back">חזרה</string>
       
   <string name="accept_user_data_management_policy_and_privacy">קבל את מדיניות ניהול נתוני המשתמש ואת מדיניות הפרטיות</string>
       
@@ -210,4 +210,7 @@
       
   <string name="hint_result_here">התוצאה כאן</string>
   
+  <string name="settings">הגדרות</string>
+  <string name="hint_result">תוצאה</string>
+  <string name="function_prefix">f(</string>
 </resources>

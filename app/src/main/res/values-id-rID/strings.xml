@@ -120,4 +120,42 @@
     <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Données utilisateur personnelles et sensibles Voir le lien pour plus d\'infos</string>
     <string name="fx">fx(</string>
 
+  <string name="button_download_image">Unduh gambar</string>
+  <string name="button_plot">Plot grafik</string>
+  <string name="button_save_image">Simpan</string>
+  <string name="button_share_image">Bagikan</string>
+  <string name="content_description_graph_image">Gambar grafik yang diplot</string>
+  <string name="error_could_not_create_file">Tidak dapat membuat berkas</string>
+  <string name="error_failed_to_share_image">Gagal membagikan gambar.</string>
+  <string name="error_invalid_input">Masukan tidak valid</string>
+  <string name="error_no_image_to_share">Tidak ada gambar yang tersedia untuk dibagikan.</string>
+  <string name="error_not_a_number">Bukan angka</string>
+  <string name="error_plotting_with_message">Kesalahan plot: %s</string>
+  <string name="error_syntax">Kesalahan sintaksis</string>
+  <string name="error_syntax_with_message">Kesalahan sintaksis: %s</string>
+  <string name="error_x_max_lt_x_min">X Maks harus > X Min</string>
+  <string name="error_x_min_lt_x_max">X Min harus lebih kecil dari X Maks.</string>
+  <string name="error_y_max_lt_y_min">Y Maks harus > Y Min</string>
+  <string name="error_y_min_lt_y_max">Y Min harus lebih kecil dari Y Maks.</string>
+  <string name="failed_to_save_image">Gagal menyimpan gambar: %s</string>
+  <string name="file_name_prefix">GRAPH_%s_</string>
+  <string name="file_name_suffix">.png</string>
+  <string name="function_prefix">f(</string>
+  <string name="graph_plotter_description">Pemplot grafik mendefinisikan variabel dan memplot fungsi</string>
+  <string name="hint_formula_fx">y = f(x) (mis., x^2)</string>
+  <string name="hint_formula_x">Rumus X (mis., t*cos(t))</string>
+  <string name="hint_formula_y">Rumus Y (mis., t*sin(t))</string>
+  <string name="hint_result">Hasil</string>
+  <string name="hint_result_here">Hasil di sini</string>
+  <string name="hint_x_max">X Maks</string>
+  <string name="hint_x_min">X Min</string>
+  <string name="hint_y_max">Y Maks (mis., 10)</string>
+  <string name="hint_y_min">Y Min (mis., -10)</string>
+  <string name="image_saved_to">Gambar disimpan ke %s</string>
+  <string name="privacy_policy_link_text">Lihat Kebijakan Privasi online: https://empty3.app/android/privacy.html</string>
+  <string name="settings">Pengaturan</string>
+  <string name="share_image_title">Bagikan gambar grafik</string>
+  <string name="storage_directory">simplecalculator</string>
+  <string name="title_activity_graph">Pemplot Grafik</string>
+  <string name="title_activity_privacy_policy">Kebijakan Privasi</string>
 </resources>

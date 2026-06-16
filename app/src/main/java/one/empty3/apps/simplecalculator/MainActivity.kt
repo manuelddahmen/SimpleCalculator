@@ -20,6 +20,7 @@
 
 package one.empty3.apps.simplecalculator
 
+
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -34,7 +35,6 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.preference.PreferenceManager
-import androidx.test.core.app.ApplicationProvider
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingResult
@@ -42,287 +42,200 @@ import com.android.billingclient.api.PendingPurchasesParams
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.google.android.play.agesignals.AgeSignalsManagerFactory
 import com.google.android.play.agesignals.AgeSignalsRequest
+import com.google.android.play.agesignals.model.AgeSignalsVerificationStatus
 import one.empty3.library.StructureMatrix
-import one.empty3.library1.tree.AlgebraicFormulaSyntaxException
 import one.empty3.library1.tree.AlgebraicTree
-import one.empty3.apps.simplecalculator.R
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var purchasesUpdatedListener: PurchasesUpdatedListener
     private lateinit var billingClient: BillingClient
+    private var isKidsMode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false) // Essentiel pour le bord à bord
-        setContentView(R.layout.main_layout_table)
-        val yourRootView =
-            findViewById<View>(R.id.root_activity_calc) // Ou la vue qui a besoin de padding
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        isKidsMode = prefs.getBoolean("kids_mode_active", false)
+
+        setupUI()
+        checkAgeSignals()
+        initBilling()
+    }
+
+    private fun setupUI() {
+        if (isKidsMode) {
+            setContentView(R.layout.kids_layout_table)
+        } else {
+            setContentView(R.layout.main_layout_table)
+        }
+
+        val yourRootView = findViewById<View>(R.id.root_activity_calc)
         ViewCompat.setOnApplyWindowInsetsListener(yourRootView) { view, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-
-            // Appliquer le padding pour éviter le chevauchement avec les barres système
             view.updatePadding(
                 left = insets.left,
                 top = insets.top,
                 right = insets.right,
                 bottom = insets.bottom
             )
-
-            // Indiquer que les insets ont été consommés
             WindowInsetsCompat.CONSUMED
         }
 
+        val textAnswer: EditText = findViewById(R.id.answerText)
+        val editText: EditText = findViewById(R.id.editTextCalculus)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
-        purchasesUpdatedListener =
-            PurchasesUpdatedListener { billingResult, purchases ->
-                // To be implemented in a later section.
-            }
-
-        billingClient = BillingClient.newBuilder(applicationContext)
-            .setListener(purchasesUpdatedListener)
-            // Configure other settings.
-            .enablePendingPurchases(
-                PendingPurchasesParams.newBuilder().enablePrepaidPlans().enableOneTimeProducts()
-                    .build()
-            )
-            .build()
-        billingClient.startConnection(object : BillingClientStateListener {
-            override fun onBillingSetupFinished(billingResult: BillingResult) {
-                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                    // The BillingClient is ready. You can query purchases here.
-                }
-            }
-
-            override fun onBillingServiceDisconnected() {
-                // Try to restart the connection on the next request to
-                // Google Play by calling the startConnection() method.
-            }
-        })
-        // Initialize the Vertex AI service and the generative model
-// Specify a model that supports your use case
-// Gemini 1.5 Pro is versatile and can accept both text-only and multimodal prompt inputs
-
-
-        val buttonsNumbers = arrayListOf(
-            R.id.button0,
-            R.id.button1,
-            R.id.button2,
-            R.id.button3,
-            R.id.button4,
-            R.id.button5,
-            R.id.button6,
-            R.id.button7,
-            R.id.button8,
-            R.id.button9,
-            R.id.dotButton,
-            R.id.equalButton,
-            R.id.divideButton,
-            R.id.multButton,
-            R.id.addButton,
-            R.id.substractButton,
-            R.id.expButton,
-            R.id.delButton,
-            R.id.buttonParenthesis,
-            R.id.buttonParenthesisA,
-            R.id.buttonComa
-        )
-        val prefs = PreferenceManager
-            .getDefaultSharedPreferences(this)
-
-        val textAnswer: EditText = findViewById<EditText>(R.id.answerText)
-        val editText: EditText = findViewById<EditText>(R.id.editTextCalculus)
         editText.setText("")
-        var string: String? = prefs.getString("autoSaveEditText", "")
-        if (string != null && string.isNotEmpty())
-            editText.setText(string)
-        if (string != null && string.isNotEmpty()) {
-            val tree = AlgebraicTree(string)
+        val savedText = prefs.getString("autoSaveEditText", "")
+        if (!savedText.isNullOrEmpty()) {
+            editText.setText(savedText)
+            val tree = AlgebraicTree(savedText)
             compute(tree, textAnswer)
         }
 
-        for (j: Int in buttonsNumbers) {
-            val findViewById: Button = findViewById(j)
-            findViewById.setOnClickListener {
+        val buttonsNumbers = arrayListOf(
+            R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4,
+            R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9,
+            R.id.dotButton, R.id.equalButton, R.id.divideButton, R.id.multButton,
+            R.id.addButton, R.id.substractButton, R.id.expButton, R.id.delButton,
+            R.id.buttonParenthesis, R.id.buttonParenthesisA, R.id.buttonComa
+        )
+
+        for (id in buttonsNumbers) {
+            findViewById<Button>(id)?.setOnClickListener { btn ->
+                val button = btn as Button
                 editText.requestFocus()
-                if (findViewById == findViewById<Button>(R.id.delButton)) {
-                    val toString: String = editText.text.toString()
-                    if (toString.length > 1) {
-                        val myEditText = editText
-                        val textToInsert: String = findViewById.text.toString()
-                        if (myEditText.getSelectionStart() == myEditText.getSelectionEnd()) {
-                            val end = Math.max(myEditText.getSelectionStart(), 0);
-                            val start = Math.max(myEditText.getSelectionStart() - 1, 0);
-                            myEditText.getText().replace(
-                                start, end,
-                                "", 0, 0
-                            );
-
-                        } else {
-                            val start = Math.max(myEditText.getSelectionStart(), 0);
-                            val end = Math.max(myEditText.getSelectionEnd(), 0);
-                            myEditText.getText().replace(
-                                Math.min(start, end), Math.max(start, end),
-                                "", 0, 0
-                            );
-                        }
-                    } else if (toString.length == 1) {
-                        editText.setText("")
-                    }
-                    val tree = AlgebraicTree(editText.text.toString())
-                    compute(tree, textAnswer)
-                    return@setOnClickListener
+                if (id == R.id.delButton) {
+                    handleDelete(editText, textAnswer)
+                } else {
+                    handleInsert(button.text.toString(), editText, textAnswer)
                 }
-                val myEditText = editText
-                val textToInsert: String = findViewById.text.toString()
-                val start = Math.max(myEditText.getSelectionStart(), 0);
-                val end = Math.max(myEditText.getSelectionEnd(), 0);
-                myEditText.getText().replace(
-                    Math.min(start, end), Math.max(start, end),
-                    textToInsert, 0, textToInsert.length
-                );
-                //editText.text = editText.text.append(findViewById.text)
-
-                val tree = AlgebraicTree(editText.text.toString())
-
-                compute(tree, textAnswer)
             }
         }
 
-        val buttonFunctionAdd: Button = findViewById(R.id.buttonFunction)
-        buttonFunctionAdd.setOnClickListener {
-//            val stringFragment : StringFragment= StringFragment()
-//                val ft: FragmentTransaction = supportFragmentManager.beginTransaction();
-//                ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
-            val dialog = ChooseFunctionDialogFragment()
-            dialog.show(
-                supportFragmentManager,
-                "one.empty3.apps.simplecalculator.ChooseFunctionDialogFragment"
-            )
-            Thread {
-                run {
-                    while (!dialog.isExited) {
-                        Thread.sleep(100)
-                    }
-
-                    runOnUiThread {
-                        val result: String = dialog.functionName
-                        if (result.isNotEmpty()) {
-                            val myEditText = editText
-                            val textToInsert: String = result
-                            val start = Math.max(myEditText.getSelectionStart(), 0);
-                            val end = Math.max(myEditText.getSelectionEnd(), 0);
-                            myEditText.getText().replace(
-                                Math.min(start, end), Math.max(start, end),
-                                textToInsert, 0, textToInsert.length
-                            );
-                        }
-                    }
-                }
-            }.start()
+        // Standard Mode only buttons
+        findViewById<Button>(R.id.buttonFunction)?.setOnClickListener {
+            showFunctionDialog(editText, textAnswer, false)
         }
-        val buttonFunctionMultiple: Button = findViewById(R.id.buttonFunctionMultiple)
-        buttonFunctionMultiple.setOnClickListener {
-//            val stringFragment : StringFragment= StringFragment()
-//                val ft: FragmentTransaction = supportFragmentManager.beginTransaction();
-//                ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
-            val dialog = ChooseFxDialogFragment()
-            dialog.show(
-                supportFragmentManager,
-                "one.empty3.apps.simplecalculator.ChooseFxDialogFragment"
-            )
-            Thread {
-                run {
-                    while (!dialog.isExited) {
-                        Thread.sleep(100)
-                    }
-
-                    runOnUiThread {
-                        val result: String = dialog.functionName
-                        if (result.isNotEmpty()) {
-                            val myEditText = editText
-                            val textToInsert: String = result
-                            val start = Math.max(myEditText.getSelectionStart(), 0);
-                            val end = Math.max(myEditText.getSelectionEnd(), 0);
-                            myEditText.getText().replace(
-                                Math.min(start, end), Math.max(start, end),
-                                textToInsert, 0, textToInsert.length
-                            );
-                        }
-                    }
-                }
-            }.start()
+        findViewById<Button>(R.id.buttonFunctionMultiple)?.setOnClickListener {
+            showFunctionDialog(editText, textAnswer, true)
         }
-        // Create an instance of the dialog fragment and show it
-        //val dialog = ChooseFunctionDialogFragment()
-        //dialog.show(
-        //    getSupportFragmentManager(),
-        //    "one.empty3.apps.simplecalculator.ChooseFunctionDialogFragment"
-        //)
-        //       this.setContentView(R.layout.fragment_item_list)
-//            editText.text = editText.text.append(dialog.function)
-        findViewById<Button>(R.id.AboutButton).setOnClickListener {
+        findViewById<Button>(R.id.your_button_id_to_open_graph_activity)?.setOnClickListener {
+            startActivity(Intent(this, GraphActivity::class.java))
+        }
+        findViewById<Button>(R.id.textCalculatorButton)?.setOnClickListener {
+            startActivity(Intent(this, ScrollingActivity::class.java))
+        }
+
+        // Kids Mode only: open the exercises prototype
+        findViewById<Button>(R.id.kidsExercisesButton)?.setOnClickListener {
+            startActivity(Intent(this, KidsExercisesActivity::class.java))
+        }
+
+        // Common buttons
+        findViewById<Button>(R.id.AboutButton)?.setOnClickListener {
             openUserData(it)
         }
-        findViewById<Button>(R.id.textCalculatorButton).setOnClickListener(View.OnClickListener {
-            val intentText: Intent = Intent(this, ScrollingActivity::class.java)
-            startActivity(intentText)
-        })
+
+        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
+        toolbar?.inflateMenu(R.menu.menu_main)
+        toolbar?.setOnMenuItemClickListener { item ->
+            if (item.itemId == R.id.action_help) {
+                showHelp()
+                true
+            } else {
+                false
+            }
+        }
 
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                var toString = editText.text.toString()
-                val tree = AlgebraicTree(toString)
-                compute(tree, textAnswer)
-                println("Characters changed = " + toString)
-                toString = editText.text.toString()
-                runOnUiThread {
-                    prefs.edit().putString("autoSaveEditText", toString).apply();
-                }
+                val toString = s.toString()
+                compute(AlgebraicTree(toString), textAnswer)
+                prefs.edit().putString("autoSaveEditText", toString).apply()
             }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
-// Dans votre MainActivity.kt ou une autre activité
-        val buttonOpenGraph: Button = findViewById(R.id.your_button_id_to_open_graph_activity)
-        buttonOpenGraph.setOnClickListener {
-            val intent = Intent(this, GraphActivity::class.java)
-            startActivity(intent)
-        }
-
-
-        // Create an instance of a manager
-        val ageSignalsManager =
-            AgeSignalsManagerFactory.create(ApplicationProvider.getApplicationContext())
-
-        // Request an age signals check
-        ageSignalsManager
-            .checkAgeSignals(AgeSignalsRequest.builder().build())
-            .addOnSuccessListener { ageSignalsResult ->
-                // Store the install ID for later...
-                val installId = ageSignalsResult.installId()
-
-                if (ageSignalsResult.userStatus() == AgeSignalsVerificationStatus.SUPERVISED_APPROVAL_DENIED) {
-                    // Disallow access...
-                } else {
-                    // Do something else if the user is SUPERVISED, VERIFIED, etc.
-                }
-            }
-
     }
 
-    private fun compute(
-        tree: AlgebraicTree,
-        textAnswer: EditText
-    ) {
+    private fun handleDelete(editText: EditText, textAnswer: EditText) {
+        val toString = editText.text.toString()
+        if (toString.length > 1) {
+            val start = editText.selectionStart
+            val end = editText.selectionEnd
+            if (start == end) {
+                editText.text.replace(Math.max(start - 1, 0), start, "")
+            } else {
+                editText.text.replace(Math.min(start, end), Math.max(start, end), "")
+            }
+        } else {
+            editText.setText("")
+        }
+        compute(AlgebraicTree(editText.text.toString()), textAnswer)
+    }
+
+    private fun handleInsert(text: String, editText: EditText, textAnswer: EditText) {
+        val start = editText.selectionStart
+        val end = editText.selectionEnd
+        editText.text.replace(Math.min(start, end), Math.max(start, end), text)
+        compute(AlgebraicTree(editText.text.toString()), textAnswer)
+    }
+
+    private fun showFunctionDialog(editText: EditText, textAnswer: EditText, isMultiple: Boolean) {
+        val dialog = if (isMultiple) ChooseFxDialogFragment() else ChooseFunctionDialogFragment()
+        dialog.show(supportFragmentManager, dialog.javaClass.name)
+        
+        Thread {
+            while (if (isMultiple) !(dialog as ChooseFxDialogFragment).isExited else !(dialog as ChooseFunctionDialogFragment).isExited) {
+                Thread.sleep(100)
+            }
+            runOnUiThread {
+                val result = if (isMultiple) (dialog as ChooseFxDialogFragment).functionName else (dialog as ChooseFunctionDialogFragment).functionName
+                if (result.isNotEmpty()) {
+                    handleInsert(result, editText, textAnswer)
+                }
+            }
+        }.start()
+    }
+
+    private fun checkAgeSignals() {
+        val ageSignalsManager = AgeSignalsManagerFactory.create(applicationContext)
+        ageSignalsManager.checkAgeSignals(AgeSignalsRequest.builder().build())
+            .addOnSuccessListener { ageSignalsResult ->
+                val status = ageSignalsResult.userStatus()
+                val upperRange = ageSignalsResult.ageUpper()
+                
+                // Trigger Kids Mode if user is supervised OR verified as 12 or under
+                val shouldBeKidsMode = (status == AgeSignalsVerificationStatus.SUPERVISED || 
+                                       (upperRange != null && upperRange <= 12))
+                
+                val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+                if (shouldBeKidsMode != isKidsMode) {
+                    isKidsMode = shouldBeKidsMode
+                    prefs.edit().putBoolean("kids_mode_active", isKidsMode).apply()
+                    // Recreate to apply new layout
+                    recreate()
+                }
+            }
+    }
+
+    private fun initBilling() {
+        purchasesUpdatedListener = PurchasesUpdatedListener { _, _ -> }
+        billingClient = BillingClient.newBuilder(applicationContext)
+            .setListener(purchasesUpdatedListener)
+            .enablePendingPurchases(PendingPurchasesParams.newBuilder()
+                .enablePrepaidPlans().enableOneTimeProducts().build())
+            .build()
+        billingClient.startConnection(object : BillingClientStateListener {
+            override fun onBillingSetupFinished(billingResult: BillingResult) { }
+            override fun onBillingServiceDisconnected() { }
+        })
+    }
+
+    private fun compute(tree: AlgebraicTree, textAnswer: EditText) {
         try {
             tree.construct()
             val d: StructureMatrix<Double>? = tree.eval()
@@ -331,45 +244,38 @@ class MainActivity : AppCompatActivity() {
                 textAnswer.setText(str)
                 textAnswer.setTextColor(Color.GRAY)
             }
-            println("Calculus OK, displayed")
-        } catch (ex: AlgebraicFormulaSyntaxException) {
+        } catch (ex: Exception) {
             runOnUiThread {
-                textAnswer.setTextColor(Color.RED)
-            }
-        } catch (ex: IndexOutOfBoundsException) {
-            runOnUiThread {
-                textAnswer.setTextColor(Color.RED)
-            }
-        } catch (ex: NullPointerException) {
-            runOnUiThread {
-                textAnswer.setTextColor(Color.RED)
                 textAnswer.setTextColor(Color.RED)
             }
         }
     }
 
     private fun stringFromEval(d: StructureMatrix<Double>?): String {
-        if (d == null)
-            return ""
-        var labelAnswer: String = "" + (d.getElem() ?: 0.0)
-        if (d.dim == 0)
-            labelAnswer = "" + d.getElem()
-        else if (d.dim == 1 && d.data1d != null) {
-            labelAnswer = "("
-            for (i in 0 until d.data1d.size) {
-                labelAnswer += d.data1d[i]
-                if (i < d.data1d.size - 1)
-                    labelAnswer += ","
-            }
-            labelAnswer += ")"
+        if (d == null) return ""
+        if (d.dim == 0) return "" + (d.getElem() ?: 0.0)
+        if (d.dim == 1 && d.data1d != null) {
+            return d.data1d.joinToString(prefix = "(", postfix = ")", separator = ",")
         }
-        return labelAnswer
+        return ""
     }
 
     private fun openUserData(view: View) {
-        val intent: Intent = Intent(view.context, PrivacyPolicyActivity::class.java).apply {
-            putExtra("class", "")
+        startActivity(Intent(view.context, PrivacyPolicyActivity::class.java))
+    }
+
+    private fun showHelp() {
+        val helpResId = if (isKidsMode) R.raw.help_kids else R.raw.help_standard
+        val helpText = try {
+            resources.openRawResource(helpResId).bufferedReader().use { it.readText() }
+        } catch (_: Exception) {
+            "Help content unavailable."
         }
-        startActivity(intent)
+
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle(R.string.dialog_help_title)
+            .setMessage(helpText)
+            .setPositiveButton(R.string.ok_button, null)
+            .show()
     }
 }

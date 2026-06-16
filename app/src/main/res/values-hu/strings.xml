@@ -210,4 +210,7 @@
       
   <string name="hint_result_here">Eredmény itt</string>
   
+  <string name="settings">Beállítások</string>
+  <string name="hint_result">Eredmény</string>
+  <string name="function_prefix">f(</string>
 </resources>

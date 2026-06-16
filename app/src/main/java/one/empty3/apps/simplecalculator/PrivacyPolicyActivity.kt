@@ -18,7 +18,9 @@ class PrivacyPolicyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_privacy_policy) // Ensure this matches your layout file name
 
-        title = getString(R.string.title_activity_privacy_policy)
+        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         webView = findViewById(R.id.webViewPrivacy)
         textViewPrivacyLink = findViewById(R.id.textViewPrivacyLink) // If using it

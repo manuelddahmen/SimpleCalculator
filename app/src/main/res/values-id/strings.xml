@@ -210,4 +210,7 @@
       
   <string name="hint_result_here">Hasil di sini</string>
   
+  <string name="settings">Pengaturan</string>
+  <string name="hint_result">Hasil</string>
+  <string name="function_prefix">f(</string>
 </resources>

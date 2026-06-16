@@ -121,4 +121,42 @@
     <string name="donn_es_utilisateur_personnelles_et_sensibles_voir_le_lien_pour_plus_d_infos">Données utilisateur personnelles et sensibles Voir le lien pour plus d\'infos</string>
     <string name="fx">fx(</string>
 
+  <string name="button_download_image">Transferir imagem</string>
+  <string name="button_plot">Traçar gráfico</string>
+  <string name="button_save_image">Guardar</string>
+  <string name="button_share_image">Partilhar</string>
+  <string name="content_description_graph_image">Imagem do gráfico traçado</string>
+  <string name="error_could_not_create_file">Não foi possível criar o ficheiro</string>
+  <string name="error_failed_to_share_image">Não foi possível partilhar a imagem.</string>
+  <string name="error_invalid_input">Entrada inválida</string>
+  <string name="error_no_image_to_share">Não há nenhuma imagem disponível para partilhar.</string>
+  <string name="error_not_a_number">Não é um número</string>
+  <string name="error_plotting_with_message">Erro ao traçar: %s</string>
+  <string name="error_syntax">Erro de sintaxe</string>
+  <string name="error_syntax_with_message">Erro de sintaxe: %s</string>
+  <string name="error_x_max_lt_x_min">X Máx tem de ser > X Mín</string>
+  <string name="error_x_min_lt_x_max">X Mín tem de ser menor que X Máx.</string>
+  <string name="error_y_max_lt_y_min">Y Máx tem de ser > Y Mín</string>
+  <string name="error_y_min_lt_y_max">Y Mín tem de ser menor que Y Máx.</string>
+  <string name="failed_to_save_image">Não foi possível guardar a imagem: %s</string>
+  <string name="file_name_prefix">GRAPH_%s_</string>
+  <string name="file_name_suffix">.png</string>
+  <string name="function_prefix">f(</string>
+  <string name="graph_plotter_description">O traçador de gráficos define uma variável e traça a função</string>
+  <string name="hint_formula_fx">y = f(x) (p. ex., x^2)</string>
+  <string name="hint_formula_x">Fórmula X (p. ex., t*cos(t))</string>
+  <string name="hint_formula_y">Fórmula Y (p. ex., t*sin(t))</string>
+  <string name="hint_result">Resultado</string>
+  <string name="hint_result_here">Resultado aqui</string>
+  <string name="hint_x_max">X Máx</string>
+  <string name="hint_x_min">X Mín</string>
+  <string name="hint_y_max">Y Máx (p. ex., 10)</string>
+  <string name="hint_y_min">Y Mín (p. ex., -10)</string>
+  <string name="image_saved_to">Imagem guardada em %s</string>
+  <string name="privacy_policy_link_text">Ver a política de privacidade online: https://empty3.app/android/privacy.html</string>
+  <string name="settings">Definições</string>
+  <string name="share_image_title">Partilhar imagem do gráfico</string>
+  <string name="storage_directory">simplecalculator</string>
+  <string name="title_activity_graph">Traçador de gráficos</string>
+  <string name="title_activity_privacy_policy">Política de privacidade</string>
 </resources>

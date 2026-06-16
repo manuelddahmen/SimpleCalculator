@@ -210,4 +210,7 @@
       
   <string name="hint_result_here">Resultado aqui</string>
   
+  <string name="settings">Configurações</string>
+  <string name="hint_result">Resultado</string>
+  <string name="function_prefix">f(</string>
 </resources>

@@ -210,4 +210,7 @@
       
   <string name="hint_result_here">Výsledok tu</string>
   
+  <string name="settings">Nastavenia</string>
+  <string name="hint_result">Výsledok</string>
+  <string name="function_prefix">f(</string>
 </resources>
