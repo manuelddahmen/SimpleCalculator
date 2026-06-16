@@ -14,7 +14,7 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406999606
+def versionCode1000 = 406999607
 def javaVersion = 21
 
 android {
