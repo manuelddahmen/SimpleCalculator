@@ -57,10 +57,20 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        isKidsMode = prefs.getBoolean("kids_mode_active", false)
+        
+        // Priority: Check if age selection is locked in settings
+        val isLocked = prefs.getBoolean("lock_age", false)
+        if (isLocked) {
+            val agePref = prefs.getString("user_age", "standard")
+            isKidsMode = agePref == "kids"
+        } else {
+            isKidsMode = prefs.getBoolean("kids_mode_active", false)
+        }
 
         setupUI()
-        checkAgeSignals()
+        if (!isLocked) {
+            checkAgeSignals()
+        }
         initBilling()
     }
 

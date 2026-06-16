@@ -9,4 +9,14 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+    <string-array name="age_entries">
+        <item>Kids (0-12)</item>
+        <item>Standard (13+)</item>
+    </string-array>
+
+    <string-array name="age_values">
+        <item>kids</item>
+        <item>standard</item>
+    </string-array>
 </resources>

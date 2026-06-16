@@ -45,6 +45,24 @@ class SettingsActivity : AppCompatActivity() {
     class SettingsFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
+
+            val lockAgePref = findPreference<androidx.preference.SwitchPreferenceCompat>("lock_age")
+            val userAgePref = findPreference<androidx.preference.ListPreference>("user_age")
+
+            userAgePref?.isEnabled = lockAgePref?.isChecked != true
+
+            lockAgePref?.setOnPreferenceChangeListener { _, newValue ->
+                val isLocked = newValue as Boolean
+                userAgePref?.isEnabled = !isLocked
+                true
+            }
+
+            userAgePref?.setOnPreferenceChangeListener { _, newValue ->
+                val prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(requireContext())
+                val isKidsMode = newValue == "kids"
+                prefs.edit().putBoolean("kids_mode_active", isKidsMode).apply()
+                true
+            }
         }
     }
 }

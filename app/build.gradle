@@ -14,7 +14,7 @@ if (hasProperty('buildScan')) {
 }
 
 
-def versionCode1000 = 406999604
+def versionCode1000 = 406999606
 def javaVersion = 21
 
 android {
@@ -38,7 +38,8 @@ android {
     }
 
     defaultConfig {
-        targetSdk 35
+        targetSdk 37
+        targetSdkVersion 37
         minSdkVersion 24
         versionName "9.1"
         versionCode versionCode1000
