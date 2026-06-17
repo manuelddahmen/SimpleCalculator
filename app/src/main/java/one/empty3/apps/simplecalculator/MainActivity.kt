@@ -101,8 +101,7 @@ class MainActivity : AppCompatActivity() {
         val savedText = prefs.getString("autoSaveEditText", "")
         if (!savedText.isNullOrEmpty()) {
             editText.setText(savedText)
-            val tree = AlgebraicTree(savedText)
-            compute(tree, textAnswer)
+            val tree = compute(savedText, textAnswer)
         }
 
         val buttonsNumbers = arrayListOf(
@@ -148,6 +147,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.AboutButton)?.setOnClickListener {
             openUserData(it)
         }
+        findViewById<Button>(R.id.settingsButton)?.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
 
         val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
         toolbar?.inflateMenu(R.menu.menu_main)
@@ -163,7 +165,7 @@ class MainActivity : AppCompatActivity() {
         editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val toString = s.toString()
-                compute(AlgebraicTree(toString), textAnswer)
+                compute(toString, textAnswer)
                 prefs.edit().putString("autoSaveEditText", toString).apply()
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -184,14 +186,14 @@ class MainActivity : AppCompatActivity() {
         } else {
             editText.setText("")
         }
-        compute(AlgebraicTree(editText.text.toString()), textAnswer)
+        compute(editText.text.toString(), textAnswer)
     }
 
     private fun handleInsert(text: String, editText: EditText, textAnswer: EditText) {
         val start = editText.selectionStart
         val end = editText.selectionEnd
         editText.text.replace(Math.min(start, end), Math.max(start, end), text)
-        compute(AlgebraicTree(editText.text.toString()), textAnswer)
+        compute(editText.text.toString(), textAnswer)
     }
 
     private fun showFunctionDialog(editText: EditText, textAnswer: EditText, isMultiple: Boolean) {
@@ -245,8 +247,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun compute(tree: AlgebraicTree, textAnswer: EditText) {
+    private fun compute(text: String, textAnswer: EditText) {
         try {
+            val tree = AlgebraicTree(text)
             tree.construct()
             val d: StructureMatrix<Double>? = tree.eval()
             val str = stringFromEval(d)
@@ -255,6 +258,14 @@ class MainActivity : AppCompatActivity() {
                 textAnswer.setTextColor(Color.GRAY)
             }
         } catch (ex: Exception) {
+            runOnUiThread {
+                textAnswer.setTextColor(Color.RED)
+            }
+        } catch (r:RuntimeException) {
+            runOnUiThread {
+                textAnswer.setTextColor(Color.RED)
+            }
+        } catch (t : Throwable) {
             runOnUiThread {
                 textAnswer.setTextColor(Color.RED)
             }

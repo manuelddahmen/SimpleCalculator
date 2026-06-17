@@ -394,7 +394,7 @@
                 app:layout_constraintStart_toEndOf="@id/textCalculatorButton"
                 app:layout_constraintTop_toTopOf="@id/textCalculatorButton" />
 
-            <!-- Row 8: About -->
+            <!-- Row 8: About and Settings -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/AboutButton"
                 style="@style/Widget.Material3.Button.TextButton"
@@ -402,9 +402,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/about_and_policies"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/settingsButton"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textCalculatorButton" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/settingsButton"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_settings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/AboutButton"
+                app:layout_constraintTop_toTopOf="@id/AboutButton" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

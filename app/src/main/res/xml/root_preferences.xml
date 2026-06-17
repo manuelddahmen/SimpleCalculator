@@ -36,6 +36,12 @@
             app:title="@string/lock_age_title"
             app:summary="@string/lock_age_summary" />
 
+        <EditTextPreference
+            app:key="user_birthdate"
+            app:title="@string/user_birthdate_title"
+            app:summary="@string/user_birthdate_summary"
+            app:useSimpleSummaryProvider="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/messages_header">

@@ -76,6 +76,8 @@
     <string name="user_age_summary">Select user age to adapt interface</string>
     <string name="lock_age_title">Lock Age Selection</string>
     <string name="lock_age_summary">Prevent changes to the age selection</string>
+    <string name="user_birthdate_title">Birth Date</string>
+    <string name="user_birthdate_summary">Optional: Enter your birth date</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
