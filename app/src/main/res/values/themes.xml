@@ -26,6 +26,7 @@
         <item name="colorSurfaceVariant">@color/surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/onSurfaceVariant</item>
         <item name="colorOutline">@color/outline</item>
+        <item name="colorOutlineVariant">@color/outline</item>
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@android:color/transparent</item>
